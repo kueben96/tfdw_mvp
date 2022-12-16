@@ -1,0 +1,14 @@
+FROM python:3.8-alpine
+EXPOSE 5000
+# # Tell Python to not generate .pyc
+ENV PYTHONDONTWRITEBYTECODE 1
+# # Turn off buffering
+ENV PYTHONUNBUFFERED 1
+# copy the requirements file into the image
+COPY ./requirements.txt /app/requirements.txt
+# switch working directory
+WORKDIR /app
+RUN pip install -r requirements.txt
+# copy every content from the local file to the image
+COPY . /app
+ADD . /app
