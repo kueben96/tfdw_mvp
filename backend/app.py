@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, jsonify
 import json
 import os
 
@@ -7,8 +7,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return json.dumps({'name': 'alice',
-                       'email': 'alice@outlook.com'})
+    return jsonify({'name': 'alice',
+                    'email': 'alicessss@outlook.com'})
 
 
 if __name__ == "__main__":
