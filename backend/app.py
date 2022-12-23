@@ -1,14 +1,29 @@
 from flask import Flask, jsonify
-import json
+# from flask_cors import CORS, cross_origin
 import os
 
 app = Flask(__name__)
 
 
 @app.route('/')
+# @cross_origin(supports_credentials=True)
 def index():
+    # return jsonify({'name': 'alice',
+    #                 'email': 'alicessss@outlook.com'})
     return jsonify({'name': 'alice',
-                    'email': 'alicessss@outlook.com'})
+                    'location': 'hamburg',
+                    'id': 1}, {'name': 'ben',
+                               'location': 'hannover',
+                               'id': 2}, )
+
+
+@app.route('/api', methods=['GET'])
+def donor_info():
+    return jsonify({'name': 'alice',
+                    'location': 'hamburg',
+                    'id': 1}, {'name': 'ben',
+                               'location': 'hannover',
+                               'id': 2}, )
 
 
 if __name__ == "__main__":
