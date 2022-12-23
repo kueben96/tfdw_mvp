@@ -24,7 +24,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> TRIKOT FssssÜR DIE WELTkljdfskjfdslkjklds
         </p>
-        <span>dfsdf {donorData}</span>
+        <span>{donorData[0].location}</span>
         <a
           className="App-link"
           href="https://reactjs.org"
