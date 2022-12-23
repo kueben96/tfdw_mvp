@@ -1,5 +1,5 @@
 FROM python:3.8-alpine
-EXPOSE 5000
+EXPOSE 8000
 # # Tell Python to not generate .pyc
 ENV PYTHONDONTWRITEBYTECODE 1
 # # Turn off buffering

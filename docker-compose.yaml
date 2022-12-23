@@ -25,13 +25,13 @@ services:
       - appdata:/var/www/
     networks:
       - frontend
-      - backend
+      # - backend
 
 networks:
   frontend:
     driver: bridge
-  backend:
-    driver: bridge
+  # backend:
+  #   driver: bridge
 volumes:
   appdata:
     driver: local

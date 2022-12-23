@@ -7,7 +7,8 @@ function App() {
   const [donorData, setDonorData] = useState('');
   useEffect(() => {
     const headers = { 'Content-Type': 'application/json' }
-    fetch('http://api:5000', { headers })
+    // fetch('http://api:5000', { headers })
+    fetch('/api', { headers })
       .then(response => response.json())
       .then(data => setDonorData(data));
     // empty dependency array means this effect will only run once (like componentDidMount in classes)
