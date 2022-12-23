@@ -1,7 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import { React, useEffect, useState } from 'react'
 
 function App() {
+
+  const [donorData, setDonorData] = useState('');
+  useEffect(() => {
+    const headers = { 'Content-Type': 'application/json' }
+    fetch('http://api:5000', { headers })
+      .then(response => response.json())
+      .then(data => setDonorData(data));
+    // empty dependency array means this effect will only run once (like componentDidMount in classes)
+  }, []);
+  console.log("donor data");
+  console.log(donorData);
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -9,6 +23,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> TRIKOT FssssÜR DIE WELTkljdfskjfdslkjklds
         </p>
+        <span>dfsdf {donorData}</span>
         <a
           className="App-link"
           href="https://reactjs.org"
