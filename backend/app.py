@@ -1,15 +1,11 @@
 from flask import Flask, jsonify
-# from flask_cors import CORS, cross_origin
 import os
 
 app = Flask(__name__)
 
 
 @app.route('/')
-# @cross_origin(supports_credentials=True)
 def index():
-    # return jsonify({'name': 'alice',
-    #                 'email': 'alicessss@outlook.com'})
     return jsonify({'name': 'alice',
                     'location': 'hamburg',
                     'id': 1}, {'name': 'ben',

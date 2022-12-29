@@ -12,8 +12,8 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
-    networks:
-      - frontend
+    depends_on:
+      - api
   api:
     build:
       context: ./backend
@@ -23,15 +23,6 @@ services:
       - 8000:5000
     volumes:
       - appdata:/var/www/
-    networks:
-      - frontend
-      # - backend
-
-networks:
-  frontend:
-    driver: bridge
-  # backend:
-  #   driver: bridge
 volumes:
   appdata:
     driver: local
