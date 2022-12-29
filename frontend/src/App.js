@@ -4,10 +4,12 @@ import { React, useEffect, useState } from 'react'
 
 function App() {
 
-  const [donorData, setDonorData] = useState('');
+  const [donorData, setDonorData] = useState([]);
   useEffect(() => {
-    const headers = { 'Content-Type': 'application/json' }
-    // fetch('http://api:5000', { headers })
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
     fetch('/api', { headers })
       .then(response => response.json())
       .then(data => setDonorData(data));
@@ -22,9 +24,9 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> TRIKOT FssssÜR DIE WELTkljdfskjfdslkjklds
+          Edit <code>src/App.js</code> TRIKOT FÜR DIE WELT
         </p>
-        <span>{donorData[0].location}</span>
+        <span>{donorData.toString()}</span>
         <a
           className="App-link"
           href="https://reactjs.org"
