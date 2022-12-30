@@ -1,7 +1,25 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request, flash, redirect, url_for
 import os
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+# from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
+
+class Todo(db.Model):
+    __tablename__ = "todos"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    completed = db.Column(db.Boolean, nullable=False, default=False)
+    description = db.Column(db.String(), nullable=False)
+    due_date = db.Column(db.DateTime, nullable=True)
+
+    def __repr__(self):
+        return f"<Todo {self.id}, {self.completed}, {self.description}>"
 
 
 @app.route('/')

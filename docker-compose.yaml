@@ -21,6 +21,10 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     command: gunicorn --bind 0.0.0.0:5000 app:app
+    environment:
+      # vllt ohne +psycog?
+      #SQLALCHEMY_DATABASE_URI: postgresql+psycopg2://docker:docker@database/exampledb
+      SQLALCHEMY_DATABASE_URI: postgresql://docker:docker@database:5432/exampledb
     ports:
       - 8000:5000
     volumes:
@@ -28,6 +32,7 @@ services:
     networks:
       - backend
       - frontend
+    restart: always
   database:
     image: postgres
     ports:
