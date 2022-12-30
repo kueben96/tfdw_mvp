@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, flash, redirect, url_for
+from flask import Flask, jsonify, request, flash, redirect, url_for, make_response
 import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -20,6 +20,26 @@ class Todo(db.Model):
 
     def __repr__(self):
         return f"<Todo {self.id}, {self.completed}, {self.description}>"
+
+
+class Donor(db.Model):
+    __tablename__ = "donors"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String, nullable=False, default=False)
+    description = db.Column(db.String(), nullable=False)
+    # allow to give each object a string representation to recognize it for debugging purposes
+
+    def __repr__(self):
+        return f"<Donor {self.id}, {self.name}, {self.description}>"
+# donor1 = Donor(name="Dafina", description="Trousers")
+
+
+@app.route('/api/donors', methods=['GET'])
+def get_donors():
+    donors = Donor.query.all()
+    print(donors)
+    return make_response(jsonify(donors), 200)
 
 
 @app.route('/')

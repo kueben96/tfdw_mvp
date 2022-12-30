@@ -28,6 +28,7 @@ services:
     ports:
       - 8000:5000
     volumes:
+      - ./backend:/app
       - appdata:/var/www/
     networks:
       - backend
