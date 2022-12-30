@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { React, useEffect, useState } from 'react'
+import DonorList from './components/DonorList';
 
 function App() {
 
@@ -10,9 +11,10 @@ function App() {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     }
-    fetch('/api', { headers })
+    fetch('/api/donors', { headers })
       .then(response => response.json())
-      .then(data => setDonorData(data));
+      .then(data => setDonorData(data))
+      .catch(error => console.log(error));
     // empty dependency array means this effect will only run once (like componentDidMount in classes)
   }, []);
   console.log("donor data");
@@ -20,22 +22,16 @@ function App() {
 
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> TRIKOT FÜR DIE WELT
-        </p>
-        <span>{donorData.toString()}</span>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App container m-4">
+      <div className="row">
+        <div className="text-center">
+          <h1>Connecting a React Frontend to a Flask Backend.</h1>
+        </div>
+      </div>
+      <DonorList
+        donors={donorData}
+      />
+
     </div>
   );
 }
