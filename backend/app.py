@@ -1,12 +1,14 @@
 from flask import Flask, jsonify, request
 import json
 import os
-from api.user import user_route
+from api.login import login_route
 from api.donation import donation_route
+from api.user import user_route
 
 app = Flask(__name__)
-app.register_blueprint(user_route)
+app.register_blueprint(login_route)
 app.register_blueprint(donation_route)
+app.register_blueprint(user_route)
 
 
 if __name__ == "__main__":
