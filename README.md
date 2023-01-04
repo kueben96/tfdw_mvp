@@ -10,7 +10,7 @@
 
 ## Database migrations
 
-- docker exec -it  tfdw_platform-api-1 sh
+- docker exec -it  tfdw_mvp-api-1 sh
 - setup migrations folder once with: flask db init
 - re-run conainters with docker-compose up --build
 - flask db migrate --> will detect changes in the SQLAlchemy Models
