@@ -1,9 +1,13 @@
-from flask import Flask
+from flask import Flask, jsonify, request
+import json
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_marshmallow import Marshmallow
 from flask_cors import CORS
 import os
+from api.login import login_route
+from api.donation import donation_route
+from api.user import user_route
 
 # Create various application instances
 # Order matters: Initialize SQLAlchemy before Marshmallow
@@ -18,6 +22,10 @@ def create_app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    app.register_blueprint(login_route)
+    app.register_blueprint(donation_route)
+    app.register_blueprint(user_route)
 
     # Initialize extensions
     # To use the application instances above, instantiate with an application:
