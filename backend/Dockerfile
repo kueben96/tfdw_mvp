@@ -11,7 +11,7 @@ WORKDIR /app
 RUN pip install -r requirements.txt
 # defining env vars
 # ENV FLASK_APP=app.py
-ENV FLASK_APP=routes.py
+ENV FLASK_APP=app.py
 # watch app' files
 ENV FLASK_DEBUG=true
 ENV FLASK_ENV=development

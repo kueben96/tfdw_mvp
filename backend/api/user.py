@@ -2,12 +2,12 @@ from flask import Flask, jsonify, request, Blueprint
 
 user_route = Blueprint('user_route', __name__)
 
-@user_route.route('/user', methods=['POST'])
+@user_route.route('/api/user', methods=['POST'])
 def create_donor():
     data = request.get_json()
     return jsonify("created user")
 
-@user_route.route('/user', methods=['GET']) # add id to route
+@user_route.route('/api/user', methods=['GET']) # add id to route
 def get_donor():
     return jsonify({"firstname":"Bob", 
                     "lastname":"Pense",
@@ -19,6 +19,6 @@ def get_donor():
                     "zip_code": 22525,
                     "region": "Hamburg"})
 
-@user_route.route('/user', methods=['POST'])
+@user_route.route('/api/user', methods=['POST'])
 def update_donor():
     return jsonify()
