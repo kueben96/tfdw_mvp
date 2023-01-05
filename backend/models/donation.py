@@ -1,7 +1,7 @@
 from extensions import db, ma
 
 class Donation(db.Model):
-    __tablename__ = "donoations"
+    __tablename__ = "donations"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     clothes = db.Column(db.String, nullable=False, default=False)
