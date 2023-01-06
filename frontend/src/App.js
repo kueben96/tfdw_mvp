@@ -5,20 +5,7 @@ import DonorList from './components/DonorList';
 
 function App() {
 
-  const [donorData, setDonorData] = useState([]);
-  useEffect(() => {
-    const headers = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    }
-    fetch('/api/donors', { headers })
-      .then(response => response.json())
-      .then(data => setDonorData(data))
-      .catch(error => console.log(error));
-    // empty dependency array means this effect will only run once (like componentDidMount in classes)
-  }, []);
-  console.log("donor data");
-  console.log(donorData);
+
 
 
   return (
@@ -28,9 +15,7 @@ function App() {
           <h1>Connecting a React Frontend to a Flask Backend.</h1>
         </div>
       </div>
-      <DonorList
-        donors={donorData}
-      />
+      <h1>Trikot für die Welt</h1>
 
     </div>
   );
