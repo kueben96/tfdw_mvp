@@ -8,6 +8,14 @@
 - change proxy in package.json to "http://localhost:8000"
 - npm start -> localhost:3000
 
+## Database adminer login
+- address: localhost:8080
+- database system: PostgreSQL
+- server name: database
+- user: docker
+- password: docker
+- database: exampledb
+
 ## Database migrations
 
 - docker exec -it  tfdw_mvp-api-1 sh
