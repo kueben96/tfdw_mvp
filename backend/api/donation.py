@@ -6,7 +6,7 @@ donation_route = Blueprint('donation_route', __name__)
 
 @donation_route.route('/api/donation', methods=['POST'])
 def create_donation():
-    user_id = request.json.get('user_id', '')
+    user_id = request.json.get('user_id', '')  # get this from the logged in user data later, can be replaced with random int to work with frontend
     donation_type = request.json.get('donation_type', '')
     number = request.json.get('number', '')
     color = request.json.get('color', '')

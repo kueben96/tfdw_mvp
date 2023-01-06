@@ -1,10 +1,6 @@
-[{"clothes":"Jersey", 
- "accessories":"None",
- "number": 10,
- "color": "black",
- "description": "Male children black shirt"}, 
- {"clothes":"Jersey", 
- "accessories":"None",
- "number": 10,
- "color": "black",
- "description": "Male children black shirt"}]
+{"user_id":2, 
+ "donation_type":"sock",
+ "number": 1,
+ "color": "white",
+ "cut": "unisex",
+ "description": "one sock to free an elf"}

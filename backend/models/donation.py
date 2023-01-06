@@ -12,6 +12,7 @@ class Donation(db.Model):
     description = db.Column(db.String(), nullable=False)
 
     # TODO: add location
+    # TODO: add size (children, adult)
     
     # allow to give each object a string representation to recognize it for debugging purposes
 
