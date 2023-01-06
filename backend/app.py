@@ -8,7 +8,7 @@ from api.user import user_route
 
 from extensions import db, migrate, ma, cors
 
-from models import donation
+from models import donation, user
 
 def create_app():
     """Application-factory pattern"""

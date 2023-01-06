@@ -1,0 +1,13 @@
+{
+"first_name":"Alice", 
+"last_name":"Cooper",
+"email": "alice@outlook.com",
+"phone": "1234",
+"club": "Alices's Football Team",
+"street": "Street 10",
+"zip_code": 22525,
+"city":"Hamburg",
+"region": "Hamburg",
+"preferred_contact": "email",
+"is_donor": true
+}
