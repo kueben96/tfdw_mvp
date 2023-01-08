@@ -1,38 +1,112 @@
 .App {
+ 
   text-align: center;
+
+  position: absolute;
+  width: 1450px;
+  height: 808px;
+  left: 0px;
+
+
+/* tfdw/green */
+
+background: #67C392;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+.spendendetails{
+position: absolute;
+width: 392px;
+height: 48px;
+left: 528px;
+top: 30px;
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+font-family: 'Bebas Neue', sans-serif;
+font-style: normal;
+font-weight: bold;
+font-size: 32px;
+line-height: 38px;
+display: flex;
+align-items: center;
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+color: #000000;
+
+}
+.paragraph{
+  position: absolute;
+  width: 392px;
+  height: 48px;
+  left: 528px;
+  top: 70px;
+  text-align: left;
+  font-family: 'Calibri';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  
+  color: #000000;
+}
+.meine-spende{
+position: absolute;
+width: 320px;
+height: 24px;
+left: 528px;
+top: 165px;
+
+font-family: 'Bebas Neue', sans-serif;
+font-style: normal;
+font-weight: bold;
+font-size: 14px;
+line-height: 19px;
+display:flex;
+align-items: center;
+
+color: #000000;
+
+}
+.form-container{
+position: absolute;
+width: 392px;
+height: 480px;
+left: 528px;
+top: 200px;
+text-align: left;
+
+/* tfdw/pink */
+
+background: #FBA276;
+border-radius: 20px;
+}
+fieldset{
+  border: 0;
+}
+wrapper {
+  padding: 5px 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.wrapper fieldset {
+  margin: 20px 0;
 }
+button{
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+box-sizing: border-box;
+position: relative;
+width: 130px;
+height: 30px;
+border: 1px solid #000000;
+border-radius: 20px;
+background-color: transparent;
+cursor: pointer;
+font-family: 'Bebas Neue', sans-serif;
+color: white;
+font-weight: bold;
+display:inline;
+margin: 20px;
+left: 22px;
+
+}
+button:hover{
+  background-color: #F7E167;
 }
