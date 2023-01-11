@@ -7,9 +7,25 @@ const formReducer = (state, event) => {
     ...state,
     [event.name]: event.value
   }
- }
+ };
+window.onload = function(){
+    var mainListDiv = document.getElementById("hamburger"),
+    mediaButton = document.getElementById("nav__link");
+   
+   mediaButton.onclick = function () {
+    
+    "use strict";
+    
+    mainListDiv.classList.toggle("show_list");
+    mediaButton.classList.toggle("active");
+    
+   };
+    }
+
 
 function App() {
+  const [selected, setSelected] = useState('');
+
   const [formData, setFormData] = useReducer(formReducer, {});
   const [submitting, setSubmitting] = useState(false);
   const handleSubmit = event => {
@@ -26,28 +42,22 @@ function App() {
     value: event.target.value,
   });
 }
-const hamburger = document.querySelector('.hamburger');
-const navLink = document.querySelector('.nav__link');
-
-hamburger.addEventListener('click', () => {
-  navLink.classList.toggle('hide');
-});
 
   return (
     
     
  
     <div className="App container m-4">
- <nav class="nav">
-        <a href="/" class="logo">logo</a>
+ <nav className="nav">
+        <a href="/" className="logo">logo</a>
 
-        <div class="hamburger">
-          <span class="line"></span>
-          <span class="line"></span>
-          <span class="line"></span>
+        <div className="hamburger" id='hamburger'>
+          <span className="line"></span>
+          <span className="line"></span>
+          <span className="line"></span>
         </div>
 
-        <div class="nav__link hide">
+        <div className="nav__link hide" id='nav__link'>
           <a href="#">Spenden</a>
           <a href="#">Trikot-Wichteln</a>
           <a href="#">Spendenprojekte</a>
@@ -57,29 +67,29 @@ hamburger.addEventListener('click', () => {
         </div>
       </nav>
     
-<section class="home"></section>
+<section className="home"></section>
 
 
+ <div className='wrapper'>
+     {submitting &&
+       <div>Wird bearbeitet...</div>
+     }
 
-
-      <div className='navigator'></div>
+<div className='navigator'>
       <div className="row">
         <div className="text-center">
           <label className='spendendetails'>SPENDENDETAILS</label>
         </div>
+        <div className='para'>
+           <p className='paragraph'>Wir möchten deine Spende bestmöglich erfassen. Bitte gib hier die Details deiner Spende ein.</p> 
+        </div> 
+           <p className='meine-spende'>MEINE SPENDE</p>
       </div>
-      <p className='paragraph'>Wir möchten deine Spende bestmöglich erfassen. Bitte gib hier die Details deiner Spende ein.</p> 
-      <p className='meine-spende'>MEINE SPENDE</p>
-     
-     
-     
-     <div className='wrapper'>
-     {submitting &&
-       <div>Wird bearbeitet...</div>
-     }
-      <form class='form-container' onSubmit={handleSubmit} enctype="multipart/form-data">
-      <fieldset>
-      <label>
+      {/* enctype="multipart/form-data" */}
+      <div className='formdiv'>
+         <form  className='form-container' onSubmit={handleSubmit} >
+         <fieldset>
+         <label>
            <p>Was möchtest du spenden?</p>
            <select className="donationproduct" onChange={handleChange} required>
                <option value="" selected disabled hidden>Wähle Art</option>
@@ -90,13 +100,13 @@ hamburger.addEventListener('click', () => {
                <option value="d5">Fußballschuhe (Paar)</option>
                <option value="d6">Torwarthandschuhe (Paar)</option>
                <option value="d7">Bälle</option>
-             
-           </select>
-         </label>
+             </select>
+          </label>
 
          <label>
            <p>Anzahl</p>
-           <input className='anzahl' type="number" name="count" min='0' placeholder='Nr.' onChange={handleChange} step="1" required/></label>
+           <input className='anzahl' type="number" name="count" min='0' placeholder='Nr.' onChange={handleChange} step="1" required/>
+         </label>
 
          
            <p>Farbe</p>
@@ -114,7 +124,7 @@ hamburger.addEventListener('click', () => {
            
             <label>
            <p>Schnitt</p>
-           <select className='prodgender' onChange={handleChange} required>
+           <select  className='prodgender' onChange={handleChange} required>
                <option value="" selected disabled hidden>Wähle Schnit</option>
                <option value="d1">unisex</option>
                <option value="d2">male</option>
@@ -140,14 +150,16 @@ hamburger.addEventListener('click', () => {
        <button type="submit">ZURÜCK</button>
        <button type='submit'>DATEN PRÜFEN</button>
       </form>
-   </div>
+   </div></div>
 
 
         <div className='bottom'>
           <label className='bttmtext'>Teile Freude, Hoffnung und dein Trikot</label>
           </div>       
-   </div>
+   </div></div>
   );
+
+
 }
 
 
