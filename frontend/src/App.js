@@ -185,7 +185,9 @@ function App() {
         <div className='bottom'>
           <label className='bttmtext'>TEILE FREUDE, HOFFNUNG UND DEIN TRIKOT</label>
           </div>       
-   </div></div>
+   </div>
+   
+   </div>
   );
 
 
