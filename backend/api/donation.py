@@ -60,6 +60,6 @@ def update_donation(donation_id):
 @donation_route.route("/api/donation/<int:donation_id>", methods=['DELETE'])
 def delete_donation(donation_id):
     donation = Donation.query.get(donation_id)
-    db.session.delete(donation_id)
+    db.session.delete(donation)
     db.session.commit()
     return donation_schema.jsonify(donation)
