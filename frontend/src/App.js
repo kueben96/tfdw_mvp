@@ -123,7 +123,7 @@ function App() {
            <select name='DonationProduct' className="donationproduct" onChange={handleChange} required>
                <option value="" selected disabled hidden>Wähle Art</option>
                <option value="Kindergröße">Trikot in Kindergröße</option>
-               <option value="Erwachsenengröß">Trikot in Erwachsenengröße</option>
+               <option value="Erwachsenengröße">Trikot in Erwachsenengröße</option>
                <option value="Trikotsatz">Trikotsatz (Trikot + Hose)</option>
                <option value="Leibchen">Leibchen</option>
                <option value="Fußballschuhe">Fußballschuhe (Paar)</option>
