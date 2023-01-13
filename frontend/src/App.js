@@ -17,6 +17,8 @@ const formReducer = (state, event) => {
     [event.name]: event.value
   }
  };
+ /* window.onload ist necessary because .getElement... wasnt recognized as the function 
+ is happening before the elements inside function App are running */
 window.onload = function(){
     var mainListDiv = document.getElementById("hamburger"),
     mediaButton = document.getElementById("nav__link");
@@ -87,10 +89,10 @@ function App() {
 <section className="home"></section>
 
 
- <div className='wrapper'>
+<div className='wrapper'>
      {submitting &&
        <div>Wird bearbeitet...</div>
-     }
+     } 
 
 <div className='navigator'>
       <div className="row">
