@@ -1,4 +1,5 @@
-from extensions import db, ma
+from backend.extensions import db, ma
+
 
 class User(db.Model):
     __tablename__ = "users"
