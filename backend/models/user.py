@@ -2,6 +2,9 @@ from extensions import db, ma
 
 
 class User(db.Model):
+    """
+    Database model for table users.
+    """
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -23,6 +26,9 @@ class User(db.Model):
 
 
 class UserSchema(ma.Schema):
+    """
+    Marshmallow schema for database table models.
+    """
     class Meta:
         fields = ("id", "first_name", "last_name", "email", "phone", "club", "street", "zip_code", "city", "region", "preferred_contact", "is_donor")
 
