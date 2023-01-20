@@ -2,7 +2,7 @@
 import './donationdetails.css';
 import { React, useEffect, useState , useReducer} from 'react';
 import { Routes, Route } from 'react-router-dom';
-import './App.js';
+import '../App.js';
 
 const formReducer = (state, event) => {
     if(event.reset) {

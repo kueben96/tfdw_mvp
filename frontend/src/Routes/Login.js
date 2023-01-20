@@ -14,6 +14,9 @@ export default function Login() {
   function handleSubmit(event) {
     event.preventDefault();
   }
+  function hideIcon(self) {
+    self.style.backgroundImage = 'none';
+}
 
   return (
     <div className="App ">
@@ -35,18 +38,24 @@ export default function Login() {
         <Form.Group size="lg" controlId="email">
           <Form.Label></Form.Label>
           <Form.Control
+          className="login-email"
             autoFocus
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder='E-Mail Addresse'
+            onchange="hideIcon(this);"
           />
         </Form.Group>
         <Form.Group size="lg" controlId="password">
           <Form.Label></Form.Label>
           <Form.Control
+          className="login-password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder='Passwort'
+            onchange="hideIcon(this);"
           />
           <a className="login-text1" href="#">Ich habe mein Passwort vergessen.  </a>
         </Form.Group>
