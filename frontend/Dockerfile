@@ -10,7 +10,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 # copy files
 COPY package.json /app/package.json
 COPY package-lock.json /app/package-lock.json
-RUN npm install
+RUN npm install --save
 RUN npm install react-scripts -g
 
 # Add React app to working directory
