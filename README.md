@@ -24,3 +24,7 @@
 - flask db migrate --> will detect changes in the SQLAlchemy Models
 - flask db upgrade
 - see reference here: https://dev.to/yactouat/flask-postgres-sqlalchemy-migrations-dockerized-intro-2f8p
+
+## Run tests in terminal
+
+- execute all tests located in the test package: pytest
