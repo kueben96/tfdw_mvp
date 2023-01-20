@@ -12,50 +12,57 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
+    depends_on:
+      - api
     networks:
       - frontend
-
-  mongodb:
-    image: mongo
-    container_name: mongo
-    restart: unless-stopped
-    command: mongod --auth
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: "admin"
-      MONGO_INITDB_ROOT_PASSWORD: "password"
-      MONGO_INITDB_DATABASE: webapp
-      MONGODB_DATA_DIR: /data/db
-    volumes:
-      - mongodbdata:/data/db
-    networks:
-      - backend
-
   api:
     build:
       context: ./backend
       dockerfile: Dockerfile
     command: gunicorn --bind 0.0.0.0:5000 app:app
+    environment:
+      # vllt ohne +psycog?
+      #SQLALCHEMY_DATABASE_URI: postgresql+psycopg2://docker:docker@database/exampledb
+      SQLALCHEMY_DATABASE_URI: postgresql://docker:docker@database:5432/exampledb
     ports:
       - 8000:5000
-    # environment:
-    #   MONGODB_HOST: mongodb
-    #   MONGODB_USERNAME: "apiuser"
-    #   MONGODB_PASSWORD: "apipassword"
     volumes:
+      - ./backend:/app
       - appdata:/var/www/
-    depends_on:
-      - mongodb
     networks:
-      - frontend
       - backend
-
+      - frontend
+    restart: always
+  database:
+    image: postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: exampledb
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+    networks:
+      - backend
+  adminer:
+    image: adminer
+    restart: always
+    depends_on:
+      - database
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
 networks:
   frontend:
     driver: bridge
   backend:
     driver: bridge
 volumes:
-  mongodbdata:
-    driver: local
   appdata:
+    driver: local
+  postgresdata:
     driver: local

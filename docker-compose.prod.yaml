@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+
+  client:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-prod
+    tty: true
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - frontend
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: gunicorn --bind 0.0.0.0:5000 app:app
+    ports:
+      - 8000:5000
+    volumes:
+      - appdata:/var/www/
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    driver: bridge
+volumes:
+  appdata:
+    driver: local
