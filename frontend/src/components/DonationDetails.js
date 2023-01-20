@@ -1,7 +1,6 @@
 
-import './donationdetails.css';
+import '../resources/styles/donationdetails.css';
 import { React, useState, useReducer } from 'react';
-import '../App.js';
 
 const formReducer = (state, event) => {
   if (event.reset) {

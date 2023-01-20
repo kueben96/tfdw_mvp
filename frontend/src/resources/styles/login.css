@@ -112,7 +112,7 @@ input[type=email],input[type=password]{
     margin-bottom: -40px;
   }
   input#email {
-    background-image: url(./images/SecuredLetter.png);
+    background-image: url(../../images/SecuredLetter.png);
     background-repeat: no-repeat;
     text-indent: 30px;
     background-position: 10px 5px; 
@@ -121,7 +121,7 @@ input#email:focus{
   background-image:none;
  }
  input#password {
-  background-image: url(./images/Lock.png);
+  background-image: url(../../images/Lock.png);
   background-repeat: no-repeat;
   text-indent: 30px;
   background-position: 10px 5px; 
