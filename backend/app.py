@@ -10,10 +10,12 @@ from extensions import db, migrate, ma, cors
 
 from models import donation, user
 
+
 def create_app():
     """Application-factory pattern"""
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI',
+                                                           default="postgresql://docker:docker@database:5432/exampledb")
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # Initialize extensions
@@ -28,6 +30,7 @@ def create_app():
     app.register_blueprint(user_route)
 
     return app
+
 
 # Create an application instance
 app = create_app()
