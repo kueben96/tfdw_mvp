@@ -1,13 +1,39 @@
-{
-"first_name":"Alice", 
-"last_name":"Cooper",
-"email": "alice@outlook.com",
-"phone": "1234",
-"club": "Alices's Football Team",
-"street": "Street 10",
-"zip_code": 22525,
-"city": "Hamburg",
-"region": "Hamburg",
-"preferred_contact": "email",
-"is_donor": true
-}
+[{
+  "first_name":"Harry",
+  "last_name":"Potter",
+  "email": "harry.potter@hogwarts.magic",
+  "phone": "5678",
+  "street": "Street 12",
+  "zip_code": 12345,
+  "city": "Hogsmeade",
+  "region": "Scotland",
+  "password": "alohomora",
+  "role": "donor",
+  "club_name": "Gryffindor"
+  },
+  {
+  "first_name":"Dobby",
+  "last_name":"Elf",
+  "email": "dobby@hogwarts.magic",
+  "phone": "1234",
+  "street": "Street 10",
+  "zip_code": 12345,
+  "city": "Hogsmeade",
+  "region": "Scotland",
+  "password": "dobby",
+  "role": "receiver",
+  "club_name": "Dobby's Elves"
+  },
+  {
+  "first_name":"Alice",
+  "last_name":"Cooper",
+  "email": "alice@outlook.com",
+  "phone": "1234",
+  "street": "Street 10",
+  "zip_code": 22525,
+  "city": "Hamburg",
+  "region": "Hamburg",
+  "password": "email",
+  "role": "donor",
+  "club_name": "Alices's Football Team"
+}]

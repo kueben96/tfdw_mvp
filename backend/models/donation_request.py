@@ -1,8 +1,8 @@
 from extensions import db, ma
 
 
-class Donation(db.Model):
-    __tablename__ = "donations"
+class DonationRequest(db.Model):
+    __tablename__ = "donation_requests"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
@@ -12,23 +12,22 @@ class Donation(db.Model):
     size_1 = db.Column(db.String, nullable=False, default=False)
     size_2 = db.Column(db.String, nullable=False, default=False)
     color_1 = db.Column(db.String, nullable=False, default=False)
-    color_2 = db.Column(db.String, nullable=True, default=False)
     description = db.Column(db.String, nullable=True, default=False)
     status = db.Column(db.String, nullable=False, default=False)
 
     # allow to give each object a string representation to recognize it for debugging purposes
 
     def __repr__(self):
-        return f"<Donation {self.id}, {self.user_id}, {self.date}, {self.category}, {self.amount}, {self.size_1}, " \
-               f"{self.size_2}, {self.color_1}, {self.color_2}, {self.description}, {self.status}>"
+        return f"<DonationRequest {self.id}, {self.user_id}, {self.date}, {self.category}, {self.amount}, " \
+               f"{self.size_1}, {self.size_2}, {self.color_1}, {self.description}, {self.status}>"
 
 
-class DonationSchema(ma.SQLAlchemyAutoSchema):
+class DonationRequestSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
-        model = Donation
+        model = DonationRequest
         load_instance = True
         include_fk = True
 
 
-donation_schema = DonationSchema()
-donations_schema = DonationSchema(many=True)
+donation_schema = DonationRequestSchema()
+donations_schema = DonationRequestSchema(many=True)

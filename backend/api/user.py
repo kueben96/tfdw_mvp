@@ -4,6 +4,7 @@ from extensions import db
 
 user_route = Blueprint('user_route', __name__)
 
+
 @user_route.route('/api/user', methods=['POST'])
 def create_user():
     first_name = request.json.get('first_name', '')
@@ -18,8 +19,8 @@ def create_user():
     preferred_contact = request.json.get('preferred_contact', '')
     is_donor = request.json.get('is_donor', '')
 
-    user = User(first_name=first_name, 
-                last_name=last_name, 
+    user = User(first_name=first_name,
+                last_name=last_name,
                 email=email,
                 phone=phone,
                 club=club,
@@ -29,21 +30,24 @@ def create_user():
                 region=region,
                 preferred_contact=preferred_contact,
                 is_donor=is_donor)
-    
+
     db.session.add(user)
     db.session.commit()
-    
+
     return user_schema.jsonify(user)
 
-@user_route.route('/api/user', methods=['GET']) # add id to route
+
+@user_route.route('/api/user', methods=['GET'])  # add id to route
 def get_users():
     all_users = User.query.all()
     return jsonify(users_schema.dump(all_users))
+
 
 @user_route.route('/api/user/<int:user_id>', methods=['GET'])
 def get_user(user_id):
     user = User.query.get(user_id)
     return user_schema.jsonify(user)
+
 
 @user_route.route('/api/user/<int:user_id>', methods=['PATCH'])
 def update_user(user_id):
