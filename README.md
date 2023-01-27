@@ -1,3 +1,10 @@
+# Prerequisites
+
+- create a .env file in the root folder of this directory
+- tfdw_platform/.env
+- pass variable for AWS postgres connection string inside --> ask Kübra
+- SQLALCHEMY_DATABASE_URI=${commectionstring}
+
 ## Start dockerized React and Flask development servers
 - docker-compose up --build
 - localhost:3000 -> react app
@@ -29,6 +36,7 @@
 - re-run conainters with docker-compose up --build
 - flask db migrate --> will detect changes in the SQLAlchemy Models
 - flask db upgrade
+- if error target db not up to date: "flask db stamp head" first
 - see reference here: https://dev.to/yactouat/flask-postgres-sqlalchemy-migrations-dockerized-intro-2f8p
 
 ## Run tests in terminal
