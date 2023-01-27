@@ -8,6 +8,12 @@
 - change proxy in package.json to "http://localhost:8000"
 - npm start -> localhost:3000
 
+## To develop locally without fully dockerized backend
+- use local environment with all packages from requirements.txt installed
+- set environment variable SQLALCHEMY_DATABASE_URI: postgresql://docker:docker@database:5432/exampledb in local environment
+- docker-compose up database
+- docker-compose up adminer
+
 ## Database adminer login
 - address: localhost:8080
 - database system: PostgreSQL

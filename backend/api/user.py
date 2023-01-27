@@ -4,8 +4,13 @@ from extensions import db
 
 user_route = Blueprint('user_route', __name__)
 
+
 @user_route.route('/api/user', methods=['POST'])
 def create_user():
+    """
+    Creates a new user entity in the users database table.
+    Returns: json with user data
+    """
     first_name = request.json.get('first_name', '')
     last_name = request.json.get('last_name', '')
     email = request.json.get('email', '')
@@ -18,8 +23,8 @@ def create_user():
     preferred_contact = request.json.get('preferred_contact', '')
     is_donor = request.json.get('is_donor', '')
 
-    user = User(first_name=first_name, 
-                last_name=last_name, 
+    user = User(first_name=first_name,
+                last_name=last_name,
                 email=email,
                 phone=phone,
                 club=club,
@@ -29,24 +34,43 @@ def create_user():
                 region=region,
                 preferred_contact=preferred_contact,
                 is_donor=is_donor)
-    
+
     db.session.add(user)
     db.session.commit()
-    
+
     return user_schema.jsonify(user)
 
-@user_route.route('/api/user', methods=['GET']) # add id to route
+
+@user_route.route('/api/user', methods=['GET'])  # add id to route
 def get_users():
+    """
+    Get all users from the database table users.
+    Returns: json with list of all users
+    """
     all_users = User.query.all()
     return jsonify(users_schema.dump(all_users))
 
+
 @user_route.route('/api/user/<int:user_id>', methods=['GET'])
-def get_user(user_id):
+def get_user(user_id: int):
+    """
+    Gets a specific user by id from the users database table.
+    Args:
+        user_id: id of user
+    Returns: json with user data
+    """
     user = User.query.get(user_id)
     return user_schema.jsonify(user)
 
+
 @user_route.route('/api/user/<int:user_id>', methods=['PATCH'])
-def update_user(user_id):
+def update_user(user_id: int):
+    """
+    Updates a given user by id in the users database table.
+    Args:
+        user_id: id of user to be updated
+    Returns: json of updated user
+    """
     first_name = request.json.get('first_name', '')
     last_name = request.json.get('last_name', '')
     email = request.json.get('email', '')
@@ -77,9 +101,16 @@ def update_user(user_id):
 
     return user_schema.jsonify(user)
 
-    @user_route.route("/api/user/<int:user_id>", methods=['DELETE'])
-    def delete_user(user_id):
-        user = User.query.get(user_id)
-        db.session.delete(user)
-        db.session.commit()
-        return user_schema.jsonify(user)
+
+@user_route.route("/api/user/<int:user_id>", methods=['DELETE'])
+def delete_user(user_id: int):
+    """
+    Deletes a user by id from the users database table.
+    Args:
+        user_id: id of user to be deleted
+    Returns: json of deleted user entity from database table users
+    """
+    user = User.query.get(user_id)
+    db.session.delete(user)
+    db.session.commit()
+    return user_schema.jsonify(user)

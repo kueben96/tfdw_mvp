@@ -2,6 +2,9 @@ from extensions import db, ma
 
 
 class User(db.Model):
+    """
+    Database model for table users.
+    """
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -15,7 +18,7 @@ class User(db.Model):
     city = db.Column(db.String, nullable=False, default=False)
     region = db.Column(db.String, nullable=False, default=False)  # Bundesland
     preferred_contact = db.Column(db.String, nullable=False, default=False)
-    is_donor = db.Column(db.Boolean, nullable=False) # if True, then user is donor, otherwise user is receiver
+    is_donor = db.Column(db.Boolean, nullable=False)  # if True, then user is donor, otherwise user is receiver
     # allow to give each object a string representation to recognize it for debugging purposes
 
     def __repr__(self):
@@ -23,6 +26,9 @@ class User(db.Model):
 
 
 class UserSchema(ma.Schema):
+    """
+    Marshmallow schema for database table models.
+    """
     class Meta:
         fields = ("id", "first_name", "last_name", "email", "phone", "club", "street", "zip_code", "city", "region", "preferred_contact", "is_donor")
 

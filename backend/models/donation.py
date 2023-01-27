@@ -1,6 +1,10 @@
 from extensions import db, ma
 
+
 class Donation(db.Model):
+    """
+    Database model for table donations.
+    """
     __tablename__ = "donations"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -13,7 +17,7 @@ class Donation(db.Model):
 
     # TODO: add location
     # TODO: add size (children, adult)
-    
+
     # allow to give each object a string representation to recognize it for debugging purposes
 
     def __repr__(self):
@@ -21,6 +25,9 @@ class Donation(db.Model):
 
 
 class DonationSchema(ma.Schema):
+    """
+    Marshmallow schema for database table donations.
+    """
     class Meta:
         fields = ("id", "user_id", "donation_type", "number", "color", "cut", "description")
 

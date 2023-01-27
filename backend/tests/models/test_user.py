@@ -5,6 +5,10 @@ from models.user import User
 
 @pytest.fixture(scope='module')
 def new_user():
+    """
+    Creates a new user object from the database model User.
+    Returns: user object
+    """
     user = User(id=1, first_name="Alice", last_name="Cooper", email="alice@outlook.com", phone="1234",
                 club="Alices's Football Team", street="Street 10", zip_code=22525, city="Hamburg", region="Hamburg",
                 preferred_contact="email", is_donor=True)
