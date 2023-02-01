@@ -2,6 +2,9 @@ from extensions import db, ma
 
 
 class Donation(db.Model):
+    """
+    Database model for table donations.
+    """
     __tablename__ = "donations"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -24,6 +27,9 @@ class Donation(db.Model):
 
 
 class DonationSchema(ma.SQLAlchemyAutoSchema):
+    """
+    Marshmallow schema for database table donations.
+    """
     class Meta:
         model = Donation
         load_instance = True

@@ -5,6 +5,9 @@ from marshmallow_sqlalchemy import fields
 
 
 class User(db.Model):
+    """
+    Database model for table users.
+    """
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -29,6 +32,9 @@ class User(db.Model):
 
 
 class UserSchema(ma.SQLAlchemyAutoSchema):
+    """
+    Marshmallow schema for database table models.
+    """
     class Meta:
         model = User
         load_instance = True

@@ -10,10 +10,11 @@ from extensions import db, migrate, ma, cors
 
 from models import donation, user
 
+
 def create_app():
     """Application-factory pattern"""
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # Initialize extensions
@@ -29,21 +30,12 @@ def create_app():
 
     return app
 
+
 # Create an application instance
 app = create_app()
 
 # Create various application instances
 # Order matters: Initialize SQLAlchemy before Marshmallow
-
-
-# @app.route("/api/donors", methods=["GET"], strict_slashes=False)
-# def articles():
-
-#     donors = Donor.query.all()
-#     results = donors_schema.dump(donors)
-
-#     return jsonify(results)
-
 
 # if __name__ == "__main__":
 #     port = int(os.environ.get('PORT', 5000))
