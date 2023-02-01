@@ -2,6 +2,9 @@ from extensions import db, ma
 
 
 class DonationRequest(db.Model):
+    """
+    Database model for table donation_requests.
+    """
     __tablename__ = "donation_requests"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -23,11 +26,14 @@ class DonationRequest(db.Model):
 
 
 class DonationRequestSchema(ma.SQLAlchemyAutoSchema):
+    """
+    Marshmallow schema for database table donation_requests.
+    """
     class Meta:
         model = DonationRequest
         load_instance = True
         include_fk = True
 
 
-donation_schema = DonationRequestSchema()
-donations_schema = DonationRequestSchema(many=True)
+donation_request_schema = DonationRequestSchema()
+donation_requests_schema = DonationRequestSchema(many=True)

@@ -13,18 +13,26 @@ def create_donation():
     """
     user_id = request.json.get('user_id', '')
     # TODO: get user_id from the logged in user data later, can be replaced with random int to work with frontend
-    donation_type = request.json.get('donation_type', '')
-    number = request.json.get('number', '')
-    color = request.json.get('color', '')
-    cut = request.json.get('cut', '')
+    date = request.json.get('date', '') # TODO: maybe date needs to be casted to datetime format
+    category = request.json.get('category', '')
+    amount = request.json.get('amount', '')
+    size_1 = request.json.get('size_1', '')
+    size_2 = request.json.get('size_2', '')
+    color_1 = request.json.get('color_1', '')
+    color_2 = request.json.get('color_2', '')
     description = request.json.get('description', '')
+    status = "offen"
 
     donation = Donation(user_id=user_id,
-                        donation_type=donation_type,
-                        number=number,
-                        color=color,
-                        cut=cut,
-                        description=description)
+                        date=date,
+                        category=category,
+                        amount=amount,
+                        size_1=size_1,
+                        size_2=size_2,
+                        color_1=color_1,
+                        color_2=color_2,
+                        description=description,
+                        status=status)
 
     db.session.add(donation)
     db.session.commit()
@@ -63,19 +71,27 @@ def update_donation(donation_id: int):
     Returns: json of updated donation
     """
     user_id = request.json.get('user_id', '')
-    donation_type = request.json.get('donation_type', '')
-    number = request.json.get('number', '')
-    color = request.json.get('color', '')
-    cut = request.json.get('cut', '')
+    date = request.json.get('date', '')
+    category = request.json.get('category', '')
+    amount = request.json.get('amount', '')
+    size_1 = request.json.get('size_1', '')
+    size_2 = request.json.get('size_2', '')
+    color_1 = request.json.get('color_1', '')
+    color_2 = request.json.get('color_2', '')
     description = request.json.get('description', '')
+    status = request.json.get('status', '')
 
     donation = Donation.query.get(donation_id)
     donation.user_id = user_id
-    donation.donation_type = donation_type
-    donation.number = number
-    donation.color = color
-    donation.cut = cut
+    donation.date = date
+    donation.category = category
+    donation.amount = amount
+    donation.size_1 = size_1
+    donation.size_2 = size_2
+    donation.color_1 = color_1
+    donation.color_2 = color_2
     donation.description = description
+    donation.status = status
 
     db.session.add(donation)
     db.session.commit()

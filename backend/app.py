@@ -3,12 +3,13 @@ import json
 
 import os
 from api.login import login_route
-from api.donation import donation_route
 from api.user import user_route
+from api.donation import donation_route
+from api.donation_request import donation_request_route
 
 from extensions import db, migrate, ma, cors
 
-from models import donation, user
+from models import user, donation, donation_request
 
 
 def create_app():
@@ -25,8 +26,9 @@ def create_app():
     cors.init_app(app)
 
     app.register_blueprint(login_route)
-    app.register_blueprint(donation_route)
     app.register_blueprint(user_route)
+    app.register_blueprint(donation_route)
+    app.register_blueprint(donation_request_route)
 
     return app
 
