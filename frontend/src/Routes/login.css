@@ -9,9 +9,9 @@
   top:10px;
    }
  
-input[type=email],input[type=password]{
-  width: 350px;
-  height: 20px;
+.login-email, .login-password{
+ width: 350px;
+  height: 32px;
   padding: 5px;
   margin-top: 15px;
   color: #4f4f4f;
