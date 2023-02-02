@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchDonations, getDonationsError, getDonationsStatus, selectAllDonations } from '../../store/reducers/donationsSlice';
 import AddDonationForm from '../donations/AddDonationForm';
 import DonationCard from '../donations/DonationCard';
+import { Row, Col, Container } from 'react-bootstrap'
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -25,13 +26,18 @@ const Home = () => {
         content = <p>{error}</p>;
     }
     return (
-        <>
-            <h1> Donations</h1>
-            {content}
+        <div className='App'>
+            <Container>
 
-            <AddDonationForm></AddDonationForm>
+                <h1> Donations</h1>
+                {content}
+                <Row>
+                    <AddDonationForm></AddDonationForm>
+                </Row>
 
-        </>
+            </Container>
+        </div>
+
     )
 
 }

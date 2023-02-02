@@ -1,0 +1,25 @@
+
+/* General CSS Specifications belong here! */
+
+:root {
+    --black: #000000;
+    --green: #67C392;
+  }
+
+  body{
+    background-color: var(--green)!important;
+    position: relative;
+    margin:auto;     
+  }
+  
+
+  .footer{
+    background-color: #FFFFFF;
+    height: 35px;
+    text-align: center;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }

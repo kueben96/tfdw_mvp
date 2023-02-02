@@ -6,7 +6,6 @@ import DonationDetails from './components/DonationDetails';
 import Layout from './components/Layout';
 
 
-
 function App() {
     return (
 

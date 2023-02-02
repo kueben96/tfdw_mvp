@@ -3,13 +3,13 @@
   --green: #67C392;
   /* --font-normal: 'Nunito Sans', sans-serif; */
 }
-.App {
+/* .App {
   text-align: center;
   position: absolute;
   width: 100%;
   height: 100%;
   left: 0px;
-}
+} */
 body{
   background: var(--green);
   position: relative;     
