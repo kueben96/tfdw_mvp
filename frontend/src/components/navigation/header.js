@@ -18,7 +18,7 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse className="justify-content-space-between" id="responsive-navbar-nav">
                     <Nav className="mr-auto nav-components">
-                        {names.map(item => (<Nav.Link activeClass='active' spy={true} smooth={true} offset={300} duration={500} className="nav-element" href={`#${item.toLowerCase()}`}>{item}</Nav.Link>))}
+                        {names.map(item => (<Nav.Link key={item} offset={300} duration={500} className="nav-element" href={`#${item.toLowerCase()}`}>{item}</Nav.Link>))}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

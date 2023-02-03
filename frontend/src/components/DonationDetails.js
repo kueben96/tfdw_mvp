@@ -115,7 +115,6 @@ function DonationDetails() {
             <p className='meine-spende'>MEINE SPENDE</p>
           </div>
 
-
           {/* enctype="multipart/form-data" */}
           <div className='formdiv'>
             <form className='form-container' onSubmit={handleSubmit} >
