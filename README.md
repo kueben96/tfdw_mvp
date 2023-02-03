@@ -29,6 +29,15 @@
 - password: docker
 - database: exampledb
 
+## Register user
+- route: /api/signup POST
+- request_body: see list of sample bodies in backend/mock_data/user.json
+
+## Log in
+- route: /api/login POST
+- request_body: see list of sample bodies in backend/mock_data/login.json
+- example response_body:{ "token": "eyJ0eJAiOiJK1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwiZXhwIjoxNjc1NDM5MDI0fQ.m8LqSvsD8A_LaIHtqI9sjzNhAFTLVoznm3eikNYLZgg"}
+
 ## Database migrations
 
 - docker exec -it  tfdw_mvp-api-1 sh
