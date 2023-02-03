@@ -66,7 +66,7 @@ function DonationDetails() {
 
     <div className="App ">
 
-      <nav className="nav" onChange={handleChange}>
+      {/* <nav className="nav" onChange={handleChange}>
         <a href="/" className="logo">logo</a>
 
         <div className="hamburger" id='hamburger'>
@@ -83,7 +83,7 @@ function DonationDetails() {
           <a href="/">Blog</a>
           <a href="/">Kontakt</a>
         </div>
-      </nav>
+      </nav> */}
 
       <section className="home"></section>
 
@@ -182,11 +182,6 @@ function DonationDetails() {
               <button className='donationbutton' type='submit' disabled={submitting}>DATEN PRÜFEN</button>
             </form>
           </div></div>
-
-
-        <div className='bottom'>
-          <label className='bttmtext'>TEILE FREUDE, HOFFNUNG UND DEIN TRIKOT</label>
-        </div>
       </div>
 
     </div>
