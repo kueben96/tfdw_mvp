@@ -24,7 +24,7 @@ services:
     env_file:
       - ./.env
     environment:
-      SQLALCHEMY_DATABASE_URI: ${SQLALCHEMY_DATABASE_URI}
+    SQLALCHEMY_DATABASE_URI  : ${SQLALCHEMY_DATABASE_URI}
     ports:
       - 8000:5000
     volumes:
