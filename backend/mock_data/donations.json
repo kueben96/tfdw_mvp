@@ -1,4 +1,4 @@
-[{"user_id":1,
+[{"user_id":5,
  "date": "2020-01-08T18:52:50.637635",
  "category": "sock",
  "amount": 1,
@@ -9,7 +9,29 @@
  "description": "one sock to free an elf"
 },
  {
-  "user_id": 3,
+  "user_id": 7,
+  "date": "2020-01-08T18:52:50.637635",
+  "category": "jersey kit",
+  "amount": 1,
+  "size_1": "adult",
+  "size_2": "M",
+  "color_1": "red",
+  "color_2": "yellow",
+  "description": "jersey kit"
+ },
+ {
+  "user_id": 8,
+  "date": "2020-01-08T18:52:50.637635",
+  "category": "jersey kit",
+  "amount": 1,
+  "size_1": "adult",
+  "size_2": "M",
+  "color_1": "red",
+  "color_2": "yellow",
+  "description": "jersey kit"
+ },
+ {
+  "user_id": 9,
   "date": "2020-01-08T18:52:50.637635",
   "category": "jersey",
   "amount": 1,
@@ -17,5 +39,5 @@
   "size_2": "M",
   "color_1": "green",
   "color_2": "white",
-  "description": "women's jersey"
+  "description": "green and white striped jersey size M"
  }]
