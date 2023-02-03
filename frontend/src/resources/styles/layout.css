@@ -6,6 +6,7 @@
     --black: #000000;
     --green: #67C392;
     --white: #FFFFFF;
+    --pink: #FBA276;
     --font-stylish: 'Bebas Neue', cursive;
   }
 
@@ -14,21 +15,32 @@
     position: relative;
     margin:auto;     
   }
-  x 
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-stylish);
+  }
+
+  .font-24{
+    font-size: 24px;
+  }
+
+  .font-64{
+    font-size: 64px;
+  }
+
+  
   .footer{
-    background-color: #FFFFFF;
-    height: 35px;
+    background-color: #FFFFFF!important;
+    height: 50px;
     text-align: center;
     overflow: hidden;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+    font-family: var(--font-stylish);
+   padding: 10px 0 20px 0;
   }
-
-  /* .icon {
-    height: 20px;
-  } */
 
   .logo {
     display: flex;
@@ -57,5 +69,27 @@
     margin-right: 10px;
   }
 
+/* Homepage */
+
+.homePage{
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-stylish);
+}
+
+
+.homePage > * {
+  padding: 30px;
+}
+
+.button-pink {
+  background-color: var(--pink);
+  border-radius: 100px;
+  border-style: none;  
+  padding: 12px 20px;
+}
 
   

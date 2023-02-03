@@ -1,7 +1,6 @@
 import React from 'react';
-import logo from '../../images/Jersey_Icon.svg'
 import { Nav, Navbar, Container } from 'react-bootstrap'
-import { Logo } from '../../resources/Logo';
+import { Logo } from '../Logo';
 import Blog from '../../images/Blog.png'
 import Globe from '../../images/Globe.png'
 import Heart from '../../images/Heart.png'
@@ -43,13 +42,13 @@ const Header = () => {
     return (
         <Navbar collapseOnSelect className="nav-fixed nav" expand="lg" >
             <Container>
-                <Navbar.Brand className="ml-auto" href="#">
+                <Navbar.Brand className="ml-auto" href="/">
                     <Logo></Logo>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse className=" justify-content-end" id="responsive-navbar-nav">
                     <Nav className="mr-auto nav-components">
-                        {navElements.map(element => (<Nav.Link key={element.name} className="nav-element" offset={300} duration={500} href={`#${element.name.toLowerCase()}`}>{<NavElement item={element}></NavElement>}</Nav.Link>))}
+                        {navElements.map(element => (<Nav.Link key={element.name} className="nav-element" offset={300} duration={500} href={`${element.name.toLowerCase()}`}>{<NavElement item={element}></NavElement>}</Nav.Link>))}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

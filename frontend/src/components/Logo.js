@@ -6,12 +6,11 @@ export const Logo = () => {
     return (
         <div className="logo">
             <img
-
                 alt="Jersey Logo"
                 src={logo}
             />
             <img
-
+                className="d-inline-block align-top"
                 alt="Logo Top"
                 src={logoText}
             />

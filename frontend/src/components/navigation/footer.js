@@ -5,9 +5,9 @@ import '../../resources/styles/layout.css'
 const Footer = () => {
 
     return (
-        <div className='footer'>
-            <label className='bttmtext'>TEILE FREUDE, HOFFNUNG UND DEIN TRIKOT</label>
-        </div>
+        <Container fluid={true} className='footer'>
+            <h3>TEILE FREUDE, HOFFNUNG UND DEIN TRIKOT</h3>
+        </Container>
     )
 
 }
