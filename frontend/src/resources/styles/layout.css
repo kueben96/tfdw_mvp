@@ -91,5 +91,31 @@
   border-style: none;  
   padding: 12px 20px;
 }
+.button-pink-outlined {
+  background-color: transparent;
+  border-radius: 100px;
+  border: solid 1px var(--pink);  
+  padding: 12px 20px;
+}
 
-  
+/* Login */
+
+.auth-section{
+  height: 60vh!important;
+}
+
+.form-input-white {
+  width: 85%;
+  box-sizing: border-box;
+    border-radius: 5px;
+    background-color: var(--white);
+    border-style: none;
+    padding: 16px 20px;
+    color: var(--black);
+    margin: 8px 0;
+    outline: none;
+}
+
+#login-form {
+  margin: 70px 0;
+}
