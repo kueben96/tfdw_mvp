@@ -24,7 +24,6 @@ services:
     env_file:
       - ./.env
     environment:
-      # SQLALCHEMY_DATABASE_URI: postgresql://postgres:hallohalloMaster@postgres-1.c1le0hpnxv6u.eu-west-1.rds.amazonaws.com:5432/postgres
       SQLALCHEMY_DATABASE_URI: ${SQLALCHEMY_DATABASE_URI}
     ports:
       - 8000:5000

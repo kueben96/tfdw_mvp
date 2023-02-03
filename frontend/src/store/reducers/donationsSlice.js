@@ -18,8 +18,8 @@ export const fetchDonations = createAsyncThunk(
 
 export const addDonation = createAsyncThunk(
     "donations/add",
-    async (newPost) => {
-        const response = await axios.post("/api/donation", newPost)
+    async (newDonation) => {
+        const response = await axios.post("/api/donation", newDonation)
         return response.data;
     }
 )
@@ -46,20 +46,3 @@ export const getDonationsError = (state) => state.donations.error;
 
 export default donationsSlice.reducer
 
-
-// *** reserved section for later requests"
-
-// export const retrieveAllDonations = createAsyncThunk(
-//     "donations/retrieveAll",
-//     async () => {
-//         const res = await DonationsDataService.getAll()
-//     }
-// )
-
-// export const getDonationsById = createAsyncThunk(
-//     "donations/retrieveById",
-//     async ({ id }) => {
-//         const res = await DonationsDataService.getDonation(id)
-//         return res.data;
-//     }
-// )

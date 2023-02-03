@@ -5,7 +5,7 @@ import '../../resources/styles/layout.css'
 const Footer = () => {
 
     return (
-        <div className='bottom'>
+        <div className='footer'>
             <label className='bttmtext'>TEILE FREUDE, HOFFNUNG UND DEIN TRIKOT</label>
         </div>
     )
