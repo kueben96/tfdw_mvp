@@ -2,11 +2,14 @@ from flask import Flask, jsonify, request, Blueprint
 from models.donation import Donation, donation_schema, donations_schema
 from extensions import db
 
+from api.user import token_required
+
 donation_route = Blueprint('donation_route', __name__)
 
 
 @donation_route.route('/api/donation', methods=['POST'])
-def create_donation():
+@token_required
+def create_donation(current_user):
     """
     Creates a new donation entity in the donations database table.
     Returns: json with donation data
@@ -41,7 +44,8 @@ def create_donation():
 
 
 @donation_route.route('/api/donation', methods=['GET'])
-def get_donations():
+@token_required
+def get_donations(current_user):
     """
     Get all donations from the database table donations.
     Returns: json with list of all donations
@@ -51,7 +55,8 @@ def get_donations():
 
 
 @donation_route.route('/api/donation/<int:donation_id>', methods=['GET'])
-def get_donation(donation_id: int):
+@token_required
+def get_donation(current_user, donation_id: int):
     """
     Gets a specific donation by id from the donations database table.
     Args:
@@ -63,7 +68,8 @@ def get_donation(donation_id: int):
 
 
 @donation_route.route('/api/donation/<int:donation_id>', methods=['PATCH'])
-def update_donation(donation_id: int):
+@token_required
+def update_donation(current_user, donation_id: int):
     """
     Updates a given donation by id in the donations database table.
     Args:
@@ -100,7 +106,8 @@ def update_donation(donation_id: int):
 
 
 @donation_route.route("/api/donation/<int:donation_id>", methods=['DELETE'])
-def delete_donation(donation_id: int):
+@token_required
+def delete_donation(current_user, donation_id: int):
     """
     Deletes a donation by id from the donations database table.
     Args:

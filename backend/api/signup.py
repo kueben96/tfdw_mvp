@@ -50,6 +50,6 @@ def signup():
         return make_response('Successfully registered.', 201)
     else:
         # returns 202 if user already exists
-        return make_response('User already exists. Please log ing.', 202)
+        return make_response('User already exists. Please log in.', 202)
 
 

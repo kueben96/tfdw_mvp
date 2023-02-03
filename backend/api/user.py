@@ -46,7 +46,8 @@ def get_users(current_user):
 
 
 @user_route.route('/api/user/<int:user_id>', methods=['GET'])
-def get_user(user_id: int):
+@token_required
+def get_user(current_user, user_id: int):
     """
     Gets a specific user by id from the users database table.
     Args:
@@ -58,7 +59,8 @@ def get_user(user_id: int):
 
 
 @user_route.route('/api/user/<int:user_id>', methods=['PATCH'])
-def update_user(user_id: int):
+@token_required
+def update_user(current_user, user_id: int):
     """
     Updates a given user by id in the users database table.
     Args:
@@ -97,7 +99,8 @@ def update_user(user_id: int):
 
 
 @user_route.route("/api/user/<int:user_id>", methods=['DELETE'])
-def delete_user(user_id: int):
+@token_required
+def delete_user(current_user, user_id: int):
     """
     Deletes a user by id from the users database table.
     Args:
