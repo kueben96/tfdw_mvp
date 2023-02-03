@@ -1,6 +1,21 @@
-{"user_id":2, 
- "donation_type":"sock",
- "number": 1,
- "color": "white",
- "cut": "unisex",
- "description": "one sock to free an elf"}
+[{"user_id":1,
+ "date": "2020-01-08T18:52:50.637635",
+ "category": "sock",
+ "amount": 1,
+ "size_1": "children",
+ "size_2": "35-38",
+ "color_1": "white",
+ "color_2": "white",
+ "description": "one sock to free an elf"
+},
+ {
+  "user_id": 3,
+  "date": "2020-01-08T18:52:50.637635",
+  "category": "jersey",
+  "amount": 1,
+  "size_1": "adult",
+  "size_2": "M",
+  "color_1": "green",
+  "color_2": "white",
+  "description": "women's jersey"
+ }]
