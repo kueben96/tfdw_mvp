@@ -25,6 +25,32 @@
   "club_name": "Dobby's Elves"
   },
   {
+  "first_name":"Hermione",
+  "last_name":"Granger",
+  "email": "hermione.granger@hogwarts.magic",
+  "phone": "12345678",
+  "street": "Street 12",
+  "zip_code": 12345,
+  "city": "Hogsmeade",
+  "region": "Scotland",
+  "password": "caputdraconis",
+  "role": "donor",
+  "club_name": "Gryffindor"
+  },
+  {
+  "first_name":"Ron",
+  "last_name":"Weasley",
+  "email": "ron.weasley@hogwarts.magic",
+  "phone": "5678",
+  "street": "Street 12",
+  "zip_code": 12345,
+  "city": "Hogsmeade",
+  "region": "Scotland",
+  "password": "password",
+  "role": "donor",
+  "club_name": "Gryffindor"
+  },
+  {
   "first_name":"Alice",
   "last_name":"Cooper",
   "email": "alice@outlook.com",
@@ -33,7 +59,21 @@
   "zip_code": 22525,
   "city": "Hamburg",
   "region": "Hamburg",
-  "password": "email",
+  "password": "Alice123",
   "role": "donor",
   "club_name": "Alices's Football Team"
-}]
+},
+  {
+  "first_name":"Bob",
+  "last_name":"Riley",
+  "email": "bob@outlook.com",
+  "phone": "1234",
+  "street": "Street 10",
+  "zip_code": 22525,
+  "city": "Hamburg",
+  "region": "Hamburg",
+  "password": "Bob",
+  "role": "receiver",
+  "club_name": "Bob's Football Team"
+}
+]

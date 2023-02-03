@@ -1,48 +1,42 @@
-from flask import Flask, jsonify, request, Blueprint
-from models.user import User, user_schema, users_schema
+import jwt
+import os
+
 from extensions import db
+from functools import wraps
+from flask import Flask, jsonify, request, Blueprint
+
+from models.user import User, user_schema, users_schema
+
 
 user_route = Blueprint('user_route', __name__)
 
 
-@user_route.route('/api/user', methods=['POST'])
-def create_user():
-    """
-    Creates a new user entity in the users database table.
-    Returns: json with user data
-    """
-    first_name = request.json.get('first_name', '')
-    last_name = request.json.get('last_name', '')
-    email = request.json.get('email', '')
-    phone = request.json.get('phone', '')
-    password = request.json.get('password', '')
-    street = request.json.get('street', '')
-    zip_code = request.json.get('zip_code', '')
-    city = request.json.get('city', '')
-    region = request.json.get('region', '')
-    role = request.json.get('role', '')
-    club_name = request.json.get('club_name', '')
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = None
+        # jwt is passed in the request header
+        if 'x-access-token' in request.header:
+            token = request.headers['x-access-token']
+        # return 401 if token is  not passed
+        if not token:
+            return jsonify({'message': 'Token is missing!!'}), 401
+        try:
+            # decoding the payload to fetch the stored details
+            data = jwt.decode(token, os.environ.get('SECRET_KEY'))
+            current_user = User.query.filter_by(id=data['id']).first()
+        except:
+            return jsonify({'message': 'Token is invalid!!'}), 401
 
-    user = User(first_name=first_name,
-                last_name=last_name,
-                email=email,
-                phone=phone,
-                password=password,
-                street=street,
-                zip_code=zip_code,
-                city=city,
-                region=region,
-                role=role,
-                club_name=club_name)
+        # returns the current logged in users context to the routes
+        return f(current_user, *args, **kwargs)
 
-    db.session.add(user)
-    db.session.commit()
-
-    return user_schema.jsonify(user)
+    return decorated
 
 
-@user_route.route('/api/user', methods=['GET'])  # add id to route
-def get_users():
+@user_route.route('/api/user', methods=['GET'])
+@token_required
+def get_users(current_user):
     """
     Get all users from the database table users.
     Returns: json with list of all users

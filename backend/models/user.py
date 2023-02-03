@@ -25,6 +25,7 @@ class User(db.Model):
     user_donations = db.relationship(Donation, backref='user', single_parent=True)
     user_requests = db.relationship(DonationRequest, backref='user', single_parent=True)
 
+
     # allow to give each object a string representation to recognize it for debugging purposes
     def __repr__(self):
         return f"<User {self.id}, {self.first_name}, {self.last_name}, {self.email}, {self.phone}, {self.password}, " \

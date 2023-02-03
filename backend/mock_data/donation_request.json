@@ -1,9 +1,16 @@
-{"user_id":2,
+[{"user_id": 6,
  "date": "2020-01-08T18:52:50.637635",
  "category": "sock",
  "amount": 1,
  "size_1": "children",
- "size_2": "35-38",
  "color_1": "white",
  "description": "one sock to free an elf"
-}
+},
+ {"user_id": 10,
+ "date": "2020-01-08T18:52:50.637635",
+ "category": "jersey",
+ "amount": 1,
+ "size_1": "adult",
+ "color_1": "green",
+ "description": "green jersey size M"
+ }]
