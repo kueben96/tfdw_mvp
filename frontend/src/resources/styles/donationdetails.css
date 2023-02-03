@@ -1,15 +1,7 @@
 .navigator{
   position: inherit;
 }
-.row{
-  width: 460px;
-  margin: auto;
-  text-align: left;
-  
-  margin-bottom: -5px;
-  display: block;
-  margin-top: 80px;
-}
+
 .spendendetails{
   text-align: left;
   width: 460px;
@@ -274,27 +266,6 @@ a {
   text-transform: uppercase;
 }
 
-
-/* nav styles */
-
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 20px;
-  top: 0;
-  background-color: #FFFFFF;
-  height: 25px;
-  width: 100%;
-  position: fixed;
-  z-index: 9999;
-}
-
-.logo {
-  font-size: 1.8rem;
-  color: black;
-  padding-left: 20px;
-}
 
 .hamburger {
   padding-right: 20px;

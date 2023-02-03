@@ -1,9 +1,12 @@
 
 /* General CSS Specifications belong here! */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito+Sans&display=swap');
 
 :root {
     --black: #000000;
     --green: #67C392;
+    --white: #FFFFFF;
+    --font-stylish: 'Bebas Neue', cursive;
   }
 
   body{
@@ -22,5 +25,37 @@
     left: 0;
     right: 0;
   }
+
+  /* .icon {
+    height: 20px;
+  } */
+
+  .logo {
+    display: flex;
+    margin: 0;
+  }
+
+  .logo img {
+    margin-right: 10px;
+  }
+
+  .nav {
+    background-color: var(--white);
+    font-family: var(--font-stylish)!important;
+    font-size: 16px;
+   
+  }
+
+  .nav-element {
+    display: flex;
+    flex-direction: row;
+   align-items: center;
+  }
+
+  .nav-element span{
+    padding-top: 5px;
+    margin-right: 10px;
+  }
+
 
   
