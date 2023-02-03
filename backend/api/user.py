@@ -16,7 +16,7 @@ def token_required(f):
     def decorated(*args, **kwargs):
         token = None
         # jwt is passed in the request header
-        if 'x-access-token' in request.header:
+        if 'x-access-token' in request.headers:
             token = request.headers['x-access-token']
         # return 401 if token is  not passed
         if not token:
