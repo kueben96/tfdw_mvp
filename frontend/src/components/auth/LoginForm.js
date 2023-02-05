@@ -1,22 +1,47 @@
 import '../../resources/styles/login.css';
-import { React, useState, useReducer } from 'react';
+import { React, useState, useEffect } from 'react';
 import Button from "react-bootstrap/Button";
-import { Container, Col, Row, Form, Card } from 'react-bootstrap';
+import { Container, Col, Row, Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, selectCurrentUser, setCredentials } from '../../store/reducers/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const authUser = useSelector(selectCurrentUser)
+
+
+    useEffect(() => {
+        // redirect to home if already logged in
+        if (authUser) navigate('/');
+
+    }, []);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    // TODO: implement more advanced navigation
     function validateForm() {
         return email.length > 0 && password.length > 0;
     }
 
-    function handleSubmit(event) {
-        event.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            const userData = dispatch(login({ email, password }))
+            console.log(userData)
+            setCredentials({ ...userData, email })
+            setEmail('')
+            setPassword('')
+        } catch (e) {
+            console.log(e)
+        }
+
     }
-    function hideIcon(self) {
-        self.style.backgroundImage = 'none';
-    }
+    const handleEmailInput = (e) => setEmail(e.target.value)
+
+    const handlePasswordInput = (e) => setPassword(e.target.value)
+
     return (
 
         <div>
@@ -31,7 +56,7 @@ function LoginForm() {
                                 <input className="form-input-white"
                                     type="email"
                                     value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    onChange={handleEmailInput}
                                     placeholder='E-Mail Addresse'
                                 ></input>
 
@@ -40,7 +65,7 @@ function LoginForm() {
                                 <input className="form-input-white"
                                     type="password"
                                     value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    onChange={handlePasswordInput}
                                     placeholder='Passwort'
                                 ></input>
 
