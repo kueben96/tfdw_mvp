@@ -119,3 +119,8 @@
 #login-form {
   margin: 70px 0;
 }
+
+/* || UTILITY CLASSES */
+.errmsg {
+  color: firebrick;
+}

@@ -6,6 +6,8 @@ import DonationDetails from './components/DonationDetails';
 import Layout from './components/Layout';
 import Home from './components/home';
 import LoginForm from './components/auth/LoginForm';
+import RequireAuth from './components/utils/RequireAuth';
+
 
 
 function App() {
@@ -15,8 +17,10 @@ function App() {
             <Route path='/' element={<Layout />}>
                 <Route index element={< Home />} />
                 <Route path='/login' element={<LoginForm />}></Route>
+
                 <Route path='/donation' element={<DonationDetails />}></Route>
                 <Route path='/spenden' element={<SpendenTestRequest />}></Route>
+
             </Route>
         </Routes>
 

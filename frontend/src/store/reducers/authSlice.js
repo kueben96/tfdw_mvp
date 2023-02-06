@@ -5,7 +5,6 @@ export const login = createAsyncThunk(
     "auth/login",
     async ({ email, password }) => {
         const response = await axios.post("/api/login", { email, password })
-        console.log(response)
         return response.data;
     }
 )
@@ -17,6 +16,8 @@ const authSlice = createSlice({
     reducers: {
         setCredentials: (state, action) => {
             const { user, accessToken } = action.payload
+            console.log('payload')
+            console.log(action.payload)
             state.user = user
             state.token = accessToken
         },
@@ -28,7 +29,8 @@ const authSlice = createSlice({
     extraReducers: {
         [login.pending]: (state) => { state.error = null },
         [login.fulfilled]: (state, action) => {
-
+            console.log("payload")
+            console.log(action.payload)
             const user = action.payload
 
             state.user = user

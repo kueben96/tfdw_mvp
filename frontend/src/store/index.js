@@ -7,5 +7,8 @@ export const store = configureStore({
         donations: donationsReducer,
         auth: authReducer
     },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({}).concat([]),
+    devTools: true
+
 });
 
