@@ -1,0 +1,206 @@
+
+.registerform{
+    margin: auto;
+    position: relative;
+    width: 400px;
+    height: 600px;
+    text-align: left;
+    background: white;
+    border-radius: 20px;
+    }
+
+  .registerwrap{
+    width:400px;
+    margin: auto;
+    text-align: left;
+    margin-top: 70px;
+   
+  }
+  .register-list input{
+    background: #F0F1EC;
+  }
+  .register-titel{
+    text-align: center;
+    width:400px;
+   font-family: 'Bebas Neue', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    color: black;
+    height: 35px;
+    line-height: 38px;
+    background-color: #ccc;
+    border-radius:  20px 20px 0 0;
+  }
+  .register-paragraph{
+    margin: auto;
+   width: 380px;
+    height: 48px;
+  text-align: left;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  align-items: center;
+  color: #000000;
+  }
+ 
+  .registerform li{
+    list-style: none;
+    margin-bottom: 3px;
+ 
+    }
+
+/* .name, .last, .zip, .city, .bundesland{
+      margin-top: 3px;
+      
+    } */
+  
+.register-list{
+  margin-left: -20px;
+  display: inline-block;  
+   
+    } 
+li{
+    text-align: left;
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size:12px;
+    
+    
+    }
+
+.names, .pick-country{
+    display: flex;
+   width: 380px;
+  
+  } 
+
+.passid, .email, .repeat-pass{
+   
+    width: 250px;
+    height: 25px;
+    padding: 5px;
+    margin-top: 0px;
+    color: #4f4f4f;
+    font-size: 16px;
+    border-radius: 5px;
+    position: relative;
+   
+     
+ 
+}
+    
+.registerbutton{
+  box-sizing: border-box;
+  position: relative;
+  width: 149px;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  background-color: #FBA276;
+  cursor: pointer;
+  font-family: 'Bebas Neue', sans-serif;
+  color: black !important;
+  font-weight: bold;
+  display:inline;
+  margin-left: 240px;
+  left: -25px;
+  font-size: 12px;
+  text-transform: uppercase;
+
+}
+.register-check {
+  margin: 10px;
+  margin-left: -80px;
+ 
+}
+.register-check label{
+  margin: 10px;
+  position: relative;
+  margin-left: -70px;
+  
+}
+
+/* .register-check {
+ 
+  font-family: system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 2;
+  display: grid;
+  grid-template-columns: 110px auto;
+  gap: 0.5em;
+} */
+
+
+.register-check {
+  display: block;
+  position: relative;
+  margin-top: 10px;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Bebas Neue', sans-serif;
+  line-height: 1;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.register-check input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.register-check:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.register-check input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.register-check input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.register-check .checkmark:after {
+  left: 6px;
+  
+  width: 5px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}

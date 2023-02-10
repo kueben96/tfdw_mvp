@@ -1,3 +1,41 @@
+.form-input-white{
+  width: 350px;
+  height: 35px;
+  padding: 5px;
+  margin-top: 15px;
+  color: #4f4f4f;
+  font-size: 16px;
+  border-radius: 10px;
+  position: relative;
+   }
+input#email {
+    background-image: url(../../images/SecuredLetter.png);
+    background-repeat: no-repeat;
+    text-indent: 30px;
+    background-position: 10px 5px; 
+}
+input#email:focus{
+  background-image:none;
+ }
+ input#password {
+  background-image: url(../../images/Lock.png);
+  background-repeat: no-repeat;
+  text-indent: 30px;
+  background-position: 10px 5px; 
+}
+input#password:focus{
+background-image:none;
+}
+.logincontainer{
+  display: block;
+  position: relative;
+  margin: auto;
+  align-items: center;
+  width: 350px;
+  height: 500px;
+  font-family: 'Raleway', sans-serif;
+  top:10px;
+   }
 /* .logincontainer{
   display: block;
   position: relative;
