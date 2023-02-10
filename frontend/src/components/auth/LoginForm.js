@@ -66,7 +66,7 @@ function LoginForm() {
 
     return (
 
-        <div>
+        <div >
             <Container>
                 <Row className="auth-section d-flex justify-content-center align-items-center">
 
