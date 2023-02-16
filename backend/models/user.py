@@ -25,7 +25,6 @@ class User(db.Model):
     user_donations = db.relationship(Donation, backref='user', single_parent=True)
     user_requests = db.relationship(DonationRequest, backref='user', single_parent=True)
 
-
     # allow to give each object a string representation to recognize it for debugging purposes
     def __repr__(self):
         return f"<User {self.id}, {self.first_name}, {self.last_name}, {self.email}, {self.phone}, {self.password}, " \
@@ -36,10 +35,17 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
     """
     Marshmallow schema for database table models.
     """
+
     class Meta:
         model = User
         load_instance = True
         include_relationships = True
+
+        fields = (
+            'id', 'first_name', 'last_name', 'email', 'phone', 'password', 'street', 'zip_code', 'city', 'region',
+            'role',
+            'club_name', 'user_donations', 'user_donation_requests')
+
     user_donations = fields.Nested(DonationSchema, many=True)
     user_donation_requests = fields.Nested(DonationRequestSchema, many=True)
 
