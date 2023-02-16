@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request, Blueprint
+from datetime import datetime
 from models.donation_request import DonationRequest, donation_request_schema, donation_requests_schema
 from extensions import db
 
@@ -14,9 +15,8 @@ def create_donation_request(current_user):
     Creates a new donation request entity in the donation_requests database table.
     Returns: json with donation request data
     """
-    user_id = request.json.get('user_id', '')
-    # TODO: get user_id from the logged in user data later, can be replaced with random int to work with frontend
-    date = request.json.get('date', '')  # TODO: maybe date needs to be casted to datetime format
+    user_id = current_user.id
+    date = datetime.now()
     category = request.json.get('category', '')
     amount = request.json.get('amount', '')
     size_1 = request.json.get('size_1', '')
@@ -74,8 +74,8 @@ def update_donation_request(current_user, donation_request_id: int):
         donation_request_id: id of donation request to be updated
     Returns: json of updated donation request
     """
-    user_id = request.json.get('user_id', '')
-    date = request.json.get('date', '') # TODO: maybe needs to be cast to datetime
+    user_id = current_user.id
+    date = datetime.now()
     category = request.json.get('category', '')
     amount = request.json.get('amount', '')
     size_1 = request.json.get('size_1', '')
