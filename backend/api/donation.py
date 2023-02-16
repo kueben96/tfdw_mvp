@@ -49,8 +49,8 @@ def create_donation(current_user):
 @token_required
 def get_donations(current_user):
     """
-    Get all donations from the database table donations.
-    Returns: json with list of all donations
+    Get all donations from the database table donations joined with table user.
+    Returns: json with list of all donations and corresponding user data
     """
     # all_donations = Donation.query.all()
     # return jsonify(donations_schema.dump(all_donations))
