@@ -60,6 +60,10 @@ function LoginForm() {
 
     const handlePasswordInput = (e) => setPassword(e.target.value)
 
+    const routeSignUp = () => {
+        navigate('/signup')
+    }
+
     return (
 
         <div >
@@ -99,7 +103,7 @@ function LoginForm() {
                         <Row>
                             <Col>
                                 <div>Ich möchte ein Benutzerkonto erstellen.</div>
-                                <Button bsPrefix='button-pink-outlined' type="submit" onSubmit={validateForm} >
+                                <Button onClick={routeSignUp} bsPrefix='button-pink-outlined'>
                                     Registrieren
                                 </Button>
                             </Col>

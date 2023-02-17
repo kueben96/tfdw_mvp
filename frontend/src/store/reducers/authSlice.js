@@ -4,6 +4,10 @@ const token = localStorage.getItem('token')
     ? localStorage.getItem('token')
     : null
 
+const user = localStorage.getItem('user')
+    ? localStorage.getItem('user')
+    : null
+
 const authSlice = createSlice({
     name: 'auth',
     initialState: { email: null, token: token },
@@ -13,6 +17,7 @@ const authSlice = createSlice({
             state.email = email
             state.token = token
             localStorage.setItem('token', token)
+            localStorage.setItem('user', email)
         },
         logOut: (state, action) => {
             state.email = null

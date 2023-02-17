@@ -8,11 +8,12 @@ const Home = () => {
 
     const navigate = useNavigate()
     const token = useSelector(selectCurrentToken)
+    const user = useSelector(selectCurrentUser)
 
     const routeLogin = () => {
         navigate('/login')
     }
-    const welcomeMsg = token ? <h1>Welcome, you're logged in</h1> : <div>Log in to proceed: press the button below </div>
+    const welcomeMsg = token ? <h1>Welcome, you're logged in {user}</h1> : <div>Log in to proceed: press the button below </div>
 
     return (
         <section>
