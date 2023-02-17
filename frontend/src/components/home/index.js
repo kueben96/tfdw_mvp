@@ -8,10 +8,6 @@ const Home = () => {
 
     const navigate = useNavigate()
     const token = useSelector(selectCurrentToken)
-    console.log("authUser")
-    console.log(token)
-
-
 
     const routeLogin = () => {
         navigate('/login')
