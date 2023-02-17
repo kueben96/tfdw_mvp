@@ -43,7 +43,7 @@ def create_donation_request(current_user):
 
 
 @donation_request_route.route('/api/donation_request', methods=['GET'])
-@token_required
+@token_required(True)
 def get_donation_requests(current_user):
     """
     Get all donation requests from the database table donation_requests joined with table user.
@@ -63,7 +63,7 @@ def get_donation_requests(current_user):
 
 
 @donation_request_route.route('/api/donation_request/<int:donation_request_id>', methods=['GET'])
-@token_required
+@token_required()
 def get_donation_request(current_user, donation_request_id: int):
     """
     Gets a specific donation request by id from the donation_requests database table.
@@ -76,7 +76,7 @@ def get_donation_request(current_user, donation_request_id: int):
 
 
 @donation_request_route.route('/api/donation_request/<int:donation_request_id>', methods=['PATCH'])
-@token_required
+@token_required()
 def update_donation_request(current_user, donation_request_id: int):
     """
     Updates a given donation request by id in the donation requests database table.
@@ -112,7 +112,7 @@ def update_donation_request(current_user, donation_request_id: int):
 
 
 @donation_request_route.route("/api/donation_request/<int:donation_request_id>", methods=['DELETE'])
-@token_required
+@token_required()
 def delete_donation(current_user, donation_request_id: int):
     """
     Deletes a donation request by id from the donation_requests database table.
