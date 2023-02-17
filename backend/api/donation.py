@@ -52,6 +52,7 @@ def get_donations(current_user):
     Get all donations from the database table donations joined with table user.
     Returns: json with list of all donations and corresponding user data
     """
+    # TODO: write functionality for donation card and donation details
     # all_donations = Donation.query.all()
     # return jsonify(donations_schema.dump(all_donations))
     results = (db.session.query(Donation.id, Donation.date, Donation.category, Donation.amount,
