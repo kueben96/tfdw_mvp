@@ -3,23 +3,40 @@ import { React, useState, useReducer } from 'react';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import AccountCircle from '../../images/AccountCircle.png'
 import MenuIcon from '../../images/MenuIcon.png'
+import { useSignupMutation } from '../../store/reducers/authApiSlice';
 
 
 
 function Registerform() {
 
-	const [firstName, setFirstName] = useState("");
-	const [lastname, setLastName] = useState("");
-	const [email, setEmail] = useState("");
-	const [phoneNumber, setPhoneNumber] = useState("");
-	const [clubName, setClubName] = useState("");
-	const [address, setAddress] = useState("");
-	const [zipCode, setZipCode] = useState("");
-	const [city, setCity] = useState("");
-	const [federalState, setFederalState] = useState("");
-	const [password, setPassword] = useState("");
-	const [repeatPassword, setRepeatPassword] = useState("");
+	const [user, setUser] = useState({ id: "", asDonor: false, asRecipient: false, firstName: "", lastname: "", email: "", phoneNumber: "", clubName: "", address: "", zipCode: "", city: "", federalState: "", password: "", password: "", repeatPassword: "" });
 
+	const [addUser, { isLoading: updating, isSuccess: saved }] = useSignupMutation();
+
+
+	const inputHandler = (e) => {
+		const { name, value, checked } = e.target;
+		// TODO: check if password is same
+		// code here
+		let theValue = isCheckox(name) ? checked : value
+		console.log(theValue)
+		setUser({ ...user, [name]: theValue });
+	};
+
+	const isCheckox = (name) => {
+		if (name === "user-type-donor" || "user-type-recipient") {
+			return true
+		} else {
+			return false
+		}
+
+	}
+
+	const saveUser = (e) => {
+		e.preventDefault();
+		addUser(user);
+		// goBack(700);
+	};
 
 	return (
 		<div>
@@ -41,13 +58,17 @@ function Registerform() {
 									<Form>
 										<Form.Check
 											type="checkbox"
-											id="user-type"
+											id="user-type-donor"
+											name="user-type-donor"
 											label="Ich möchte spenden"
+											onChange={inputHandler}
 										/>
 										<Form.Check
 											type="checkbox"
-											id="user-type"
+											id="user-type-recipient"
+											name="user-type-recipient"
 											label="Ich suche Spenden"
+											onChange={inputHandler}
 										/>
 										<Row>
 											<Col sm={6} md={6}>
@@ -55,8 +76,9 @@ function Registerform() {
 													<label>Vorname *</label>
 													<input className="form-input-grey"
 														type="text"
-														value={firstName}
-														onChange={(e) => setFirstName(e.target.value)}
+														id='firstName'
+														name='firstName'
+														onChange={inputHandler}
 													></input>
 												</Form.Group>
 											</Col>
@@ -65,8 +87,9 @@ function Registerform() {
 													<label>Nachname *</label>
 													<input className="form-input-grey"
 														type="text"
-														value={lastname}
-														onChange={(e) => setLastName(e.target.value)}
+														id='lastName'
+														name='lastName'
+														onChange={inputHandler}
 													></input>
 												</Form.Group>
 											</Col>
@@ -76,8 +99,9 @@ function Registerform() {
 											<label>E-Mail-Adresse *</label>
 											<input className="form-input-grey"
 												type="email"
-												value={email}
-												onChange={(e) => setEmail(e.target.value)}
+												id='email'
+												name='email'
+												onChange={inputHandler}
 											></input>
 										</Form.Group>
 
@@ -85,8 +109,9 @@ function Registerform() {
 											<label>Telefonnummer</label>
 											<input className="form-input-grey"
 												type="tel"
-												value={phoneNumber}
-												onChange={(e) => setPhoneNumber(e.target.value)}
+												id='phone'
+												name='phone'
+												onChange={inputHandler}
 											></input>
 										</Form.Group>
 
@@ -94,16 +119,18 @@ function Registerform() {
 											<label>Vereinsname / Organnisationsname *</label>
 											<input className="form-input-grey"
 												type="text"
-												value={clubName}
-												onChange={(e) => setClubName(e.target.value)}
+												id='clubName'
+												name='clubName'
+												onChange={inputHandler}
 											></input>
 										</Form.Group>
 										<Form.Group className="mb-1 flex-col" controlId="address">
 											<label>Straße und Hausnummer *</label>
 											<input className="form-input-grey"
 												type="text"
-												value={address}
-												onChange={(e) => setAddress(e.target.value)}
+												id='address'
+												name='address'
+												onChange={inputHandler}
 											></input>
 										</Form.Group>
 
@@ -113,8 +140,9 @@ function Registerform() {
 													<label>PLZ *</label>
 													<input className="form-input-grey"
 														type="number"
-														value={zipCode}
-														onChange={(e) => setZipCode(e.target.value)}
+														id='zipCode'
+														name='zipCode'
+														onChange={inputHandler}
 													></input>
 												</Form.Group>
 											</Col>
@@ -123,8 +151,9 @@ function Registerform() {
 													<label>Stadt *</label>
 													<input className="form-input-grey"
 														type="text"
-														value={city}
-														onChange={(e) => setCity(e.target.value)}
+														id='city'
+														name='city'
+														onChange={inputHandler}
 													></input>
 												</Form.Group>
 											</Col>
@@ -134,29 +163,28 @@ function Registerform() {
 												<label>Bundesland *</label>
 												<input className="form-input-grey"
 													type="text"
-													value={federalState}
-													onChange={(e) => setFederalState(e.target.value)}
+													id='federalState'
+													name='federalState'
+													onChange={inputHandler}
 												></input>
 											</Form.Group>
 										</Col>
-
-
-
-
 										<Form.Group className="mb-1 flex-col" controlId="password">
 											<label>Password *</label>
 											<input className="form-input-grey"
 												type="password"
-												value={password}
-												onChange={(e) => setPassword(e.target.value)}
+												id='password'
+												name='password'
+												onChange={inputHandler}
 											></input>
 										</Form.Group>
 										<Form.Group className="mb-1 flex-col" controlId="password">
 											<label>Password wiederholen *</label>
 											<input className="form-input-grey"
 												type="password"
-												value={repeatPassword}
-												onChange={(e) => setRepeatPassword(e.target.value)}
+												id='repeatPassword'
+												name='repeatPassword'
+												onChange={inputHandler}
 											></input>
 										</Form.Group>
 										<Button bsPrefix='button-pink align-self-right' className='button-pink'>Konto erstellen</Button>
