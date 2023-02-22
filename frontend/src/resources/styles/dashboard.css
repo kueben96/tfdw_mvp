@@ -1,0 +1,38 @@
+.dashboard{
+    margin: auto;
+    position: relative;
+    width: 900px;
+    height: 600px;
+    text-align: left;
+    background: white;
+    border-radius: 20px;
+    margin-top: 50px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.dashboard-titel{
+    width: 900px;
+    text-align: center;
+   font-family: 'Bebas Neue', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    color: black;
+    height: 35px;
+    line-height: 38px;
+    background-color: #ccc;
+    border-radius:  20px 20px 0 0;
+}
+.dashboard-paragraph{
+  margin: auto;
+  width: 700px;
+  height: 48px;
+  text-align: left;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  align-items: center;
+  color: #000000;
+  }

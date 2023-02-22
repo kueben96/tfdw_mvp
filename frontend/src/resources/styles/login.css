@@ -26,16 +26,72 @@ input#email:focus{
 input#password:focus{
 background-image:none;
 }
+
+.loginwrap{
+  width:350px;
+  margin: auto;
+  text-align: left;
+ margin-top: 150px;
+ 
+}
 .logincontainer{
   display: block;
   position: relative;
   margin: auto;
   align-items: center;
   width: 350px;
-  height: 500px;
+  height: 300px;
   font-family: 'Raleway', sans-serif;
-  top:10px;
+  top:30px;
    }
+   .login-text1{
+    width: 350px;
+    height: 24px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 19px;
+    align-items: center;
+    color: #000000;
+    margin-top: 5px;
+    text-decoration-line:underline;
+    text-transform:none;
+    font-weight: normal;
+    
+  }
+  .login-paragraph{
+    width: 350px;
+    height: 48px;
+  text-align: left;
+  font-family: 'Bebas Neue', sans-serif;
+  font-style:normal;
+  font-size: 18px;
+  line-height: 20px;
+  align-items: center;
+  color: #000000;
+  }
+  .login-text1:hover{
+    color: #F7E167;
+    text-decoration-line: none;
+  }
+  .login-form{
+    width:350px;
+    margin: auto;
+    text-align: left;
+   margin-top: 60px;
+   
+  }
+  .login-text2{
+    width: 350px;
+    height: 24px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 19px;
+    align-items: center;
+    color: #000000;
+    margin-bottom: -40px;
+  }
 /* .logincontainer{
   display: block;
   position: relative;
