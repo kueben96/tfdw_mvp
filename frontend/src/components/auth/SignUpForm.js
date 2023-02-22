@@ -155,7 +155,7 @@ function Registerform() {
 											<label>Password wiederholen *</label>
 											<input className="form-input-grey"
 												type="password"
-												value={password}
+												value={repeatPassword}
 												onChange={(e) => setRepeatPassword(e.target.value)}
 											></input>
 										</Form.Group>
