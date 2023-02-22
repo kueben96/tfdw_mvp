@@ -18,6 +18,7 @@ function Registerform() {
 	const [city, setCity] = useState("");
 	const [federalState, setFederalState] = useState("");
 	const [password, setPassword] = useState("");
+	const [repeatPassword, setRepeatPassword] = useState("");
 
 
 	return (
@@ -55,7 +56,7 @@ function Registerform() {
 													<input className="form-input-grey"
 														type="text"
 														value={firstName}
-														onChange={() => { }}
+														onChange={(e) => setFirstName(e.target.value)}
 													></input>
 												</Form.Group>
 											</Col>
@@ -65,7 +66,7 @@ function Registerform() {
 													<input className="form-input-grey"
 														type="text"
 														value={lastname}
-														onChange={() => { }}
+														onChange={(e) => setLastName(e.target.value)}
 													></input>
 												</Form.Group>
 											</Col>
@@ -76,7 +77,7 @@ function Registerform() {
 											<input className="form-input-grey"
 												type="email"
 												value={email}
-												onChange={() => { }}
+												onChange={(e) => setEmail(e.target.value)}
 											></input>
 										</Form.Group>
 
@@ -85,7 +86,7 @@ function Registerform() {
 											<input className="form-input-grey"
 												type="tel"
 												value={phoneNumber}
-												onChange={() => { }}
+												onChange={(e) => setPhoneNumber(e.target.value)}
 											></input>
 										</Form.Group>
 
@@ -94,7 +95,7 @@ function Registerform() {
 											<input className="form-input-grey"
 												type="text"
 												value={clubName}
-												onChange={() => { }}
+												onChange={(e) => setClubName(e.target.value)}
 											></input>
 										</Form.Group>
 										<Form.Group className="mb-1 flex-col" controlId="address">
@@ -102,7 +103,7 @@ function Registerform() {
 											<input className="form-input-grey"
 												type="text"
 												value={address}
-												onChange={() => { }}
+												onChange={(e) => setAddress(e.target.value)}
 											></input>
 										</Form.Group>
 
@@ -113,7 +114,7 @@ function Registerform() {
 													<input className="form-input-grey"
 														type="number"
 														value={zipCode}
-														onChange={() => { }}
+														onChange={(e) => setZipCode(e.target.value)}
 													></input>
 												</Form.Group>
 											</Col>
@@ -123,7 +124,7 @@ function Registerform() {
 													<input className="form-input-grey"
 														type="text"
 														value={city}
-														onChange={() => { }}
+														onChange={(e) => setCity(e.target.value)}
 													></input>
 												</Form.Group>
 											</Col>
@@ -134,7 +135,7 @@ function Registerform() {
 												<input className="form-input-grey"
 													type="text"
 													value={federalState}
-													onChange={() => { }}
+													onChange={(e) => setFederalState(e.target.value)}
 												></input>
 											</Form.Group>
 										</Col>
@@ -147,7 +148,7 @@ function Registerform() {
 											<input className="form-input-grey"
 												type="password"
 												value={password}
-												onChange={() => { }}
+												onChange={(e) => setPassword(e.target.value)}
 											></input>
 										</Form.Group>
 										<Form.Group className="mb-1 flex-col" controlId="password">
@@ -155,7 +156,7 @@ function Registerform() {
 											<input className="form-input-grey"
 												type="password"
 												value={password}
-												onChange={() => { }}
+												onChange={(e) => setRepeatPassword(e.target.value)}
 											></input>
 										</Form.Group>
 										<Button bsPrefix='button-pink align-self-right' className='button-pink'>Konto erstellen</Button>
@@ -173,66 +174,3 @@ function Registerform() {
 
 }
 export default Registerform;
-
-
-{/* <form className='registerform' onSubmit={handleSubmit}>
-				<div className="register-text-center">
-					<label className='register-titel'>DEIN KONTO</label>
-				</div>
-				<div className='registerpara'>
-					<p className='register-paragraph'>Um deine Angaben für die nächsten Spenden zu speichern, erstelle gerne ein Benutzerkonto.   </p>
-				</div>
-				<ul className='register-list'>
-					<div className='pick-country'>
-						<li><label for="zip">Vorname</label>
-							<input className="zip" id='name'></input></li>
-
-						<li><label for="country">Nachname</label>
-							<input type="text" className="city" id='lastname' /></li>
-					</div>
-
-
-					<li><label for="email">Email</label></li>
-					<li><input type="email" className="email" id='email1' /></li>
-
-
-					<li><label for="username">ggf. Vereinsname</label></li>
-					<li><input type="text" clasName="verein-name" size="50" id='verein' /></li>
-					<li><label for="address">Straße und Hausnummer</label></li>
-					<li><input type="text" className="address" size="50" id='address' /></li>
-
-
-					<div className='pick-country'>
-						<li><label for="zip">ZIP code</label>
-							<input className="zip" id='zip'></input></li>
-
-						<li><label for="country">Stadt</label>
-							<input type="text" className="city" id='city' /></li>
-					</div>
-
-
-					<li><label for="bundesland">Bundesland</label>
-						<li><input type="text" className="bundesland" size="12" id='land' /></li>
-					</li>
-					<li><label for="passid">Passwort</label></li>
-					<li><input type="password" className="passid" size="12" id='pswd' /></li>
-					<li><label for="passid">Passwort wiederholen</label></li>
-					<li><input type="password" className="repeat-pass" size="12" id='rpswd' /></li>
-
-					<label class="register-check">Ich möchte spenden
-						<input type="checkbox" id='ch1' />
-						<span class="checkmark"></span>
-					</label>
-
-					<label class="register-check">Ich suche Spenden
-						<input type="checkbox" id='ch2' />
-						<span class="checkmark"></span>
-					</label>
-
-					<li><button type="submit" className="registerbutton" value="Submit">Konto erstellen </button>
-					</li>
-				</ul>
-
-			</form>
-
-		</div> */}
