@@ -9,9 +9,11 @@ const baseQuery = fetchBaseQuery({
         if (token) {
             headers.set("authorization", `Bearer ${token}`)
         }
-        return token
+        return headers
     }
 })
+
+
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
     let result = await baseQuery(args, api, extraOptions)
