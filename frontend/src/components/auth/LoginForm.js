@@ -66,15 +66,18 @@ function LoginForm() {
 
     return (
 
-        <div >
-            <Container>
+ <Container> 
+                 
+       <div className="login-form">
+        
                 <Row className="auth-section d-flex justify-content-center align-items-center">
 
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <Col md={8} lg={6} xs={12}>
+                    <Col >
                         <h2>Schön, dass du da bist</h2>
-
-                        <Form id="login-form" onSubmit={handleSubmit}>
+                        <h4 className='login-paragraph'>Bitte melde dich mit deinen Benutzerdaten an, erstelle ein Konto oder fahre als Gast fort.</h4>
+                      <div className="logincontainer">
+                        <Form onSubmit={handleSubmit}>
                             <span>Ich habe ein Benutzer:innenkonto.</span>
                             <Form.Group ze="lg" controlId="email">
                                 <input className="form-input-white"
@@ -92,17 +95,17 @@ function LoginForm() {
                                     onChange={handlePasswordInput}
                                     placeholder='Passwort'
                                 ></input>
-
+                             <a className="login-text1" href="/">Ich habe mein Passwort vergessen.  </a>
                             </Form.Group>
-
+                          
                             <Button bsPrefix='button-pink' type="submit" onSubmit={validateForm} >
                                 Anmelden
                             </Button>
 
-                        </Form>
+                        </Form></div>
                         <Row>
                             <Col>
-                                <div>Ich möchte ein Benutzerkonto erstellen.</div>
+                                <div >Ich möchte ein Benutzerkonto erstellen.</div>
                                 <Button bsPrefix='button-pink-outlined' type="submit" onSubmit={validateForm} >
                                     Registrieren
                                 </Button>
@@ -111,10 +114,12 @@ function LoginForm() {
 
                     </Col>
                 </Row>
+                
+             </div>
             </Container>
-        </div>
-
-
+      
+        
+      
 
     );
 

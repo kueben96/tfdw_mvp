@@ -32,7 +32,7 @@ export default function Login() {
 
       </div>
       <div className="login-form">
-        <div class="logincontainer">
+        <div className="logincontainer">
 
           <Form onSubmit={handleSubmit}>
             <Form.Group size="lg" controlId="email">
