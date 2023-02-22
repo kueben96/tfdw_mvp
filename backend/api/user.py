@@ -11,31 +11,46 @@ from models.user import User, user_schema, users_schema
 user_route = Blueprint('user_route', __name__)
 
 
-def token_required(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        token = None
-        # jwt is passed in the request header
-        if 'x-access-token' in request.headers:
-            token = request.headers['x-access-token']
-        # return 401 if token is  not passed
-        if not token:
-            return jsonify({'message': 'Token is missing!!'}), 401
-        try:
-            # decoding the payload to fetch the stored details
-            data = jwt.decode(token, os.environ.get('SECRET_KEY'))
-            current_user = User.query.filter_by(id=data['id']).first()
-        except:
-            return jsonify({'message': 'Token is invalid!!'}), 401
+def token_required(optional=False):
+    def decorator(f):
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+            token = None
+            current_user = None
+            # jwt is passed in the request header
+            if 'x-access-token' in request.headers:
+                token = request.headers['x-access-token']
 
-        # returns the current logged in users context to the routes
-        return f(current_user, *args, **kwargs)
+            if optional:
+                if token:
+                    try:
+                        # decoding the payload to fetch the stored details
+                        data = jwt.decode(token, os.environ.get('SECRET_KEY'))
+                        current_user = User.query.filter_by(id=data['id']).first()
+                    except:
+                        return jsonify({'message': 'Token is invalid!!'}), 401
+                else:
+                    current_user = None
 
-    return decorated
+            else:
+                # return 401 if token is  not passed
+                if not token:
+                    return jsonify({'message': 'Token is missing!!'}), 401
+                try:
+                    # decoding the payload to fetch the stored details
+                    data = jwt.decode(token, os.environ.get('SECRET_KEY'))
+                    current_user = User.query.filter_by(id=data['id']).first()
+                except:
+                    return jsonify({'message': 'Token is invalid!!'}), 401
+
+            # returns the current logged in users context to the routes
+            return f(current_user, *args, **kwargs)
+        return wrapper
+    return decorator
 
 
 @user_route.route('/api/user', methods=['GET'])
-@token_required
+@token_required()
 def get_users(current_user):
     """
     Get all users from the database table users.
@@ -46,7 +61,7 @@ def get_users(current_user):
 
 
 @user_route.route('/api/user/<int:user_id>', methods=['GET'])
-@token_required
+@token_required()
 def get_user(current_user, user_id: int):
     """
     Gets a specific user by id from the users database table.
@@ -59,7 +74,7 @@ def get_user(current_user, user_id: int):
 
 
 @user_route.route('/api/user/<int:user_id>', methods=['PATCH'])
-@token_required
+@token_required()
 def update_user(current_user, user_id: int):
     """
     Updates a given user by id in the users database table.
@@ -99,7 +114,7 @@ def update_user(current_user, user_id: int):
 
 
 @user_route.route("/api/user/<int:user_id>", methods=['DELETE'])
-@token_required
+@token_required()
 def delete_user(current_user, user_id: int):
     """
     Deletes a user by id from the users database table.

@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request, Blueprint
+from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 from models.donation import Donation, donation_schema, donations_schema
+from models.user import User, users_schema
 from extensions import db
 
 from api.user import token_required
@@ -44,18 +46,27 @@ def create_donation(current_user):
 
 
 @donation_route.route('/api/donation', methods=['GET'])
-@token_required
+@token_required(True)
 def get_donations(current_user):
     """
-    Get all donations from the database table donations.
-    Returns: json with list of all donations
+    Get all donations from the database table donations joined with table user.
+    Returns: json with list of all donations and corresponding user data
     """
-    all_donations = Donation.query.all()
-    return jsonify(donations_schema.dump(all_donations))
+    # TODO: write functionality for donation card and donation details
+    # all_donations = Donation.query.all()
+    # return jsonify(donations_schema.dump(all_donations))
+    results = (db.session.query(Donation.id, Donation.date, Donation.category, Donation.amount,
+                                Donation.size_1, Donation.size_2, Donation.color_1, Donation.color_2,
+                                Donation.description, User.first_name, User.last_name, User.email,
+                                User.zip_code, User.city)
+               .join(User, User.id == Donation.user_id)).all()
+    return jsonify([dict(id=x.id, date=x.date, category=x.category, amount=x.amount, size_1=x.size_1, size_2=x.size_2,
+                         color_1=x.color_1, color_2=x.color_2, description=x.description, first_name=x.first_name,
+                         last_name=x.last_name, email=x.email, zip_code=x.zip_code, city=x.city) for x in results])
 
 
 @donation_route.route('/api/donation/<int:donation_id>', methods=['GET'])
-@token_required
+@token_required()
 def get_donation(current_user, donation_id: int):
     """
     Gets a specific donation by id from the donations database table.
@@ -68,7 +79,7 @@ def get_donation(current_user, donation_id: int):
 
 
 @donation_route.route('/api/donation/<int:donation_id>', methods=['PATCH'])
-@token_required
+@token_required()
 def update_donation(current_user, donation_id: int):
     """
     Updates a given donation by id in the donations database table.
@@ -106,7 +117,7 @@ def update_donation(current_user, donation_id: int):
 
 
 @donation_route.route("/api/donation/<int:donation_id>", methods=['DELETE'])
-@token_required
+@token_required()
 def delete_donation(current_user, donation_id: int):
     """
     Deletes a donation by id from the donations database table.
