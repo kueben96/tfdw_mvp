@@ -23,14 +23,11 @@ function Registerform() {
 		setUser({ ...user, [name]: theValue });
 	};
 
-	const isCheckox = (name) => {
-		if (name === "user-type-donor" || "user-type-recipient") {
-			return true
-		} else {
-			return false
-		}
+	console.log(user)
 
-	}
+	const isCheckox = (name) =>
+		name === "user-type-donor" || "user-type-recipient" ? true : false
+
 
 	const saveUser = (e) => {
 		e.preventDefault();
