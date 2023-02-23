@@ -1,10 +1,14 @@
 import React from 'react'
-import '../../resources/styles/dashboard.css';
+import '../../resources/styles/dashboardresults.css';
+import DonationCard from './DonationCard';
 
 const DashboardResults = () =>{
 return(
 
-<div></div>
+<div className='articles'>
+<DonationCard>hello</DonationCard>
+
+</div>
 
 
 )
