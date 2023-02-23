@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request, Blueprint
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
+import pytz
+
 from models.donation import Donation, donation_schema, donations_schema
 from models.user import User, users_schema
 from extensions import db
@@ -11,14 +13,16 @@ donation_route = Blueprint('donation_route', __name__)
 
 
 @donation_route.route('/api/donation', methods=['POST'])
-@token_required
+@token_required()
 def create_donation(current_user):
     """
     Creates a new donation entity in the donations database table.
     Returns: json with donation data
     """
     user_id = current_user.id
-    date = datetime.now()
+    tz = pytz.timezone('Europe/Berlin')
+    date = datetime.now(tz)
+
     category = request.json.get('category', '')
     amount = request.json.get('amount', '')
     size_1 = request.json.get('size_1', '')
@@ -46,19 +50,34 @@ def create_donation(current_user):
 
 
 @donation_route.route('/api/donation', methods=['GET'])
-@token_required(True)
+@token_required(optional=True)
 def get_donations(current_user):
     """
     Get all donations from the database table donations joined with table user.
     Returns: json with list of all donations and corresponding user data
     """
-    # TODO: write functionality for donation card and donation details
-    # all_donations = Donation.query.all()
-    # return jsonify(donations_schema.dump(all_donations))
+    results = (db.session.query(Donation.id, Donation.date, Donation.category, Donation.amount,
+                                Donation.size_1, Donation.size_2, Donation.color_1, Donation.color_2,
+                                Donation.description, User.zip_code, User.city)
+               .filter_by(status="offen")
+               .join(User, User.id == Donation.user_id)).all()
+    return jsonify([dict(id=x.id, date=x.date, category=x.category, amount=x.amount, size_1=x.size_1, size_2=x.size_2,
+                         color_1=x.color_1, color_2=x.color_2, description=x.description, zip_code=x.zip_code,
+                         city=x.city) for x in results])
+
+
+@donation_route.route('/api/donation/<int:donation_id>', methods=['GET'])
+@token_required()
+def get_donation_details(current_user, donation_id):
+    """
+    Get donation details and user data for given donation_id.
+    Returns: json with donation details for given donation
+    """
     results = (db.session.query(Donation.id, Donation.date, Donation.category, Donation.amount,
                                 Donation.size_1, Donation.size_2, Donation.color_1, Donation.color_2,
                                 Donation.description, User.first_name, User.last_name, User.email,
                                 User.zip_code, User.city)
+               .filter_by(id=donation_id)
                .join(User, User.id == Donation.user_id)).all()
     return jsonify([dict(id=x.id, date=x.date, category=x.category, amount=x.amount, size_1=x.size_1, size_2=x.size_2,
                          color_1=x.color_1, color_2=x.color_2, description=x.description, first_name=x.first_name,
@@ -67,7 +86,7 @@ def get_donations(current_user):
 
 @donation_route.route('/api/donation/<int:donation_id>', methods=['GET'])
 @token_required()
-def get_donation(current_user, donation_id: int):
+def get_donation_by_id(current_user, donation_id: int):
     """
     Gets a specific donation by id from the donations database table.
     Args:

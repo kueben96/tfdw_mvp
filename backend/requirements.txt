@@ -9,4 +9,5 @@ Flask-Cors==3.0.10
 pytest
 pytest-flask
 PyJWT==1.7.1
+pytz
 
