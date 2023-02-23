@@ -87,15 +87,43 @@ def get_donation_request_details(current_user, donation_request_id: int):
                          last_name=x.last_name, email=x.email, zip_code=x.zip_code, city=x.city) for x in results])
 
 
-@donation_request_route.route('/api/donation_request/<int:donation_request_id>', methods=['PATCH'])
+@donation_request_route.route('/api/donation_request_details', methods=['GET'])
 @token_required()
-def update_donation_request(current_user, donation_request_id: int):
+def get_donation_request_details_new(current_user):
+    """
+    Gets a specific donation request by id from the donation_requests database table.
+    Args:
+        donation_request_id: id of donation request
+    Returns: json with donation request data
+    """
+    args = request.args.to_dict()
+    donation_request_id = args.get("id")
+
+    results = (
+        db.session.query(DonationRequest.id, DonationRequest.date, DonationRequest.category, DonationRequest.amount,
+                         DonationRequest.size_1, DonationRequest.size_2, DonationRequest.color_1,
+                         DonationRequest.description, User.first_name, User.last_name, User.email,
+                         User.zip_code, User.city)
+        .filter_by(id=donation_request_id)
+        .join(User, User.id == DonationRequest.user_id)).all()
+    return jsonify([dict(id=x.id, date=x.date, category=x.category, amount=x.amount, size_1=x.size_1, size_2=x.size_2,
+                         color_1=x.color_1, description=x.description, first_name=x.first_name,
+                         last_name=x.last_name, email=x.email, zip_code=x.zip_code, city=x.city) for x in results])
+
+
+@donation_request_route.route('/api/donation_request', methods=['PATCH'])
+@token_required()
+def update_donation_request(current_user):
     """
     Updates a given donation request by id in the donation requests database table.
     Args:
         donation_request_id: id of donation request to be updated
     Returns: json of updated donation request
     """
+
+    args = request.args.to_dict()
+    donation_request_id = args.get("id")
+
     user_id = current_user.id
     date = datetime.now()
     category = request.json.get('category', '')
@@ -123,15 +151,18 @@ def update_donation_request(current_user, donation_request_id: int):
     return donation_request_schema.jsonify(donation_request)
 
 
-@donation_request_route.route("/api/donation_request/<int:donation_request_id>", methods=['DELETE'])
+@donation_request_route.route("/api/donation_request", methods=['DELETE'])
 @token_required()
-def delete_donation(current_user, donation_request_id: int):
+def delete_donation(current_user):
     """
     Deletes a donation request by id from the donation_requests database table.
     Args:
         donation_request_id: id of donation request to be deleted
     Returns: json of deleted donation request entity from database table donation requests
     """
+    args = request.args.to_dict()
+    donation_request_id = args.get("id")
+
     donation_request = DonationRequest.query.get(donation_request_id)
     db.session.delete(donation_request)
     db.session.commit()
