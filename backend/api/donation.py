@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request, Blueprint
+from sqlalchemy import or_, text
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 import pytz
@@ -48,19 +49,44 @@ def create_donation(current_user):
 
     return donation_schema.jsonify(donation)
 
-
 @donation_route.route('/api/donation', methods=['GET'])
 @token_required(optional=True)
 def get_donations(current_user):
     """
     Get all donations from the database table donations joined with table user.
+    If arguments are given in query string, results are being filtered by given arguments.
     Returns: json with list of all donations and corresponding user data
     """
-    results = (db.session.query(Donation.id, Donation.date, Donation.category, Donation.amount,
-                                Donation.size_1, Donation.size_2, Donation.color_1, Donation.color_2,
-                                Donation.description, User.zip_code, User.city)
-               .filter_by(status="offen")
-               .join(User, User.id == Donation.user_id)).all()
+    args = request.args.to_dict()
+    if args:
+        args['status'] = "offen"
+        if 'color' in args:
+            color = args.pop('color')
+
+            filter_data = {key: value for (key, value) in args.items() if value}
+
+            results = (db.session.query(Donation.id, Donation.date, Donation.category, Donation.amount,
+                                        Donation.size_1, Donation.size_2, Donation.color_1, Donation.color_2,
+                                        Donation.description, User.zip_code, User.city)
+                       .filter_by(**filter_data)
+                       .filter(or_(Donation.color_1 == color, Donation.color_2 == color))
+                       .join(User, User.id == Donation.user_id)).all()
+        else:
+            filter_data = {key: value for (key, value) in args.items() if value}
+
+            results = (db.session.query(Donation.id, Donation.date, Donation.category, Donation.amount,
+                                        Donation.size_1, Donation.size_2, Donation.color_1, Donation.color_2,
+                                        Donation.description, User.zip_code, User.city)
+                       .filter_by(**filter_data)
+                       .join(User, User.id == Donation.user_id)).all()
+
+    else:
+        results = (db.session.query(Donation.id, Donation.date, Donation.category, Donation.amount,
+                                    Donation.size_1, Donation.size_2, Donation.color_1, Donation.color_2,
+                                    Donation.description, User.zip_code, User.city)
+                   .filter_by(status="offen")
+                   .join(User, User.id == Donation.user_id)).all()
+
     return jsonify([dict(id=x.id, date=x.date, category=x.category, amount=x.amount, size_1=x.size_1, size_2=x.size_2,
                          color_1=x.color_1, color_2=x.color_2, description=x.description, zip_code=x.zip_code,
                          city=x.city) for x in results])
@@ -123,8 +149,6 @@ def get_donation_by_id(current_user, donation_id: int):
 def update_donation(current_user):
     """
     Updates a given donation by id in the donations database table.
-    Args:
-        donation_id: id of donation to be updated
     Returns: json of updated donation
     """
     args = request.args.to_dict()
