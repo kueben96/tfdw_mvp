@@ -9,17 +9,36 @@ import { useSignupMutation } from '../../store/reducers/authApiSlice';
 
 function Registerform() {
 
-	const [user, setUser] = useState({ id: "", asDonor: false, asRecipient: false, firstName: "", lastname: "", email: "", phoneNumber: "", clubName: "", address: "", zipCode: "", city: "", federalState: "", password: "", password: "", repeatPassword: "" });
+	const [user, setUser] = useState({ firstName: "", lastname: "", email: "", phoneNumber: "", clubName: "", address: "", zipCode: "", city: "", federalState: "", password: "", password: "", repeatPassword: "", role: "" });
+
+	//checkbox: nur eins von beiden
+	const [isDonor, setIsDonor] = useState(true);
+	const [isRecipient, setIsRecipient] = useState(false)
+
+	const handleOnChangeIsDonor = (e) => {
+		setIsDonor(!isDonor)
+		setIsRecipient(isDonor)
+		// TODO: Handle Role input
+		console.log('isDonor', isDonor)
+		console.log('isRecipient', isRecipient)
+		console.log(e.target.checked)
+	}
+
+	const handleOnChangeIsRecipient = () => {
+		setIsRecipient(!isRecipient)
+		setIsDonor(isRecipient)
+	}
 
 	const [addUser, { isLoading: updating, isSuccess: saved }] = useSignupMutation();
 
 
 	const inputHandler = (e) => {
+		//checked gibt es gar nicht
 		const { name, value, checked } = e.target;
+
 		// TODO: check if password is same
 		// code here
 		let theValue = isCheckox(name) ? checked : value
-		console.log(theValue)
 		setUser({ ...user, [name]: theValue });
 	};
 
@@ -27,7 +46,6 @@ function Registerform() {
 
 	const isCheckox = (name) =>
 		name === "user-type-donor" || "user-type-recipient" ? true : false
-
 
 	const saveUser = (e) => {
 		e.preventDefault();
@@ -52,20 +70,22 @@ function Registerform() {
 								</div>
 								<div className="form-body">
 									<div className="mb-10">Um deine Angaben für die nächsten Spenden zu speichern, erstelle gerne ein Benutzerkonto.   </div>
-									<Form>
+									<Form onSubmit={saveUser}>
 										<Form.Check
 											type="checkbox"
 											id="user-type-donor"
 											name="user-type-donor"
 											label="Ich möchte spenden"
-											onChange={inputHandler}
+											checked={isDonor}
+											onChange={handleOnChangeIsDonor}
 										/>
 										<Form.Check
 											type="checkbox"
 											id="user-type-recipient"
 											name="user-type-recipient"
 											label="Ich suche Spenden"
-											onChange={inputHandler}
+											checked={isRecipient}
+											onChange={handleOnChangeIsDonor}
 										/>
 										<Row>
 											<Col sm={6} md={6}>
@@ -184,7 +204,7 @@ function Registerform() {
 												onChange={inputHandler}
 											></input>
 										</Form.Group>
-										<Button bsPrefix='button-pink align-self-right' className='button-pink'>Konto erstellen</Button>
+										<Button type="submit" bsPrefix='button-pink align-self-right' className='button-pink'> {updating ? "Konto wird erstellt ..." : "Konto erstellen"}</Button>
 									</Form>
 								</div>
 							</div>
