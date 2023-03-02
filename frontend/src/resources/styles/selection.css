@@ -1,0 +1,21 @@
+.selection{
+height: 400px;
+width: 400px;
+margin: auto;
+position: relative;
+background: white;
+border-radius: 20px;
+margin-top: 50px;
+}
+.buttons{
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+.buttons button{
+width: 300px;
+margin-bottom: 40px;
+font-size: 20px;
+display: flex;
+text-transform: uppercase;
+font-weight: lighter;
+}

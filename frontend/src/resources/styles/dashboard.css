@@ -8,10 +8,13 @@
     margin-top: 50px;
     overflow-x: hidden;
     overflow-y: scroll;
+  
 }
-.dashboard-titel{
-    width: 900px;
-    text-align: center;
+.register-text-center{
+  
+  justify-content: center;
+    position: inherit;
+    display: flex;
     font-family: 'Bebas Neue', sans-serif;
     font-style: normal;
     font-weight: bold;
@@ -27,6 +30,7 @@
     margin: auto;
     margin-top: 30px;
     align-items: center;
+  
     background-color: #67C39266;
     
 }
@@ -43,8 +47,9 @@
   color: #000000;
   }
   .registerbutton{
-font-size: 14px;
-  display: block;
+  
+
+  display: flex;
   margin: 0 auto;
   justify-content: center;
   
