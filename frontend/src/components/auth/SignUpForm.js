@@ -50,89 +50,10 @@ function Registerform(){
 		var ch1= document.getElementById("ch1").value;
     var ch2= document.getElementById("ch2").value;
 		
-		
-        //email id expression code
-		var pwd_expression = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/;
-		var letters = /^[A-Za-z]+$/;
-		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	
 
-	// 	if(name==='')
-	// 	{
-	// 		alert('Please enter your name');
-	// 	}
-	// 	else if(!letters.test(name))
-	// 	{
-	// 		alert('Name field required only alphabet characters');
-	// 	}
-    // if(lastname==='')
-	// 	{
-	// 		alert('Please enter your lastname');
-	// 	}
-	// 	else if(!letters.test(name))
-	// 	{
-	// 		alert('Lastname field required only alphabet characters');
-	// 	}
-    // if(address==='')
-	// 	{
-	// 		alert('Please enter address');
-	// 	}
-    // if(land==='')
-	// 	{
-	// 		alert('Please enter land');
-	// 	}
-	// 	else if(!letters.test(name))
-	// 	{
-	// 		alert('Name land required only alphabet characters');
-	// 	}
-	// 	else if(email==='')
-	// 	{
-	// 		alert('Please enter your user email id');
-	// 	}
-	// 	else if (!filter.test(email))
-	// 	{
-	// 		alert('Invalid email');
-	// 	}
-	// 	else if(zip==='')
-	// 	{
-	// 		alert('Please enter the ZIP Code.');
-	// 	}
-	// 	else if(!filter.test(zip))
-	// 	{
-	// 		alert('ZIP Code field required only numerical characters');
-	// 	}
-	// 	else if(pswd==='')
-	// 	{
-	// 		alert('Please enter Password');
-	// 	}
-	// 	else if(rpswd==='')
-	// 	{
-	// 		alert('Enter Confirm Password');
-	// 	}
-	// 	else if(!pwd_expression.test(pswd))
-	// 	{
-	// 		alert ('Upper case, Lower case, Special character and Numeric letter are required in Password filed');
-	// 	}
-	// 	else if(pswd != rpswd)
-	// 	{
-	// 		alert ('Password not Matched');
-	// 	}
-	// 	else if(document.getElementById("t5").value.length < 6)
-	// 	{
-	// 		alert ('Password minimum length is 6');
-	// 	}
-	// 	else if(document.getElementById("t5").value.length > 12)
-	// 	{
-	// 		alert ('Password max length is 12');
-	// 	}
+	
 
-
-
-
-	// 	else
-	// 	{				                            
-    //            alert('Thank You for Login & You are Redirecting to TFDW Website');
-			 
-	// 	}
 	 }
 
 return(

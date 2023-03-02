@@ -118,3 +118,4 @@ def delete_donation(current_user, donation_id: int):
     db.session.delete(donation)
     db.session.commit()
     return donation_schema.jsonify(donation)
+
