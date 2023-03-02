@@ -118,3 +118,9 @@ def delete_donation(current_user, donation_id: int):
     db.session.delete(donation)
     db.session.commit()
     return donation_schema.jsonify(donation)
+
+
+@donation_route.route(methods=['GET'])
+def index():
+    donations = Donation.query.all()
+    return donation_schema( donations=donations)

@@ -16,8 +16,8 @@ const DonationsDashboardPage = () => {
                     <label className='dashboard-titel'>SPENDEN SUCHMASCHINE</label>
                     </div>
                     <div className='registerpara'>
-                    <p className='dashboard-paragraph'>Hat jemand das, was du suchst oder spenden möchtest? Kontaktiere etwas Passendes. 
-             Falls nichts Passendes dabei ist, erstelle einen Eintrag. </p>
+                    <p className='dashboard-paragraph'>Erstelle eine Spende oder kontaktiere potenzielle Gesuche.   </p>
+                    <button className='registerbutton'>Spende erstellen</button>
                     </div>
 <FilterBarDonations></FilterBarDonations>
 <DashboardResults></DashboardResults>

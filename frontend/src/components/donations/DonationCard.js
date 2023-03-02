@@ -1,35 +1,29 @@
 import React from 'react'
+import { Col , Row} from 'react-bootstrap';
 import '../../resources/styles/donationcards.css';
 
-const DonationCard = ({ donation }) => {
+
+const DonationCard = ({donations }) => {
+    
     return ( 
+       
         <div className='articles1'>
+        
         <div className='each-article'>
-        {/* <article>
-         <h2>{donation.category}</h2>
-            <p>{donation.description}</p>
-        </article> */}
+        <article>
+          <Row>  
+            <p>Category</p>
+{/*             
+            <p>{donations.category}</p> */}
+      
+          </Row>
+         </article> 
+        
         </div> 
-         <div className='each-article'>
-         {/* <article>
-          <h2>{donation.category}</h2>
-             <p>{donation.description}</p>
-         </article> */}
-         </div> 
-          <div className='each-article'>
-          {/* <article>
-           <h2>{donation.category}</h2>
-              <p>{donation.description}</p>
-          </article> */}
-          </div> 
-          <div className='each-article'>
-        {/* <article>
-         <h2>{donation.category}</h2>
-            <p>{donation.description}</p>
-        </article> */}
-        </div> 
+      
        
           </div>
+          
     )
 }
 
