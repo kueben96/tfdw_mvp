@@ -5,53 +5,69 @@ import AccountCircle from '../../images/AccountCircle.png'
 import MenuIcon from '../../images/MenuIcon.png'
 import { useSignupMutation } from '../../store/reducers/authApiSlice';
 
-
+// Note: Add new user mutation must be implemented
+// Compare with YT tut and check why its not async
 
 function Registerform() {
 
-	const [user, setUser] = useState({ firstName: "", lastname: "", email: "", phoneNumber: "", clubName: "", address: "", zipCode: "", city: "", federalState: "", password: "", password: "", repeatPassword: "", role: "" });
+	const [user, setUser] = useState({ firstName: "", lastName: "", email: "", phoneNumber: "", clubName: "", address: "", zipCode: "", city: "", federalState: "", password: "", password: "", repeatPassword: "", role: "" });
 
-	//checkbox: nur eins von beiden
 	const [isDonor, setIsDonor] = useState(true);
 	const [isRecipient, setIsRecipient] = useState(false)
 
 	const handleOnChangeIsDonor = (e) => {
 		setIsDonor(!isDonor)
 		setIsRecipient(isDonor)
-		// TODO: Handle Role input
-		console.log('isDonor', isDonor)
-		console.log('isRecipient', isRecipient)
-		console.log(e.target.checked)
+		setUser({ ...user, role: getRole() })
 	}
 
-	const handleOnChangeIsRecipient = () => {
-		setIsRecipient(!isRecipient)
-		setIsDonor(isRecipient)
+	const getRole = () => {
+		let role = ""
+		if (isDonor === true) {
+			role = "donor"
+		}
+		else role = "recipient"
+		return role
 	}
 
 	const [addUser, { isLoading: updating, isSuccess: saved }] = useSignupMutation();
 
 
 	const inputHandler = (e) => {
-		//checked gibt es gar nicht
-		const { name, value, checked } = e.target;
-
+		const { name, value } = e.target;
 		// TODO: check if password is same
-		// code here
-		let theValue = isCheckox(name) ? checked : value
-		setUser({ ...user, [name]: theValue });
+		console.log("isCheckbox,", name, isCheckox(name))
+		if (!isCheckox(name)) {
+			console.log("no checkbox")
+			setUser({ ...user, [name]: value });
+		}
+		console.log(user)
 	};
 
-	console.log(user)
 
-	const isCheckox = (name) =>
-		name === "user-type-donor" || "user-type-recipient" ? true : false
+
+	const isCheckox = (name) => {
+		if (name == "user-type-donor" || name == "user-type-recipient") return true
+		return false
+	}
+
 
 	const saveUser = (e) => {
+
 		e.preventDefault();
-		addUser(user);
+		console.log("submm")
+		setUser({ ...user, role: getRole() })
+
+		// TODO; compare YT Tutorial AddPostForm.js await and unwrap
+		// TODO: check if region
+		try {
+			addUser({ first_name: user.firstName, last_name: user.lastName, email: user.email, phone: user.phoneNumber, street: user.address, zip_code: user.zipCode, city: user.city, region: user.federalState, password: user.password, role: getRole(), club_name: user.clubName }).unwrap()
+		} catch (err) {
+			console.log("failed to post user", err)
+		}
+
 		// goBack(700);
-	};
+	}
 
 	return (
 		<div>
@@ -126,8 +142,8 @@ function Registerform() {
 											<label>Telefonnummer</label>
 											<input className="form-input-grey"
 												type="tel"
-												id='phone'
-												name='phone'
+												id='phoneNumber'
+												name='phoneNumber'
 												onChange={inputHandler}
 											></input>
 										</Form.Group>
