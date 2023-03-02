@@ -10,6 +10,7 @@ import RequireAuth from './components/utils/RequireAuth';
 import SignUpForm from './components/auth/SignUpForm';
 import Register from './components/Register';
 import DonationsDashboardPage from './components/donations/DonationsDashboardPage';
+import Selection from './components/Selection';
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                 <Route path='/donation' element={<DonationDetails />}></Route>
                 <Route path='/spenden' element={<SpendenTestRequest />}></Route>
                 <Route path='/dashboard' element={<DonationsDashboardPage />}></Route>
+                <Route path='/selection' element={<Selection />}></Route>
             </Route>
         </Routes>
 

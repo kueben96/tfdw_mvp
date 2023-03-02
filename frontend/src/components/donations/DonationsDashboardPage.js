@@ -17,11 +17,11 @@ const DonationsDashboardPage = () => {
                     </div>
                     <div className='registerpara'>
                     <p className='dashboard-paragraph'>Erstelle eine Spende oder kontaktiere potenzielle Gesuche.   </p>
-                    <button className='registerbutton'>Spende erstellen</button>
+                    <button className='registerbutton' onclick="location.href='https://blog.hubspot.com/website/bootstrap-button'">Spende erstellen</button>
                     </div>
-<FilterBarDonations></FilterBarDonations>
-<DashboardResults></DashboardResults>
-</form>
+            <FilterBarDonations></FilterBarDonations>
+            <DashboardResults></DashboardResults>
+                </form>
 
 
 </Container>
