@@ -41,6 +41,10 @@
     font-size: 64px;
   }
 
+  .err {
+    color: var(--pink-accent);
+  }
+
   .footer{
     background-color: #FFFFFF!important;
     height: 50px;

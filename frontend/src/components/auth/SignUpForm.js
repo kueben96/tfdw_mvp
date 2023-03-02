@@ -12,6 +12,19 @@ function Registerform() {
 
 	const [user, setUser] = useState({ firstName: "", lastName: "", email: "", phoneNumber: "", clubName: "", address: "", zipCode: "", city: "", federalState: "", password: "", password: "", repeatPassword: "", role: "" });
 
+	const [error, setError] = useState({
+		firstName: '',
+		lastName: '',
+		email: '',
+		clubName: '',
+		address: '',
+		zipCode: '',
+		city: '',
+		federalState: '',
+		password: '',
+		repeatPassword: ''
+	})
+
 	const [isDonor, setIsDonor] = useState(true);
 	const [isRecipient, setIsRecipient] = useState(false)
 
@@ -30,19 +43,71 @@ function Registerform() {
 		return role
 	}
 
+	// use mutation to post request on API
 	const [addUser, { isLoading: updating, isSuccess: saved }] = useSignupMutation();
 
 
 	const inputHandler = (e) => {
 		const { name, value } = e.target;
-		// TODO: check if password is same
-		console.log("isCheckbox,", name, isCheckox(name))
+
 		if (!isCheckox(name)) {
-			console.log("no checkbox")
 			setUser({ ...user, [name]: value });
 		}
-		console.log(user)
+		validateInput(e);
 	};
+
+	const validateInput = e => {
+		let { name, value } = e.target;
+		setError(prev => {
+			const stateObj = { ...prev, [name]: "" };
+
+			switch (name) {
+				case "firstName":
+					if (!value) {
+						stateObj[name] = "Please enter firstName.";
+					}
+					break;
+				case "lastName":
+					if (!value) {
+						stateObj[name] = "Please enter lastName.";
+					}
+					break;
+				case "email":
+					if (!value) {
+						stateObj[name] = "Please enter email.";
+					}
+					break;
+				case "clubName":
+					if (!value) {
+						stateObj[name] = "Please enter clubName.";
+					}
+					break;
+
+				case "password":
+					if (!value) {
+						stateObj[name] = "Please enter Password.";
+					} else if (user.repeatPassword && value !== user.repeatPassword) {
+						stateObj["repeatPassword"] = "Password and Confirm Password does not match.";
+					} else {
+						stateObj["repeatPassword"] = user.repeatPassword ? "" : error.repeatPassword;
+					}
+					break;
+
+				case "repeatPassword":
+					if (!value) {
+						stateObj[name] = "Please enter Confirm Password.";
+					} else if (user.password && value !== user.password) {
+						stateObj[name] = "Password and Confirm Password does not match.";
+					}
+					break;
+
+				default:
+					break;
+			}
+
+			return stateObj;
+		});
+	}
 
 
 
@@ -55,11 +120,8 @@ function Registerform() {
 	const saveUser = (e) => {
 
 		e.preventDefault();
-		console.log("submm")
 		setUser({ ...user, role: getRole() })
 
-		// TODO; compare YT Tutorial AddPostForm.js await and unwrap
-		// TODO: check if region
 		try {
 			addUser({ first_name: user.firstName, last_name: user.lastName, email: user.email, phone: user.phoneNumber, street: user.address, zip_code: user.zipCode, city: user.city, region: user.federalState, password: user.password, role: getRole(), club_name: user.clubName }).unwrap()
 		} catch (err) {
@@ -113,6 +175,7 @@ function Registerform() {
 														name='firstName'
 														onChange={inputHandler}
 													></input>
+													{error.firstName && <span className='err'>{error.firstName}</span>}
 												</Form.Group>
 											</Col>
 											<Col sm={6}>
@@ -124,6 +187,7 @@ function Registerform() {
 														name='lastName'
 														onChange={inputHandler}
 													></input>
+													{error.lastName && <span className='err'>{error.lastName}</span>}
 												</Form.Group>
 											</Col>
 										</Row>
@@ -209,7 +273,9 @@ function Registerform() {
 												id='password'
 												name='password'
 												onChange={inputHandler}
+												onBlur={validateInput}
 											></input>
+											{error.password && <span className='err'>{error.password}</span>}
 										</Form.Group>
 										<Form.Group className="mb-1 flex-col" controlId="password">
 											<label>Password wiederholen *</label>
@@ -218,7 +284,9 @@ function Registerform() {
 												id='repeatPassword'
 												name='repeatPassword'
 												onChange={inputHandler}
+												onBlur={validateInput}
 											></input>
+											{error.repeatPassword && <span className='err'>{error.repeatPassword}</span>}
 										</Form.Group>
 										<Button type="submit" bsPrefix='button-pink align-self-right' className='button-pink'> {updating ? "Konto wird erstellt ..." : "Konto erstellen"}</Button>
 									</Form>
