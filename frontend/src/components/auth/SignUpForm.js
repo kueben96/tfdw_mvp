@@ -122,13 +122,10 @@ function Registerform() {
 
 	}
 
-
-
 	const isCheckox = (name) => {
 		if (name == "user-type-donor" || name == "user-type-recipient") return true
 		return false
 	}
-
 
 	const saveUser = (e) => {
 

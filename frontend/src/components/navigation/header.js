@@ -8,13 +8,17 @@ import { Heart } from '../../images'
 import Pray from '../../images/Pray.svg'
 import Santa from '../../images/Santa.png'
 import TShirt from '../../images/T-Shirt.png'
-import { useDispatch } from 'react-redux';
-import { logOut } from '../../store/reducers/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { logOut, selectCurrentToken } from '../../store/reducers/authSlice';
+import { useNavigate } from 'react-router-dom'
 
 
 const Header = () => {
 
     const dispatch = useDispatch();
+
+    const token = useSelector(selectCurrentToken)
+    const navigate = useNavigate()
 
     const navElements = [
         {
@@ -41,14 +45,19 @@ const Header = () => {
             name: "Kontakt",
             logo: Heart
         },
-        {
-            name: "Logout",
-        }
     ]
 
-    const onClickLogout = (element) => {
-        if (element.name === "Logout") {
-            console.log("logginh")
+    if (token) {
+        navElements.push({ name: "Logout" })
+    } else {
+        navElements.push({ name: "Login" })
+    }
+
+    const onClickAuth = (element) => {
+
+        if (element.name === "Login") {
+            navigate('/login')
+        } else if (element.name === "Logout") {
             dispatch(logOut())
         }
     }
@@ -63,7 +72,7 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse className=" justify-content-end" id="responsive-navbar-nav">
                     <Nav className="mr-auto nav-components">
-                        {navElements.map(element => (<Nav.Link onClick={(e) => { e.preventDefault(); onClickLogout(element) }} key={element.name} className="nav-element" offset={300} duration={500} href={`${element.name.toLowerCase()}`}>{<NavElement item={element}></NavElement>}</Nav.Link>))}
+                        {navElements.map(element => (<Nav.Link onClick={(e) => { e.preventDefault(); onClickAuth(element) }} key={element.name} className="nav-element" offset={300} duration={500} href={`${element.name.toLowerCase()}`}>{<NavElement item={element}></NavElement>}</Nav.Link>))}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
