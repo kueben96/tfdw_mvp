@@ -4,6 +4,7 @@ import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import AccountCircle from '../../images/AccountCircle.png'
 import MenuIcon from '../../images/MenuIcon.png'
 import { useSignupMutation } from '../../store/reducers/authApiSlice';
+import { connect } from 'react-redux';
 
 // Note: Add new user mutation must be implemented
 // Compare with YT tut and check why its not async
@@ -12,18 +13,7 @@ function Registerform() {
 
 	const [user, setUser] = useState({ firstName: "", lastName: "", email: "", phoneNumber: "", clubName: "", address: "", zipCode: "", city: "", federalState: "", password: "", password: "", repeatPassword: "", role: "" });
 
-	const [error, setError] = useState({
-		firstName: '',
-		lastName: '',
-		email: '',
-		clubName: '',
-		address: '',
-		zipCode: '',
-		city: '',
-		federalState: '',
-		password: '',
-		repeatPassword: ''
-	})
+	const [error, setError] = useState({})
 
 	const [isDonor, setIsDonor] = useState(true);
 	const [isRecipient, setIsRecipient] = useState(false)
@@ -49,64 +39,87 @@ function Registerform() {
 
 	const inputHandler = (e) => {
 		const { name, value } = e.target;
-
 		if (!isCheckox(name)) {
 			setUser({ ...user, [name]: value });
 		}
-		validateInput(e);
 	};
 
-	const validateInput = e => {
+	const isEmail = (email) =>
+		/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
+
+
+	const isValid = () => {
+		const errors = { ...error }
+		console.log("eerrrros,", errors)
+		if (!isEmail(user.email)) {
+			errors.email = "Invalid email";
+			console.log("why invalid")
+			console.log(user.email)
+		}
+		if (!user.email) {
+			errors.email = "Enter Email";
+			console.log("why invalid")
+			console.log(user.email)
+		}
+		if (!user.firstName) {
+			errors.firstName = "Enter FirstName";
+		}
+		if (!user.lastName) {
+			errors.lastName = "Enter LastName";
+		}
+		if (!user.address) {
+			errors.lastName = "Enter Street";
+		}
+		if (!user.clubName) {
+			errors.clubName = "Enter Club Name";
+		}
+		if (!user.zipCode) {
+			errors.zipCode = "Enter ZipCode";
+		}
+		if (!user.city) {
+			errors.zipCode = "Enter City";
+		}
+		if (!user.federalState) {
+			errors.federalState = "Enter Region";
+		}
+		setError(errors)
+
+		if (!Object.keys(error).length) {
+			console.log("error obj", Object.keys(error))
+			alert(JSON.stringify(user, null, 2));
+		}
+
+
+	}
+
+	const validatePasswordOnRepeat = e => {
 		let { name, value } = e.target;
-		setError(prev => {
-			const stateObj = { ...prev, [name]: "" };
 
-			switch (name) {
-				case "firstName":
-					if (!value) {
-						stateObj[name] = "Please enter firstName.";
-					}
-					break;
-				case "lastName":
-					if (!value) {
-						stateObj[name] = "Please enter lastName.";
-					}
-					break;
-				case "email":
-					if (!value) {
-						stateObj[name] = "Please enter email.";
-					}
-					break;
-				case "clubName":
-					if (!value) {
-						stateObj[name] = "Please enter clubName.";
-					}
-					break;
+		const passwordErrors = { ...error };
+		switch (name) {
+			case "password":
+				if (!value) {
+					passwordErrors.password = "Please enter Password.";
+				} else if (user.repeatPassword && value !== user.repeatPassword) {
+					passwordErrors.repeatPassword = "Password and Confirm Password does not match.";
+				} else {
+					passwordErrors.repeatPassword = user.repeatPassword ? "" : error.repeatPassword;
+				}
+				break;
 
-				case "password":
-					if (!value) {
-						stateObj[name] = "Please enter Password.";
-					} else if (user.repeatPassword && value !== user.repeatPassword) {
-						stateObj["repeatPassword"] = "Password and Confirm Password does not match.";
-					} else {
-						stateObj["repeatPassword"] = user.repeatPassword ? "" : error.repeatPassword;
-					}
-					break;
+			case "repeatPassword":
+				if (!value) {
+					passwordErrors.repeatPassword = "Please enter Confirm Password.";
+				} else if (user.repeatPassword && value !== user.password) {
+					passwordErrors.repeatPassword = "Password and Confirm Password does not match.";
+				}
+				break;
 
-				case "repeatPassword":
-					if (!value) {
-						stateObj[name] = "Please enter Confirm Password.";
-					} else if (user.password && value !== user.password) {
-						stateObj[name] = "Password and Confirm Password does not match.";
-					}
-					break;
+			default:
+				break;
+		}
+		setError(passwordErrors)
 
-				default:
-					break;
-			}
-
-			return stateObj;
-		});
 	}
 
 
@@ -120,15 +133,17 @@ function Registerform() {
 	const saveUser = (e) => {
 
 		e.preventDefault();
+		isValid()
 		setUser({ ...user, role: getRole() })
 
 		try {
-			addUser({ first_name: user.firstName, last_name: user.lastName, email: user.email, phone: user.phoneNumber, street: user.address, zip_code: user.zipCode, city: user.city, region: user.federalState, password: user.password, role: getRole(), club_name: user.clubName }).unwrap()
+			const response = addUser({ first_name: user.firstName, last_name: user.lastName, email: user.email, phone: user.phoneNumber, street: user.address, zip_code: user.zipCode, city: user.city, region: user.federalState, password: user.password, role: getRole(), club_name: user.clubName }).unwrap()
+
+			console.log("response", response)
 		} catch (err) {
 			console.log("failed to post user", err)
 		}
 
-		// goBack(700);
 	}
 
 	return (
@@ -200,6 +215,7 @@ function Registerform() {
 												name='email'
 												onChange={inputHandler}
 											></input>
+											{error.email && <span className='err'>{error.email}</span>}
 										</Form.Group>
 
 										<Form.Group className="mb-1 flex-col" controlId="phone">
@@ -220,6 +236,7 @@ function Registerform() {
 												name='clubName'
 												onChange={inputHandler}
 											></input>
+											{error.clubName && <span className='err'>{error.clubName}</span>}
 										</Form.Group>
 										<Form.Group className="mb-1 flex-col" controlId="address">
 											<label>Straße und Hausnummer *</label>
@@ -229,6 +246,7 @@ function Registerform() {
 												name='address'
 												onChange={inputHandler}
 											></input>
+											{error.address && <span className='err'>{error.address}</span>}
 										</Form.Group>
 
 										<Row>
@@ -241,6 +259,7 @@ function Registerform() {
 														name='zipCode'
 														onChange={inputHandler}
 													></input>
+													{error.zipCode && <span className='err'>{error.zipCode}</span>}
 												</Form.Group>
 											</Col>
 											<Col md={6}>
@@ -252,6 +271,7 @@ function Registerform() {
 														name='city'
 														onChange={inputHandler}
 													></input>
+													{error.city && <span className='err'>{error.city}</span>}
 												</Form.Group>
 											</Col>
 										</Row>
@@ -264,6 +284,7 @@ function Registerform() {
 													name='federalState'
 													onChange={inputHandler}
 												></input>
+												{error.federalState && <span className='err'>{error.federalState}</span>}
 											</Form.Group>
 										</Col>
 										<Form.Group className="mb-1 flex-col" controlId="password">
@@ -273,7 +294,7 @@ function Registerform() {
 												id='password'
 												name='password'
 												onChange={inputHandler}
-												onBlur={validateInput}
+												onBlur={validatePasswordOnRepeat}
 											></input>
 											{error.password && <span className='err'>{error.password}</span>}
 										</Form.Group>
@@ -284,7 +305,7 @@ function Registerform() {
 												id='repeatPassword'
 												name='repeatPassword'
 												onChange={inputHandler}
-												onBlur={validateInput}
+												onBlur={validatePasswordOnRepeat}
 											></input>
 											{error.repeatPassword && <span className='err'>{error.repeatPassword}</span>}
 										</Form.Group>
