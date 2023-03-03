@@ -1,213 +1,322 @@
 import '../../resources/styles/register.css';
 import { React, useState, useReducer } from 'react';
+import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import AccountCircle from '../../images/AccountCircle.png'
+import MenuIcon from '../../images/MenuIcon.png'
+import { useSignupMutation } from '../../store/reducers/authApiSlice';
 
-import { Form } from 'react-router-dom';
+function Registerform() {
 
+	const [user, setUser] = useState({ firstName: "", lastName: "", email: "", phoneNumber: "", clubName: "", address: "", zipCode: "", city: "", federalState: "", password: "", password: "", repeatPassword: "", role: "" });
 
+	const [error, setError] = useState({})
 
-const formReducer = (state, event) => {
-    if (event.reset) {
-      return {
-        DonationProduct: 'Empty',
-        Count: 0,
-        ColorChoice: 'Empty',
-        Gender: 'Empty',
-        Comment: 'Empty ',
-      }
-    }
-    return {
-      ...state,
-      [event.name]: event.value
-    }
-  };
-  
-function Registerform(){
+	const [isDonor, setIsDonor] = useState(true);
+	const [isRecipient, setIsRecipient] = useState(false)
 
+	const handleOnChangeIsDonor = (e) => {
+		setIsDonor(!isDonor)
+		setIsRecipient(isDonor)
+		setUser({ ...user, role: getRole() })
+	}
 
-    const [formData, setFormData] = useReducer(formReducer, {});
-    const [submitting, setSubmitting] = useState(false);
-    const handleSubmit = event => {
-      event.preventDefault();
-      setSubmitting(true);
-  
-      setTimeout(() => {
-        setSubmitting(false);
-        setFormData({
-          reset: true
-        })
-      }, 3000)
+	const getRole = () => {
+		let role = ""
+		if (isDonor === true) {
+			role = "donor"
+		}
+		else role = "recipient"
+		return role
+	}
+
+	// use mutation to post request on API
+	const [addUser, { isLoading: updating, isSuccess: saved }] = useSignupMutation();
 
 
-		var name= document.getElementById("name").value;
-		var lastname= document.getElementById("lastname").value;
-		var email= document.getElementById("email1").value;
-		var address= document.getElementById("address").value;			
-		var verein= document.getElementById("verein").value;
-    var zip= document.getElementById("zip").value;
-		var land= document.getElementById("land").value;
-		var pswd= document.getElementById("pswd").value;
-		var rpswd= document.getElementById("rpswd").value;			
-		var ch1= document.getElementById("ch1").value;
-    var ch2= document.getElementById("ch2").value;
-		
-		
-        //email id expression code
-		var pwd_expression = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/;
-		var letters = /^[A-Za-z]+$/;
-		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	const inputHandler = (e) => {
+		const { name, value } = e.target;
+		if (!isCheckox(name)) {
+			setUser({ ...user, [name]: value });
+		}
+	};
 
-	// 	if(name==='')
-	// 	{
-	// 		alert('Please enter your name');
-	// 	}
-	// 	else if(!letters.test(name))
-	// 	{
-	// 		alert('Name field required only alphabet characters');
-	// 	}
-    // if(lastname==='')
-	// 	{
-	// 		alert('Please enter your lastname');
-	// 	}
-	// 	else if(!letters.test(name))
-	// 	{
-	// 		alert('Lastname field required only alphabet characters');
-	// 	}
-    // if(address==='')
-	// 	{
-	// 		alert('Please enter address');
-	// 	}
-    // if(land==='')
-	// 	{
-	// 		alert('Please enter land');
-	// 	}
-	// 	else if(!letters.test(name))
-	// 	{
-	// 		alert('Name land required only alphabet characters');
-	// 	}
-	// 	else if(email==='')
-	// 	{
-	// 		alert('Please enter your user email id');
-	// 	}
-	// 	else if (!filter.test(email))
-	// 	{
-	// 		alert('Invalid email');
-	// 	}
-	// 	else if(zip==='')
-	// 	{
-	// 		alert('Please enter the ZIP Code.');
-	// 	}
-	// 	else if(!filter.test(zip))
-	// 	{
-	// 		alert('ZIP Code field required only numerical characters');
-	// 	}
-	// 	else if(pswd==='')
-	// 	{
-	// 		alert('Please enter Password');
-	// 	}
-	// 	else if(rpswd==='')
-	// 	{
-	// 		alert('Enter Confirm Password');
-	// 	}
-	// 	else if(!pwd_expression.test(pswd))
-	// 	{
-	// 		alert ('Upper case, Lower case, Special character and Numeric letter are required in Password filed');
-	// 	}
-	// 	else if(pswd != rpswd)
-	// 	{
-	// 		alert ('Password not Matched');
-	// 	}
-	// 	else if(document.getElementById("t5").value.length < 6)
-	// 	{
-	// 		alert ('Password minimum length is 6');
-	// 	}
-	// 	else if(document.getElementById("t5").value.length > 12)
-	// 	{
-	// 		alert ('Password max length is 12');
-	// 	}
+	const isEmail = (email) =>
+		/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
 
 
+	const isValid = () => {
+		const errors = { ...error }
+		if (!isEmail(user.email)) {
+			errors.email = "Invalid email";
+			console.log("why invalid")
+			console.log(user.email)
+		}
+		if (!user.email) {
+			errors.email = "Enter Email";
+			console.log("why invalid")
+			console.log(user.email)
+		}
+		if (!user.firstName) {
+			errors.firstName = "Enter FirstName";
+		}
+		if (!user.lastName) {
+			errors.lastName = "Enter LastName";
+		}
+		if (!user.address) {
+			errors.lastName = "Enter Street";
+		}
+		if (!user.clubName) {
+			errors.clubName = "Enter Club Name";
+		}
+		if (!user.zipCode) {
+			errors.zipCode = "Enter ZipCode";
+		}
+		if (!user.city) {
+			errors.zipCode = "Enter City";
+		}
+		if (!user.federalState) {
+			errors.federalState = "Enter Region";
+		}
+		setError(errors)
+
+		if (!Object.keys(error).length) {
+			console.log("error obj", Object.keys(error))
+			return true
+		} else {
+			return false
+		}
 
 
-	// 	else
-	// 	{				                            
-    //            alert('Thank You for Login & You are Redirecting to TFDW Website');
-			 
-	// 	}
-	 }
+	}
 
-return(
+	const validatePasswordOnRepeat = e => {
+		let { name, value } = e.target;
 
+		const passwordErrors = { ...error };
+		switch (name) {
+			case "password":
+				if (!value) {
+					passwordErrors.password = "Please enter Password.";
+				} else if (user.repeatPassword && value !== user.repeatPassword) {
+					passwordErrors.repeatPassword = "Password and Confirm Password does not match.";
+				} else {
+					passwordErrors.repeatPassword = user.repeatPassword ? "" : error.repeatPassword;
+				}
+				break;
 
-    <div  >
-<form className='registerform' onSubmit={handleSubmit}>
-<div className="register-text-center">
-          <label className='register-titel'>DEIN KONTO</label>
-        </div>
-        <div className='registerpara'>
-          <p className='register-paragraph'>Um deine Angaben für die nächsten Spenden zu speichern, erstelle gerne ein Benutzerkonto.   </p>
-        </div>
-<ul className='register-list'>
-<div className='pick-country'>
-<li><label for="zip">Vorname</label>
-<input className="zip" id='name'></input></li> 
+			case "repeatPassword":
+				if (!value) {
+					passwordErrors.repeatPassword = "Please enter Confirm Password.";
+				} else if (user.repeatPassword && value !== user.password) {
+					passwordErrors.repeatPassword = "Password and Confirm Password does not match.";
+				}
+				break;
 
-<li><label for="country">Nachname</label> 
-<input type="text" className="city" id='lastname' /></li>
-   </div>
-   
+			default:
+				break;
+		}
+		setError(passwordErrors)
 
-<li><label for="email">Email</label></li>
-<li><input type="email" className="email" id='email1' /></li>
+	}
 
+	const isCheckox = (name) => {
+		if (name == "user-type-donor" || name == "user-type-recipient") return true
+		return false
+	}
 
-<li><label for="username">ggf. Vereinsname</label></li>
-<li><input type="text" clasName="verein-name" size="50"  id='verein'/></li>
-<li><label for="address">Straße und Hausnummer</label></li>
-<li><input type="text" className="address" size="50" id='address' /></li>
+	const saveUser = (e) => {
 
+		e.preventDefault();
+		const isValid = isValid()
+		setUser({ ...user, role: getRole() })
 
-<div className='pick-country'>
-<li><label for="zip">ZIP code</label>
-<input className="zip" id='zip'></input></li> 
+		if (isValid) {
+			try {
+				const response = addUser({ first_name: user.firstName, last_name: user.lastName, email: user.email, phone: user.phoneNumber, street: user.address, zip_code: user.zipCode, city: user.city, region: user.federalState, password: user.password, role: getRole(), club_name: user.clubName }).unwrap()
 
-<li><label for="country">Stadt</label> 
-<input type="text" className="city" id='city'/></li>
-   </div>
+				console.log("response", response)
+			} catch (err) {
+				console.log("failed to post user", err)
+			}
+		} else {
+			console.log("gib notification, is nicht valid")
+		}
+	}
 
+	return (
+		<div>
+			<Container>
+				<Row className="d-flex justify-content-center align-items-center">
+					<Col md={8} lg={6} xs={12}>
+						<div className="form-card">
 
-<li><label for="bundesland">Bundesland</label>
-<li><input type="text" className="bundesland" size="12"  id='land'/></li>
-</li>
-<li><label for="passid">Passwort</label></li>
-<li><input type="password" className="passid" size="12"  id='pswd'/></li>
-<li><label for="passid">Passwort wiederholen</label></li>
-<li><input type="password" className="repeat-pass" size="12" id='rpswd'/></li>
+							<div className="">
+								<div className="form-header">
+									<img src={MenuIcon} className="icon"></img>
+									<h2 className="text-uppercase ">
+										Dein Konto
+									</h2>
+									<img src={AccountCircle} className="icon"></img>
+								</div>
+								<div className="form-body">
+									<div className="mb-10">Um deine Angaben für die nächsten Spenden zu speichern, erstelle gerne ein Benutzerkonto.   </div>
+									<Form onSubmit={saveUser}>
+										<Form.Check
+											type="checkbox"
+											id="user-type-donor"
+											name="user-type-donor"
+											label="Ich möchte spenden"
+											checked={isDonor}
+											onChange={handleOnChangeIsDonor}
+										/>
+										<Form.Check
+											type="checkbox"
+											id="user-type-recipient"
+											name="user-type-recipient"
+											label="Ich suche Spenden"
+											checked={isRecipient}
+											onChange={handleOnChangeIsDonor}
+										/>
+										<Row>
+											<Col sm={6} md={6}>
+												<Form.Group className="mb-1 flex-col" controlId="firstName">
+													<label>Vorname *</label>
+													<input className="form-input-grey"
+														type="text"
+														id='firstName'
+														name='firstName'
+														onChange={inputHandler}
+													></input>
+													{error.firstName && <span className='err'>{error.firstName}</span>}
+												</Form.Group>
+											</Col>
+											<Col sm={6}>
+												<Form.Group className="mb-1 flex-col" controlId="lastName">
+													<label>Nachname *</label>
+													<input className="form-input-grey"
+														type="text"
+														id='lastName'
+														name='lastName'
+														onChange={inputHandler}
+													></input>
+													{error.lastName && <span className='err'>{error.lastName}</span>}
+												</Form.Group>
+											</Col>
+										</Row>
 
-<label class="register-check">Ich möchte spenden
-  <input type="checkbox" id='ch1'/>
-  <span class="checkmark"></span>
-</label>
+										<Form.Group className="mb-1 flex-col" controlId="email">
+											<label>E-Mail-Adresse *</label>
+											<input className="form-input-grey"
+												type="email"
+												id='email'
+												name='email'
+												onChange={inputHandler}
+											></input>
+											{error.email && <span className='err'>{error.email}</span>}
+										</Form.Group>
 
-<label class="register-check">Ich suche Spenden
-  <input type="checkbox" id='ch2'/>
-  <span class="checkmark"></span>
-</label>
+										<Form.Group className="mb-1 flex-col" controlId="phone">
+											<label>Telefonnummer</label>
+											<input className="form-input-grey"
+												type="tel"
+												id='phoneNumber'
+												name='phoneNumber'
+												onChange={inputHandler}
+											></input>
+										</Form.Group>
 
-<li><button type="submit" className="registerbutton" value="Submit">Konto erstellen </button>
-</li>
-</ul>
+										<Form.Group className="mb-1 flex-col" controlId="club">
+											<label>Vereinsname / Organnisationsname *</label>
+											<input className="form-input-grey"
+												type="text"
+												id='clubName'
+												name='clubName'
+												onChange={inputHandler}
+											></input>
+											{error.clubName && <span className='err'>{error.clubName}</span>}
+										</Form.Group>
+										<Form.Group className="mb-1 flex-col" controlId="address">
+											<label>Straße und Hausnummer *</label>
+											<input className="form-input-grey"
+												type="text"
+												id='address'
+												name='address'
+												onChange={inputHandler}
+											></input>
+											{error.address && <span className='err'>{error.address}</span>}
+										</Form.Group>
 
-</form>
+										<Row>
+											<Col md={4}>
+												<Form.Group className="mb-1 flex-col" controlId="zipCode">
+													<label>PLZ *</label>
+													<input className="form-input-grey"
+														type="number"
+														id='zipCode'
+														name='zipCode'
+														onChange={inputHandler}
+													></input>
+													{error.zipCode && <span className='err'>{error.zipCode}</span>}
+												</Form.Group>
+											</Col>
+											<Col md={6}>
+												<Form.Group className="mb-1 flex-col" controlId="city">
+													<label>Stadt *</label>
+													<input className="form-input-grey"
+														type="text"
+														id='city'
+														name='city'
+														onChange={inputHandler}
+													></input>
+													{error.city && <span className='err'>{error.city}</span>}
+												</Form.Group>
+											</Col>
+										</Row>
+										<Col >
+											<Form.Group className="mb-1 flex-col" controlId="federalState">
+												<label>Bundesland *</label>
+												<input className="form-input-grey"
+													type="text"
+													id='federalState'
+													name='federalState'
+													onChange={inputHandler}
+												></input>
+												{error.federalState && <span className='err'>{error.federalState}</span>}
+											</Form.Group>
+										</Col>
+										<Form.Group className="mb-1 flex-col" controlId="password">
+											<label>Password *</label>
+											<input className="form-input-grey"
+												type="password"
+												id='password'
+												name='password'
+												onChange={inputHandler}
+												onBlur={validatePasswordOnRepeat}
+											></input>
+											{error.password && <span className='err'>{error.password}</span>}
+										</Form.Group>
+										<Form.Group className="mb-1 flex-col" controlId="password">
+											<label>Password wiederholen *</label>
+											<input className="form-input-grey"
+												type="password"
+												id='repeatPassword'
+												name='repeatPassword'
+												onChange={inputHandler}
+												onBlur={validatePasswordOnRepeat}
+											></input>
+											{error.repeatPassword && <span className='err'>{error.repeatPassword}</span>}
+										</Form.Group>
+										<Button type="submit" bsPrefix='button-pink align-self-right' className='button-pink'> {updating ? "Konto wird erstellt ..." : "Konto erstellen"}</Button>
+									</Form>
+								</div>
+							</div>
 
-
-
-
-
-</div>
-);
-
-
-
+						</div>
+					</Col>
+				</Row>
+			</Container >
+		</div >
+	)
 
 
 }

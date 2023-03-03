@@ -3,14 +3,23 @@ import { Nav, Navbar, Container } from 'react-bootstrap'
 import { Logo } from '../Logo';
 import Blog from '../../images/Blog.png'
 import Globe from '../../images/Globe.png'
-import Heart from '../../images/Heart.png'
+// import Heart from '../../images/Heart.png'
+import { Heart } from '../../images'
 import Pray from '../../images/Pray.svg'
 import Santa from '../../images/Santa.png'
 import TShirt from '../../images/T-Shirt.png'
+import { useDispatch, useSelector } from 'react-redux';
+import { logOut, selectCurrentToken } from '../../store/reducers/authSlice';
+import { useNavigate } from 'react-router-dom'
 
 
 const Header = () => {
-    //TODO: fetch with GraphQl
+
+    const dispatch = useDispatch();
+
+    const token = useSelector(selectCurrentToken)
+    const navigate = useNavigate()
+
     const navElements = [
         {
             name: "Spenden",
@@ -38,6 +47,21 @@ const Header = () => {
         },
     ]
 
+    if (token) {
+        navElements.push({ name: "Logout" })
+    } else {
+        navElements.push({ name: "Login" })
+    }
+
+    const onClickAuth = (element) => {
+
+        if (element.name === "Login") {
+            navigate('/login')
+        } else if (element.name === "Logout") {
+            dispatch(logOut())
+        }
+    }
+
 
     return (
         <Navbar collapseOnSelect className="nav-fixed nav" expand="lg" >
@@ -48,7 +72,7 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse className=" justify-content-end" id="responsive-navbar-nav">
                     <Nav className="mr-auto nav-components">
-                        {navElements.map(element => (<Nav.Link key={element.name} className="nav-element" offset={300} duration={500} href={`${element.name.toLowerCase()}`}>{<NavElement item={element}></NavElement>}</Nav.Link>))}
+                        {navElements.map(element => (<Nav.Link onClick={(e) => { e.preventDefault(); onClickAuth(element) }} key={element.name} className="nav-element" offset={300} duration={500} href={`${element.name.toLowerCase()}`}>{<NavElement item={element}></NavElement>}</Nav.Link>))}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
@@ -61,14 +85,23 @@ export default Header;
 
 
 const NavElement = ({ item }) => {
-    return (
-        <div className='nav-element'>
-            <span>{item.name}</span>
-            <img
+
+    const renderNavIcon = () => {
+        if (item.logo) {
+            return <img
                 className="d-inline-block align-top"
                 alt={item.name}
                 src={item.logo}
             />
+        } else {
+            return <></>
+        }
+    }
+    return (
+        <div className='nav-element'>
+            <span>{item.name}</span>
+
+            {renderNavIcon()}
         </div>
     )
 }

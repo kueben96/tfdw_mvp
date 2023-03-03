@@ -3,14 +3,17 @@ import { React, useState, useEffect, useRef } from 'react';
 import Button from "react-bootstrap/Button";
 import { Container, Col, Row, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, selectCurrentUser, setCredentials } from '../../store/reducers/authSlice';
+import { selectCurrentUser, setCredentials } from '../../store/reducers/authSlice';
 import { useNavigate } from 'react-router-dom';
+import { useLoginMutation } from '../../store/reducers/authApiSlice';
 
 function LoginForm() {
     const errRef = useRef()
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const authUser = useSelector(selectCurrentUser)
+
+    const [login, { isLoading }] = useLoginMutation()
 
 
     useEffect(() => {
@@ -22,23 +25,16 @@ function LoginForm() {
     const [password, setPassword] = useState("");
     const [errMsg, setErrMsg] = useState('')
 
-    // TODO: implement more advanced navigation
+    // TODO: implement more advanced validation
     function validateForm() {
         return email.length > 0 && password.length > 0;
     }
 
-
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const userData = dispatch(login({ email, password }))
-
-            // TODO: hier ist komisch
-            console.log({ ...userData })
-            setCredentials({ ...userData, email })
-            // TODO: set user email into the state
-            console.log('userData')
-            console.log(userData)
+            const userData = await login({ email, password }).unwrap()
+            dispatch(setCredentials({ ...userData, email }))
 
             setEmail('')
             setPassword('')
@@ -63,6 +59,10 @@ function LoginForm() {
     const handleEmailInput = (e) => setEmail(e.target.value)
 
     const handlePasswordInput = (e) => setPassword(e.target.value)
+
+    const routeSignUp = () => {
+        navigate('/signup')
+    }
 
     return (
 
@@ -103,7 +103,7 @@ function LoginForm() {
                         <Row>
                             <Col>
                                 <div>Ich möchte ein Benutzerkonto erstellen.</div>
-                                <Button bsPrefix='button-pink-outlined' type="submit" onSubmit={validateForm} >
+                                <Button onClick={routeSignUp} bsPrefix='button-pink-outlined'>
                                     Registrieren
                                 </Button>
                             </Col>

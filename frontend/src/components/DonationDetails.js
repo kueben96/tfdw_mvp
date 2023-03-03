@@ -24,14 +24,14 @@ window.onload = function () {
   var mainListDiv = document.getElementById("hamburger"),
     mediaButton = document.getElementById("nav__link");
 
-  mediaButton.onclick = function () {
+  // mediaButton.onclick = function () {
 
-    "use strict";
+  //   "use strict";
 
-    mainListDiv.classList.toggle("show_list");
-    mediaButton.classList.toggle("active");
+  //   mainListDiv.classList.toggle("show_list");
+  //   mediaButton.classList.toggle("active");
 
-  };
+  // };
 }
 
 function DonationDetails() {

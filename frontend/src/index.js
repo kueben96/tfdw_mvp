@@ -9,6 +9,7 @@ import App from './routes';
 
 const root = ReactDOMClient.createRoot(document.getElementById('root'));
 
+console.log(localStorage)
 root.render(
   <Provider store={store}>
     <Router>
