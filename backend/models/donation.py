@@ -38,3 +38,4 @@ class DonationSchema(ma.SQLAlchemyAutoSchema):
 
 donation_schema = DonationSchema()
 donations_schema = DonationSchema(many=True)
+

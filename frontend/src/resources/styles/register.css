@@ -93,7 +93,7 @@ li{
     
 .registerbutton{
   box-sizing: border-box;
-  position: relative;
+  
   width: 149px;
   height: 40px;
   border: none;
@@ -103,10 +103,11 @@ li{
   font-family: 'Bebas Neue', sans-serif;
   color: black !important;
   font-weight: bold;
-  display:inline;
-  margin-left: 240px;
-  left: -25px;
-  font-size: 12px;
+
+  justify-content: center;
+  margin: 0 auto;
+
+  font-size: 14px;
   text-transform: uppercase;
 
 }
