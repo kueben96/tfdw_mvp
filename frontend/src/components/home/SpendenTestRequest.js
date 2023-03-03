@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchDonations, getDonationsError, getDonationsStatus, selectAllDonations } from '../../store/reducers/donationsSlice';
 import AddDonationForm from '../donations/AddDonationForm';
 import DonationCardDemo from '../donations/DonationCardDemo';
-import { Row, Col, Container } from 'react-bootstrap'
+import { Row, Container } from 'react-bootstrap'
 
 const SpendenTestRequest = () => {
     const dispatch = useDispatch();

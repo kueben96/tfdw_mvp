@@ -1,9 +1,8 @@
 import React from 'react';
 import { Nav, Navbar, Container } from 'react-bootstrap'
-import { Logo } from '../Logo';
+import { Logo } from '../ui/Logo';
 import Blog from '../../images/Blog.png'
 import Globe from '../../images/Globe.png'
-// import Heart from '../../images/Heart.png'
 import { Heart } from '../../images'
 import Pray from '../../images/Pray.svg'
 import Santa from '../../images/Santa.png'

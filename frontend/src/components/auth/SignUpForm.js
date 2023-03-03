@@ -1,6 +1,6 @@
 import '../../resources/styles/register.css';
-import { React, useState, useReducer } from 'react';
-import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import { React, useState } from 'react';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import AccountCircle from '../../images/AccountCircle.png'
 import MenuIcon from '../../images/MenuIcon.png'
 import { useSignupMutation } from '../../store/reducers/authApiSlice';
@@ -120,7 +120,7 @@ function Registerform() {
 	}
 
 	const isCheckox = (name) => {
-		if (name == "user-type-donor" || name == "user-type-recipient") return true
+		if (name === "user-type-donor" || name === "user-type-recipient") return true
 		return false
 	}
 

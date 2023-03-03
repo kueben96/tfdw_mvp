@@ -1,24 +1,17 @@
 import React from 'react'
 import { Button, Container } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { selectCurrentToken, selectCurrentUser, logOut } from '../../store/reducers/authSlice'
+import { selectCurrentToken, selectCurrentUser } from '../../store/reducers/authSlice'
 
 const Home = () => {
 
     const navigate = useNavigate()
     const token = useSelector(selectCurrentToken)
     const user = useSelector(selectCurrentUser)
-    const dispatch = useDispatch()
 
     const routeLogin = () => {
         navigate('/login')
-    }
-
-    const logout = () => {
-        console.log('logging out')
-        dispatch(logOut)
-        console.log(localStorage)
     }
     const welcomeMsg = token ? <h1>Welcome, you're logged in {user}</h1> : <div>Log in to proceed: press the button below </div>
 
