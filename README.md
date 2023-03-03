@@ -71,6 +71,6 @@
   - /api/donation?category=shoes?color=gold
 
 ## Get Donation Details
-- authentication required
-- example route: /api/donation_details?id=1
+- authentication required: x-access-token in header
+- example route: GET /api/donation_details?id=1
 
