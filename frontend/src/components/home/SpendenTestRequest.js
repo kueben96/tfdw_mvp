@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchDonations, getDonationsError, getDonationsStatus, selectAllDonations } from '../../store/reducers/donationsSlice';
 import AddDonationForm from '../donations/AddDonationForm';
-import DonationCard from '../donations/DonationCard';
+import DonationCardDemo from '../donations/DonationCardDemo';
 import { Row, Col, Container } from 'react-bootstrap'
 
 const SpendenTestRequest = () => {
@@ -21,7 +21,7 @@ const SpendenTestRequest = () => {
     if (donationsStatus === 'loading') {
         content = <p>"Loading..."</p>;
     } else if (donationsStatus === 'succeeded') {
-        content = donations.map(donation => <DonationCard key={donation.id} donation={donation} />)
+        content = donations.map(donation => <DonationCardDemo key={donation.id} donation={donation} />)
     } else if (donationsStatus === 'failed') {
         content = <p>{error}</p>;
     }

@@ -4,10 +4,6 @@ import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import AccountCircle from '../../images/AccountCircle.png'
 import MenuIcon from '../../images/MenuIcon.png'
 import { useSignupMutation } from '../../store/reducers/authApiSlice';
-import { connect } from 'react-redux';
-
-// Note: Add new user mutation must be implemented
-// Compare with YT tut and check why its not async
 
 function Registerform() {
 
@@ -50,7 +46,6 @@ function Registerform() {
 
 	const isValid = () => {
 		const errors = { ...error }
-		console.log("eerrrros,", errors)
 		if (!isEmail(user.email)) {
 			errors.email = "Invalid email";
 			console.log("why invalid")
@@ -86,7 +81,9 @@ function Registerform() {
 
 		if (!Object.keys(error).length) {
 			console.log("error obj", Object.keys(error))
-			alert(JSON.stringify(user, null, 2));
+			return true
+		} else {
+			return false
 		}
 
 
@@ -130,17 +127,20 @@ function Registerform() {
 	const saveUser = (e) => {
 
 		e.preventDefault();
-		isValid()
+		const isValid = isValid()
 		setUser({ ...user, role: getRole() })
 
-		try {
-			const response = addUser({ first_name: user.firstName, last_name: user.lastName, email: user.email, phone: user.phoneNumber, street: user.address, zip_code: user.zipCode, city: user.city, region: user.federalState, password: user.password, role: getRole(), club_name: user.clubName }).unwrap()
+		if (isValid) {
+			try {
+				const response = addUser({ first_name: user.firstName, last_name: user.lastName, email: user.email, phone: user.phoneNumber, street: user.address, zip_code: user.zipCode, city: user.city, region: user.federalState, password: user.password, role: getRole(), club_name: user.clubName }).unwrap()
 
-			console.log("response", response)
-		} catch (err) {
-			console.log("failed to post user", err)
+				console.log("response", response)
+			} catch (err) {
+				console.log("failed to post user", err)
+			}
+		} else {
+			console.log("gib notification, is nicht valid")
 		}
-
 	}
 
 	return (

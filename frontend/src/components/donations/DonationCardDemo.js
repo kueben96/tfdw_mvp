@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DonationCard = ({ donation }) => {
+const DonationCardDemo = ({ donation }) => {
     return (
         <article>
             <h2>{donation.category}</h2>
@@ -9,4 +9,4 @@ const DonationCard = ({ donation }) => {
     )
 }
 
-export default DonationCard
+export default DonationCardDemo
