@@ -54,3 +54,19 @@
 ## Run tests in terminal
 
 - execute all tests located in the test package: pytest
+
+## Dashboard Filtering
+- authentication is optional for dashboard (route: GET /api/donation)
+- parameters, e.g. "red" for color need to be in language of database entries (in this case: English)
+- parameters that can be filtered:
+  - category (e.g. jersey_kit, jersey_top, jersey_pants, bib (Deutsch: Leibchen), tracksuit_top, football_sock (Deutsch: Stutzen), shoes, goalkeeper_gloves, other)
+  - color (e.g. red, yellow, green, blue, white, black, orange, turquoise, purple, pink, brown)
+  - size_1 (children or adult)
+  - size_2 (e.g. S, M, L for clothing, numbers for gloves, shoes etc.)
+  - zip_code
+- Example requests:
+  - /api/donation?category=jersey
+  - /api/donation?color=green
+  - /api/donation?color=green&category=jersey&size_1=adult&size_2=M
+  - /api/donation?category=shoes?color=gold
+

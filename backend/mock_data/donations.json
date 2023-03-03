@@ -8,7 +8,7 @@
  "description": "one sock to free an elf"
 },
  {
-  "category": "jersey kit",
+  "category": "jersey_kit",
   "amount": 1,
   "size_1": "adult",
   "size_2": "M",
@@ -17,7 +17,7 @@
   "description": "jersey kit"
  },
  {
-  "category": "jersey kit",
+  "category": "jersey_kit",
   "amount": 1,
   "size_1": "adult",
   "size_2": "M",
