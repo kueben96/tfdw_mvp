@@ -70,3 +70,7 @@
   - /api/donation?color=green&category=jersey&size_1=adult&size_2=M
   - /api/donation?category=shoes?color=gold
 
+## Get Donation Details
+- authentication required
+- example route: /api/donation_details?id=1
+

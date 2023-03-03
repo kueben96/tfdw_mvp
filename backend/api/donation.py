@@ -92,24 +92,6 @@ def get_donations(current_user):
                          city=x.city) for x in results])
 
 
-@donation_route.route('/api/donation/<int:donation_id>', methods=['GET'])
-@token_required()
-def get_donation_details(current_user, donation_id):
-    """
-    Get donation details and user data for given donation_id.
-    Returns: json with donation details for given donation
-    """
-    results = (db.session.query(Donation.id, Donation.date, Donation.category, Donation.amount,
-                                Donation.size_1, Donation.size_2, Donation.color_1, Donation.color_2,
-                                Donation.description, User.first_name, User.last_name, User.email,
-                                User.zip_code, User.city)
-               .filter_by(id=donation_id)
-               .join(User, User.id == Donation.user_id)).all()
-    return jsonify([dict(id=x.id, date=x.date, category=x.category, amount=x.amount, size_1=x.size_1, size_2=x.size_2,
-                         color_1=x.color_1, color_2=x.color_2, description=x.description, first_name=x.first_name,
-                         last_name=x.last_name, email=x.email, zip_code=x.zip_code, city=x.city) for x in results])
-
-
 @donation_route.route('/api/donation_details', methods=['GET'])
 @token_required()
 def get_donation_details_new(current_user):
