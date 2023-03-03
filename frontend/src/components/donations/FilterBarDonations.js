@@ -12,7 +12,8 @@ const FilterBarDonations = () => {
                  <Row className='filter-down'> 
                        <Col sm={6} md={2}>
                             <select className='filters' >
-                            <option value="" disabled selected>Trikot Set</option>
+                            <option value="" disabled selected>Größe</option>
+                            <option value="9" >Trikot Set</option>
                             <option value="1" >Trikot Oberteil</option>
                             <option value="2"  >Trikot Hose</option>
                             <option value="3"  >Leibchen</option>

@@ -3,9 +3,7 @@ import { Container } from 'react-bootstrap';
 import '../resources/styles/selection.css';
 
 
-const Selection = () => {
-
-    const donations = [{}]
+const Selection = () => {    
 
     return (
         <div>
@@ -15,9 +13,11 @@ const Selection = () => {
                     <label className='dashboard-titel'>SPENDENPLATFORM</label>
                     </div>
                     <div className='buttons'>
-                    
-                    <button className='registerbutton' onclick="location.href='https://blog.hubspot.com/website/bootstrap-button'">Ich möchte spenden</button>
-                    <button className='registerbutton'>Ich suche Spenden</button>
+                    <form action="/dashboard">
+                    <button className='registerbutton' type='submit'>Ich möchte spenden</button></form>
+                    <form action=''>
+                    <button className='registerbutton'>Ich suche Spenden</button></form>
+                   
                    </div>
           
                 </form>
