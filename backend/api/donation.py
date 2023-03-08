@@ -4,8 +4,8 @@ from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 import pytz
 
-from models.donation import Donation, donation_schema, donations_schema
-from models.user import User, users_schema
+from models.donation import Donation, donation_schema
+from models.user import User
 from extensions import db
 
 from api.user import token_required

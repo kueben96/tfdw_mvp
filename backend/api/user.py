@@ -11,16 +11,29 @@ from models.user import User, user_schema, users_schema
 user_route = Blueprint('user_route', __name__)
 
 
-def token_required(optional=False):
+def token_required(optional=False, refresh=False):
+    """
+    Decorator function for routes requiring authentication
+    Args:
+        optional: token is optional, route can be accessed without token
+        refresh: refresh token is needed to access route
+
+    Returns: current user (user data, retrieved from users table)
+
+    """
     def decorator(f):
         @wraps(f)
         def wrapper(*args, **kwargs):
             token = None
             current_user = None
-            # jwt is passed in the request header
-            if 'x-access-token' in request.headers:
-                token = request.headers['x-access-token']
-
+            if refresh:
+                # jwt is passed in the request header
+                if 'refresh-token' in request.headers:
+                    token = request.headers['refresh-token']
+            else:
+                # jwt is passed in the request header
+                if 'x-access-token' in request.headers:
+                    token = request.headers['x-access-token']
             if optional:
                 if token:
                     try:

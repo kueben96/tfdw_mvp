@@ -4,6 +4,8 @@
 - tfdw_platform/.env
 - pass variable for AWS postgres connection string inside --> ask Kübra
 - SQLALCHEMY_DATABASE_URI=${commectionstring}
+- add secret key for JWT authentication --> ask Sarah
+- SECRET_KEY=${secretkey}
 
 ## Start dockerized React and Flask development servers
 - docker-compose up --build
@@ -36,10 +38,14 @@
 ## Log in
 - route: /api/login POST
 - request_body: see list of sample bodies in backend/mock_data/login.json
-- example response_body:{ "token": "eyJ0eJAiOiJK1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwiZXhwIjoxNjc1NDM5MDI0fQ.m8LqSvsD8A_LaIHtqI9sjzNhAFTLVoznm3eikNYLZgg"}
+- example response_body:{ "refresh_token": "eyJ0eJAiOiJK1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwiZXhwIjoxNjc1NDM5MDI0fQ.m8LqSvsD8A_LaIHtqI9sjzNhAFTLVoznm3eikNYLZgg", "token": "eyJ0eJAiOiJK1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwiZXhwIjoxNjc1NDM5MDI0fQ.m8LqSvsD8A_LaIHtqI9sjzNhAFTLVoznm3eikNYLZgg"}
 
 ## Requests with authentications required
 - add to headers: key: x-access-token, value: token received from login
+
+## Token refresh
+- add to headers: key: refresh-token, value: refresh_token received from login
+- route: /api/refresh
 
 ## Database migrations
 
@@ -70,7 +76,7 @@
   - /api/donation?color=green&category=jersey&size_1=adult&size_2=M
   - /api/donation?category=shoes?color=gold
 
-## Get Donation Details
+## Get Donation / Donation Request Details
 - authentication required: x-access-token in header
 - example route: GET /api/donation_details?id=1
 

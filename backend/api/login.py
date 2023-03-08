@@ -6,6 +6,7 @@ from werkzeug.security import check_password_hash
 from datetime import datetime, timedelta
 
 from models.user import User
+from api.user import token_required
 
 login_route = Blueprint('login_route', __name__)
 
@@ -41,9 +42,12 @@ def login():
             'id': user.id,
             'exp': datetime.utcnow() + timedelta(minutes=30)
         }, os.environ.get('SECRET_KEY'))
+        refresh_token = jwt.encode({
+            'id': user.id,
+            'exp': datetime.utcnow() + timedelta(days=1)
+        }, os.environ.get('SECRET_KEY'))
 
-
-        return make_response(jsonify({'token': token.decode('UTF-8')}), 201)
+        return make_response(jsonify({'token': token.decode('UTF-8'), 'refresh_token': refresh_token.decode('UTF-8')}), 201)
 
     # returns 403 if password is wrong
     return make_response(
@@ -51,3 +55,23 @@ def login():
         403,
         {'WWW-Authenticate': 'Basic realm = "Wrong Password!!'}
     )
+
+
+@login_route.route('/api/refresh', methods=['POST'])
+@token_required(refresh=True)
+def refresh(current_user):
+    """
+    Token refresh route, generates new access token.
+    Args:
+        current_user: User object
+
+    Returns: new x-access-token
+
+    """
+    # generates new JWT Token
+    token = jwt.encode({
+        'id': current_user.id,
+        'exp': datetime.utcnow() + timedelta(minutes=30)
+    }, os.environ.get('SECRET_KEY'))
+    return make_response(jsonify({'token': token.decode('UTF-8')}), 201)
+
