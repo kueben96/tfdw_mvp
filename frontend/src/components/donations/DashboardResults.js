@@ -6,7 +6,7 @@ const DashboardResults = () =>{
 return(
 
 <div className='articles'>
-<DonationCard>hello</DonationCard>
+<DonationCard></DonationCard>
 
 </div>
 
