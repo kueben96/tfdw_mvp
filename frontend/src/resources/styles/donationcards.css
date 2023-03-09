@@ -1,9 +1,28 @@
+.articles1{
+    display: inline-block;
+    margin-bottom: 20px;
+}
 .each-article{
-    width: 330px;
-    border: 1px solid black;
+    width: 300px;
+    border: none;
     height: 100px;
     border-radius: 20px;
-    display: inline-block;
-    margin-right: 20px;
+    float: left;
+    margin-right: 50px;
     margin-top: 20px;
+}
+.each-article p{
+    margin-top: 0px;
+    text-align: center;
+    
+    margin-left: 10px;
+}
+.each-article button{
+    width: 330px;
+    height: 100px;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: white;
+    margin-left: -13px;
+    
 }
