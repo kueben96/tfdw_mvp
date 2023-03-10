@@ -1,11 +1,12 @@
 import React from 'react'
+import { Card } from 'react-bootstrap'
 
 const DonationCardDemo = ({ donation }) => {
     return (
-        <article>
+        <Card>
             <h2>{donation.category}</h2>
             <p>{donation.description}</p>
-        </article>
+        </Card>
     )
 }
 

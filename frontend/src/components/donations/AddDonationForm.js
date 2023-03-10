@@ -24,11 +24,11 @@ const AddDonationForm = () => {
         if (canSave) {
             try {
                 addNewDonation({ user_id: userId, category: category, amount: itemCount, color_1: color, size_1: cut, description: description }).unwrap()
-                // setCategory('')
-                // setDescription('')
-                // setItemCount('')
-                // setCut('')
-                // setColor('')
+                setCategory('')
+                setDescription('')
+                setItemCount('')
+                setCut('')
+                setColor('')
             } catch (err) {
                 console.error('Failed to save the donation', err)
             }

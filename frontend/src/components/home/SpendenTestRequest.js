@@ -1,10 +1,37 @@
 import React from 'react'
-import { useFetchDonationsQuery } from '../../store/reducers/donationsSlice';
+import { useFetchDonationsQuery, useFetchFilteredDonationsQuery } from '../../store/reducers/donationsSlice';
 import AddDonationForm from '../donations/AddDonationForm';
 import DonationCardDemo from '../donations/DonationCardDemo';
-import { Row, Container } from 'react-bootstrap'
+import { Row, Container, Button } from 'react-bootstrap'
+import { useState } from 'react';
 
 const SpendenTestRequest = () => {
+    const [colorFilter, setColorFilter] = useState('')
+    const [categoryFilter, setCategoryFilter] = useState('')
+
+
+    // const {
+    //     data: filteredDonations,
+    //     isLoadingFilter,
+    //     isSuccessFilter,
+    //     isErrorFilter,
+    //     errorFilter
+    // } = useFetchFilteredDonationsQuery({ category: categoryFilter, color: colorFilter })
+
+    const filterDonations = () => {
+        console.log('clicked filter')
+        content = donations.map(donation => <DonationCardDemo key={donation.id} donation={donation} />)
+        if (isLoading) {
+            content = <p>"Filtering..."</p>;
+        } else if (isSuccess) {
+            content = donations.map(donation => <DonationCardDemo key={donation.id} donation={donation} />)
+        } else if (isError) {
+            content = <p>{error}</p>;
+        }
+
+    }
+
+
 
     const {
         data: donations,
@@ -12,7 +39,8 @@ const SpendenTestRequest = () => {
         isSuccess,
         isError,
         error
-    } = useFetchDonationsQuery()
+    } = useFetchFilteredDonationsQuery({ category: categoryFilter, color: colorFilter })
+
 
     let content;
 
@@ -23,6 +51,7 @@ const SpendenTestRequest = () => {
     } else if (isError) {
         content = <p>{error}</p>;
     }
+
     return (
         <div className='App'>
             <Container>
@@ -30,6 +59,20 @@ const SpendenTestRequest = () => {
                 <h1> Donations</h1>
 
                 <Row>
+                    <div>
+                        <h2>Filters</h2>
+
+                        <Row>
+                            <p>color_filter</p>
+                            <input id="color" type="text" onChange={e => setColorFilter(e.target.value)}></input>
+                        </Row>
+                        <Row>
+                            <p>category_filter</p>
+                            <input id="category" type="text" onChange={e => setCategoryFilter(e.target.value)}></input>
+                        </Row>
+                        <button onClick={filterDonations}>Filter</button>
+
+                    </div>
                     <AddDonationForm></AddDonationForm>
                 </Row>
                 {content}

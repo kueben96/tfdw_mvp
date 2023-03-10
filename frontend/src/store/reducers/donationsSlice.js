@@ -4,11 +4,30 @@ export const donationsApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         fetchDonations: builder.query({
             query: () => '/donation',
-            // providesTags: (result, error, arg) => [
-            //     { type: 'Donation', id: "LIST" },
-            //     ...result.ids.map(id => ({ type: 'Donation', id }))
-            // ],
+            providesTags: (result, error, arg) => [
+                { type: 'Donation', id: "LIST" },
+                ...result.map(id => ({ type: 'Donation', id }))
+            ],
         }),
+        fetchFilteredDonations: builder.query({
+            query: ({ category, color }) =>
+                `/donation?category=${category}&color=${color}`
+        }),
+
+        // not necessary -> will get deleted
+        getDonationById: builder.query({
+            query: donation_id => `/donation_details/?${donation_id}`,
+        }),
+        // header x-access-token required
+        // for detailed card with contact info
+        getDonationDetailsByIdWithUserInfo: builder.query({
+            query: id => `/donation_details/?id=${id}`,
+            providesTags: (result, error, arg) => [
+                ...result.map(id => ({ type: 'Donation', id }))
+            ]
+        }),
+
+        // header x-access-token required
         addDonation: builder.mutation({
             query: donationData => ({
                 url: '/donation',
@@ -22,6 +41,8 @@ export const donationsApiSlice = apiSlice.injectEndpoints({
 
 export const {
     useFetchDonationsQuery,
+    useFetchFilteredDonationsQuery,
+    // useGetDonationDetailsByIdWithUserInfoQuery,
     useAddDonationMutation,
 } = donationsApiSlice
 
