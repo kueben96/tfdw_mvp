@@ -14,9 +14,6 @@ const SpendenTestRequest = () => {
         error
     } = useFetchDonationsQuery()
 
-    console.log(donations)
-
-
     let content;
 
     if (isLoading) {
@@ -31,10 +28,11 @@ const SpendenTestRequest = () => {
             <Container>
 
                 <h1> Donations</h1>
-                {content}
+
                 <Row>
                     <AddDonationForm></AddDonationForm>
                 </Row>
+                {content}
 
             </Container>
         </div>

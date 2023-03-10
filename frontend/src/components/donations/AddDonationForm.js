@@ -1,18 +1,16 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { addDonation } from '../../store/reducers/donationsSlice'
+import { useAddDonationMutation } from '../../store/reducers/donationsSlice'
 
 const AddDonationForm = () => {
 
-    const dispatch = useDispatch()
-    const [userId, setUserId] = useState(1)
-    const [category, setCategory] = useState('')
-    const [itemCount, setItemCount] = useState('')
-    const [description, setDescription] = useState('')
-    const [cut, setCut] = useState('')
-    const [color, setColor] = useState('')
+    const [addNewDonation, { isLoading }] = useAddDonationMutation()
 
-    const [addRequestStatus, setAddRequestStatus] = useState('idle')
+    const [userId, setUserId] = useState(1)
+    const [category, setCategory] = useState('jersey')
+    const [itemCount, setItemCount] = useState(3)
+    const [description, setDescription] = useState('test')
+    const [cut, setCut] = useState('nice')
+    const [color, setColor] = useState('red')
 
     const onCategoryChanged = e => setCategory(e.target.value)
     const onDescriptionChanged = e => setDescription(e.target.value)
@@ -20,19 +18,19 @@ const AddDonationForm = () => {
     const onCutChanged = e => setCut(e.target.value)
     const onColorChanged = e => setColor(e.target.value)
 
-    const canSave = [description, category, userId, color, itemCount, cut, color].every(Boolean) && addRequestStatus === 'idle';
+    const canSave = [description, category, userId, color, itemCount, cut, color].every(Boolean) && !isLoading;
 
     const onSaveDonationClicked = () => {
         if (canSave) {
             try {
-                setAddRequestStatus('pending')
-                // dispatch(addDonation({ user_id: userId, category: category, number: itemCount, color: color, cut: cut, description: description })).unwrap()
-
-
+                addNewDonation({ user_id: userId, category: category, amount: itemCount, color_1: color, size_1: cut, description: description }).unwrap()
+                // setCategory('')
+                // setDescription('')
+                // setItemCount('')
+                // setCut('')
+                // setColor('')
             } catch (err) {
                 console.error('Failed to save the donation', err)
-            } finally {
-                setAddRequestStatus('idle')
             }
         }
 
