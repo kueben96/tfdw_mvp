@@ -26,7 +26,7 @@ const AddDonationForm = () => {
         if (canSave) {
             try {
                 setAddRequestStatus('pending')
-                dispatch(addDonation({ user_id: userId, category: category, number: itemCount, color: color, cut: cut, description: description })).unwrap()
+                // dispatch(addDonation({ user_id: userId, category: category, number: itemCount, color: color, cut: cut, description: description })).unwrap()
 
 
             } catch (err) {

@@ -1,28 +1,29 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchDonations, getDonationsError, getDonationsStatus, selectAllDonations } from '../../store/reducers/donationsSlice';
+import React from 'react'
+import { useFetchDonationsQuery } from '../../store/reducers/donationsSlice';
 import AddDonationForm from '../donations/AddDonationForm';
 import DonationCardDemo from '../donations/DonationCardDemo';
 import { Row, Container } from 'react-bootstrap'
 
 const SpendenTestRequest = () => {
-    const dispatch = useDispatch();
-    const donations = useSelector(selectAllDonations)
-    const donationsStatus = useSelector(getDonationsStatus)
-    const error = useSelector(getDonationsError)
 
-    useEffect(() => {
-        if (donationsStatus === 'idle') {
-            dispatch(fetchDonations())
-        }
-    }, [donationsStatus, dispatch])
+    const {
+        data: donations,
+        isLoading,
+        isSuccess,
+        isError,
+        error
+    } = useFetchDonationsQuery()
+
+    console.log(donations)
+
 
     let content;
-    if (donationsStatus === 'loading') {
+
+    if (isLoading) {
         content = <p>"Loading..."</p>;
-    } else if (donationsStatus === 'succeeded') {
+    } else if (isSuccess) {
         content = donations.map(donation => <DonationCardDemo key={donation.id} donation={donation} />)
-    } else if (donationsStatus === 'failed') {
+    } else if (isError) {
         content = <p>{error}</p>;
     }
     return (
