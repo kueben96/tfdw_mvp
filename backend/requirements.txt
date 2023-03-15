@@ -10,4 +10,4 @@ pytest
 pytest-flask
 PyJWT==1.7.1
 pytz
-
+Flask-Mail
