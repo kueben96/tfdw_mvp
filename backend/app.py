@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 import json
+from flask_socketio import SocketIO
 
 import os
 from api.signup import signup_route
@@ -8,7 +9,7 @@ from api.user import user_route
 from api.donation import donation_route
 from api.donation_request import donation_request_route
 
-from extensions import db, migrate, ma, cors
+from extensions import db, migrate, ma, cors, socketio
 
 from models import user, donation, donation_request
 
@@ -26,6 +27,8 @@ def create_app():
     migrate.init_app(app, db)
     ma.init_app(app)
     cors.init_app(app)
+    socketio.init_app(app, cors_allowed_origins="*", port=5001)
+    # for socketio: debug=True? , do I need cors_allowed_origins?, might need to change port to 5001
 
     app.register_blueprint(signup_route)
     app.register_blueprint(login_route)
@@ -38,6 +41,7 @@ def create_app():
 
 # Create an application instance
 app = create_app()
+
 
 # Create various application instances
 # Order matters: Initialize SQLAlchemy before Marshmallow
