@@ -1,5 +1,7 @@
 import jwt
 import os
+import secrets
+import string
 
 from flask import Flask, jsonify, request, Blueprint, render_template
 from datetime import datetime, timedelta
@@ -14,26 +16,31 @@ from services.mail_service import send_email
 reset_route = Blueprint('reset_route', __name__)
 
 
+# TODO: implement temporary password
 @reset_route.route('/api/forgot', methods=['POST'])
 def forgot_password():
-    url = "localhost:8000/api/reset"
 
     email = request.json.get("email", "")
     user = verify_email(email)
 
-    # generates the JWT Token
-    reset_token = jwt.encode({
-            'id': user.id,
-            'exp': datetime.utcnow() + timedelta(minutes=5)
-    }, os.environ.get('SECRET_KEY'))
+    # # generates the JWT Token
+    # reset_token = jwt.encode({
+    #         'id': user.id,
+    #         'exp': datetime.utcnow() + timedelta(minutes=5)
+    # }, os.environ.get('SECRET_KEY'))
+
+    alphabet = string.ascii_letters + string.digits
+    temp_password = ''.join(secrets.choice(alphabet) for i in range(20))  # for a 20-character password
+
+    # TODO: store temp_password in database
 
     return send_email('[TFDW] Reset Your Password',
                       sender='support@tfdw.com',
                       recipients=[user.email],
                       text_body=render_template('reset_password.txt',
-                                                user=user, token=reset_token),
+                                                temp_password=temp_password),
                       html_body=render_template('reset_password.html',
-                                                user=user, token=reset_token))
+                                                temp_password=temp_password))
 
 
 @reset_route.route('/api/reset_password/<token>', methods=['POST'])
@@ -45,15 +52,11 @@ def reset_password(token):
     db.session.add(user)
     db.session.commit()
 
-    return "Reset password."
-
-    # TODO: does not work, url in email from forgot_password function does not work
-
-    # return send_email('[TFDW] Password reset successful',
-    #                   sender='support@tfdw.com',
-    #                   recipients=[user.email],
-    #                   text_body='Password reset was successful',
-    #                   html_body='<p>Password reset was successful</p>')
+    return send_email('[TFDW] Password reset successful',
+                      sender='support@tfdw.com',
+                      recipients=[user.email],
+                      text_body='Password reset was successful',
+                      html_body='<p>Password reset was successful</p>')
 
 
 
