@@ -72,7 +72,6 @@ def verify_email(email):
     return user
 
 
-@staticmethod
 def verify_reset_password_token(token):
     try:
         # decoding the payload to fetch the stored details

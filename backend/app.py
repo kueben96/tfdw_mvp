@@ -21,11 +21,12 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    app.config['MAIL_SERVER'] = 'localhost'
-    app.config['MAIL_PORT'] = '1025'
-    app.config['MAIL_USE_SSL'] = True
-    app.config['MAIL_USERNAME'] = "support@tfdw.com"
-    app.config['MAIL_PASSWORD'] = ""
+    app.config['MAIL_SERVER'] = 'sandbox.smtp.mailtrap.io'
+    app.config['MAIL_PORT'] = 2525
+    app.config['MAIL_USERNAME'] = 'a10678fe9a4d7c'
+    app.config['MAIL_PASSWORD'] = 'c8244bd595751b'
+    app.config['MAIL_USE_TLS'] = True
+    app.config['MAIL_USE_SSL'] = False
 
     # Initialize extensions
     # To use the application instances above, instantiate with an application:
