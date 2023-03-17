@@ -9,17 +9,7 @@ const SpendenTestRequest = () => {
     const [colorFilter, setColorFilter] = useState('')
     const [categoryFilter, setCategoryFilter] = useState('')
 
-
-    // const {
-    //     data: filteredDonations,
-    //     isLoadingFilter,
-    //     isSuccessFilter,
-    //     isErrorFilter,
-    //     errorFilter
-    // } = useFetchFilteredDonationsQuery({ category: categoryFilter, color: colorFilter })
-
     const filterDonations = () => {
-        console.log('clicked filter')
         content = donations.map(donation => <DonationCardDemo key={donation.id} donation={donation} />)
         if (isLoading) {
             content = <p>"Filtering..."</p>;
@@ -28,10 +18,7 @@ const SpendenTestRequest = () => {
         } else if (isError) {
             content = <p>{error}</p>;
         }
-
     }
-
-
 
     const {
         data: donations,
@@ -40,8 +27,6 @@ const SpendenTestRequest = () => {
         isError,
         error
     } = useFetchFilteredDonationsQuery({ category: categoryFilter, color: colorFilter })
-
-
     let content;
 
     if (isLoading) {
