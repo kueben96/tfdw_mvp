@@ -1,12 +1,18 @@
-
+@media only screen and (min-width: 500px){
+    .articles {width: 6.66%;}
+}
 
 .articles{
-    width: 800px;
-   margin: auto;
+    width: 900px;
+    
+    margin: auto;
     margin-top: 30px;
     align-items: center;
     align-self: center;
    
-    
+   position: relative;
+   overflow-y: scroll;
+   height: 320px;
+   overflow-x: hidden;
 
 }
