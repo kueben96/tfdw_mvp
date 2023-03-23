@@ -31,7 +31,7 @@ const DonationCard= () => {
 
     return (
 
-      <div className='articles1'>
+      <div className='articles-cards'>
      
        
                 <article>

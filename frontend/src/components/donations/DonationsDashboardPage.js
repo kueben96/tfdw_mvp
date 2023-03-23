@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import '../../resources/styles/dashboard.css';
 import DashboardResults from './DashboardResults';
 import FilterBarDonations from './FilterBarDonations';
@@ -12,8 +12,16 @@ const DonationsDashboardPage = () => {
         <div>
             <Container>
                 <form className='dashboard'>
+                    
                     <div className="register-text-center">
-                    <label className='dashboard-titel'>SPENDEN SUCHMASCHINE</label>
+                        <Row>
+                            <Col sm={2} >
+                     <button className='home-image'></button></Col>
+                     <Col sm={8}>
+                     <h4>Spendenplatform</h4></Col>
+                     <Col sm={2} >
+                     <button className='konto-image'></button></Col>
+                     </Row>
                     </div>
                     <div className='registerpara'>
                     <p className='dashboard-paragraph'>Erstelle eine Spende oder kontaktiere potenzielle Gesuche.   </p>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import '../../resources/styles/donationcards.css';
 
 
@@ -9,15 +9,19 @@ const DonationCardDemo = ({ donation }) => {
     return (
         <div className='each-article'>
             <button >
-        <article >
-            <p>Category: {donation.category}</p>
+            <Row>
+                <Col sm={2}  className='yellow-tick'>
             
-            <p>Amount: {donation.amount}</p> 
-            
-            <p>Description: {donation.description}</p>
-            
-           
-        </article></button>
+                </Col>    
+                <Col >
+                   <article >
+                   <h6> {donation.category}</h6>
+                   <p>{donation.amount} Stück, PLZ {donation.plz}</p> 
+          
+                   </article></Col>
+            </Row>
+         
+            </button>
         </div>
     )
 }}

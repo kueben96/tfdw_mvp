@@ -7,12 +7,12 @@ const FilterBarDonations = () => {
         <div className='filterbar'>
              <Container> 
                  <Row>
-                    <label>Gesuche</label>
+                    <h6>Gesuche</h6>
                  </Row>
                  <Row className='filter-down'> 
                        <Col sm={6} md={2}>
                             <select className='filters' >
-                            <option value="" disabled selected>Größe</option>
+                            <option value="" disabled selected>Kategorie</option>
                             <option value="9" >Trikot Set</option>
                             <option value="1" >Trikot Oberteil</option>
                             <option value="2"  >Trikot Hose</option>

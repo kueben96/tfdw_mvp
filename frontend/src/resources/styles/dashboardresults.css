@@ -1,7 +1,12 @@
+
+
 .articles{
-    width: 700px;
-    margin: auto;
+    width: 800px;
+   margin: auto;
     margin-top: 30px;
+    align-items: center;
+    align-self: center;
+   
     
 
 }
