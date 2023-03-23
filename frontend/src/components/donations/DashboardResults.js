@@ -5,10 +5,10 @@ import DonationCard from './DonationCard';
 const DashboardResults = () =>{
 return(
 
-<div className='articles'>
-<DonationCard></DonationCard>
+      <div className='articles'>
+      <DonationCard></DonationCard>
 
-</div>
+      </div>
 
 
 )

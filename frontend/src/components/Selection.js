@@ -10,7 +10,7 @@ const Selection = () => {
             <Container>
                 <form className='selection'>
                     <div className="register-text-center">
-                    <label className='dashboard-titel'>SPENDENPLATFORM</label>
+                    <h4>Spendenplatform</h4>
                     </div>
                     <div className='buttons'>
                     <form action="/dashboard">
