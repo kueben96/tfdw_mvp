@@ -3,17 +3,23 @@
 .articles-cards{
     position: relative;
     margin-bottom: 20px;
-    width: 850px;
-  
+    width: 800px;
+    margin-right: 10px;
+   height: 100%;
+    margin: auto;
+    
+   
+
 }
 .each-article{
-    width: 420px;
+    width: 412px;
     border: none;
     height: 100px;
     border-radius: 50px;
     
     margin-top: 20px;
     display: inline-flex;
+    
 }
 .each-article h6{
     margin-top: 10px;
@@ -32,7 +38,7 @@
     
 }
 .each-article button{
-    width: 420px;
+    width: 412px;
     height: 80px;
     border: 0.5px solid gray;
     border-radius: 10px;
