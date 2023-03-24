@@ -1,17 +1,17 @@
 import React from 'react'
 import '../../resources/styles/dashboardresults.css';
-import DonationCard from './DonationCard';
+import DonationsCard from './DonationsCard';
 
-const DashboardResults = () =>{
-return(
+const DashboardResults = () => {
+      return (
 
-      <div className='articles'>
-      <DonationCard></DonationCard>
+            <div className='articles'>
+                  <DonationsCard></DonationsCard>
 
-      </div>
+            </div>
 
 
-)
+      )
 }
 
 export default DashboardResults

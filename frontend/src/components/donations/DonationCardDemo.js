@@ -4,26 +4,22 @@ import '../../resources/styles/donationcards.css';
 
 
 const DonationCardDemo = ({ donation }) => {
-    let don;
-    for (don in donation){
+    console.log(donation)
+
     return (
         <div className='each-article'>
             <button >
-            <Row>
-                <Col className='yellow-tick'>
-            
-                </Col>    
-                <Col >
-                   
-                   <h6> {donation.category}</h6>
-                   <p>{donation.amount} Stück, PLZ {donation.plz}</p> 
-          
-                  </Col>
-            </Row>
-         
+                <Row>
+                    <Col className='yellow-tick'>
+                    </Col>
+                    <Col >
+                        <h6> {donation.category}</h6>
+                        <p>{donation.amount} Stück, PLZ {donation.zipCode}</p>
+                    </Col>
+                </Row>
             </button>
         </div>
     )
-}}
 
+}
 export default DonationCardDemo
