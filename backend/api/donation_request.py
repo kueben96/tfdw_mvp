@@ -54,6 +54,14 @@ def get_donation_requests(current_user):
     If arguments are given in query string, results are being filtered by given arguments.
     Returns: json with list of all donation requests and corresponding user data
     """
+    if current_user:
+        if current_user.role == "admin":
+            results = (db.session.query(DonationRequest.id, DonationRequest.date, DonationRequest.category,
+                                        DonationRequest.status, User.club_name)
+                       .join(User, User.id == DonationRequest.user_id)).all()
+
+            return jsonify([dict(id=x.id, date=x.date, category=x.category, status=x.status, first_name=x.club_name)
+                            for x in results])
     args = request.args.to_dict()
     if args:
         args['status'] = "offen"
@@ -83,7 +91,7 @@ def get_donation_requests(current_user):
 
 @donation_request_route.route('/api/donation_request_details', methods=['GET'])
 @token_required()
-def get_donation_request_details_new(current_user):
+def get_donation_request_details(current_user):
     """
     Gets a specific donation request by id from the donation_requests database table.
     Returns: json with donation request data

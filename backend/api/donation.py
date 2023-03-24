@@ -57,6 +57,14 @@ def get_donations(current_user):
     If arguments are given in query string, results are being filtered by given arguments.
     Returns: json with list of all donations and corresponding user data
     """
+    if current_user:
+        if current_user.role == "admin":
+            results = (db.session.query(Donation.id, Donation.date, Donation.category, Donation.status, User.first_name)
+                       .join(User, User.id == Donation.user_id)).all()
+
+            return jsonify([dict(id=x.id, date=x.date, category=x.category, status=x.status, first_name=x.first_name)
+                            for x in results])
+
     args = request.args.to_dict()
     if args:
         args['status'] = "offen"
@@ -94,7 +102,7 @@ def get_donations(current_user):
 
 @donation_route.route('/api/donation_details', methods=['GET'])
 @token_required()
-def get_donation_details_new(current_user):
+def get_donation_details(current_user):
     """
     Get donation details and user data for given donation_id.
     Returns: json with donation details for given donation

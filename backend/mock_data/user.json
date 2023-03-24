@@ -75,5 +75,18 @@
   "password": "Bob",
   "role": "receiver",
   "club_name": "Bob's Football Team"
-}
+},
+  {
+  "first_name":"admin",
+  "last_name":"TFDW",
+  "email": "tfdw.admin@tfdw.com",
+  "phone": "5678",
+  "street": "Street 12",
+  "zip_code": 12345,
+  "city": "Hamburg",
+  "region": "Hamburg",
+  "password": "AwnhzJ78b4LfuqHujjJ2",
+  "role": "admin",
+  "club_name": "TFDW"
+  }
 ]
