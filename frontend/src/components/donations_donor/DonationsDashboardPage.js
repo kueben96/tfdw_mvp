@@ -2,7 +2,6 @@ import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
 import '../../resources/styles/dashboard.css';
 import DonationsCard from './DonationsCard';
-import FilterBarDonations from './FilterBarDonations';
 
 const DonationsDashboardPage = () => {
 
@@ -29,8 +28,6 @@ const DonationsDashboardPage = () => {
                         <DonationsCard></DonationsCard>
                     </div>
                 </div>
-
-
             </Container>
         </div>
     )

@@ -1,16 +1,11 @@
-
-
 .articles{
-    width: 900px;
-    
+    width: 900px;    
     margin: auto;
     margin-top: 30px;
     align-items: center;
     align-self: center;
-   
    position: relative;
    overflow-y: scroll;
-   height: 320px;
+   height: 520px;
    overflow-x: hidden;
-
 }

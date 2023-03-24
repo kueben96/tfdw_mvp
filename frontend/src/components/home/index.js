@@ -10,8 +10,8 @@ const Home = () => {
     const token = useSelector(selectCurrentToken)
     const user = useSelector(selectCurrentUser)
 
-    const routeLogin = () => {
-        navigate('/login')
+    const routeDashboard = () => {
+        navigate('/selection')
     }
     const welcomeMsg = token ? <h1>Welcome, you're logged in {user}</h1> : <div>Log in to proceed: press the button below </div>
 
@@ -23,7 +23,7 @@ const Home = () => {
                     {welcomeMsg}
                     <h3>TRIKOTS FÜR DIE WELT</h3>
                     <h1 className='font-64'>SPENDEN</h1>
-                    <Button onClick={routeLogin} bsPrefix='button-pink' className='font-24'>Spendenplattform</Button>
+                    <Button onClick={routeDashboard} bsPrefix='button-pink' className='font-24'>Spendenplattform</Button>
                 </div>
             </Container>
         </section>

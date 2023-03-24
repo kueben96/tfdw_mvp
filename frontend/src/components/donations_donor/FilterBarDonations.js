@@ -54,7 +54,7 @@ const FilterBarDonations = ({ onFilterChange, onClearFilters }) => {
         <div className='filterbar'>
             <Container>
                 <Row>
-                    <h6>Hier siehst du all Gesuche</h6>
+                    <h6>Hier siehst du alle Gesuche</h6>
                 </Row>
                 <Row className='filter-down'>
                     <Col sm={6} md={2}>

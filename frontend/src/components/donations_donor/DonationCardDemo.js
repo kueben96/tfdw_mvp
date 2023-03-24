@@ -6,9 +6,10 @@ import '../../resources/styles/donationcards.css';
 const DonationCardDemo = ({ donation }) => {
     console.log(donation)
 
+
     return (
         <div className='each-article'>
-            <button >
+            <button  >
                 <Row>
                     <Col className='yellow-tick'>
                     </Col>
@@ -20,6 +21,6 @@ const DonationCardDemo = ({ donation }) => {
             </button>
         </div>
     )
-
 }
+
 export default DonationCardDemo
