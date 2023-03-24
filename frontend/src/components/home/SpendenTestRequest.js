@@ -5,9 +5,6 @@ import { Container, } from 'react-bootstrap'
 import { useState } from 'react';
 
 const SpendenTestRequest = () => {
-    // const [colorFilter, setColorFilter] = useState('')
-    // const [categoryFilter, setCategoryFilter] = useState('')
-    // size buttons erst aktiv nachdem kategorie ausgewählt wurde
 
     const [filters, setFilters] = useState({});
 
