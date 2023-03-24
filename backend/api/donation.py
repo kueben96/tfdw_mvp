@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask, jsonify, request, Blueprint
 from sqlalchemy import or_, text
 from sqlalchemy.orm import sessionmaker
@@ -5,7 +7,7 @@ from datetime import datetime
 import pytz
 
 from models.donation import Donation, donation_schema
-from models.user import User
+from models.user import User, user_schema
 from extensions import db
 
 from api.user import token_required
@@ -98,6 +100,21 @@ def get_donations(current_user):
     return jsonify([dict(id=x.id, date=x.date, category=x.category, amount=x.amount, size_1=x.size_1, size_2=x.size_2,
                          color_1=x.color_1, color_2=x.color_2, description=x.description, zip_code=x.zip_code,
                          city=x.city) for x in results])
+
+
+@donation_route.route('/api/user_donations', methods=['GET'])
+@token_required()
+def get_user_donations(current_user):
+    results = (db.session.query(User.id, Donation.date, Donation.category, Donation.amount)
+               .filter_by(id=current_user.id)
+               .join(Donation, User.id == Donation.user_id)).all()
+
+    return jsonify([dict(date=x.date, category=x.category, amount=x.amount) for x in results])
+
+    # TODO: could be optimized by using the donations already present in current_user but difficult to access
+    # current_user_json = user_schema.jsonify(current_user)
+    # user_donations = jsonify(current_user_json['user_donations'])
+    # return user_donations
 
 
 @donation_route.route('/api/donation_details', methods=['GET'])

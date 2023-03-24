@@ -44,7 +44,8 @@ def signup():
             city=city,
             region=region,
             role=role,
-            club_name=club_name
+            club_name=club_name,
+            reviewed=False
         )
 
         # insert user

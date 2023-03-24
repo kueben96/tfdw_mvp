@@ -89,6 +89,21 @@ def get_donation_requests(current_user):
                     results])
 
 
+@donation_request_route.route('/api/user_donation_requests', methods=['GET'])
+@token_required()
+def get_user_donations(current_user):
+    results = (db.session.query(User.id, DonationRequest.date, DonationRequest.category, DonationRequest.amount)
+               .filter_by(id=current_user.id)
+               .join(DonationRequest, User.id == DonationRequest.user_id)).all()
+
+    return jsonify([dict(date=x.date, category=x.category, amount=x.amount) for x in results])
+
+    # TODO: could be optimized by using the donations already present in current_user but difficult to access
+    # current_user_json = user_schema.jsonify(current_user)
+    # user_donation_requests = jsonify(current_user_json['user_donation_requests'])
+    # return user_donation_requests
+
+
 @donation_request_route.route('/api/donation_request_details', methods=['GET'])
 @token_required()
 def get_donation_request_details(current_user):
