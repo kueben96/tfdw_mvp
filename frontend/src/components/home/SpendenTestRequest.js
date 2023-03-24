@@ -57,9 +57,8 @@ const FilterToolBar = ({ onFilterChange, onClearFilters }) => {
     // TODO: for sizes, do category mapping (shoes have different sizes)
 
     const [filters, setFilters] = useState({});
-
-
     const [sizeOptions, setSizeOptions] = useState([]);
+
 
     const handleFilterChange = (event) => {
         const newFilters = { ...filters, [event.target.name]: event.target.value };
@@ -72,28 +71,37 @@ const FilterToolBar = ({ onFilterChange, onClearFilters }) => {
         onClearFilters()
     }
 
-    const handleCategoryChange = (event) => {
-        const { categoryValue } = event.target;
-        setFilters({ ...filters, category: categoryValue, size_1: '', size_2: '' })
-    }
+    // const handleCategoryChange = (event) => {
+    //     const { categoryValue } = event.target;
+    //     setFilters({ ...filters, category: categoryValue, size_1: '', size_2: '' })
+    // }
 
     useEffect(() => {
+        console.log("using effect")
+
         const sizes = {
             adult: {
-                jersey_set: ["XS", "S", "XXL", "XXXL"],
+                jersey_set: ["XS", "S", "M", "L", "XL", "XXL", "XXXL"],
+                jersey: ["XS", "S", "M", "L", "XL", "XXL", "XXXL"],
                 gloves: Array.from({ length: 7 }, (_, i) => i + 1),
                 shoes: Array.from({ length: 10 }, (_, i) => i + 39),
             },
-            kids: {
-                jersey_set: ["XS", "S", "XXL", "XXXL"],
+            children: {
+                jersey_set: ["XS", "S", "M", "L", "XL"],
+                jersey: ["XS", "S", "M", "L", "XL"],
                 gloves: Array.from({ length: 6 }, (_, i) => i + 1),
                 shoes: Array.from({ length: 11 }, (_, i) => i + 28),
             },
         };
+        console.log("sizes")
+        console.log("jersey" in sizes)
 
-        // Get size options based on selected category and size_1 value
         const getSizeOptions = (category, size1) => {
+            console.log("getSizeOptions")
+            console.log(category)
+            console.log(size1)
             if (category in sizes && size1 in sizes[filters.size_1]) {
+                console.log("trueee")
                 return sizes[filters.size_1][category];
             }
             return [];
@@ -102,6 +110,10 @@ const FilterToolBar = ({ onFilterChange, onClearFilters }) => {
         setSizeOptions(getSizeOptions(filters.category, filters.size_1));
     }, [filters.category, filters.size_1]);
 
+    console.log(filters.category)
+    console.log(filters.size_1)
+    console.log(filters)
+    console.log(sizeOptions)
 
     return (
         <div>
@@ -132,6 +144,26 @@ const FilterToolBar = ({ onFilterChange, onClearFilters }) => {
                     <option value="gloves">Handschuhe (Paar)</option>
                 </select>
             </label>
+
+            <select name="size_1" onChange={handleFilterChange}>
+                <option value="">Select Size 1</option>
+                <option value="adult">Adult</option>
+                <option value="children">Kids</option>
+            </select>
+
+
+            {/* {filters.category && filters.size_1 && sizeOptions.length > 0 && ( */}
+            {filters.category && filters.size_1 && (
+                <select name="size_2" onChange={handleFilterChange}>
+                    <option value="">Select Size 2</option>
+                    {sizeOptions.map((size) => (
+                        <option value={size} key={size}>
+                            {size}
+                        </option>
+                    ))}
+                </select>
+            )}
+
             <button onClick={handleClearFilters}>Clear Filters</button>
         </div>
     )
