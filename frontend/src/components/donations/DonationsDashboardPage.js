@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
 import '../../resources/styles/dashboard.css';
-import DashboardResults from './DashboardResults';
+import DonationsCard from './DonationsCard';
 import FilterBarDonations from './FilterBarDonations';
 
 const DonationsDashboardPage = () => {
@@ -9,8 +9,7 @@ const DonationsDashboardPage = () => {
     return (
         <div>
             <Container>
-                <form className='dashboard'>
-
+                <div className='dashboard'>
                     <div className="text-center">
                         <Row>
                             <Col sm={2} >
@@ -25,9 +24,11 @@ const DonationsDashboardPage = () => {
                         <p>Erstelle eine Spende oder kontaktiere potenzielle Gesuche.   </p>
                         <button className='button-pink'>Spende erstellen</button>
                     </div>
-                    <FilterBarDonations></FilterBarDonations>
-                    <DashboardResults></DashboardResults>
-                </form>
+
+                    <div className='articles'>
+                        <DonationsCard></DonationsCard>
+                    </div>
+                </div>
 
 
             </Container>

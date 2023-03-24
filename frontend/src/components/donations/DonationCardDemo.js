@@ -14,7 +14,7 @@ const DonationCardDemo = ({ donation }) => {
                     </Col>
                     <Col >
                         <h6> {donation.category}</h6>
-                        <p>{donation.amount} Stück, PLZ {donation.zipCode}</p>
+                        <p>{donation.amount} Stück, PLZ {donation.zip_code}</p>
                     </Col>
                 </Row>
             </button>

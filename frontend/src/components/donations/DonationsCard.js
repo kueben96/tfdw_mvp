@@ -1,45 +1,54 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { Row } from 'react-bootstrap';
 import '../../resources/styles/donationcards.css';
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchDonations, getDonationsError, getDonationsStatus, selectAllDonations } from '../../store/reducers/donationsSlice';
+import { useFetchDonationsQuery } from '../../store/reducers/donationsSlice';
 
 import DonationCardDemo from './DonationCardDemo';
+import FilterBarDonations from './FilterBarDonations';
 
 
 const DonationsCard = () => {
-    const dispatch = useDispatch();
-    const donations = useSelector(selectAllDonations)
-    const donationsStatus = useSelector(getDonationsStatus)
-    const error = useSelector(getDonationsError)
 
-    useEffect(() => {
-        if (donationsStatus === 'idle') {
-            dispatch(fetchDonations())
-        }
-    }, [donationsStatus, dispatch])
+    const [filters, setFilters] = useState({});
+
+    const {
+        data: donations,
+        isLoading,
+        isSuccess,
+        isError,
+    } = useFetchDonationsQuery(filters)
+
+    const handleFilterChange = (newFilters) => {
+        setFilters(newFilters)
+    }
+
+    const clearFilters = () => {
+        setFilters({});
+    };
+
 
     let content;
-    if (donationsStatus === 'loading') {
-        content = <p>"Loading..."</p>;
-    } else if (donationsStatus === 'succeeded') {
 
+    if (isLoading) {
+        content = <p>"Loading..."</p>;
+    } else if (isSuccess) {
         content = donations.map(donation => <DonationCardDemo key={donation.id} donation={donation} />)
-    } else if (donationsStatus === 'failed') {
-        content = <p>{error}</p>;
+    } else if (isError) {
+        content = <p>Error fetching a donations</p>;
     }
 
     return (
+        <>
+            <FilterBarDonations onFilterChange={handleFilterChange} onClearFilters={clearFilters} />
+            <div className='articles-cards'>
+                <article>
+                    <Row>
+                        {content}
+                    </Row>
+                </article>
 
-        <div className='articles-cards'>
-            <article>
-                <Row>
-                    {content}
-                </Row>
-            </article>
-
-        </div>
-
+            </div>
+        </>
 
     )
 }

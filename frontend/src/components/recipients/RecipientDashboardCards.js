@@ -2,49 +2,30 @@ import React, { useEffect } from 'react';
 import { Row } from 'react-bootstrap';
 import '../../resources/styles/donationcards.css';
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchDonations, getDonationsError, getDonationsStatus, selectAllDonations } from '../../store/reducers/donationsSlice';
+
 
 import RecipientDonationDashboard from './RecipientDonationdDashboard';
 
 
 
-const RecipientDashboardCards= () => {
-  const dispatch = useDispatch();
-  const donations = useSelector(selectAllDonations)
-  const donationsStatus = useSelector(getDonationsStatus)
-  const error = useSelector(getDonationsError)
+const RecipientDashboardCards = () => {
 
-  useEffect(() => {
-      if (donationsStatus === 'idle') {
-          dispatch(fetchDonations())
-      }
-  }, [donationsStatus, dispatch])
-
-  let content;
-  if (donationsStatus === 'loading') {
-      content = <p>"Loading..."</p>;
-  } else if (donationsStatus === 'succeeded') {
-    
-        content = donations.map(donation => <RecipientDonationDashboard key={donation.id} donation={donation}  />)
-  } else if (donationsStatus === 'failed') {
-      content = <p>{error}</p>;
-  }
-
+    let content = <p>hello</p>
     return (
 
-      <div className='articles-cards'>
-     
-       
-                <article>
-                    <Row>
-                      
-                        {content}
+        <div className='articles-cards'>
 
-                    </Row>
-                </article>
-                
-             </div>
-      
+
+            <article>
+                <Row>
+
+                    {content}
+
+                </Row>
+            </article>
+
+        </div>
+
 
     )
 }
