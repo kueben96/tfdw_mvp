@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
-import { useFetchDonationsQuery, useFetchFilteredDonationsQuery } from '../../store/reducers/donationsSlice';
-import AddDonationForm from '../donations/AddDonationForm';
+import { useFetchDonationsQuery } from '../../store/reducers/donationsSlice';
 import DonationCardDemo from '../donations/DonationCardDemo';
-import { Row, Container, Button } from 'react-bootstrap'
+import { Container, } from 'react-bootstrap'
 import { useState } from 'react';
 
 const SpendenTestRequest = () => {
@@ -54,13 +53,17 @@ export default SpendenTestRequest;
 const sizes = {
     adult: {
         jersey_set: ["XS", "S", "M", "L", "XL", "XXL", "XXXL"],
-        jersey: ["XS", "S", "M", "L", "XL", "XXL", "XXXL"],
+        jersey_kit: ["XS", "S", "M", "L", "XL", "XXL", "XXXL"],
+        jersey_top: ["XS", "S", "M", "L", "XL", "XXL", "XXXL"],
+        tracksuit_top: ["XS", "S", "M", "L", "XL", "XXL", "XXXL"],
         gloves: Array.from({ length: 7 }, (_, i) => i + 1),
         shoes: Array.from({ length: 10 }, (_, i) => i + 39),
     },
     children: {
         jersey_set: ["XS", "S", "M", "L", "XL"],
-        jersey: ["XS", "S", "M", "L", "XL"],
+        jersey_kit: ["XS", "S", "M", "L", "XL"],
+        jersey_top: ["XS", "S", "M", "L", "XL"],
+        tracksuit_top: ["XS", "S", "M", "L", "XL"],
         gloves: Array.from({ length: 6 }, (_, i) => i + 1),
         shoes: Array.from({ length: 11 }, (_, i) => i + 28),
     },
@@ -119,7 +122,6 @@ const FilterToolBar = ({ onFilterChange, onClearFilters }) => {
                 <select name="category" onChange={handleFilterChange}>
                     <option value="">Any</option>
                     <option value="jersey_kit">Trikot Set</option>
-                    <option value="jersey">Trikot</option>
                     <option value="jersey_top">Trikot Oberteil</option>
                     <option value="tracksuit_top">Trainingsanzug Oberteil</option>
                     <option value="shoes">Schuhe (Paar)</option>
