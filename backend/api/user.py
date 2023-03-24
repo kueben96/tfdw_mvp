@@ -139,3 +139,4 @@ def delete_user(current_user, user_id: int):
     db.session.delete(user)
     db.session.commit()
     return user_schema.jsonify(user)
+

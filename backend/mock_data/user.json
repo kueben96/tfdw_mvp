@@ -88,5 +88,18 @@
   "password": "AwnhzJ78b4LfuqHujjJ2",
   "role": "admin",
   "club_name": "TFDW"
+  },
+  {
+  "first_name":"Alice",
+  "last_name":"B",
+  "email": "alice.b@football_for_girls.com",
+  "phone": "5678",
+  "street": "Street 12",
+  "zip_code": 12345,
+  "city": "Hamburg",
+  "region": "Hamburg",
+  "password": "alice",
+  "role": "receiver",
+  "club_name": "Football for Girls"
   }
 ]

@@ -5,6 +5,7 @@ import os
 from api.signup import signup_route
 from api.login import login_route
 from api.user import user_route
+from api.admin import admin_route
 from api.donation import donation_route
 from api.donation_request import donation_request_route
 
@@ -30,6 +31,7 @@ def create_app():
     app.register_blueprint(signup_route)
     app.register_blueprint(login_route)
     app.register_blueprint(user_route)
+    app.register_blueprint(admin_route)
     app.register_blueprint(donation_route)
     app.register_blueprint(donation_request_route)
 
