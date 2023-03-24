@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, Blueprint, make_response
+from flask import Flask, request, Blueprint, make_response
 from werkzeug.security import generate_password_hash
 
 from models.user import User
@@ -10,7 +10,11 @@ signup_route = Blueprint('signup_route', __name__)
 
 @signup_route.route('/api/signup', methods=['POST'])
 def signup():
+    """
+    Creates a new user in the database.
 
+    Returns: response if signup was successful
+    """
     first_name = request.json.get('first_name', '')
     last_name = request.json.get('last_name', '')
     email = request.json.get('email', '')

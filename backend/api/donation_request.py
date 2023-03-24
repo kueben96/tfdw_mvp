@@ -1,5 +1,3 @@
-from operator import or_
-
 from flask import Flask, jsonify, request, Blueprint
 from datetime import datetime
 import pytz

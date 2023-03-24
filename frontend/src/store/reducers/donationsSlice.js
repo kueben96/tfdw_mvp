@@ -1,48 +1,59 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { apiSlice } from "./apiSlice";
 
-const initialState = {
-    donations: [],
-    status: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
-    error: null
-}
+export const donationsApiSlice = apiSlice.injectEndpoints({
+    endpoints: builder => ({
+        fetchDonations: builder.query({
+            query: (filter) => {
+                const filterQueryParams = new URLSearchParams(filter).toString();
+                return `/donation?${filterQueryParams}`;
+            },
+            providesTags: (result = [], error, arg) =>
+                result
+                    ? [
+                        ...result.map(({ id }) => ({ type: 'Donation', id })),
+                        { type: 'Donation', id: 'LIST' },
+                    ]
+                    : [{ type: 'Donation', id: 'LIST' }],
+            // providesTags: (result, error, arg) => [
+            //     { type: 'Donation', id: "LIST" },
+            //     ...result.map(id => ({ type: 'Donation', id }))
+            // ],
+        }),
+        // fetchFilteredDonations: builder.query({
+        //     query: ({ category, color }) =>
+        //         `/donation?category=${category}&color=${color}`
+        // }),
 
-export const fetchDonations = createAsyncThunk(
-    "donations/fetch",
-    async () => {
-        const response = await axios.get("/api/donation")
-        console.log(response.data)
-        return response.data;
-    }
-)
+        // not necessary -> will get deleted
+        getDonationById: builder.query({
+            query: donation_id => `/donation_details/?${donation_id}`,
+        }),
+        // header x-access-token required
+        // for detailed card with contact info
+        getDonationDetailsByIdWithUserInfo: builder.query({
+            query: id => `/donation_details/?id=${id}`,
+            providesTags: (result, error, arg) => [
+                ...result.map(id => ({ type: 'Donation', id }))
+            ]
+        }),
 
-export const addDonation = createAsyncThunk(
-    "donations/add",
-    async (newDonation) => {
-        const response = await axios.post("/api/donation", newDonation)
-        return response.data;
-    }
-)
+        // header x-access-token required
+        addDonation: builder.mutation({
+            query: donationData => ({
+                url: '/donation',
+                method: 'POST',
+                body: { ...donationData }
+            })
+        })
 
-const donationsSlice = createSlice({
-    name: "donations",
-    initialState,
-    extraReducers: {
-        [addDonation.fulfilled]: (state, action) => {
-            state.push(action.payload)
-        },
-        [fetchDonations.fulfilled]: (state, action) => {
-            state.status = 'succeeded'
-            // return [...action.payload];
-            state.donations = [...action.payload]
-        }
-    }
+    })
 })
 
-export const selectAllDonations = (state) => state.donations.donations;
-export const getDonationsStatus = (state) => state.donations.status;
-export const getDonationsError = (state) => state.donations.error;
+export const {
+    useFetchDonationsQuery,
+    useFetchFilteredDonationsQuery,
+    // useGetDonationDetailsByIdWithUserInfoQuery,
+    useAddDonationMutation,
+} = donationsApiSlice
 
-
-export default donationsSlice.reducer
 
