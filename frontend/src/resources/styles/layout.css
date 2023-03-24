@@ -1,9 +1,8 @@
 
 /* General CSS Specifications belong here! */
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 @import url('https://fonts.cdnfonts.com/css/anton');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+/* @import url('https://fonts.googleapis.com/css?family=Open+Sans'); */
 :root {
     --black: #000000;
     --green-primary: #67C392;
@@ -14,10 +13,10 @@
     --white: #FFFFFF;
     --font-stylish: 'Anton', cursive;
     --font-regular: 'Open Sans Light', sans-serif;
-    --font-size-headline: 6px;
+    --font-size-headline: 16px;
     --font-size-sub-headlines: 14px;
     --font-size-paragraphs: 14px;
-    --font-size-small: 6px;
+    --font-size-small: 12px;
   }
 
   body{
@@ -44,10 +43,10 @@ h6 {
  p {
   font-family: var(--font-regular);
 
-
  }
  button{
   font-family: var(--font-regular);
+  font-size: 10px;
   
  }
   .font-24{

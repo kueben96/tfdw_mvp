@@ -9,52 +9,49 @@
     margin-top: 30px;
   
 }
-.register-text-center{
+.text-center{
 
     background-color: #67C39266;
     border-radius:  20px 20px 0 0;
 }
-.register-text-center h4{
+.text-center h4{
   display: flex;
   align-content: center;
   font-style: normal;
   font-weight: bold;
   margin: auto;
   line-height: 45px;
-  font-size: 18px;
+  font-size: 20px;
   color: black;
   justify-content: center;
 
 }
 .home-image{
   background-image: url(../../images/Group.png);
-    background-repeat: no-repeat;
-   background-size: cover;
-    margin-top: 15px;
-    float: left;
-    margin-left: 15px;
-    width: 18px;
-    height: 18px;
-    background-color: transparent;
-    border: none;
-    
-align-items: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: 15px;
+  float: left;
+  margin-left: 15px;
+  width: 18px;
+  height: 18px;
+  background-color: transparent;
+  border: none;
+  align-items: center;
     
 }
 .konto-image{
   background-image: url(../../images/Konto.png);
   background-repeat: no-repeat;
- background-size: cover;
- float: right;
+  background-size: cover;
+  float: right;
   width: 48px;
   height: 48px;
- 
   background-color: transparent;
-    border: none;
+  border: none;
   align-items: center;
   
 }
-
 
 .registerpara{
     height: 100px;
@@ -64,24 +61,26 @@ align-items: center;
     background-color: #67C39266;
     
 }
-.dashboard-paragraph{
+.registerpara p{
   margin: auto;
   text-align: center;
   height: 48px;
   font-style: normal;
   font-weight: 0;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 20px;
   align-items: center;
   color: #000000;
   }
-.registerbutton{
+ .registerpara button{
   display: flex;
   margin:  auto;
+  width: 200px;
+  height: 40px;
   justify-content: center;
   padding: 10px;
-  line-height: 1.25rem; 
-  font-size: 15px;
+  font-size: 16px;
+  line-height: 1rem;
   
   
   }

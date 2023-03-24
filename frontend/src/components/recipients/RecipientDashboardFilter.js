@@ -2,12 +2,12 @@ import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import '../../resources/styles/dashboardfilter.css';
 
-const FilterBarDonations = () => {
+const RecipientDashboardFilter = () => {
     return (
         <div className='filterbar'>
              <Container> 
                  <Row>
-                    <h6>Hier siehst du all Gesuche</h6>
+                    <h6>Hier siehst du alle Spenden</h6>
                  </Row>
                  <Row className='filter-down'> 
                        <Col sm={6} md={2}>
@@ -84,4 +84,4 @@ const FilterBarDonations = () => {
     )
 }
 
-export default FilterBarDonations
+export default  RecipientDashboardFilter  

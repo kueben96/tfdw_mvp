@@ -6,6 +6,7 @@ import Layout from './components/Layout';
 import Home from './components/home';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
+import RecipientDashboard from './components/recipients/RecipientsDashboard';
 
 import DonationsDashboardPage from './components/donations/DonationsDashboardPage';
 import Selection from './components/Selection';
@@ -22,6 +23,7 @@ function App() {
                 <Route path='/spenden' element={<SpendenTestRequest />}></Route>
                 <Route path='/dashboard' element={<DonationsDashboardPage />}></Route>
                 <Route path='/selection' element={<Selection />}></Route>
+                <Route path='/recipientdash' element={<RecipientDashboard />}></Route>
             </Route>
         </Routes>
 
