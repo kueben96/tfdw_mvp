@@ -9,14 +9,14 @@ const Selection = () => {
         <div>
             <Container>
                 <form className='selection'>
-                    <div className="register-text-center">
+                    <div className="text-center">
                     <h4>Spendenplatform</h4>
                     </div>
                     <div className='buttons'>
                     <form action="/dashboard">
-                    <button className='registerbutton' type='submit'>Ich möchte spenden</button></form>
+                    <button className='button-pink' type='submit'>Ich möchte spenden</button></form>
                     <form action=''>
-                    <button className='registerbutton'>Ich suche Spenden</button></form>
+                    <button className='button-pink'>Ich suche Spenden</button></form>
                    
                    </div>
           

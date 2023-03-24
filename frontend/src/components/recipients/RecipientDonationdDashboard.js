@@ -3,7 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import '../../resources/styles/donationcards.css';
 
 
-const DonationCardDemo = ({ donation }) => {
+const RecipientDonationDashboard = ({ donation }) => {
     let don;
     for (don in donation){
     return (
@@ -26,4 +26,4 @@ const DonationCardDemo = ({ donation }) => {
     )
 }}
 
-export default DonationCardDemo
+export default RecipientDonationDashboard

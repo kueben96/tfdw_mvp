@@ -1,10 +1,11 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
 import '../../resources/styles/dashboard.css';
-import DashboardResults from './DashboardResults';
-import FilterBarDonations from './FilterBarDonations';
+import RecipientDashboardFilter from './RecipientDashboardFilter';
+import RecipientResultDashboard from './RecipientResultDashboard';
 
-const DonationsDashboardPage = () => {
+
+const RecipientsDashboard = () => {
 
     const donations = [{}]
 
@@ -24,11 +25,11 @@ const DonationsDashboardPage = () => {
                         </Row>
                     </div>
                        <div className='registerpara'>
-                       <p>Erstelle eine Spende oder kontaktiere potenzielle Gesuche.   </p>
-                       <button className='button-pink' onclick="location.href='https://blog.hubspot.com/website/bootstrap-button'">Spende erstellen</button>
+                       <p>Erstelle ein Gesuch oder kontaktiere potenzielle Spenden.     </p>
+                       <button className='button-pink' onclick="location.href='https://blog.hubspot.com/website/bootstrap-button'">Gesuch erstellen</button>
                     </div>
-            <FilterBarDonations></FilterBarDonations>
-            <DashboardResults></DashboardResults>
+          <RecipientDashboardFilter></RecipientDashboardFilter>
+          <RecipientResultDashboard></RecipientResultDashboard>
                 </form>
 
 
@@ -37,4 +38,4 @@ const DonationsDashboardPage = () => {
     )
 }
 
-export default DonationsDashboardPage
+export default RecipientsDashboard

@@ -7,6 +7,7 @@
 }
 .filterbar h6{
     font-weight: 100;
+    font-size: 15px;
 }
 .filter-down{
    margin-top: 20px;
@@ -19,6 +20,10 @@
     width: 200px;
     height: 32px;
     border: 1px solid black;
+    background-color: white;
+}
+.search:hover{
+    background-color: whitesmoke;
 }
 .filters{
     width: 100px;

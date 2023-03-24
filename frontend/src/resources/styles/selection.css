@@ -12,11 +12,12 @@ margin-top: 50px;
   margin-bottom: 50px;
 }
 .buttons button{
-width: 300px;
+margin: auto;
+width: 280px;
 margin-bottom: 40px;
 font-size: 20px;
 display: flex;
 text-transform: uppercase;
 font-weight: lighter;
-color: aquamarine;
+color: black;
 }
