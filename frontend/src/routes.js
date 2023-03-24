@@ -10,6 +10,7 @@ import RecipientDashboard from './components/recipients/RecipientsDashboard';
 
 import DonationsDashboardPage from './components/donations/DonationsDashboardPage';
 import Selection from './components/Selection';
+import AdminRequests from './components/admin/AdminRequests';
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                 <Route path='/dashboard' element={<DonationsDashboardPage />}></Route>
                 <Route path='/selection' element={<Selection />}></Route>
                 <Route path='/recipientdash' element={<RecipientDashboard />}></Route>
+                <Route path='/adminrequests' element={<AdminRequests />}></Route>
             </Route>
         </Routes>
 
