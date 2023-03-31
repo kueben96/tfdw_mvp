@@ -5,6 +5,7 @@ import { useFetchDonationsQuery } from '../../store/reducers/donationsSlice';
 
 import DonationCardDemo from './DonationCardDemo';
 import FilterBarDonations from './FilterBarDonations';
+import { useFetchDonationRequestsQuery } from '../../store/reducers/donationsRequestSlice';
 
 
 const DonationsCard = () => {
@@ -16,7 +17,7 @@ const DonationsCard = () => {
         isLoading,
         isSuccess,
         isError,
-    } = useFetchDonationsQuery(filters)
+    } = useFetchDonationRequestsQuery(filters)
 
     const handleFilterChange = (newFilters) => {
         setFilters(newFilters)

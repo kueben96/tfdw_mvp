@@ -1,17 +1,18 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import { useLocation, useParams } from 'react-router-dom';
-import { useFetchDonationByIdQuery } from '../store/reducers/donationsSlice';
+import { useFetchDonationRequestByIdQuery } from '../store/reducers/donationsRequestSlice';
 
-const DonationDetail = () => {
+const DonationRequestDetail = () => {
     const location = useLocation();
     const donationFromState = location.state?.donation;
   
     const {id} = useParams();
    
-    const { data: donationFromApi, isLoading, isError } = useFetchDonationByIdQuery(id, {
+    const { data: donationFromApi, isLoading, isError } = useFetchDonationRequestByIdQuery(id, {
       skip: !!donationFromState,
     });
     const donation = donationFromState || donationFromApi[0];
+    console.log(donation)
 
     
     if (isLoading) {
@@ -54,7 +55,7 @@ const DonationDetail = () => {
     );
   };
   
-  export default DonationDetail;
+  export default DonationRequestDetail;
 
 
 
