@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
 import '../../resources/styles/dashboard.css';
-import DonationsCard from './DonationsCard';
+import DonorsDashboardCards from './DonorsDashboardCards';
 
 const DonorsDashboard = () => {
 
@@ -25,7 +25,7 @@ const DonorsDashboard = () => {
                     </div>
 
                     <div className='articles'>
-                        <DonationsCard></DonationsCard>
+                        <DonorsDashboardCards></DonorsDashboardCards>
                     </div>
                 </div>
             </Container>

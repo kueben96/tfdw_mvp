@@ -3,7 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import '../../resources/styles/donationcards.css';
 
-const DonationCardDemo = ({ donation }) => {
+const DonationCard = ({ donation }) => {
 
     const navigate = useNavigate();
 
@@ -29,4 +29,4 @@ const DonationCardDemo = ({ donation }) => {
     )
 }
 
-export default DonationCardDemo
+export default DonationCard

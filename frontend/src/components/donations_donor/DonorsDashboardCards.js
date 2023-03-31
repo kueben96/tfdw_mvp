@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Row } from 'react-bootstrap';
 import '../../resources/styles/donationcards.css';
-import DonationCardDemo from './DonationCardDemo';
+import DonationCard from './DonationCard';
 import FilterBarDonations from '../FilterBarDonations';
 import { useFetchDonationRequestsQuery } from '../../store/reducers/donationsRequestSlice';
 
 
-const DonationsCard = () => {
+const DonorsDashboardCards = () => {
 
     const [filters, setFilters] = useState({});
 
@@ -31,7 +31,7 @@ const DonationsCard = () => {
     if (isLoading) {
         content = <p>"Loading..."</p>;
     } else if (isSuccess) {
-        content = donations.map(donation => <DonationCardDemo key={donation.id} donation={donation} />)
+        content = donations.map(donation => <DonationCard key={donation.id} donation={donation} />)
     } else if (isError) {
         content = <p>Error fetching a donations</p>;
     }
@@ -52,4 +52,4 @@ const DonationsCard = () => {
     )
 }
 
-export default DonationsCard
+export default DonorsDashboardCards

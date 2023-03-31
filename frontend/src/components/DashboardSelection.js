@@ -8,7 +8,7 @@ const DashboardSelection = () => {
 
     const navigate = useNavigate();
 
-    const navigateDonorsDashboard = () => navigate('/dashboard/donations_requests');
+    const navigateDonorsDashboard = () => navigate('/dashboard/requests');
     const navigateRecipientsDashboard = () => navigate('/dashboard/donations');
 
     return (

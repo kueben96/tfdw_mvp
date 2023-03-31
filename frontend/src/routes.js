@@ -22,9 +22,8 @@ function App() {
                 <Route path='/login' element={<LoginForm />}></Route>
                 <Route path='/signup' element={<SignUpForm />}></Route>
                 <Route path='/dashboard/donations' element={<RecipientDashboard />}></Route>
-                <Route path='/dashboard/donations_requests' element={<DonorsDashboard />}></Route>
-                <Route path='/selection' element={<DashboardSelection />}></Route>
-                <Route path='/recipientdash' element={<RecipientDashboard />}></Route>
+                <Route path='/dashboard/requests' element={<DonorsDashboard />}></Route>
+                <Route path='/dashboard' element={<DashboardSelection />}></Route>
                 <Route path='/adminrequests' element={<AdminRequests />}></Route>
                 <Route path='/donation/:id' element={<DonationRequestDetail />}></Route>
             </Route>
