@@ -28,6 +28,20 @@ const CreateDonation = () => {
                         <p>Falls du einen Trikotsatz spendest, kannst du eine Durchschnittsgröße angeben. </p>
                     </Row>
                     <FilterBarDonations isForPostRequest={true} onFilterChange={handleFilterChange} />
+                    <p>Beschreibe deine Spende</p>
+                    <input type='text' placeholder='Description'></input>
+                    <Row>
+                        <Col sm={6}>
+                            <button>Weitere Spende</button>
+                        </Col>
+                        <Col sm={3}>
+                            <button>Zurück</button>
+                        </Col>
+                        <Col sm={3}>
+                            <button className='button-pink'>Gesuch erstellen</button>
+                        </Col>
+                    </Row>
+
                 </Col>
             </Container>
         </div>

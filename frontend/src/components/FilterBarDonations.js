@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import '../resources/styles/dashboardfilter.css';
 
-
 const sizes = {
     adult: {
         jersey_set: ["XS", "S", "M", "L", "XL", "XXL", "XXXL"],
@@ -22,6 +21,7 @@ const sizes = {
     },
 };
 
+
 const getSizeOptions = (category, size1) => {
     if (category && size1 in sizes) {
         console.log("getting size ops")
@@ -35,6 +35,9 @@ const FilterBarDonations = ({ onFilterChange, onClearFilters, isForPostRequest }
 
 
     const [filters, setFilters] = useState({});
+    // TODO: handle default values for form
+    // category has to be pre-selected in state in order 
+    // for the filter to work 
     const [sizeOptions, setSizeOptions] = useState([]);
 
     const handleFilterChange = (event) => {
