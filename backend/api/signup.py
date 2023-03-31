@@ -1,3 +1,6 @@
+from datetime import datetime
+
+import pytz
 from flask import Flask, request, Blueprint, make_response
 from werkzeug.security import generate_password_hash
 
@@ -26,6 +29,7 @@ def signup():
     region = request.json.get('region', '')
     role = request.json.get('role', '')
     club_name = request.json.get('club_name', '')
+    date = datetime.now(pytz.timezone('Europe/Berlin'))
 
     # checking for existing user
     user = User.query \
@@ -45,7 +49,8 @@ def signup():
             region=region,
             role=role,
             club_name=club_name,
-            reviewed=False
+            reviewed=False,
+            date = date
         )
 
         # insert user
