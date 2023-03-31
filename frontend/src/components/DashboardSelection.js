@@ -8,6 +8,9 @@ const DashboardSelection = () => {
 
     const navigate = useNavigate();
 
+    const navigateDonorsDashboard = () => navigate('/dashboard/donations_requests');
+    const navigateRecipientsDashboard = () => navigate('/dashboard/donations');
+
     return (
         <Container>
             <div className='selection'>
@@ -15,8 +18,8 @@ const DashboardSelection = () => {
                     <h4>Spendenplatform</h4>
                 </div>
                 <div className='buttons'>
-                    <button onClick={() => navigate('/dashboard/donations_requests')} className='button-pink'>Ich möchte spenden</button>
-                    <button onClick={() => navigate('/dashboard/donations')} className='button-pink'>Ich suche Spenden</button>
+                    <button onClick={navigateDonorsDashboard} className='button-pink'>Ich möchte spenden</button>
+                    <button onClick={navigateRecipientsDashboard} className='button-pink'>Ich suche Spenden</button>
                 </div>
             </div>
         </Container>
