@@ -1,11 +1,16 @@
 .articles{
     width: 900px;    
     margin: auto;
-    margin-top: 30px;
+    margin-top: 70px;
     align-items: center;
     align-self: center;
    position: relative;
    overflow-y: scroll;
    height: 420px;
    overflow-x: hidden;
+}
+
+.articles h6{
+    font-weight: 100;
+    font-size: 15px;
 }

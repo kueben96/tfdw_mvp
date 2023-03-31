@@ -37,7 +37,8 @@ const DonorsDashboardCards = () => {
     }
 
     return (
-        <>
+        <div className='articles'>
+            <h6>Hier siehst du alle Gesuche</h6>
             <FilterBarDonations onFilterChange={handleFilterChange} onClearFilters={clearFilters} />
             <div className='articles-cards'>
                 <article>
@@ -45,9 +46,9 @@ const DonorsDashboardCards = () => {
                         {content}
                     </Row>
                 </article>
-
             </div>
-        </>
+        </div>
+
 
     )
 }

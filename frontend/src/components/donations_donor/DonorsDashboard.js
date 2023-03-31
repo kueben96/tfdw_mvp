@@ -23,10 +23,7 @@ const DonorsDashboard = () => {
                         <p>Erstelle eine Spende oder kontaktiere potenzielle Gesuche.   </p>
                         <button className='button-pink'>Spende erstellen</button>
                     </div>
-
-                    <div className='articles'>
-                        <DonorsDashboardCards></DonorsDashboardCards>
-                    </div>
+                    <DonorsDashboardCards></DonorsDashboardCards>
                 </div>
             </Container>
         </div>

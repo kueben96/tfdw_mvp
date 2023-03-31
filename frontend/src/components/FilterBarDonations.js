@@ -53,14 +53,12 @@ const FilterBarDonations = ({ onFilterChange, onClearFilters }) => {
     return (
         <div className='filterbar'>
             <Container>
-                <Row>
-                    <h6>Hier siehst du alle Gesuche</h6>
-                </Row>
+
                 <Row className='filter-down'>
                     <Col sm={6} md={2}>
 
                         <select name="category" onChange={handleFilterChange} className='filters'>
-                            <option value="" disabled selected>Kategorie</option>
+                            <option value="" disabled>Kategorie</option>
                             <option value="jersey_kit">Trikot Set</option>
                             <option value="jersey_top">Trikot Oberteil</option>
                             <option value="tracksuit_top">Trainingsanzug Oberteil</option>
@@ -73,7 +71,7 @@ const FilterBarDonations = ({ onFilterChange, onClearFilters }) => {
                     </Col>
                     <Col sm={2} >
                         <select name="size_1" onChange={handleFilterChange} className='filters'>
-                            <option value='' disabled selected>Größe 1</option>
+                            <option value='' disabled >Größe 1</option>
                             <option value="adult">Adult</option>
                             <option value="children">Kids</option>
                         </select>
@@ -82,7 +80,7 @@ const FilterBarDonations = ({ onFilterChange, onClearFilters }) => {
                     {filters.category && filters.size_1 && sizeOptions.length > 0 && (
                         <Col>
                             <select name="size_2" className='filters' onChange={handleFilterChange}>
-                                <option value="" disabled selected>Größe 2</option>
+                                <option value="" disabled>Größe 2</option>
                                 {sizeOptions.map((size) => (
                                     <option value={size} key={size}>
                                         {size}
@@ -94,7 +92,7 @@ const FilterBarDonations = ({ onFilterChange, onClearFilters }) => {
 
                     <Col sm={2}>
                         <select name="color" className='filters' onChange={handleFilterChange} >
-                            <option value='' disabled selected>Farbe</option>
+                            <option value='' disabled >Farbe</option>
                             <option value="red">Rot</option>
                             <option value="yellow">Gelb</option>
                             <option value="green">Grün</option>

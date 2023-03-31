@@ -21,9 +21,7 @@ const RecipientsDashboard = () => {
                                 <button className='konto-image'></button></Col>
                         </Row>
                     </div>
-                    <Row>
-                        <h6>Hier siehst du alle Gesuche</h6>
-                    </Row>
+
                     <div className='registerpara'>
                         <p>Erstelle ein Gesuch oder kontaktiere potenzielle Spenden.     </p>
                         <button className='button-pink'>Gesuch erstellen</button>
