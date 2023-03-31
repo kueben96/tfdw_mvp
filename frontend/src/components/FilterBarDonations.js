@@ -24,12 +24,14 @@ const sizes = {
 
 const getSizeOptions = (category, size1) => {
     if (category && size1 in sizes) {
+        console.log("getting size ops")
+
         return sizes[size1][category];
     }
     return [];
 };
 
-const FilterBarDonations = ({ onFilterChange, onClearFilters }) => {
+const FilterBarDonations = ({ onFilterChange, onClearFilters, isForPostRequest }) => {
 
 
     const [filters, setFilters] = useState({});
@@ -55,11 +57,11 @@ const FilterBarDonations = ({ onFilterChange, onClearFilters }) => {
             <Container>
 
                 <Row className='filter-down'>
-                    <Col sm={6} md={2}>
+                    <Col sm={2} >
 
                         <select name="category" onChange={handleFilterChange} className='filters'>
                             <option value="" disabled>Kategorie</option>
-                            <option value="jersey_kit">Trikot Set</option>
+                            <option value="jersey_kit" defaultValue>Trikot Set</option>
                             <option value="jersey_top">Trikot Oberteil</option>
                             <option value="tracksuit_top">Trainingsanzug Oberteil</option>
                             <option value="shoes">Schuhe (Paar)</option>
@@ -78,7 +80,7 @@ const FilterBarDonations = ({ onFilterChange, onClearFilters }) => {
                     </Col>
 
                     {filters.category && filters.size_1 && sizeOptions.length > 0 && (
-                        <Col>
+                        <Col sm={2}>
                             <select name="size_2" className='filters' onChange={handleFilterChange}>
                                 <option value="" disabled>Größe 2</option>
                                 {sizeOptions.map((size) => (
@@ -102,12 +104,17 @@ const FilterBarDonations = ({ onFilterChange, onClearFilters }) => {
                             <option value="orange">Orange</option>
                         </select>
                     </Col>
+                    {!isForPostRequest ? (
+                        <Col >
+                            <button onClick={handleClearFilters} className="search"
+                            >Filter zurücksetzen</button>
+                        </Col>) : (
+                        <Col sm={2}>
+                            <input type="number" name="amount" className='filters' onChange={handleFilterChange} placeholder="Anzahl" />
+                        </Col>
+                    )
 
-                    <Col >
-                        <button onClick={handleClearFilters} className="search"
-                        >Filter zurücksetzen</button>
-                    </Col>
-
+                    }
                 </Row>
 
             </Container>

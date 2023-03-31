@@ -11,6 +11,7 @@ import DonorsDashboard from './components/donations_donor/DonorsDashboard';
 import DashboardSelection from './components/DashboardSelection';
 import AdminRequests from './components/admin/AdminRequests';
 import DonationRequestDetail from './donations_detail/DonationRequestDetail';
+import CreateDonation from './components/donations_donor/CreateDonation';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                 <Route path='/dashboard' element={<DashboardSelection />}></Route>
                 <Route path='/adminrequests' element={<AdminRequests />}></Route>
                 <Route path='/donation/:id' element={<DonationRequestDetail />}></Route>
+                <Route path='/donation/new' element={<CreateDonation />}></Route>
             </Route>
         </Routes>
 
