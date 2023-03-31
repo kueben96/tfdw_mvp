@@ -38,7 +38,8 @@ const RecipientDashboardCards = () => {
         content = <p>Error fetching a donations</p>;
     }
     return (
-        <Container>
+        <div className='articles'>
+            <h6>Hier siehst du alle Spenden</h6>
             <FilterBarDonations onFilterChange={handleFilterChange} onClearFilters={clearFilters} />
             <div className='articles-cards'>
                 <article>
@@ -46,9 +47,9 @@ const RecipientDashboardCards = () => {
                         {content}
                     </Row>
                 </article>
-
             </div>
-        </Container>
+        </div>
+
 
     )
 }

@@ -212,12 +212,11 @@ h6 {
 .articles{
   padding: 20px;
   margin: auto;
-  margin-top: 30px;
   align-items: center;
   align-self: center;
  position: relative;
  overflow-y: scroll;
- height: 500px;
+ height: 600px;
  overflow-x: hidden;
 }
 
