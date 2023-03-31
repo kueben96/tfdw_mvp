@@ -1,10 +1,26 @@
 import { Col, Container, Row } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
+import { useFetchDonationByIdQuery } from '../store/reducers/donationsSlice';
 
 const DonationDetail = () => {
     const location = useLocation();
-    const {donation} = location.state;
+    const donationFromState = location.state?.donation;
+  
+    const {id} = useParams();
    
+    const { data: donationFromApi, isLoading, isError } = useFetchDonationByIdQuery(id, {
+      skip: !!donationFromState,
+    });
+    const donation = donationFromState || donationFromApi[0];
+
+    
+    if (isLoading) {
+      return <p>Loading...</p>;
+    }
+ 
+    if (isError) {
+      return <p>Error...</p>;
+    }
  
     return (
       <Container>

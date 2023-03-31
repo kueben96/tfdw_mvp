@@ -14,19 +14,11 @@ export const donationsApiSlice = apiSlice.injectEndpoints({
                         { type: 'Donation', id: 'LIST' },
                     ]
                     : [{ type: 'Donation', id: 'LIST' }],
-            // providesTags: (result, error, arg) => [
-            //     { type: 'Donation', id: "LIST" },
-            //     ...result.map(id => ({ type: 'Donation', id }))
-            // ],
         }),
-        // fetchFilteredDonations: builder.query({
-        //     query: ({ category, color }) =>
-        //         `/donation?category=${category}&color=${color}`
-        // }),
-
-        // not necessary -> will get deleted
-        getDonationById: builder.query({
-            query: donation_id => `/donation_details/?${donation_id}`,
+        fetchDonationById: builder.query({
+            query: (id) => `/donation?id=${id}`,
+            providesTags: (result) =>
+                result ? [{ type: 'Donation', id: result.id }] : [],
         }),
         // header x-access-token required
         // for detailed card with contact info
@@ -51,8 +43,7 @@ export const donationsApiSlice = apiSlice.injectEndpoints({
 
 export const {
     useFetchDonationsQuery,
-    useFetchFilteredDonationsQuery,
-    // useGetDonationDetailsByIdWithUserInfoQuery,
+    useFetchDonationByIdQuery,
     useAddDonationMutation,
 } = donationsApiSlice
 
