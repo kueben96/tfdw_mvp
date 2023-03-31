@@ -4,7 +4,7 @@ import '../../resources/styles/donationcards.css';
 import { useSelector, useDispatch } from 'react-redux'
 
 
-import RecipientDonationDashboard from './RecipientDonationdDashboard';
+import RecipientDonationDashboard from './RecipientDonationsDashboard';
 
 
 
@@ -14,7 +14,6 @@ const RecipientDashboardCards = () => {
     return (
 
         <div className='articles-cards'>
-
 
             <article>
                 <Row>

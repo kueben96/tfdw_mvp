@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { Row } from 'react-bootstrap';
 import '../../resources/styles/donationcards.css';
-import { useFetchDonationsQuery } from '../../store/reducers/donationsSlice';
-
 import DonationCardDemo from './DonationCardDemo';
-import FilterBarDonations from './FilterBarDonations';
+import FilterBarDonations from '../FilterBarDonations';
 import { useFetchDonationRequestsQuery } from '../../store/reducers/donationsRequestSlice';
 
 

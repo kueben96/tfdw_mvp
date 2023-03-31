@@ -7,10 +7,10 @@ import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import RecipientDashboard from './components/donations_recipient/RecipientsDashboard';
 
-import DonationsDashboardPage from './components/donations_donor/DonationsDashboardPage';
-import Selection from './components/Selection';
+import DonorsDashboard from './components/donations_donor/DonorsDashboard';
+import DashboardSelection from './components/DashboardSelection';
 import AdminRequests from './components/admin/AdminRequests';
-import DonationRequestDetail from './donations_detail/DonationDetail';
+import DonationRequestDetail from './donations_detail/DonationRequestDetail';
 
 
 function App() {
@@ -21,8 +21,9 @@ function App() {
                 <Route index element={< Home />} />
                 <Route path='/login' element={<LoginForm />}></Route>
                 <Route path='/signup' element={<SignUpForm />}></Route>
-                <Route path='/dashboard' element={<DonationsDashboardPage />}></Route>
-                <Route path='/selection' element={<Selection />}></Route>
+                <Route path='/dashboard/donations' element={<RecipientDashboard />}></Route>
+                <Route path='/dashboard/donations_requests' element={<DonorsDashboard />}></Route>
+                <Route path='/selection' element={<DashboardSelection />}></Route>
                 <Route path='/recipientdash' element={<RecipientDashboard />}></Route>
                 <Route path='/adminrequests' element={<AdminRequests />}></Route>
                 <Route path='/donation/:id' element={<DonationRequestDetail />}></Route>

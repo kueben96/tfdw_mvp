@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import '../../resources/styles/dashboardfilter.css';
+import '../resources/styles/dashboardfilter.css';
 
 
 const sizes = {

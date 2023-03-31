@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import '../../resources/styles/dashboard.css';
 import DonationsCard from './DonationsCard';
 
-const DonationsDashboardPage = () => {
+const DonorsDashboard = () => {
 
     return (
         <div>
@@ -33,4 +33,4 @@ const DonationsDashboardPage = () => {
     )
 }
 
-export default DonationsDashboardPage
+export default DonorsDashboard
