@@ -50,7 +50,7 @@ def signup():
             role=role,
             club_name=club_name,
             reviewed=False,
-            date = date
+            date=date
         )
 
         # insert user
