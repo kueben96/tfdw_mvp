@@ -49,6 +49,7 @@ def create_donation(current_user):
 
     return donation_schema.jsonify(donation)
 
+
 @donation_route.route('/api/donation', methods=['GET'])
 @token_required(optional=True)
 def get_donations(current_user):
@@ -63,7 +64,8 @@ def get_donations(current_user):
         if 'color' in args:
             color = args.pop('color')
 
-            filter_data = {key: value for (key, value) in args.items() if value}
+            filter_data = {key: value for (
+                key, value) in args.items() if value}
 
             results = (db.session.query(Donation.id, Donation.date, Donation.category, Donation.amount,
                                         Donation.size_1, Donation.size_2, Donation.color_1, Donation.color_2,
@@ -72,7 +74,8 @@ def get_donations(current_user):
                        .filter(or_(Donation.color_1 == color, Donation.color_2 == color))
                        .join(User, User.id == Donation.user_id)).all()
         else:
-            filter_data = {key: value for (key, value) in args.items() if value}
+            filter_data = {key: value for (
+                key, value) in args.items() if value}
 
             results = (db.session.query(Donation.id, Donation.date, Donation.category, Donation.amount,
                                         Donation.size_1, Donation.size_2, Donation.color_1, Donation.color_2,
@@ -181,4 +184,3 @@ def delete_donation(current_user):
     db.session.delete(donation)
     db.session.commit()
     return donation_schema.jsonify(donation)
-

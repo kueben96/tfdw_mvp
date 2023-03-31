@@ -1,25 +1,36 @@
 import { useLocation } from 'react-router-dom';
 
-const ConfirmationCards = () => {
+const DonationDetail = () => {
     const location = useLocation();
-    const donation = location.state?.donation;
+    // const donation = location.state?.donation;
     console.log('location object:', location);
-    console.log('donation object:', donation);
+    // console.log('donation object:', donation);
+
+    const donation = {
+      "category": "Shoe", 
+      "amount": 3, 
+      "size_1": "adult",
+      "size_2": "XL",
+      "color_1": "red",
+      // ...
+      // hier noch weitere hinzügen
+
+    }
     return (
       <div>
-        {donation && (
+        {/* {donation && ( */}
           <div>
             <h1>Donation Confirmation</h1>
             <p>Category: {donation.category}</p>
             <p>Amount: {donation.amount}</p>
             {/* add more donation data fields here */}
           </div>
-        )}
+        {/* )} */}
       </div>
     );
   };
   
-  export default ConfirmationCards;
+  export default DonationDetail;
 
 
 
