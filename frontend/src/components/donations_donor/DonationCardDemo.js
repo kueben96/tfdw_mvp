@@ -7,23 +7,19 @@ const DonationCardDemo = ({ donation }) => {
 
     const navigate = useNavigate();
 
-    const confirmation = () => {
-        // console.log('donation object:', donation);
-        navigate({
-            pathname: '/donation',
-            // somehow pass donation object
-            // state: {donation: donation },
-        });
+    const handleOnDonationClick = () => {
+        navigate(`/donation/${donation.id}`, { state: { donation } })
     };
+
+
     return (
 
         <div className='each-article'>
-            <button onClick={confirmation} >
+            <button onClick={handleOnDonationClick} >
                 <Row>
                     <Col className='yellow-tick'>
                     </Col>
                     <Col >
-
                         <h6> {donation.category}</h6>
                         <p>{donation.amount} Stück, PLZ {donation.zip_code}</p>
                     </Col>

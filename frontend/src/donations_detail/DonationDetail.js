@@ -1,32 +1,40 @@
+import { Col, Container, Row } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 
 const DonationDetail = () => {
     const location = useLocation();
-    // const donation = location.state?.donation;
-    console.log('location object:', location);
-    // console.log('donation object:', donation);
-
-    const donation = {
-      "category": "Shoe", 
-      "amount": 3, 
-      "size_1": "adult",
-      "size_2": "XL",
-      "color_1": "red",
-      // ...
-      // hier noch weitere hinzügen
-
-    }
+    const {donation} = location.state;
+   
+ 
     return (
-      <div>
-        {/* {donation && ( */}
+      <Container>
+      <div className='dashboard'>
+          <div className="text-center">
+              <Row>
+                  <Col sm={2} >
+                      <button className='home-image'></button></Col>
+                  <Col sm={8}>
+                      <h4>Spendenplatform</h4></Col>
+                  <Col sm={2} >
+                      <button className='konto-image'></button></Col>
+              </Row>
+          </div>
+         
+
+          <div className='articles'>
+          <h1>Donation Detail</h1>
           <div>
-            <h1>Donation Confirmation</h1>
+        
             <p>Category: {donation.category}</p>
             <p>Amount: {donation.amount}</p>
             {/* add more donation data fields here */}
           </div>
-        {/* )} */}
+          </div>
       </div>
+  </Container>
+      
+      
+     
     );
   };
   

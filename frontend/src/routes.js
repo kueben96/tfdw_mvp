@@ -25,7 +25,7 @@ function App() {
                 <Route path='/selection' element={<Selection />}></Route>
                 <Route path='/recipientdash' element={<RecipientDashboard />}></Route>
                 <Route path='/adminrequests' element={<AdminRequests />}></Route>
-                <Route path='/donation' element={<DonationDetail />}></Route>
+                <Route path='/donation/:id' element={<DonationDetail />}></Route>
             </Route>
         </Routes>
 
