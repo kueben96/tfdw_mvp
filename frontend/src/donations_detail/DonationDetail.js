@@ -1,5 +1,6 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
+import '../resources/styles/donationdetail.css';
 
 const DonationDetail = () => {
     const location = useLocation();
@@ -21,13 +22,29 @@ const DonationDetail = () => {
           </div>
          
 
-          <div className='articles'>
-          <h1>Donation Detail</h1>
-          <div>
-        
-            <p>Category: {donation.category}</p>
-            <p>Amount: {donation.amount}</p>
-            {/* add more donation data fields here */}
+          <div className='donation-articles' >
+         
+          <div className='articles-cards' id='elements'>
+          <div className='each-article'>
+            <button className='unclickable white-button'  disabled>
+                <Row>
+                    <Col className='yellow-tick'>
+                    </Col>
+                    <Col >
+                        <h6> {donation.category}</h6>
+                        <p>{donation.amount} Stück, PLZ {donation.zip_code}</p>
+                    </Col>
+                </Row>
+            </button>
+        </div>
+        <div  className='details-gesuch'>
+          <h6>DETAILS GESUCH</h6>
+            <p>Kategorie: {donation.category}</p>
+            <p>Anzahl: {donation.amount}</p>
+            {/* add more donation data fields here */}</div>
+            <div className='kontaktdetails'>
+
+            </div>
           </div>
           </div>
       </div>

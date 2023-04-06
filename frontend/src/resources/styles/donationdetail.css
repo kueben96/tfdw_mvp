@@ -1,0 +1,29 @@
+#elements{
+    width: 600px;
+    height: 500px;
+}
+
+.unclickable{
+    margin-left: -30px;
+    color: black;
+    border: none;
+}
+.white-button {
+    background-color: white;
+  }
+  .details-gesuch h6{
+    display: flex;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+    
+}
+.details-gesuch p{
+    margin-top: 10px;
+    text-align: left;
+    font-size: 14px;
+    width: 280px;
+    font-weight: 500;
+    
+}
