@@ -1,11 +1,19 @@
 import { Col, Container, Row } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import '../resources/styles/donationdetail.css';
 
 const DonationDetail = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const {donation} = location.state;
-   
+    
+    const handleGoBack = () => {
+    navigate('/dashboard');
+  };
+
+  if (!donation) {
+    return <p>No donation data available</p>;
+}
  
     return (
       <Container>
@@ -57,6 +65,8 @@ const DonationDetail = () => {
             
           
             </div>
+            <button className='button-pink'>Confirm</button>
+            <button className='button-pink' onClick={handleGoBack}>Go Back</button>
             </div>
           </div>
          
