@@ -37,16 +37,29 @@ const DonationDetail = () => {
                 </Row>
             </button>
         </div>
+
         <div  className='details-gesuch'>
           <h6>DETAILS GESUCH</h6>
             <p>Kategorie: {donation.category}</p>
+            <p>Größe: {donation.size_1}, {donation.size_2}</p>
+            <p>Farbe: {donation.color_1}</p>
             <p>Anzahl: {donation.amount}</p>
-            {/* add more donation data fields here */}</div>
+            <p>PLZ: {donation.zip_code}</p>
+            <p>Beschreibung: {donation.description}</p>
+            </div>
             <div className='kontaktdetails'>
-
+            <h6>kontaktdetails</h6>
+            <p>Name: {donation.first_name} {donation.last_name}</p>
+            <p>Verein: {donation.club_name}</p>
+            <p>E-mail: {donation.email}</p>
+            <p>Telefon: {donation.phone}</p>
+          
+            
+          
+            </div>
             </div>
           </div>
-          </div>
+         
       </div>
   </Container>
       
