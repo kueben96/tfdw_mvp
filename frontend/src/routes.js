@@ -1,6 +1,5 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import DonationDetails from './components/DonationDetails';
 import Layout from './components/Layout';
 import Home from './components/home';
 import LoginForm from './components/auth/LoginForm';
@@ -10,7 +9,7 @@ import RecipientDashboard from './components/donations_recipient/RecipientsDashb
 import DonorsDashboard from './components/donations_donor/DonorsDashboard';
 import DashboardSelection from './components/DashboardSelection';
 import AdminRequests from './components/admin/AdminRequests';
-import DonationRequestDetail from './donations_detail/DonationRequestDetail';
+import DonationDetail from './components/donations_detail/DonationDetail';
 import CreateDonation from './components/donations_donor/CreateDonation';
 
 
@@ -26,7 +25,7 @@ function App() {
                 <Route path='/dashboard/requests' element={<DonorsDashboard />}></Route>
                 <Route path='/dashboard' element={<DashboardSelection />}></Route>
                 <Route path='/adminrequests' element={<AdminRequests />}></Route>
-                <Route path='/donation/:id' element={<DonationRequestDetail />}></Route>
+                <Route path='/donation/:id' element={<DonationDetail />}></Route>
                 <Route path='/donation/new' element={<CreateDonation />}></Route>
             </Route>
         </Routes>
