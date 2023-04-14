@@ -40,6 +40,19 @@
 - request_body: see list of sample bodies in backend/mock_data/login.json
 - example response_body:{ "refresh_token": "eyJ0eJAiOiJK1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwiZXhwIjoxNjc1NDM5MDI0fQ.m8LqSvsD8A_LaIHtqI9sjzNhAFTLVoznm3eikNYLZgg", "token": "eyJ0eJAiOiJK1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwiZXhwIjoxNjc1NDM5MDI0fQ.m8LqSvsD8A_LaIHtqI9sjzNhAFTLVoznm3eikNYLZgg"}
 
+## Password reset via password forgotten link
+- route: /api/forgot POST
+- can be accessed without token
+- email is expected in request body (json)
+- user is verified via email
+- user is sent a via email to a password reset page
+- reset_token is sent in response
+
+- route: api/reset_password PATCH
+- expects reset_token in header
+- expects new password in body (json)
+- new password is saved in database
+
 ## Requests with authentications required
 - add to headers: key: x-access-token, value: token received from login
 
