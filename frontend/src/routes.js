@@ -5,12 +5,12 @@ import Home from './components/home';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import RecipientDashboard from './components/donations_recipient/RecipientsDashboard';
-
 import DonorsDashboard from './components/donations_donor/DonorsDashboard';
 import DashboardSelection from './components/DashboardSelection';
 import AdminRequests from './components/admin/AdminRequests';
 import DonationDetail from './components/donations_detail/DonationDetail';
 import CreateDonation from './components/donations_donor/CreateDonation';
+import MyAccount from './components/account/MyAccount';
 
 
 function App() {
@@ -21,6 +21,7 @@ function App() {
                 <Route index element={< Home />} />
                 <Route path='/login' element={<LoginForm />}></Route>
                 <Route path='/signup' element={<SignUpForm />}></Route>
+                <Route path='/account' element={<MyAccount />}></Route>
                 <Route path='/dashboard/donations' element={<RecipientDashboard />}></Route>
                 <Route path='/dashboard/requests' element={<DonorsDashboard />}></Route>
                 <Route path='/dashboard' element={<DashboardSelection />}></Route>
