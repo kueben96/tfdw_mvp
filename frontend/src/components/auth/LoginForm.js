@@ -34,7 +34,7 @@ function LoginForm() {
         e.preventDefault()
         try {
             const userData = await login({ email, password }).unwrap()
-            dispatch(setCredentials({ ...userData, email }))
+            dispatch(setCredentials({ ...userData }))
 
             setEmail('')
             setPassword('')
