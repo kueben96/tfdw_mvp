@@ -99,12 +99,12 @@ def update_user(current_user, user_id: int):
     last_name = request.json.get('last_name', '')
     email = request.json.get('email', '')
     phone = request.json.get('phone', '')
-    password = request.json.get('password', '')
+    password = current_user.password
     street = request.json.get('street', '')
     zip_code = request.json.get('zip_code', '')
     city = request.json.get('city', '')
     region = request.json.get('region', '')
-    role = request.json.get('role', '')
+    role = current_user.role
     club_name = request.json.get('club_name', '')
 
     user = User.query.get(user_id)
@@ -139,3 +139,4 @@ def delete_user(current_user, user_id: int):
     db.session.delete(user)
     db.session.commit()
     return user_schema.jsonify(user)
+

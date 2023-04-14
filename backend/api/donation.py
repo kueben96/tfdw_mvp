@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask, jsonify, request, Blueprint
 from sqlalchemy import or_, text
 from sqlalchemy.orm import sessionmaker
@@ -5,7 +7,7 @@ from datetime import datetime
 import pytz
 
 from models.donation import Donation, donation_schema
-from models.user import User
+from models.user import User, user_schema
 from extensions import db
 
 from api.user import token_required
@@ -58,6 +60,14 @@ def get_donations(current_user):
     If arguments are given in query string, results are being filtered by given arguments.
     Returns: json with list of all donations and corresponding user data
     """
+    if current_user:
+        if current_user.role == "admin":
+            results = (db.session.query(Donation.id, Donation.date, Donation.category, Donation.status, User.first_name)
+                       .join(User, User.id == Donation.user_id)).all()
+
+            return jsonify([dict(id=x.id, date=x.date, category=x.category, status=x.status, first_name=x.first_name)
+                            for x in results])
+
     args = request.args.to_dict()
     if args:
         args['status'] = "offen"
@@ -95,9 +105,24 @@ def get_donations(current_user):
                          city=x.city) for x in results])
 
 
+@donation_route.route('/api/user_donations', methods=['GET'])
+@token_required()
+def get_user_donations(current_user):
+    results = (db.session.query(User.id, Donation.date, Donation.category, Donation.amount)
+               .filter_by(id=current_user.id)
+               .join(Donation, User.id == Donation.user_id)).all()
+
+    return jsonify([dict(date=x.date, category=x.category, amount=x.amount) for x in results])
+
+    # TODO: could be optimized by using the donations already present in current_user but difficult to access
+    # current_user_json = user_schema.jsonify(current_user)
+    # user_donations = jsonify(current_user_json['user_donations'])
+    # return user_donations
+
+
 @donation_route.route('/api/donation_details', methods=['GET'])
 @token_required()
-def get_donation_details_new(current_user):
+def get_donation_details(current_user):
     """
     Get donation details and user data for given donation_id.
     Returns: json with donation details for given donation
