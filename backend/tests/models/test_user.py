@@ -10,8 +10,8 @@ def new_user():
     Returns: user object
     """
     user = User(id=1, first_name="Alice", last_name="Cooper", email="alice@outlook.com", phone="1234",
-                club="Alices's Football Team", street="Street 10", zip_code=22525, city="Hamburg", region="Hamburg",
-                preferred_contact="email", is_donor=True)
+                password="password", role="donor",
+                club_name="Alices's Football Team", street="Street 10", zip_code=22525, city="Hamburg", region="Hamburg")
     return user
 
 
@@ -27,10 +27,10 @@ def test_new_user(new_user):
     assert new_user.last_name == "Cooper"
     assert new_user.email == "alice@outlook.com"
     assert new_user.phone == "1234"
-    assert new_user.club == "Alices's Football Team"
+    assert new_user.club_name == "Alices's Football Team"
     assert new_user.street == "Street 10"
     assert new_user.zip_code == 22525
     assert new_user.city == "Hamburg"
     assert new_user.region == "Hamburg"
-    assert new_user.preferred_contact == "email"
-    assert new_user.is_donor == True
+    assert new_user.password == "password"
+    assert new_user.role == "donor"
