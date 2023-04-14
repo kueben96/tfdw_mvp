@@ -1,13 +1,10 @@
-.filterbar{
-   width: 850px;
-   margin: auto;
-   margin-top: 10px;
 
+.filterbar{
+   margin-bottom: 20px;
 }
 
 .filter-down{
    margin-top: 20px;
-   
 }
 
 .search{
@@ -16,6 +13,10 @@
     width: 200px;
     height: 32px;
     border: 1px solid black;
+    background-color: white;
+}
+.search:hover{
+    background-color: whitesmoke;
 }
 .filters{
     width: 100px;
