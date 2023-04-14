@@ -73,7 +73,7 @@ const FilterBarDonations = ({ onFilterChange, onClearFilters }) => {
                     </Col>
                     <Col sm={2} >
                         <select name="size_1" onChange={handleFilterChange} className='filters'>
-                            <option value='' disabled selected>Größe 1</option>
+                            <option value='' disabled selected>Alter</option>
                             <option value="adult">Adult</option>
                             <option value="children">Kids</option>
                         </select>

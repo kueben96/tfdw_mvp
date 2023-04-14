@@ -27,7 +27,7 @@ const RecipientDashboardFilter = () => {
                     </Col>
                     <Col sm={2} >
                         <select className='filters'>
-                            <option value='' disabled selected>Größe</option>
+                            <option value='' disabled selected>Alter</option>
                             <optgroup label="Erwachsenengröße">
                                 <option value="e-xs">XS</option>
                                 <option value="e-s">S</option>
