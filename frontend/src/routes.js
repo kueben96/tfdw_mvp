@@ -1,6 +1,5 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import DonationDetails from './components/DonationDetails';
 import Layout from './components/Layout';
 import Home from './components/home';
 import LoginForm from './components/auth/LoginForm';
