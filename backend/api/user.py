@@ -11,10 +11,11 @@ from models.user import User, user_schema, users_schema
 user_route = Blueprint('user_route', __name__)
 
 
-def token_required(optional=False, refresh=False):
+def token_required(optional=False, refresh=False, reset=False):
     """
     Decorator function for routes requiring authentication
     Args:
+        reset:
         optional: token is optional, route can be accessed without token
         refresh: refresh token is needed to access route
 
@@ -30,6 +31,10 @@ def token_required(optional=False, refresh=False):
                 # jwt is passed in the request header
                 if 'refresh-token' in request.headers:
                     token = request.headers['refresh-token']
+            elif reset:
+                # jwt is passed in the request header
+                if 'reset_token' in request.headers:
+                    token = request.headers['reset_token']
             else:
                 # jwt is passed in the request header
                 if 'x-access-token' in request.headers:
@@ -60,6 +65,21 @@ def token_required(optional=False, refresh=False):
             return f(current_user, *args, **kwargs)
         return wrapper
     return decorator
+
+
+def verify_email(email):
+    user = User.query.filter_by(email=email).first()
+    return user
+
+
+def verify_reset_password_token(token):
+    try:
+        # decoding the payload to fetch the stored details
+        data = jwt.decode(token, os.environ.get('SECRET_KEY'))
+        current_user = User.query.filter_by(id=data['id']).first()
+    except:
+        return jsonify({'message': 'Token is invalid!!'}), 401
+    return current_user
 
 
 @user_route.route('/api/user', methods=['GET'])
@@ -99,12 +119,12 @@ def update_user(current_user, user_id: int):
     last_name = request.json.get('last_name', '')
     email = request.json.get('email', '')
     phone = request.json.get('phone', '')
-    password = request.json.get('password', '')
+    password = current_user.password
     street = request.json.get('street', '')
     zip_code = request.json.get('zip_code', '')
     city = request.json.get('city', '')
     region = request.json.get('region', '')
-    role = request.json.get('role', '')
+    role = current_user.role
     club_name = request.json.get('club_name', '')
 
     user = User.query.get(user_id)
@@ -139,3 +159,4 @@ def delete_user(current_user, user_id: int):
     db.session.delete(user)
     db.session.commit()
     return user_schema.jsonify(user)
+

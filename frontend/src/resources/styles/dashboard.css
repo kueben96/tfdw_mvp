@@ -8,11 +8,15 @@
     border-radius: 20px;
     margin-top: 30px;
   
+  
 }
+
 .text-center{
 
     background-color: #67C39266;
     border-radius:  20px 20px 0 0;
+  
+  
 }
 .text-center h4{
   display: flex;
@@ -37,7 +41,6 @@
   height: 18px;
   background-color: transparent;
   border: none;
-  align-items: center;
     
 }
 .konto-image{

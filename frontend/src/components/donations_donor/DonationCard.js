@@ -15,7 +15,7 @@ const DonationCard = ({ donation }) => {
     return (
 
         <div className='each-article'>
-            <button onClick={handleOnDonationClick} >
+            <button className='clickable' onClick={handleOnDonationClick} >
                 <Row>
                     <Col className='yellow-tick'>
                     </Col>

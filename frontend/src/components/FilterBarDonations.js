@@ -125,5 +125,4 @@ const FilterBarDonations = ({ onFilterChange, onClearFilters, isForPostRequest }
         </div>
     )
 }
-
 export default FilterBarDonations
