@@ -61,7 +61,6 @@
 - route: /api/refresh
 
 ## Database migrations
-
 - docker exec -it  tfdw_mvp-api-1 sh
 - setup migrations folder once with: flask db init
 - re-run conainters with docker-compose up --build
@@ -92,4 +91,7 @@
 ## Get Donation / Donation Request Details
 - authentication required: x-access-token in header
 - example route: GET /api/donation_details?id=1
+
+## Local SMTP Server
+- python -m smtpd -n -c DebuggingServer localhost:1025
 

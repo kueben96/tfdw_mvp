@@ -53,5 +53,12 @@
   "size_1": "children",
   "color_1": "green",
   "description": "children green jersey pants set"
+ },
+ {
+ "category": "other",
+ "amount": 1,
+ "size_1": "adult",
+ "color_1": "white",
+ "description": "ball adult size"
  }
 ]

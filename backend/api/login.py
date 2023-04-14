@@ -1,11 +1,13 @@
+import json
+
 import jwt
 import os
 
-from flask import Flask, jsonify, request, Blueprint, make_response
+from flask import Flask, jsonify, request, Blueprint, make_response, Response
 from werkzeug.security import check_password_hash
 from datetime import datetime, timedelta
 
-from models.user import User
+from models.user import User, user_schema
 from api.user import token_required
 
 login_route = Blueprint('login_route', __name__)
@@ -47,7 +49,23 @@ def login():
             'exp': datetime.utcnow() + timedelta(days=1)
         }, os.environ.get('SECRET_KEY'))
 
-        return make_response(jsonify({'token': token.decode('UTF-8'), 'refresh_token': refresh_token.decode('UTF-8')}), 201)
+        response_object = [
+            {'id': user.id,
+             'first_name': user.first_name,
+             'last_name': user.last_name,
+             'email': user.email,
+             'phone': user.phone,
+             'street': user.street,
+             'zip_code': user.zip_code,
+             'city': user.city,
+             'region': user.region,
+             'role': user.role,
+             'club_name': user.club_name},
+            {'token': token.decode('UTF-8')},
+            {'refresh_token': refresh_token.decode('UTF-8')}
+        ]
+
+        return make_response(jsonify(response_object), 201)
 
     # returns 403 if password is wrong
     return make_response(

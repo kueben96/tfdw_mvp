@@ -21,5 +21,13 @@
   {
   "email": "bob@outlook.com",
   "password": "Bob"
+},
+  {
+    "email":"tfdw.admin@tfdw.com",
+    "password": "AwnhzJ78b4LfuqHujjJ2"
+  },
+  {
+"email": "alice.b@football_for_girls.com",
+"password": "alice"
 }
 ]
