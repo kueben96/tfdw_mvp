@@ -1,16 +1,29 @@
 import pytest
 import config
 
-from api.login import login_route
 from app import create_app
-from extensions import db
-from models.user import User
 
 
-def test_login():
-    flask_app = create_app(app_config=config.TestingConfig)
+def test_login(flask_app):
 
     with flask_app.test_client() as test_client:
+        # Test case: Missing email field
+        response = test_client.post('/api/login', json={'password': 'password'})
+        assert response.status_code == 401
+
+        # Test case: Missing password field
+        response = test_client.post('/api/login', json={'email': 'ron.weasley@hogwarts.magic'})
+        assert response.status_code == 401
+
+        # Test case: User does not exist
+        response = test_client.post('/api/login', json={'email': 'albus.dumbledore@hogwarts.magic', 'password': 'password'})
+        assert response.status_code == 401
+
+        # Test case: Wrong password
+        response = test_client.post('/api/login', json={'email': 'ron.weasley@hogwarts.magic', 'password': 'alohomora'})
+        assert response.status_code == 403
+
+        # Test case: Successful login
         response = test_client.post('/api/login', json={
                 'email': 'ron.weasley@hogwarts.magic',
                 'password': 'password'
@@ -30,6 +43,8 @@ def test_login():
         assert 'role' in response.json[0]
         assert 'club_name' in response.json[0]
 
+        assert response.status_code == 201
+
         assert response.json[0].get('id') == 8
         assert response.json[0].get('email') == 'ron.weasley@hogwarts.magic'
         assert response.json[0].get('first_name') == 'Ron'
@@ -43,16 +58,11 @@ def test_login():
         assert response.json[0].get('club_name') == 'Gryffindor'
 
 
-# @pytest.fixture
-# def app():
-#     app = create_app('test')
-#     with app.app_context():
-#         db.create_all()
-#     yield app
-#     with app.app_context():
-#         db.drop_all()
-#
-#
+@pytest.fixture
+def flask_app():
+    flask_app = create_app(app_config=config.TestingConfig)
+    return flask_app
+
 # @pytest.fixture
 # def client(app):
 #     return app.test_client()

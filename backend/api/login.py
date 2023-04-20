@@ -28,14 +28,14 @@ def login():
         )
 
     user = User.query.filter_by(email=auth.get('email')).first()
-    print(user)
+    print("User: ", user)
 
     if not user:
         # returns 401 if user does not exist
         return make_response(
             'Could not verify!',
             401,
-            {'WWW-Authenticate:' 'Basic realm = "User does not exist!!"'}
+            {'WWW-Authenticate': 'Basic realm = "User does not exist!!"'}
         )
 
     if check_password_hash(user.password, auth.get('password')):
