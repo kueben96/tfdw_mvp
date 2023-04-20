@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 import json
+import config
 
 import os
 from api.signup import signup_route
@@ -15,19 +16,10 @@ from extensions import db, migrate, ma, cors, mail
 from models import user, donation, donation_request
 
 
-def create_app():
+def create_app(app_config):
     """Application-factory pattern"""
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-    app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER')
-    app.config['MAIL_PORT'] = os.environ.get('MAIL_PORT')
-    app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
-    app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
-    app.config['MAIL_USE_TLS'] = os.environ.get('MAIL_USE_TLS')
-    app.config['MAIL_USE_SSL'] = os.environ.get('MAIL_USE_SSL')
+    app.config.from_object(app_config)
 
     # Initialize extensions
     # To use the application instances above, instantiate with an application:
@@ -49,7 +41,7 @@ def create_app():
 
 
 # Create an application instance
-app = create_app()
+app = create_app(config.DevelopmentConfig)
 
 # Create various application instances
 # Order matters: Initialize SQLAlchemy before Marshmallow

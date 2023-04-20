@@ -61,8 +61,8 @@ def login():
              'region': user.region,
              'role': user.role,
              'club_name': user.club_name},
-            {'token': token.decode('UTF-8')},
-            {'refresh_token': refresh_token.decode('UTF-8')}
+            {'token': token},  # .decode('UTF-8')
+            {'refresh_token': refresh_token}  # .decode('UTF-8')
         ]
 
         return make_response(jsonify(response_object), 201)
