@@ -123,12 +123,13 @@ def get_donation_request_details(current_user):
             db.session.query(DonationRequest.id, DonationRequest.date, DonationRequest.category, DonationRequest.amount,
                              DonationRequest.size_1, DonationRequest.size_2, DonationRequest.color_1,
                              DonationRequest.description, User.first_name, User.last_name, User.phone, User.email,
-                             User.zip_code, User.city)
+                             User.zip_code, User.city, User.club_name)
             .filter_by(id=donation_request_id)
             .join(User, User.id == DonationRequest.user_id)).all()
         return jsonify([dict(id=x.id, date=x.date, category=x.category, amount=x.amount, size_1=x.size_1, size_2=x.size_2,
                              color_1=x.color_1, description=x.description, first_name=x.first_name,
-                             last_name=x.last_name, phone=x.phone, email=x.email, zip_code=x.zip_code, city=x.city) for x in results])
+                             last_name=x.last_name, phone=x.phone, email=x.email, zip_code=x.zip_code, city=x.city,
+                             club_name=x.club_name) for x in results])
     else:
         results = (db.session.query(DonationRequest.id, DonationRequest.date, DonationRequest.category, DonationRequest.amount,
                                     DonationRequest.size_1, DonationRequest.size_2, DonationRequest.color_1,
