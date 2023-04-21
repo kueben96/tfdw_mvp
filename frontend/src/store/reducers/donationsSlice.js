@@ -36,7 +36,10 @@ export const donationsApiSlice = apiSlice.injectEndpoints({
                 method: 'POST',
                 body: { ...donationData }
             })
-        })
+        }),
+        getUserDonations: builder.query({
+            query: () => '/user_donations',
+        }),
 
     })
 })
@@ -45,6 +48,7 @@ export const {
     useFetchDonationsQuery,
     useFetchDonationByIdQuery,
     useAddDonationMutation,
+    useGetUserDonationsQuery
 } = donationsApiSlice
 
 
