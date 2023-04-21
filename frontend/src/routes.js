@@ -27,8 +27,9 @@ function App() {
                 <Route path='/signup' element={<SignUpForm />} />
                 <Route path='account' element={<MyAccount />}>
                     <Route index element={<Navigate to='entries' replace />} />
-                    <Route path='entries/*' element={<AccountEntries />}>
-                    </Route>
+                    <Route path='entries' element={<AccountEntries />} />
+                    <Route path='entries/:id' element={<EntryDetail />} />
+                    <Route path='entries/:id/edit' element={<EditEntry />} />
                     <Route path='details' element={<AccountDetail />} />
                 </Route>
                 <Route path='/dashboard/donations' element={<RecipientDashboard />} />

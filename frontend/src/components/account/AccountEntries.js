@@ -40,10 +40,6 @@ const AccountEntries = () => {
                         </div>
                     </Row>
                 ))}
-                <Routes>
-                    <Route path='/:id' element={<EntryDetail />} />
-                    <Route path='/:id/edit' element={<EditEntry />} />
-                </Routes>
 
             </Container>
 
