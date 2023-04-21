@@ -11,6 +11,7 @@ import DonationsDashboardPage from './components/donations_donor/DonationsDashbo
 import Selection from './components/Selection';
 import AdminRequests from './components/admin/AdminRequests';
 import DonationDetail from './donations_detail/DonationDetail';
+import SetUpPost from './components/SetUpPost';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                 <Route path='/recipientdash' element={<RecipientDashboard />}></Route>
                 <Route path='/adminrequests' element={<AdminRequests />}></Route>
                 <Route path='/donation/:id' element={<DonationDetail />}></Route>
+                <Route path='/setpost' element={<SetUpPost />}></Route>
             </Route>
         </Routes>
 

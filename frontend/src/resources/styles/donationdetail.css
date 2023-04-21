@@ -1,17 +1,16 @@
 #elements{
     width: 500px;
-    height: 500px;
-   margin-top: -40px;
+    margin-top: -40px;
     
 }
 .donation-articles{
     overflow-y: scroll;
+    height: 480px;
 }
 .donation-articles button{
     float: right;
     margin-right: 20px;
-    margin-top: 50px;
-    margin-bottom: 30px;
+    margin-top: 20px;
 }
 .unclickable{
     margin-left: -30px;
@@ -49,11 +48,8 @@
     
 }
 .details-gesuch p{
-    margin-top: 10px;
-    text-align: left;
+    margin-bottom: 10px;
     font-size: 14px;
-    width: 280px;
-    font-weight: 500;
     font-style: normal;
     font-weight: 400;
     line-height: 14px;
@@ -61,6 +57,7 @@
     
 }
 .kontaktdetails p{
+    margin-bottom: 10px;
     margin-top: 10px;
     text-align: left;
     font-size: 14px;
