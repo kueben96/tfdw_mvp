@@ -10,11 +10,12 @@ const AccountEntries = () => {
     if (error) {
         return <div>Error: {error.message}</div>;
     }
+    console.log(data)
     return (
         <div>
             <h1>User Donations</h1>
-            {data.map((donation) => (
-                <div key={donation.id}>
+            {data.map((donation, index) => (
+                <div key={index}>
                     <p>Date: {donation.date}</p>
                     <p>Category: {donation.category}</p>
                     <p>Amount: {donation.amount}</p>
