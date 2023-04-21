@@ -23,10 +23,7 @@ export const donationsApiSlice = apiSlice.injectEndpoints({
         // header x-access-token required
         // for detailed card with contact info
         getDonationDetailsByIdWithUserInfo: builder.query({
-            query: id => `/donation_details/?id=${id}`,
-            providesTags: (result, error, arg) => [
-                ...result.map(id => ({ type: 'Donation', id }))
-            ]
+            query: id => `/donation_details?id=${id}`,
         }),
 
         // header x-access-token required
@@ -48,7 +45,8 @@ export const {
     useFetchDonationsQuery,
     useFetchDonationByIdQuery,
     useAddDonationMutation,
-    useGetUserDonationsQuery
+    useGetUserDonationsQuery,
+    useGetDonationDetailsByIdWithUserInfoQuery
 } = donationsApiSlice
 
 

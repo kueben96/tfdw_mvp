@@ -1,19 +1,27 @@
 import { Col, Container, Row } from 'react-bootstrap';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useGetDonationDetailsByIdWithUserInfoQuery } from '../../store/reducers/donationsSlice'
 import '../../resources/styles/donationdetail.css';
 
 const DonationDetail = () => {
+
+    // TODO: differentiate Slice request between donor and recipient
+    // TODO: look in url and differentiate there
     const location = useLocation();
+    const { id } = useParams()
     const navigate = useNavigate();
-    const { donation } = location.state;
+    const donationId = location?.state?.id || id;
+
+    const { data, isLoading, isError } = useGetDonationDetailsByIdWithUserInfoQuery(donationId)
+    const donation = data?.[0] ?? null;
+
+    if (isLoading) return <div>Loading...</div>
+    if (isError) return <div>Error fetching donation details</div>
+    console.log(donation)
 
     const handleGoBack = () => {
-        navigate('/dashboard');
+        navigate(-1);
     };
-
-    if (!donation) {
-        return <p>No donation data available</p>;
-    }
 
     return (
         <Container>
