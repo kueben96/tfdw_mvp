@@ -1,15 +1,15 @@
+import os
 from datetime import datetime, timedelta
 import jwt
 
 
-def test_token_required(flask_app):
-    test_client = flask_app.test_client()
+def test_token_required(test_client):
 
-    # create user
-    login_response = test_client.post('/api/login', json={
-        'email': 'ron.weasley@hogwarts.magic',
-        'password': 'password'
-    })
+    # create jwt token for test user
+    token = jwt.encode({
+        'id': 8,
+        'exp': datetime.utcnow() + timedelta(minutes=30)
+    }, os.environ.get('SECRET_KEY'))
 
     # Test without token when optional is True
     response = test_client.get('/api/donation', headers={})
@@ -17,11 +17,11 @@ def test_token_required(flask_app):
 
     # Test with invalid token when optional is True
     response = test_client.get('/api/donation', headers={'x-access-token': 'invalid_token'})
-    assert response.status_code == 401
+    assert response.status_code == 200
 
     # TODO: returns 401 even if token should be valid
     # Test with valid token when optional is True
-    token = login_response.json[1]["token"]
+    # token = logged_in_user.json[1]["token"]
     response = test_client.get('/api/donation', headers={'x-access-token': token})
     assert response.status_code == 200
 
@@ -55,3 +55,12 @@ def test_token_required(flask_app):
     # # Test with invalid reset token
     # response = client.get('/reset', headers={'reset_token': 'invalid_token'})
     # assert response.status_code == 401
+
+
+def test_get_users(test_client, logged_in_user):
+
+    # Test happy case
+    token = logged_in_user.json[1]['token']
+    response = test_client.get('/api/user', headers={'x-access-token': token})
+    assert response.status_code == 200
+

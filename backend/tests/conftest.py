@@ -10,8 +10,7 @@ def flask_app():
 
 
 @pytest.fixture()
-def logged_in_user(flask_app):
-    test_client = flask_app.test_client()
+def logged_in_user(test_client):
     response = test_client.post('/api/login', json={
         'email': 'ron.weasley@hogwarts.magic',
         'password': 'password'
@@ -22,8 +21,6 @@ def logged_in_user(flask_app):
     return response
 
 
-
-
-# @pytest.fixture
-# def client(app):
-#     return app.test_client()
+@pytest.fixture
+def test_client(flask_app):
+    return flask_app.test_client()

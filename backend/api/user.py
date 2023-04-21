@@ -15,7 +15,7 @@ def token_required(optional=False, refresh=False, reset=False):
     """
     Decorator function for routes requiring authentication
     Args:
-        reset:
+        reset: reset token is needed to access route
         optional: token is optional, route can be accessed without token
         refresh: refresh token is needed to access route
 
@@ -49,6 +49,7 @@ def token_required(optional=False, refresh=False, reset=False):
                         return jsonify({'message': 'Token is invalid!!'}), 401
                 else:
                     current_user = None
+                    return f(current_user, *args, **kwargs)
 
             else:
                 # return 401 if token is  not passed
