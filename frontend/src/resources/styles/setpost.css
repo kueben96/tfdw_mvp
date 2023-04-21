@@ -1,7 +1,7 @@
 #post-width{
-  width: 500px;
-  margin: auto;
-  margin-top: 20px;
+    width: 500px;
+    margin: auto;
+    margin-top: 20px;
 }
 .set-filters{
     display: flex;
@@ -12,23 +12,22 @@
     resize: none;
     font-style: normal;
     font-size: 14px;
-  /* tfdw/white */
     border: none;
     background: #F0F1EC;
     border-radius: 10px;
   }
-  .text-areas{
+.text-areas{
     margin-top: 30px;
   }
-  .setpost-buttons{
+.setpost-buttons{
     margin-top: 30px;
   }
-  .setpost-buttons button{
+.setpost-buttons button{
     background-color: white;
     border: 1px solid black;
     
   }
-  .setpost-buttons button:hover{
+.setpost-buttons button:hover{
     background-color: #FBA276;
     border: none;
   }
