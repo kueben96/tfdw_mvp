@@ -94,7 +94,7 @@ const DonationDetail = () => {
                                 <h6>kontaktdetails</h6>
                                 <p>Name: {donation.first_name} {donation.last_name}</p>
                                 <p>Verein: {donation.club_name}</p>
-                                <p>E-mail: {donation.email}</p>
+                                <p>E-mail:   <a href={`mailto:${donation.email}`}>{donation.email}</a></p>
                                 <p>Telefon: {donation.phone}</p>
                             </div>
                         )}
