@@ -1,18 +1,32 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useGetDonationDetailsByIdWithUserInfoQuery } from '../../store/reducers/donationsSlice'
+import { useGetDonationRequestDetailsByIdWithUserInfoQuery } from '../../store/reducers/donationsRequestSlice'
 import '../../resources/styles/donationdetail.css';
+
+const getUseGetDonationQuery = (path) => {
+    if (path.includes("/donation_request/")) {
+        return useGetDonationRequestDetailsByIdWithUserInfoQuery;
+    } else if (path.includes("/donation/")) {
+        return useGetDonationDetailsByIdWithUserInfoQuery;
+    } else {
+        console.error("Invalid route path");
+        return null;
+    }
+};
 
 const DonationDetail = () => {
 
-    // TODO: differentiate Slice request between donor and recipient
-    // TODO: look in url and differentiate there
+    const token = localStorage.getItem('token')
+
     const location = useLocation();
     const { id } = useParams()
     const navigate = useNavigate();
     const donationId = location?.state?.id || id;
 
-    const { data, isLoading, isError } = useGetDonationDetailsByIdWithUserInfoQuery(donationId)
+
+    const useGetDonationQuery = getUseGetDonationQuery(location.pathname);
+    const { data, isLoading, isError } = useGetDonationQuery(donationId);
     const donation = data?.[0] ?? null;
 
     if (isLoading) return <div>Loading...</div>
@@ -21,6 +35,17 @@ const DonationDetail = () => {
 
     const handleGoBack = () => {
         navigate(-1);
+    };
+
+    // TODO: kontaktieren mit mail link nicht genug
+    const handleContactClick = () => {
+        if (token) {
+            const mailtoLink = `mailto:${donation.email}`;
+            console.log(mailtoLink)
+            window.location.href = mailtoLink;
+        } else {
+            navigate("/login");
+        }
     };
 
     return (
@@ -63,17 +88,17 @@ const DonationDetail = () => {
                             <p>PLZ: {donation.zip_code}</p>
                             <p>Beschreibung: {donation.description}</p>
                         </div>
-                        <div className='kontaktdetails'>
-                            <h6>kontaktdetails</h6>
-                            <p>Name: {donation.first_name} {donation.last_name}</p>
-                            <p>Verein: {donation.club_name}</p>
-                            <p>E-mail: {donation.email}</p>
-                            <p>Telefon: {donation.phone}</p>
 
-
-
-                        </div>
-                        <button className='button-pink'>Kontaktieren</button>
+                        {token && (
+                            <div className='kontaktdetails'>
+                                <h6>kontaktdetails</h6>
+                                <p>Name: {donation.first_name} {donation.last_name}</p>
+                                <p>Verein: {donation.club_name}</p>
+                                <p>E-mail: {donation.email}</p>
+                                <p>Telefon: {donation.phone}</p>
+                            </div>
+                        )}
+                        <button className='button-pink' onClick={handleContactClick}>Kontaktieren</button>
                         <button className='button-pink' onClick={handleGoBack}>Zurück</button>
                     </div>
                 </div>

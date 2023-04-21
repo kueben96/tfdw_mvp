@@ -27,8 +27,8 @@ function App() {
                 <Route path='/dashboard' element={<DashboardSelection />}></Route>
                 <Route path='/adminrequests' element={<AdminRequests />}></Route>
                 <Route path='/donation/:id' element={<DonationDetail />}></Route>
-                <Route path='/request/:id' element={<DonationDetail />}></Route>
-                <Route path='/request/new' element={<DonationDetail />}></Route>
+                <Route path='/donation_request/:id' element={<DonationDetail />}></Route>
+                <Route path='/donation_request/new' element={<DonationDetail />}></Route>
                 {/* // TODO: create request  */}
                 <Route path='/donation/new' element={<CreateDonation />}></Route>
             </Route>

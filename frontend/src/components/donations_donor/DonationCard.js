@@ -3,12 +3,16 @@ import { Col, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import '../../resources/styles/donationcards.css';
 
-const DonationCard = ({ donation }) => {
+const DonationCard = ({ donation, type }) => {
 
     const navigate = useNavigate();
 
     const handleOnDonationClick = () => {
-        navigate(`/donation/${donation.id}`, { state: { id: donation.id } })
+        let path;
+        if (type === "requests") path = "donation_request"
+        else path = "donation"
+
+        navigate(`/${path}/${donation.id}`, { state: { id: donation.id } })
     };
 
 
