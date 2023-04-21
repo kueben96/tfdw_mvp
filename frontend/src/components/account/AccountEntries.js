@@ -1,6 +1,6 @@
 import React from 'react'
 import { useGetUserDonationsQuery } from '../../store/reducers/donationsSlice'
-import { Col, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 const AccountEntries = () => {
@@ -20,24 +20,25 @@ const AccountEntries = () => {
         navigate('edit')
     }
     return (
-        <div>
-            <h1>User Donations</h1>
+        <Container>
             {data.map((donation, index) => (
-                <div key={index} className='each-article'>
-                    <button className='clickable' onClick={handleAccountEntryClick} >
-                        <Row>
-                            <Col className='yellow-tick'>
-                            </Col>
-                            <Col >
-                                <h6> {donation.category}</h6>
-                                <p>{donation.amount} Stück, PLZ {donation.zip_code}</p>
-                            </Col>
-                        </Row>
-                    </button>
-                </div>
-
+                <Row key={index} className="justify-content-center">
+                    <div className='each-article'>
+                        <button className='clickable' onClick={handleAccountEntryClick} >
+                            <Row>
+                                <Col className='yellow-tick'>
+                                </Col>
+                                <Col >
+                                    <h6> {donation.category}</h6>
+                                    <p>{donation.amount} Stück, PLZ {donation.zip_code}</p>
+                                </Col>
+                            </Row>
+                        </button>
+                    </div>
+                </Row>
             ))}
-        </div>
+        </Container>
+
     )
 }
 

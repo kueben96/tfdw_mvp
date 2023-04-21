@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Col, Container, Nav, NavItem, Row } from 'react-bootstrap';
-import AccountEntries from './AccountEntries';
-import AccountDetail from './AccountDetail';
 import DashboardHeader from '../ui/DashboardHeader';
+import { Outlet, useParams, useNavigate } from 'react-router-dom';
 
 
 const MyAccount = () => {
-    const [activeTab, setActiveTab] = useState('entries');
+    const { activeTab } = useParams();
+    const navigate = useNavigate();
 
     const handleTabClick = (tab) => {
-        setActiveTab(tab);
+        navigate(`/account/${tab}`);
     };
 
     return (
@@ -31,12 +31,13 @@ const MyAccount = () => {
                     </Col>
                 </Row>
                 <div className='articles'>
-                    {activeTab === 'entries' ? <AccountEntries /> : <AccountDetail />}
+                    <Outlet />
                 </div>
             </div>
         </Container>
-    )
-}
+    );
+};
+
 
 export default MyAccount;
 

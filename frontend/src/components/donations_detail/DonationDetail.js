@@ -3,6 +3,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useGetDonationDetailsByIdWithUserInfoQuery } from '../../store/reducers/donationsSlice'
 import { useGetDonationRequestDetailsByIdWithUserInfoQuery } from '../../store/reducers/donationsRequestSlice'
 import '../../resources/styles/donationdetail.css';
+import DashboardHeader from '../ui/DashboardHeader';
 
 const getUseGetDonationQuery = (path) => {
     if (path.includes("/donation_request/")) {
@@ -52,14 +53,7 @@ const DonationDetail = () => {
         <Container>
             <div className='dashboard'>
                 <div className="text-center">
-                    <Row>
-                        <Col sm={2} >
-                            <button className='home-image'></button></Col>
-                        <Col sm={8}>
-                            <h4>Spendenplatform</h4></Col>
-                        <Col sm={2} >
-                            <button className='konto-image'></button></Col>
-                    </Row>
+                    <DashboardHeader />
                 </div>
 
 

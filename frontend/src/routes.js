@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Outlet, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './components/home';
 import LoginForm from './components/auth/LoginForm';
@@ -12,6 +12,8 @@ import DonationDetail from './components/donations_detail/DonationDetail';
 import CreateDonation from './components/donations_donor/CreateDonation';
 import MyAccount from './components/account/MyAccount';
 import EditEntry from './components/account/EditEntry';
+import AccountEntries from './components/account/AccountEntries';
+import AccountDetail from './components/account/AccountDetail';
 
 
 function App() {
@@ -19,22 +21,26 @@ function App() {
 
         <Routes>
             <Route path='/' element={<Layout />}>
-                <Route index element={< Home />} />
-                <Route path='/login' element={<LoginForm />}></Route>
-                <Route path='/signup' element={<SignUpForm />}></Route>
-                <Route path='/account' element={<MyAccount />} />
-                <Route path='/account/edit' element={<EditEntry />} />
-                <Route path='/dashboard/donations' element={<RecipientDashboard />}></Route>
-                <Route path='/dashboard/requests' element={<DonorsDashboard />}></Route>
-                <Route path='/dashboard' element={<DashboardSelection />}></Route>
-                <Route path='/adminrequests' element={<AdminRequests />}></Route>
-                <Route path='/donation/:id' element={<DonationDetail />}></Route>
-                <Route path='/donation_request/:id' element={<DonationDetail />}></Route>
-                <Route path='/donation_request/new' element={<DonationDetail />}></Route>
-                {/* // TODO: create request  */}
-                <Route path='/donation/new' element={<CreateDonation />}></Route>
+                <Route index element={<Home />} />
+                <Route path='/login' element={<LoginForm />} />
+                <Route path='/signup' element={<SignUpForm />} />
+                <Route path='/account' element={<MyAccount />}>
+                    <Route index element={<Navigate to='entries' replace />} />
+                    <Route path='entries' element={<AccountEntries />} />
+                    <Route path='entries/edit' element={<EditEntry />} />
+                    <Route path='details' element={<AccountDetail />} />
+                </Route>
+                <Route path='/dashboard/donations' element={<RecipientDashboard />} />
+                <Route path='/dashboard/requests' element={<DonorsDashboard />} />
+                <Route path='/dashboard' element={<DashboardSelection />} />
+                <Route path='/adminrequests' element={<AdminRequests />} />
+                <Route path='/donation/:id' element={<DonationDetail />} />
+                <Route path='/donation_request/:id' element={<DonationDetail />} />
+                <Route path='/donation_request/new' element={<DonationDetail />} />
+                <Route path='/donation/new' element={<CreateDonation />} />
             </Route>
         </Routes>
+
 
     );
 }
