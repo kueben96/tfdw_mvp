@@ -14,6 +14,7 @@ import MyAccount from './components/account/MyAccount';
 import EditEntry from './components/account/EditEntry';
 import AccountEntries from './components/account/AccountEntries';
 import AccountDetail from './components/account/AccountDetail';
+import EntryDetail from './components/account/EntryDetail';
 
 
 function App() {
@@ -24,10 +25,10 @@ function App() {
                 <Route index element={<Home />} />
                 <Route path='/login' element={<LoginForm />} />
                 <Route path='/signup' element={<SignUpForm />} />
-                <Route path='/account' element={<MyAccount />}>
+                <Route path='account' element={<MyAccount />}>
                     <Route index element={<Navigate to='entries' replace />} />
-                    <Route path='entries' element={<AccountEntries />} />
-                    <Route path='entries/edit' element={<EditEntry />} />
+                    <Route path='entries/*' element={<AccountEntries />}>
+                    </Route>
                     <Route path='details' element={<AccountDetail />} />
                 </Route>
                 <Route path='/dashboard/donations' element={<RecipientDashboard />} />
