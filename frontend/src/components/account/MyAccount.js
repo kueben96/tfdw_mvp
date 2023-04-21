@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Col, Container, Nav, NavItem, Row } from 'react-bootstrap';
 import AccountEntries from './AccountEntries';
 import AccountDetail from './AccountDetail';
+import DashboardHeader from '../ui/DashboardHeader';
 
 
 const MyAccount = () => {
@@ -15,17 +16,7 @@ const MyAccount = () => {
         <Container>
             <div className='dashboard'>
                 <div className="text-center">
-                    <Row>
-                        <Col sm={2}>
-                            <button className='home-image'></button>
-                        </Col>
-                        <Col sm={8}>
-                            <h4>Spendenplatform</h4>
-                        </Col>
-                        <Col sm={2}>
-                            <button className='konto-image'></button>
-                        </Col>
-                    </Row>
+                    <DashboardHeader text="Mein Konto" />
                 </div>
                 <Row>
                     <Col>

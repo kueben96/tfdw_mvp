@@ -1,6 +1,7 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import { useLocation, useParams } from 'react-router-dom';
 import { useFetchDonationRequestByIdQuery } from '../store/reducers/donationsRequestSlice';
+import DashboardHeader from '../components/ui/DashboardHeader';
 
 const DonationRequestDetail = () => {
     const location = useLocation();
@@ -26,18 +27,10 @@ const DonationRequestDetail = () => {
     return (
       <Container>
       <div className='dashboard'>
-          <div className="text-center">
-              <Row>
-                  <Col sm={2} >
-                      <button className='home-image'></button></Col>
-                  <Col sm={8}>
-                      <h4>Spendenplatform</h4></Col>
-                  <Col sm={2} >
-                      <button className='konto-image'></button></Col>
-              </Row>
-          </div>
          
-
+             <DashboardHeader/>
+      
+        
           <div className='articles'>
           <h1>Donation Detail</h1>
           <div>
