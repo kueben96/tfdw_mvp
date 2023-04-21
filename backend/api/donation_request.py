@@ -95,7 +95,7 @@ def get_donation_requests(current_user):
 
 @donation_request_route.route('/api/user_donation_requests', methods=['GET'])
 @token_required()
-def get_user_donations(current_user):
+def get_user_donation_requests(current_user):
     results = (db.session.query(User.id, DonationRequest.date, DonationRequest.category, DonationRequest.amount)
                .filter_by(id=current_user.id)
                .join(DonationRequest, User.id == DonationRequest.user_id)).all()

@@ -1,8 +1,3 @@
-import pytest
-import config
-
-from app import create_app
-
 
 def test_login(flask_app):
 
@@ -58,11 +53,4 @@ def test_login(flask_app):
         assert response.json[0].get('club_name') == 'Gryffindor'
 
 
-@pytest.fixture
-def flask_app():
-    flask_app = create_app(app_config=config.TestingConfig)
-    return flask_app
-
-# @pytest.fixture
-# def client(app):
-#     return app.test_client()
+# TODO: test_refresh

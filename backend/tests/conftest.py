@@ -1,37 +1,29 @@
 import pytest
-
 from app import create_app
-from extensions import db
 import config
 
 
-# @pytest.fixture(autouse=True, scope="session")
-# def app_dict():
-#     app = create_app(app_config=config.TestingConfig)
-#     app.config.update({"TESTING": True})
-#
-#     with app.app_context():
-#         db.create_all()
-#
-#         yield {"app": app, "db": db}
-#
-#         db.session.remove()
-#         if "test" in app.config["SQLALCHEMY_DATABASE_URI"]:
-#             db.drop_all()
-#
-#
-# @pytest.fixture(autouse=True, scope="session")
-# def test_authentication_header():
-#     return {"authorization": "Bearer MY-EXAMPLE-TOKEN"}
-#
-#
-# @pytest.fixture()
-# def client(app_dict, test_authentication_header):
-#     app = app_dict["app"]
-#     base_db = app_dict["db"]
-#     client = app.test_client()
-#
-#     client.post("/foundational/",
-#                 headers=authentication_header,
-#             )
+@pytest.fixture
+def flask_app():
+    flask_app = create_app(app_config=config.TestingConfig)
+    return flask_app
 
+
+@pytest.fixture()
+def logged_in_user(flask_app):
+    test_client = flask_app.test_client()
+    response = test_client.post('/api/login', json={
+        'email': 'ron.weasley@hogwarts.magic',
+        'password': 'password'
+    })
+    user = response.json[0]
+    token = response.json[1]
+    refresh_token = response.json[2]
+    return response
+
+
+
+
+# @pytest.fixture
+# def client(app):
+#     return app.test_client()

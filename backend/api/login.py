@@ -49,6 +49,16 @@ def login():
             'exp': datetime.utcnow() + timedelta(days=1)
         }, os.environ.get('SECRET_KEY'))
 
+        try:
+            token = token.decode('UTF-8')
+        except AttributeError:
+            pass
+
+        try:
+            refresh_token = refresh_token.decode('UTF-8')
+        except AttributeError:
+            pass
+
         response_object = [
             {'id': user.id,
              'first_name': user.first_name,
