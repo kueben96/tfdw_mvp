@@ -95,12 +95,15 @@ def get_donation_requests(current_user):
 
 @donation_request_route.route('/api/user_donation_requests', methods=['GET'])
 @token_required()
-def get_user_donations(current_user):
-    results = (db.session.query(User.id, DonationRequest.date, DonationRequest.category, DonationRequest.amount)
-               .filter_by(id=current_user.id)
-               .join(DonationRequest, User.id == DonationRequest.user_id)).all()
+def get_user_donation_requests(current_user):
+    results = (db.session.query(DonationRequest.id, DonationRequest.user_id, DonationRequest.date,
+                                DonationRequest.category, DonationRequest.amount, DonationRequest.size_1,
+                                DonationRequest.size_2, DonationRequest.color_1, DonationRequest.description)
+               .filter_by(user_id=current_user.id)).all()
+               # .join(User, User.id == Donation.user_id)).all()
 
-    return jsonify([dict(date=x.date, category=x.category, amount=x.amount) for x in results])
+    return jsonify([dict(id=x.id, user_id=x.user_id, date=x.date, category=x.category, amount=x.amount, size_1=x.size_1,
+                         size_2=x.size_2, color_1=x.color_1, description=x.description) for x in results])
 
     # TODO: could be optimized by using the donations already present in current_user but difficult to access
     # current_user_json = user_schema.jsonify(current_user)
