@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 import { Col, Container, Placeholder, Row } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../resources/styles/setpost.css';
@@ -6,19 +6,29 @@ import '../resources/styles/setpost.css';
 const SetUpPostElements = () => {
     
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleGoBack = () => {
         navigate('/dashboard');
       };
 
     const [state1, setState1] = useState(0);
-
     const [isSecondBoxVisible, setIsSecondBoxVisible] = useState(false);
+
+    const [categoryValue, setCategoryValue] = useState("");
+    const [sizeValue, setSizeValue] = useState("");
+    const [colorValue, setColorValue] = useState("");
 
     const handleCheck = () => {
         setIsSecondBoxVisible(true);
+        const searchParams = new URLSearchParams(location.search);
+    searchParams.set('category', categoryValue);
+    searchParams.set('size', sizeValue);
+    searchParams.set('color', colorValue);
+    searchParams.set('amount', state1);
+    navigate(`/dashboard/post?${searchParams.toString()}`);
       };
-
+      const [commentText, setCommentText] = useState('');
     return (
       <Container>
       
@@ -30,7 +40,9 @@ const SetUpPostElements = () => {
             <div className='set-filters'>
              <Row>
                <Col>
-                   <select name="category"  className='filters'>
+                   <select name="category" className='filters'
+                   value={categoryValue}  
+                   onChange={(e) => setCategoryValue(e.target.value)} >
                    <option value="" disabled selected>Kategorie</option>
                    <option value="jersey_kit">Trikot Set</option>
                    <option value="jersey_top">Trikot Oberteil</option>
@@ -42,14 +54,18 @@ const SetUpPostElements = () => {
                 </select>
                </Col>
                <Col >
-                <select name="size_1"  className='filters'>
+                <select name="size_1"  className='filters' 
+                value={sizeValue}  
+                onChange={(e) => setSizeValue(e.target.value)}>
                 <option value='' disabled selected>Größe</option>
                 <option value="adult">Adult</option>
                 <option value="children">Kids</option>
                 </select>
                </Col>
                <Col>
-               <select name="color" className='filters'  >
+               <select name="color" className='filters' 
+                 value={colorValue}  
+                 onChange={(e) => setColorValue(e.target.value)} >
                <option value='' disabled selected>Farbe</option>
                <option value="red">Rot</option>
                <option value="yellow">Gelb</option>
@@ -70,7 +86,12 @@ const SetUpPostElements = () => {
               <p>Beschreibe deine Spende</p>
               <div className='gray-describe'>
               <textarea type='text' className='commentbox' 
-               placeholder='Bspw verschiedene Trikotgrößen eines Trikotsatz, Zustand der Spende, etc. '></textarea>
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+               placeholder='Bspw verschiedene Trikotgrößen eines Trikotsatz, Zustand der Spende, etc. '>
+                  
+                  
+               </textarea>
               </div>
               </Row></div> 
 
@@ -128,7 +149,17 @@ const SetUpPostElements = () => {
                ) : null}
 
               <div className='setpost-buttons'>
-                <button className='button-pink'>Überprüfen</button>
+                <button className='button-pink' 
+                onClick={() => navigate('/nextpage?comment=' 
+                + encodeURIComponent(commentText) 
+                + encodeURIComponent(sizeValue)
+                + encodeURIComponent(colorValue) 
+                + encodeURIComponent(categoryValue)
+                + encodeURIComponent(state1) )}
+                
+             
+                
+                >Überprüfen</button>
                 <button className='button-pink' onClick={handleGoBack} >Züruck</button>
              
                 {isSecondBoxVisible ? null : (

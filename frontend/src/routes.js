@@ -12,6 +12,7 @@ import Selection from './components/Selection';
 import AdminRequests from './components/admin/AdminRequests';
 import DonationDetail from './donations_detail/DonationDetail';
 import SetUpPost from './components/SetUpPost';
+import NextPage from './components/NextPage';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
                 <Route path='/adminrequests' element={<AdminRequests />}></Route>
                 <Route path='/donation/:id' element={<DonationDetail />}></Route>
                 <Route path='/setpost' element={<SetUpPost />}></Route>
+                <Route path='/nextpage' element={<NextPage />}></Route>
             </Route>
         </Routes>
 
