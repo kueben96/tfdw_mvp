@@ -31,3 +31,10 @@
     background-color: #FBA276;
     border: none;
   }
+  .straight-line{
+   background-color: black;
+   height: 1px ;
+   margin-top: 20px;
+   margin-bottom: 20px;
+
+  }
