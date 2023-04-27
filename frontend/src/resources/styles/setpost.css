@@ -17,15 +17,16 @@
     border-radius: 10px;
   }
 .text-areas{
-    margin-top: 30px;
+    margin-top: 30px; 
   }
 .setpost-buttons{
     margin-top: 30px;
+ 
   }
 .setpost-buttons button{
     background-color: white;
     border: 1px solid black;
-    
+ 
   }
 .setpost-buttons button:hover{
     background-color: #FBA276;

@@ -18,17 +18,26 @@ const SetUpPostElements = () => {
     const [categoryValue, setCategoryValue] = useState("");
     const [sizeValue, setSizeValue] = useState("");
     const [colorValue, setColorValue] = useState("");
+    const [commentText, setCommentText] = useState('');
+
+    const handleSetSecondBoxVisible = () => {
+        setIsSecondBoxVisible(true);
+      }
 
     const handleCheck = () => {
-        setIsSecondBoxVisible(true);
+        
         const searchParams = new URLSearchParams(location.search);
-    searchParams.set('category', categoryValue);
-    searchParams.set('size', sizeValue);
-    searchParams.set('color', colorValue);
-    searchParams.set('amount', state1);
-    navigate(`/dashboard/post?${searchParams.toString()}`);
+        searchParams.set('category', categoryValue);
+        searchParams.set('size', sizeValue);
+        searchParams.set('color', colorValue);
+        searchParams.set('amount', state1);
+        searchParams.set('comment', commentText);
+        navigate(`/dashboard/post?${searchParams.toString()}`);
+   
       };
-      const [commentText, setCommentText] = useState('');
+    
+    
+     
     return (
       <Container>
       
@@ -43,7 +52,7 @@ const SetUpPostElements = () => {
                    <select name="category" className='filters'
                    value={categoryValue}  
                    onChange={(e) => setCategoryValue(e.target.value)} >
-                   <option value="" disabled selected>Kategorie</option>
+                   <option value="" disabled defaultValue>Kategorie</option>
                    <option value="jersey_kit">Trikot Set</option>
                    <option value="jersey_top">Trikot Oberteil</option>
                    <option value="tracksuit_top">Trainingsanzug Oberteil</option>
@@ -57,7 +66,7 @@ const SetUpPostElements = () => {
                 <select name="size_1"  className='filters' 
                 value={sizeValue}  
                 onChange={(e) => setSizeValue(e.target.value)}>
-                <option value='' disabled selected>Größe</option>
+                <option value='' disabled defaultValue>Größe</option>
                 <option value="adult">Adult</option>
                 <option value="children">Kids</option>
                 </select>
@@ -66,7 +75,7 @@ const SetUpPostElements = () => {
                <select name="color" className='filters' 
                  value={colorValue}  
                  onChange={(e) => setColorValue(e.target.value)} >
-               <option value='' disabled selected>Farbe</option>
+               <option value='' disabled defaultValue>Farbe</option>
                <option value="red">Rot</option>
                <option value="yellow">Gelb</option>
                <option value="green">Grün</option>
@@ -77,7 +86,7 @@ const SetUpPostElements = () => {
               </Col>
               <Col >
               <input className='filters' id='amount' type="number" value={state1}
-               onChange={e => {setState1("" + Number(e.target.value)); }} />
+               onChange={e => setState1(e.target.value)}/>
               </Col>
               </Row> 
               </div>
@@ -149,21 +158,21 @@ const SetUpPostElements = () => {
                ) : null}
 
               <div className='setpost-buttons'>
-                <button className='button-pink' 
-                onClick={() => navigate('/nextpage?comment=' 
-                + encodeURIComponent(commentText) 
-                + encodeURIComponent(sizeValue)
-                + encodeURIComponent(colorValue) 
-                + encodeURIComponent(categoryValue)
-                + encodeURIComponent(state1) )}
-                
-             
-                
-                >Überprüfen</button>
+              <button className='button-pink' 
+                 onClick={() => navigate('/nextpage?comment=' 
+                 
+                 +  encodeURIComponent(commentText) 
+                 + '&size=' + encodeURIComponent(sizeValue)
+                 + '&color=' + encodeURIComponent(colorValue) 
+                 + '&category=' + encodeURIComponent(categoryValue)
+                 + '&amount=' + encodeURIComponent(state1)
+                  )}
+                 >Überprüfen</button>
+
                 <button className='button-pink' onClick={handleGoBack} >Züruck</button>
              
                 {isSecondBoxVisible ? null : (
-                <button className='button-pink' onClick={handleCheck}>
+                <button className='button-pink' onClick={handleSetSecondBoxVisible}>
                   Weitere Spenden
                 </button>
               )}
