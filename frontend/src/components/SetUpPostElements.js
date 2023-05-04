@@ -12,19 +12,29 @@ const SetUpPostElements = () => {
         navigate('/dashboard');
       };
 
-    const [state1, setState1] = useState(0);
+   
     const [isSecondBoxVisible, setIsSecondBoxVisible] = useState(false);
-
+    const [state1, setState1] = useState(0);
     const [categoryValue, setCategoryValue] = useState("");
     const [sizeValue, setSizeValue] = useState("");
     const [colorValue, setColorValue] = useState("");
     const [commentText, setCommentText] = useState('');
 
-    const handleSetSecondBoxVisible = () => {
-        setIsSecondBoxVisible(true);
-      }
+    const [state2, setState2] = useState(0);
+    const [categoryValue2, setCategoryValue2] = useState("");
+    const [sizeValue2, setSizeValue2] = useState("");
+    const [colorValue2, setColorValue2] = useState("");
+    const [commentText2, setCommentText2] = useState('');
 
-    const handleCheck = () => {
+  
+
+      const handleSetSecondBoxVisible = () => {
+        if (categoryValue || sizeValue || colorValue || commentText || state1 && state1!== "0" ) {
+          setIsSecondBoxVisible(true);
+        }
+      };
+
+      const handleCheck = () => {
         
         const searchParams = new URLSearchParams(location.search);
         searchParams.set('category', categoryValue);
@@ -32,6 +42,12 @@ const SetUpPostElements = () => {
         searchParams.set('color', colorValue);
         searchParams.set('amount', state1);
         searchParams.set('comment', commentText);
+
+        searchParams.set('category2', categoryValue2);
+        searchParams.set('size2', sizeValue2);
+        searchParams.set('color2', colorValue2);
+        searchParams.set('amount2', state2);
+        searchParams.set('comment2', commentText2);
         navigate(`/dashboard/post?${searchParams.toString()}`);
    
       };
@@ -110,7 +126,9 @@ const SetUpPostElements = () => {
                   <div className='set-filters'>
                   <Row>
                   <Col>
-                      <select name="category"  className='filters'>
+                      <select name="category"  className='filters'
+                       value={categoryValue2}  
+                       onChange={(e) => setCategoryValue2(e.target.value)}>
                       <option value="" disabled selected>Kategorie</option>
                       <option value="jersey_kit">Trikot Set</option>
                       <option value="jersey_top">Trikot Oberteil</option>
@@ -123,14 +141,18 @@ const SetUpPostElements = () => {
    
                   </Col>
                   <Col >
-                   <select name="size_1"  className='filters'>
+                   <select name="size_1"  className='filters'
+                   value={sizeValue2}  
+                   onChange={(e) => setSizeValue2(e.target.value)}>
                    <option value='' disabled selected>Größe</option>
                    <option value="adult">Adult</option>
                    <option value="children">Kids</option>
                    </select>
                   </Col>
                   <Col >
-                  <select name="color" className='filters'  >
+                  <select name="color" className='filters' 
+                  value={colorValue2}  
+                  onChange={(e) => setColorValue2(e.target.value)} >
                   <option value='' disabled selected>Farbe</option>
                   <option value="red">Rot</option>
                   <option value="yellow">Gelb</option>
@@ -141,8 +163,8 @@ const SetUpPostElements = () => {
                   </select>
                  </Col>
                  <Col >
-                 <input className='filters' id='amount' type="number" value={state1}
-                  onChange={e => {setState1("" + Number(e.target.value)); }} />
+                 <input className='filters'  type="number" value={state2}
+                  onChange={e => {setState2(e.target.value) }} />
          
                  </Col>
                  </Row> 
@@ -151,23 +173,30 @@ const SetUpPostElements = () => {
               <Row>
                 <p>Beschreibe deine Spende</p>
                 <div className='gray-describe'>
-                  <textarea type='text' className='commentbox' 
+                  <textarea type='text' className='commentbox'
+                   value={commentText2}
+                   onChange={(e) => setCommentText2(e.target.value)} 
                   placeholder='Bspw verschiedene Trikotgrößen eines Trikotsatz, Zustand der Spende, etc.'></textarea>
                 </div>
               </Row></div></div>
                ) : null}
 
               <div className='setpost-buttons'>
-              <button className='button-pink' 
-                 onClick={() => navigate('/nextpage?comment=' 
-                 
-                 +  encodeURIComponent(commentText) 
-                 + '&size=' + encodeURIComponent(sizeValue)
-                 + '&color=' + encodeURIComponent(colorValue) 
-                 + '&category=' + encodeURIComponent(categoryValue)
-                 + '&amount=' + encodeURIComponent(state1)
-                  )}
-                 >Überprüfen</button>
+             {categoryValue || sizeValue || colorValue || (state1 && state1 !== "0") || commentText 
+             || categoryValue2 || sizeValue2 || colorValue2 || (state2 && state2 !== "0") || commentText2 ? (
+                <button className='button-pink' onClick={() => navigate('/nextpage?comment=' 
+                    + encodeURIComponent(commentText) 
+                    + '&size=' + encodeURIComponent(sizeValue)
+                    + '&color=' + encodeURIComponent(colorValue) 
+                    + '&category=' + encodeURIComponent(categoryValue)
+                    + '&amount=' + encodeURIComponent(state1)
+                    + '&comment2=' + encodeURIComponent(commentText2) 
+                    + '&size2=' + encodeURIComponent(sizeValue2)
+                    + '&color2=' + encodeURIComponent(colorValue2) 
+                    + '&category2=' + encodeURIComponent(categoryValue2)
+                    + '&amount2=' + encodeURIComponent(state2)
+                )}>Überprüfen</button>
+                ) : null}
 
                 <button className='button-pink' onClick={handleGoBack} >Züruck</button>
              
