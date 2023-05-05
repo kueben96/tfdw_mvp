@@ -42,9 +42,9 @@ const DonationDetail = () => {
     const handleContactClick = () => {
         if (token) {
             const mailtoLink = `mailto:${donation.email}`;
-            console.log(mailtoLink)
             window.location.href = mailtoLink;
         } else {
+            // TODO: handle navigate back to detail page after authentication
             navigate("/login");
         }
     };
@@ -92,7 +92,7 @@ const DonationDetail = () => {
                                 <p>Telefon: {donation.phone}</p>
                             </div>
                         )}
-                        <button className='button-pink' onClick={handleContactClick}>Kontaktieren</button>
+                        {!token && <button className='button-pink' onClick={handleContactClick}>Kontaktieren</button>}
                         <button className='button-pink' onClick={handleGoBack}>Zurück</button>
                     </div>
                 </div>
