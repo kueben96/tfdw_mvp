@@ -1,7 +1,11 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import { useLocation, useParams } from 'react-router-dom';
+<<<<<<< HEAD:frontend/src/components/donations_detail/DonationRequestDetail.js
 import { useFetchDonationRequestByIdQuery } from '../store/reducers/donationsRequestSlice';
 import DashboardHeader from '../components/ui/DashboardHeader';
+=======
+import { useFetchDonationRequestByIdQuery } from '../../store/reducers/donationsRequestSlice';
+>>>>>>> develop:frontend/src/donations_detail/DonationRequestDetail.js
 
 const DonationRequestDetail = () => {
     const location = useLocation();

@@ -10,6 +10,8 @@ import DashboardSelection from './components/DashboardSelection';
 import AdminRequests from './components/admin/AdminRequests';
 import DonationDetail from './components/donations_detail/DonationDetail';
 import CreateDonation from './components/donations_donor/CreateDonation';
+import SetUpPost from './components/SetUpPost';
+import NextPage from './components/NextPage';
 import MyAccount from './components/account/MyAccount';
 import EditEntry from './components/account/EditEntry';
 import AccountEntries from './components/account/AccountEntries';
@@ -40,6 +42,8 @@ function App() {
                 <Route path='/donation_request/:id' element={<DonationDetail />} />
                 <Route path='/donation_request/new' element={<DonationDetail />} />
                 <Route path='/donation/new' element={<CreateDonation />} />
+                <Route path='/setpost' element={<SetUpPost />}></Route>
+                <Route path='/nextpage' element={<NextPage />}></Route>
             </Route>
         </Routes>
 
