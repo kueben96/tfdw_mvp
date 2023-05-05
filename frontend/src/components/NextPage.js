@@ -144,7 +144,9 @@ const NextPage = () => {
      <div className='setpost-buttons'>
             <button className='button-pink' >Bestätigen</button>
             <button className='button-pink' onClick={handleGoBack}>Züruck</button>
-            <button className='button-pink' >Bearbeiten</button>  
+           
+            {/* the fields can be edited without needing this button
+            <button className='button-pink' >Bearbeiten</button>   */}
     </div>
     </div>     
     </div>

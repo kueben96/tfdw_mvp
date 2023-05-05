@@ -101,7 +101,7 @@ const SetUpPostElements = () => {
                </select>
               </Col>
               <Col >
-              <input className='filters' id='amount' type="number" value={state1}
+              <input className='filters' id='amount' type="number" min='0'  value={state1}
                onChange={e => setState1(e.target.value)}/>
               </Col>
               </Row> 
@@ -163,7 +163,7 @@ const SetUpPostElements = () => {
                   </select>
                  </Col>
                  <Col >
-                 <input className='filters'  type="number" value={state2}
+                 <input className='filters' min='0' type="number" value={state2}
                   onChange={e => {setState2(e.target.value) }} />
          
                  </Col>
