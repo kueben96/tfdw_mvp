@@ -37,6 +37,12 @@ export const donationsApiSlice = apiSlice.injectEndpoints({
         getUserDonations: builder.query({
             query: () => '/user_donations',
         }),
+        deleteDonation: builder.mutation({
+            query: (donationId) => ({
+                url: `/donation?id=${donationId}`,
+                method: 'DELETE',
+            }),
+        }),
 
     })
 })
@@ -46,7 +52,8 @@ export const {
     useFetchDonationByIdQuery,
     useAddDonationMutation,
     useGetUserDonationsQuery,
-    useGetDonationDetailsByIdWithUserInfoQuery
+    useGetDonationDetailsByIdWithUserInfoQuery,
+    useDeleteDonationMutation,
 } = donationsApiSlice
 
 
