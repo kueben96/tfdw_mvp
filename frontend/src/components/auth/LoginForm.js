@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../../store/reducers/authApiSlice';
 
 function LoginForm() {
+    // TODO: handle reset password (backend alreaady done)
+    // TODO: handle refresh token 
     const errRef = useRef()
     const dispatch = useDispatch();
     const navigate = useNavigate()
