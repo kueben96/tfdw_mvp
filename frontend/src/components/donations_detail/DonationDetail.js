@@ -1,6 +1,6 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
-import '../resources/styles/donationdetail.css';
+import '../../resources/styles/donationdetail.css';
 
 const DonationDetail = () => {
     const location = useLocation();
