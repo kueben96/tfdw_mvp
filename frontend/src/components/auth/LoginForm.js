@@ -30,14 +30,18 @@ function LoginForm() {
         return email.length > 0 && password.length > 0;
     }
 
+    const resetForm = () => {
+        setEmail('')
+        setPassword('')
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
             const userData = await login({ email, password }).unwrap()
             dispatch(setCredentials({ ...userData }))
 
-            setEmail('')
-            setPassword('')
+            resetForm()
             navigate('/')
         } catch (err) {
             // TODO: handle errors from reducer 
