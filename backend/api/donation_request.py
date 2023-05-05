@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, Blueprint
+from flask import Flask, jsonify, request, Blueprint, make_response
 from datetime import datetime
 import pytz
 
@@ -18,32 +18,36 @@ def create_donation_request(current_user):
     Creates a new donation request entity in the donation_requests database table.
     Returns: json with donation request data
     """
-    user_id = current_user.id
-    tz = pytz.timezone('Europe/Berlin')
-    date = datetime.now(tz)
+    if current_user.reviewed:
+        user_id = current_user.id
+        tz = pytz.timezone('Europe/Berlin')
+        date = datetime.now(tz)
 
-    category = request.json.get('category', '')
-    amount = request.json.get('amount', '')
-    size_1 = request.json.get('size_1', '')
-    size_2 = request.json.get('size_2', '')
-    color_1 = request.json.get('color_1', '')
-    description = request.json.get('description', '')
-    status = "offen"
+        category = request.json.get('category', '')
+        amount = request.json.get('amount', '')
+        size_1 = request.json.get('size_1', '')
+        size_2 = request.json.get('size_2', '')
+        color_1 = request.json.get('color_1', '')
+        description = request.json.get('description', '')
+        status = "offen"
 
-    donation_request = DonationRequest(user_id=user_id,
-                                       date=date,
-                                       category=category,
-                                       amount=amount,
-                                       size_1=size_1,
-                                       size_2=size_2,
-                                       color_1=color_1,
-                                       description=description,
-                                       status=status)
+        donation_request = DonationRequest(user_id=user_id,
+                                           date=date,
+                                           category=category,
+                                           amount=amount,
+                                           size_1=size_1,
+                                           size_2=size_2,
+                                           color_1=color_1,
+                                           description=description,
+                                           status=status)
 
-    db.session.add(donation_request)
-    db.session.commit()
+        db.session.add(donation_request)
+        db.session.commit()
 
-    return donation_request_schema.jsonify(donation_request)
+        return donation_request_schema.jsonify(donation_request)
+
+    else:
+        return make_response("Cannot create a donation request. Current user is not reviewed by TFWD Admins.")
 
 
 @donation_request_route.route('/api/donation_request', methods=['GET'])
@@ -54,6 +58,14 @@ def get_donation_requests(current_user):
     If arguments are given in query string, results are being filtered by given arguments.
     Returns: json with list of all donation requests and corresponding user data
     """
+    if current_user:
+        if current_user.role == "admin":
+            results = (db.session.query(DonationRequest.id, DonationRequest.date, DonationRequest.category,
+                                        DonationRequest.status, User.club_name)
+                       .join(User, User.id == DonationRequest.user_id)).all()
+
+            return jsonify([dict(id=x.id, date=x.date, category=x.category, status=x.status, first_name=x.club_name)
+                            for x in results])
     args = request.args.to_dict()
     if args:
         args['status'] = "offen"
@@ -81,9 +93,24 @@ def get_donation_requests(current_user):
                     results])
 
 
-@donation_request_route.route('/api/donation_request_details', methods=['GET'])
+@donation_request_route.route('/api/user_donation_requests', methods=['GET'])
 @token_required()
-def get_donation_request_details_new(current_user):
+def get_user_donations(current_user):
+    results = (db.session.query(User.id, DonationRequest.date, DonationRequest.category, DonationRequest.amount)
+               .filter_by(id=current_user.id)
+               .join(DonationRequest, User.id == DonationRequest.user_id)).all()
+
+    return jsonify([dict(date=x.date, category=x.category, amount=x.amount) for x in results])
+
+    # TODO: could be optimized by using the donations already present in current_user but difficult to access
+    # current_user_json = user_schema.jsonify(current_user)
+    # user_donation_requests = jsonify(current_user_json['user_donation_requests'])
+    # return user_donation_requests
+
+
+@donation_request_route.route('/api/donation_request_details', methods=['GET'])
+@token_required(optional=True)
+def get_donation_request_details(current_user):
     """
     Gets a specific donation request by id from the donation_requests database table.
     Returns: json with donation request data
@@ -91,16 +118,27 @@ def get_donation_request_details_new(current_user):
     args = request.args.to_dict()
     donation_request_id = args.get("id")
 
-    results = (
-        db.session.query(DonationRequest.id, DonationRequest.date, DonationRequest.category, DonationRequest.amount,
-                         DonationRequest.size_1, DonationRequest.size_2, DonationRequest.color_1,
-                         DonationRequest.description, User.first_name, User.last_name, User.email,
-                         User.zip_code, User.city)
-        .filter_by(id=donation_request_id)
-        .join(User, User.id == DonationRequest.user_id)).all()
-    return jsonify([dict(id=x.id, date=x.date, category=x.category, amount=x.amount, size_1=x.size_1, size_2=x.size_2,
-                         color_1=x.color_1, description=x.description, first_name=x.first_name,
-                         last_name=x.last_name, email=x.email, zip_code=x.zip_code, city=x.city) for x in results])
+    if current_user:
+        results = (
+            db.session.query(DonationRequest.id, DonationRequest.date, DonationRequest.category, DonationRequest.amount,
+                             DonationRequest.size_1, DonationRequest.size_2, DonationRequest.color_1,
+                             DonationRequest.description, User.first_name, User.last_name, User.email,
+                             User.zip_code, User.city)
+            .filter_by(id=donation_request_id)
+            .join(User, User.id == DonationRequest.user_id)).all()
+        return jsonify([dict(id=x.id, date=x.date, category=x.category, amount=x.amount, size_1=x.size_1, size_2=x.size_2,
+                             color_1=x.color_1, description=x.description, first_name=x.first_name,
+                             last_name=x.last_name, email=x.email, zip_code=x.zip_code, city=x.city) for x in results])
+    else:
+        results = (db.session.query(DonationRequest.id, DonationRequest.date, DonationRequest.category, DonationRequest.amount,
+                                    DonationRequest.size_1, DonationRequest.size_2, DonationRequest.color_1,
+                                    DonationRequest.description, User.zip_code, User.city)
+                   .filter_by(id=donation_request_id)
+                   .join(User, User.id == DonationRequest.user_id)).all()
+        return jsonify(
+            [dict(id=x.id, date=x.date, category=x.category, amount=x.amount, size_1=x.size_1, size_2=x.size_2,
+                  color_1=x.color_1, description=x.description, zip_code=x.zip_code,
+                  city=x.city) for x in results])
 
 
 @donation_request_route.route('/api/donation_request', methods=['PATCH'])

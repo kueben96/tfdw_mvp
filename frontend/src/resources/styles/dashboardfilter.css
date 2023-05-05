@@ -1,17 +1,10 @@
 
 .filterbar{
-   width: 850px;
-   margin: auto;
-   margin-top: 20px;
+   margin-bottom: 20px;
+}
 
-}
-.filterbar h6{
-    font-weight: 100;
-    font-size: 15px;
-}
 .filter-down{
    margin-top: 20px;
-   
 }
 
 .search{

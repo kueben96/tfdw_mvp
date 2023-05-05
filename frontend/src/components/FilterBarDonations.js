@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import '../../resources/styles/dashboardfilter.css';
-
+import '../resources/styles/dashboardfilter.css';
 
 const sizes = {
     adult: {
@@ -22,17 +21,23 @@ const sizes = {
     },
 };
 
+
 const getSizeOptions = (category, size1) => {
     if (category && size1 in sizes) {
+        console.log("getting size ops")
+
         return sizes[size1][category];
     }
     return [];
 };
 
-const FilterBarDonations = ({ onFilterChange, onClearFilters }) => {
+const FilterBarDonations = ({ onFilterChange, onClearFilters, isForPostRequest }) => {
 
 
     const [filters, setFilters] = useState({});
+    // TODO: handle default values for form
+    // category has to be pre-selected in state in order 
+    // for the filter to work 
     const [sizeOptions, setSizeOptions] = useState([]);
 
     const handleFilterChange = (event) => {
@@ -53,15 +58,13 @@ const FilterBarDonations = ({ onFilterChange, onClearFilters }) => {
     return (
         <div className='filterbar'>
             <Container>
-                <Row>
-                    <h6>Hier siehst du alle Gesuche</h6>
-                </Row>
+
                 <Row className='filter-down'>
-                    <Col sm={6} md={2}>
+                    <Col sm={2} >
 
                         <select name="category" onChange={handleFilterChange} className='filters'>
-                            <option value="" disabled selected>Kategorie</option>
-                            <option value="jersey_kit">Trikot Set</option>
+                            <option value="" disabled>Kategorie</option>
+                            <option value="jersey_kit" defaultValue>Trikot Set</option>
                             <option value="jersey_top">Trikot Oberteil</option>
                             <option value="tracksuit_top">Trainingsanzug Oberteil</option>
                             <option value="shoes">Schuhe (Paar)</option>
@@ -73,16 +76,16 @@ const FilterBarDonations = ({ onFilterChange, onClearFilters }) => {
                     </Col>
                     <Col sm={2} >
                         <select name="size_1" onChange={handleFilterChange} className='filters'>
-                            <option value='' disabled selected>Alter</option>
+                            <option value='' disabled >Größe 1</option>
                             <option value="adult">Adult</option>
                             <option value="children">Kids</option>
                         </select>
                     </Col>
 
                     {filters.category && filters.size_1 && sizeOptions.length > 0 && (
-                        <Col>
+                        <Col sm={2}>
                             <select name="size_2" className='filters' onChange={handleFilterChange}>
-                                <option value="" disabled selected>Größe</option>
+                                <option value="" disabled>Größe 2</option>
                                 {sizeOptions.map((size) => (
                                     <option value={size} key={size}>
                                         {size}
@@ -94,7 +97,7 @@ const FilterBarDonations = ({ onFilterChange, onClearFilters }) => {
 
                     <Col sm={2}>
                         <select name="color" className='filters' onChange={handleFilterChange} >
-                            <option value='' disabled selected>Farbe</option>
+                            <option value='' disabled >Farbe</option>
                             <option value="red">Rot</option>
                             <option value="yellow">Gelb</option>
                             <option value="green">Grün</option>
@@ -104,12 +107,17 @@ const FilterBarDonations = ({ onFilterChange, onClearFilters }) => {
                             <option value="orange">Orange</option>
                         </select>
                     </Col>
+                    {!isForPostRequest ? (
+                        <Col >
+                            <button onClick={handleClearFilters} className="search"
+                            >Filter zurücksetzen</button>
+                        </Col>) : (
+                        <Col sm={2}>
+                            <input type="number" name="amount" className='filters' onChange={handleFilterChange} placeholder="Anzahl" />
+                        </Col>
+                    )
 
-                    <Col >
-                        <button onClick={handleClearFilters} className="search"
-                        >Filter zurücksetzen</button>
-                    </Col>
-
+                    }
                 </Row>
 
             </Container>
@@ -117,5 +125,4 @@ const FilterBarDonations = ({ onFilterChange, onClearFilters }) => {
         </div>
     )
 }
-
 export default FilterBarDonations

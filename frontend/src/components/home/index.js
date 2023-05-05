@@ -11,7 +11,7 @@ const Home = () => {
     const user = useSelector(selectCurrentUser)
 
     const routeDashboard = () => {
-        navigate('/selection')
+        navigate('/dashboard')
     }
     const welcomeMsg = token ? <h1>Welcome, you're logged in {user}</h1> : <div>Log in to proceed: press the button below </div>
 

@@ -215,3 +215,15 @@ h6 {
 .mb-10{
   margin-bottom: 10px;
 }
+
+.articles{
+  padding: 20px;
+  margin: auto;
+  align-items: center;
+  align-self: center;
+ position: relative;
+ overflow-y: scroll;
+ height: 600px;
+ overflow-x: hidden;
+}
+

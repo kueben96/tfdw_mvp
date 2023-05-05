@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Row } from 'react-bootstrap';
 import '../../resources/styles/donationcards.css';
-import { useFetchDonationsQuery } from '../../store/reducers/donationsSlice';
+import DonationCard from './DonationCard';
+import FilterBarDonations from '../FilterBarDonations';
+import { useFetchDonationRequestsQuery } from '../../store/reducers/donationsRequestSlice';
 
-import DonationCardDemo from './DonationCardDemo';
-import FilterBarDonations from './FilterBarDonations';
 
-
-const DonationsCard = () => {
+const DonorsDashboardCards = () => {
 
     const [filters, setFilters] = useState({});
 
@@ -16,7 +15,7 @@ const DonationsCard = () => {
         isLoading,
         isSuccess,
         isError,
-    } = useFetchDonationsQuery(filters)
+    } = useFetchDonationRequestsQuery(filters)
 
     const handleFilterChange = (newFilters) => {
         setFilters(newFilters)
@@ -32,13 +31,14 @@ const DonationsCard = () => {
     if (isLoading) {
         content = <p>"Loading..."</p>;
     } else if (isSuccess) {
-        content = donations.map(donation => <DonationCardDemo key={donation.id} donation={donation} />)
+        content = donations.map(donation => <DonationCard key={donation.id} donation={donation} />)
     } else if (isError) {
         content = <p>Error fetching a donations</p>;
     }
 
     return (
-        <>
+        <div className='articles'>
+            <h6>Hier siehst du alle Gesuche</h6>
             <FilterBarDonations onFilterChange={handleFilterChange} onClearFilters={clearFilters} />
             <div className='articles-cards'>
                 <article>
@@ -46,11 +46,11 @@ const DonationsCard = () => {
                         {content}
                     </Row>
                 </article>
-
             </div>
-        </>
+        </div>
+
 
     )
 }
 
-export default DonationsCard
+export default DonorsDashboardCards
