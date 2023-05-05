@@ -1,6 +1,6 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import { useLocation, useParams } from 'react-router-dom';
-import { useFetchDonationRequestByIdQuery } from '../store/reducers/donationsRequestSlice';
+import { useFetchDonationRequestByIdQuery } from '../../store/reducers/donationsRequestSlice';
 
 const DonationRequestDetail = () => {
     const location = useLocation();
