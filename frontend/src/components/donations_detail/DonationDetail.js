@@ -38,7 +38,6 @@ const DonationDetail = () => {
         navigate(-1);
     };
 
-    // TODO: kontaktieren mit mail link nicht genug
     const handleContactClick = () => {
         if (token) {
             const mailtoLink = `mailto:${donation.email}`;
@@ -52,11 +51,7 @@ const DonationDetail = () => {
     return (
         <Container>
             <div className='dashboard'>
-                <div className="text-center">
-                    <DashboardHeader />
-                </div>
-
-
+                <DashboardHeader />
                 <div className='donation-articles' >
 
                     <div className='articles-cards' id='elements'>

@@ -1,34 +1,26 @@
-import { Col, Container,  Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import '../resources/styles/setpost.css';
 import SetUpPostElements from './SetUpPostElements';
+import DashboardHeader from './ui/DashboardHeader';
 
 
 
 const SetUpPost = () => {
-   
+
     return (
-      <Container>
-      <div className='dashboard'>
-          <div className="text-center">
-              <Row>
-                  <Col sm={2} >
-                      <button className='home-image'></button></Col>
-                  <Col sm={8}>
-                      <h4>Spendenplatform</h4></Col>
-                  <Col sm={2} >
-                      <button className='konto-image'></button></Col>
-              </Row>
-          </div>
-              <SetUpPostElements></SetUpPostElements>
-          </div>
-              
-  </Container>
-      
-      
-     );
-  };
-  
-  export default SetUpPost;
+        <Container>
+            <div className='dashboard'>
+                <DashboardHeader text="Eintrag erstellen" />
+                <SetUpPostElements></SetUpPostElements>
+            </div>
+
+        </Container>
+
+
+    );
+};
+
+export default SetUpPost;
 
 
 

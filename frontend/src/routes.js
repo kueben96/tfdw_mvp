@@ -40,10 +40,8 @@ function App() {
                 <Route path='/adminrequests' element={<AdminRequests />} />
                 <Route path='/donation/:id' element={<DonationDetail />} />
                 <Route path='/donation_request/:id' element={<DonationDetail />} />
-                <Route path='/donation_request/new' element={<DonationDetail />} />
-                <Route path='/donation/new' element={<CreateDonation />} />
-                <Route path='/setpost' element={<SetUpPost />}></Route>
-                <Route path='/nextpage' element={<NextPage />}></Route>
+                <Route path='/donation_request/new' element={<SetUpPost />} />
+                <Route path='/donation/new' element={<SetUpPost />} />
             </Route>
         </Routes>
 
