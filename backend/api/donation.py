@@ -1,11 +1,12 @@
 import json
 
-from flask import Flask, jsonify, request, Blueprint
+from flask import Flask, jsonify, request, Blueprint, make_response
 from sqlalchemy import or_, text
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 import pytz
 
+from dto.donation import DonationDTO, DonationEncoder
 from models.donation import Donation, donation_schema
 from models.user import User, user_schema
 from extensions import db
@@ -35,21 +36,24 @@ def create_donation(current_user):
     description = request.json.get('description', '')
     status = "offen"
 
-    donation = Donation(user_id=user_id,
-                        date=date,
-                        category=category,
-                        amount=amount,
-                        size_1=size_1,
-                        size_2=size_2,
-                        color_1=color_1,
-                        color_2=color_2,
-                        description=description,
-                        status=status)
+    donation_dto = DonationDTO(id=-1, user_id=user_id, date=date, category=category, amount=amount, size_1=size_1,
+                               size_2=size_2, color_1=color_1, color_2=color_2, description=description, status=status)
 
-    db.session.add(donation)
+    db_donation = Donation(user_id=donation_dto.user_id,
+                           date=donation_dto.date,
+                           category=donation_dto.category,
+                           amount=donation_dto.amount,
+                           size_1=donation_dto.size_1,
+                           size_2=donation_dto.size_2,
+                           color_1=donation_dto.color_1,
+                           color_2=donation_dto.color_2,
+                           description=donation_dto.description,
+                           status=donation_dto.status)
+
+    db.session.add(db_donation)
     db.session.commit()
 
-    return donation_schema.jsonify(donation)
+    return donation_schema.jsonify(db_donation)
 
 
 @donation_route.route('/api/donation', methods=['GET'])
@@ -153,6 +157,7 @@ def get_donation_details(current_user):
                   color_1=x.color_1, color_2=x.color_2, description=x.description, zip_code=x.zip_code,
                   city=x.city) for x in results])
 
+
 @donation_route.route('/api/donation/<int:donation_id>', methods=['GET'])
 @token_required()
 def get_donation_by_id(current_user, donation_id: int):
@@ -162,8 +167,15 @@ def get_donation_by_id(current_user, donation_id: int):
         donation_id: id of donation
     Returns: json with donation data
     """
-    donation = Donation.query.get(donation_id)
-    return donation_schema.jsonify(donation)
+    donation_db = Donation.query.get(donation_id)
+
+    donation_dto = DonationDTO(id=donation_id, user_id=donation_db.user_id, date=donation_db.date,
+                               category=donation_db.category, amount=donation_db.amount, size_1=donation_db.size_1,
+                               size_2=donation_db.size_2, color_1=donation_db.color_1, color_2=donation_db.color_2,
+                               description=donation_db.description, status=donation_db.status)
+
+    donation_json = DonationEncoder().encode(donation_dto)
+    return make_response(donation_json)
 
 
 @donation_route.route('/api/donation/', methods=['PATCH'])
@@ -187,22 +199,26 @@ def update_donation(current_user):
     description = request.json.get('description', '')
     status = request.json.get('status', '')
 
-    donation = Donation.query.get(donation_id)
-    donation.user_id = user_id
-    donation.date = date
-    donation.category = category
-    donation.amount = amount
-    donation.size_1 = size_1
-    donation.size_2 = size_2
-    donation.color_1 = color_1
-    donation.color_2 = color_2
-    donation.description = description
-    donation.status = status
+    donation_dto = DonationDTO(id=donation_id, user_id=user_id, date=date, category=category, amount=amount,
+                               size_1=size_1, size_2=size_2, color_1=color_1, color_2=color_2, description=description,
+                               status=status)
 
-    db.session.add(donation)
+    donation_db = Donation.query.get(donation_id)
+    donation_db.user_id = donation_dto.user_id
+    donation_db.date = donation_dto.date
+    donation_db.category = donation_dto.category
+    donation_db.amount = donation_dto.amount
+    donation_db.size_1 = donation_dto.size_1
+    donation_db.size_2 = donation_dto.size_2
+    donation_db.color_1 = donation_dto.color_1
+    donation_db.color_2 = donation_dto.color_2
+    donation_db.description = donation_dto.description
+    donation_db.status = donation_dto.status
+
+    db.session.add(donation_db)
     db.session.commit()
 
-    return donation_schema.jsonify(donation)
+    return donation_schema.jsonify(donation_db)
 
 
 @donation_route.route("/api/donation", methods=['DELETE'])

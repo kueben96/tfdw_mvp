@@ -1,7 +1,5 @@
 import jwt
 import os
-import secrets
-import string
 
 from flask import Flask, jsonify, request, Blueprint, render_template, make_response
 from datetime import datetime, timedelta
@@ -10,9 +8,7 @@ from flask_mail import Message
 from werkzeug.security import generate_password_hash
 
 from extensions import db, mail
-from models.user import User
-from api.user import token_required, verify_reset_password_token, verify_email
-from services.mail_service import send_email
+from api.user import token_required, verify_email
 
 reset_route = Blueprint('reset_route', __name__)
 
@@ -62,21 +58,3 @@ def reset_password(current_user):
     db.session.commit()
 
     return make_response("Password reset successful.", 201)
-
-# @reset_route.route('/api/reset_password/<token>', methods=['POST'])
-# def reset_password(token):
-#     user = verify_reset_password_token(token)
-#     password = request.json.get('password', '')
-#     user.password = generate_password_hash(password)
-#
-#     db.session.add(user)
-#     db.session.commit()
-#
-#     return make_response("Password reset successful.", 201)
-
-
-
-
-
-
-
