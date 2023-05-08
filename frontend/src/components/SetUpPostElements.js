@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import '../resources/styles/setpost.css';
 import { useAddDonationMutation } from '../store/reducers/donationsSlice';
 
-
-// TODO: handle set up donation
 const SetUpPostElements = () => {
 
   const navigate = useNavigate();
@@ -31,8 +29,6 @@ const SetUpPostElements = () => {
     navigate(-1);
   };
   const handleCreateEntry = () => {
-    console.log('entry')
-    console.log(entry)
     addDonation(entry);
   };
 
