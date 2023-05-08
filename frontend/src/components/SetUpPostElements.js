@@ -8,11 +8,7 @@ const SetUpPostElements = () => {
 
   const navigate = useNavigate();
 
-  const [addDonation, { isLoading, isError, isSuccess }] = useAddDonationMutation({
-    onBeforeSend: (request) => {
-      console.log(request);
-    }
-  });
+  const [addDonation, { isLoading, isError, isSuccess }] = useAddDonationMutation();
 
   const [entry, setEntry] = useState({
     category: "",
