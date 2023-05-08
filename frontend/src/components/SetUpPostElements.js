@@ -10,6 +10,12 @@ const SetUpPostElements = () => {
 
   const navigate = useNavigate();
 
+  const [addDonation, { isLoading, isError, isSuccess }] = useAddDonationMutation({
+    onBeforeSend: (request) => {
+      console.log(request);
+    }
+  });
+
   const [entry, setEntry] = useState({
     category: "",
     amount: 0,
@@ -25,15 +31,10 @@ const SetUpPostElements = () => {
     navigate(-1);
   };
   const handleCreateEntry = () => {
-    // useAddDonationMutation
+    console.log('entry')
+    console.log(entry)
+    addDonation(entry);
   };
-
-
-  const [amount, setAmount] = useState(0);
-  const [categoryValue, setCategoryValue] = useState("");
-  const [sizeValue, setSizeValue] = useState("");
-  const [colorValue, setColorValue] = useState("");
-  const [description, setDescription] = useState('');
 
   return (
     <Container>
@@ -46,8 +47,8 @@ const SetUpPostElements = () => {
             <Row>
               <Col>
                 <select name="category" className='filters'
-                  value={categoryValue}
-                  onChange={(e) => setCategoryValue(e.target.value)} >
+                  value={entry.category}
+                  onChange={(e) => setEntry({ ...entry, category: e.target.value })} >
                   <option value="" disabled defaultValue>Kategorie</option>
                   <option value="jersey_kit">Trikot Set</option>
                   <option value="jersey_top">Trikot Oberteil</option>
@@ -60,8 +61,8 @@ const SetUpPostElements = () => {
               </Col>
               <Col >
                 <select name="size_1" className='filters'
-                  value={sizeValue}
-                  onChange={(e) => setSizeValue(e.target.value)}>
+                  value={entry.size_1}
+                  onChange={(e) => setEntry({ ...entry, size_1: e.target.value })}>
                   <option value='' disabled defaultValue>Größe</option>
                   <option value="adult">Adult</option>
                   <option value="children">Kids</option>
@@ -69,8 +70,8 @@ const SetUpPostElements = () => {
               </Col>
               <Col>
                 <select name="color" className='filters'
-                  value={colorValue}
-                  onChange={(e) => setColorValue(e.target.value)} >
+                  value={entry.color_1}
+                  onChange={(e) => setEntry({ ...entry, color_1: e.target.value })} >
                   <option value='' disabled defaultValue>Farbe</option>
                   <option value="red">Rot</option>
                   <option value="yellow">Gelb</option>
@@ -81,8 +82,8 @@ const SetUpPostElements = () => {
                 </select>
               </Col>
               <Col >
-                <input className='filters' id='amount' type="number" min='0' value={amount}
-                  onChange={e => setAmount(e.target.value)} />
+                <input className='filters' id='amount' type="number" min='0' value={entry.amount}
+                  onChange={e => setEntry({ ...entry, amount: e.target.value })} />
               </Col>
             </Row>
           </div>
@@ -91,8 +92,8 @@ const SetUpPostElements = () => {
               <p>Beschreibe deine Spende</p>
               <div className='gray-describe'>
                 <textarea type='text' className='commentbox'
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  value={entry.description}
+                  onChange={(e) => setEntry({ ...entry, description: e.target.value })}
                   placeholder='Bspw verschiedene Trikotgrößen eines Trikotsatz, Zustand der Spende, etc. '>
                 </textarea>
               </div>
@@ -101,6 +102,9 @@ const SetUpPostElements = () => {
             <button className='button-pink' onClick={handleCreateEntry}>Erstellen</button>
             <button className='button-pink' onClick={handleGoBack} >Zurück</button>
           </div>
+          {isLoading && <p>Loading...</p>}
+          {isError && <p>Oops, something went wrong.</p>}
+          {isSuccess && <p>Donation added successfully!</p>}
         </div>
       </div>
     </Container>
