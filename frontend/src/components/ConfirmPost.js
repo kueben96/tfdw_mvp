@@ -145,8 +145,7 @@ const ConfirmPost = () => {
             <button className='button-pink' >Bestätigen</button>
             <button className='button-pink' onClick={handleGoBack}>Züruck</button>
            
-            {/* the fields can be edited without needing this button
-            <button className='button-pink' >Bearbeiten</button>   */}
+           
     </div>
     </div>     
     </div>
