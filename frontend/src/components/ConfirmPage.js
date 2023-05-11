@@ -93,7 +93,7 @@ const ConfirmPage = () => {
             {category2}
           </option>
                     
-                    <option value="jersey_kit">Trikot Set</option>
+                   <option value="jersey_kit">Trikot Set</option>
                    <option value="jersey_top">Trikot Oberteil</option>
                    <option value="tracksuit_top">Trainingsanzug Oberteil</option>
                    <option value="shoes">Schuhe (Paar)</option>
@@ -145,8 +145,7 @@ const ConfirmPage = () => {
             <button className='button-pink' >Bestätigen</button>
             <button className='button-pink' onClick={handleGoBack}>Züruck</button>
            
-            {/* the fields can be edited without needing this button
-            <button className='button-pink' >Bearbeiten</button>   */}
+       
     </div>
     </div>     
     </div>
