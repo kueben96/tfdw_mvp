@@ -15,7 +15,7 @@ const RecipientDonationDashboard = ({ donation }) => {
                     </Col>
                     <Col >
 
-                        <h6> {donation.category}</h6>
+                        <h6>{donation.category}</h6>
                         <p>{donation.amount} Stück, PLZ {donation.plz}</p>
 
                     </Col>
