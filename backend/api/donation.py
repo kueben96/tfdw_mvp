@@ -17,6 +17,7 @@ donation_route = Blueprint('donation_route', __name__)
 def create_donation(current_user):
     """
     Creates a new donation entity in the donations database table.
+    Expects json data for donation in request body (see examples in backend/mock_data/donations.json)
     Args:
         current_user: user that is currently logged in, authorized by token
     Returns: json with donation data
@@ -58,7 +59,8 @@ def create_donation(current_user):
 def get_donations(current_user):
     """
     Get all donations from the database table "donations" joined with table "user".
-    If arguments are given in query string, results are being filtered by given arguments.
+    If arguments are given in query string, results are being filtered by given arguments
+    (see filter arguments in Readme).
     The user does not have to be authorized to do this request.
     Args:
         current_user: user currently logged in (if user is signed in, they can view contact data, else they can only
@@ -138,6 +140,7 @@ def get_donation_details(current_user):
     """
     Get donation details and user data for given donation_id.
     If user is authenticated: returns donor data, else only return donation data
+    Expects donation id as "id" in query params.
     Args:
         current_user: user currently logged in
     Returns: json with donation details for given donation
@@ -187,6 +190,8 @@ def get_donation_by_id(donation_id: int):
 def update_donation(current_user):
     """
     Updates a given donation by id in the donations database table.
+    Expects donation data as json body (see examples in backend/mock_data/donations.json).
+    Expects donation id in query parameters as "id". (e.g. /api/donation/?id=10)
     Args:
         current_user: user currently logged in
     Returns: json of updated donation
@@ -228,6 +233,7 @@ def update_donation(current_user):
 def delete_donation():
     """
     Deletes a donation by id from the donations database table.
+    Expects donation id in query parameters as "id" (e.g. /api/donation/?id=10)
     Returns: json of deleted donation entity from database table donations
     """
     args = request.args.to_dict()
