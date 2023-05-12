@@ -51,11 +51,11 @@ def login():
         token = jwt.encode({
             'id': user.id,
             'exp': datetime.utcnow() + timedelta(minutes=30)
-        }, os.environ.get('SECRET_KEY'), algorithm="HS256")
+        }, os.environ.get('SECRET_KEY'))
         refresh_token = jwt.encode({
             'id': user.id,
             'exp': datetime.utcnow() + timedelta(days=1)
-        }, os.environ.get('SECRET_KEY'), algorithm="HS256")
+        }, os.environ.get('SECRET_KEY'))
 
         response_object = [
             {'id': user.id,
@@ -69,8 +69,8 @@ def login():
              'region': user.region,
              'role': user.role,
              'club_name': user.club_name},
-            {'token': token},
-            {'refresh_token': refresh_token}
+            {'token': token.decode('UTF-8')},
+            {'refresh_token': refresh_token.decode('UTF-8')}
         ]
 
         return make_response(jsonify(response_object), 201)
