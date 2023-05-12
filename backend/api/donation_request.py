@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request, Blueprint, make_response
 from datetime import datetime
 import pytz
 
-from models.donation_request import DonationRequest, donation_request_schema, donation_requests_schema
+from models.donation_request import DonationRequest, donation_request_schema
 from models.user import User
 from extensions import db
 
@@ -16,10 +16,15 @@ donation_request_route = Blueprint('donation_request_route', __name__)
 def create_donation_request(current_user):
     """
     Creates a new donation request entity in the donation_requests database table.
+    Expects donation request as json data in body (see examples in backend/mock_data/donation_request.json)
+    Args:
+        current_user: user currently logged in
     Returns: json with donation request data
     """
     if current_user.reviewed:
         user_id = current_user.id
+
+        # set current date and time as date for the donation request
         tz = pytz.timezone('Europe/Berlin')
         date = datetime.now(tz)
 
@@ -29,7 +34,7 @@ def create_donation_request(current_user):
         size_2 = request.json.get('size_2', '')
         color_1 = request.json.get('color_1', '')
         description = request.json.get('description', '')
-        status = "offen"
+        status = "offen"  # status for new request is always "offen" (active)
 
         donation_request = DonationRequest(user_id=user_id,
                                            date=date,
@@ -47,7 +52,7 @@ def create_donation_request(current_user):
         return donation_request_schema.jsonify(donation_request)
 
     else:
-        return make_response("Cannot create a donation request. Current user is not reviewed by TFWD Admins.")
+        return make_response("Cannot create a donation request. Current user is not reviewed by TFDW Admins.")
 
 
 @donation_request_route.route('/api/donation_request', methods=['GET'])
@@ -55,8 +60,14 @@ def create_donation_request(current_user):
 def get_donation_requests(current_user):
     """
     Get all donation requests from the database table donation_requests joined with table user.
-    If arguments are given in query string, results are being filtered by given arguments.
-    Returns: json with list of all donation requests and corresponding user data
+    If arguments are given in query string, results are being filtered by given arguments
+    (see filter arguments in Readme).
+    The user does not have to be authorized to do this request.
+    Args:
+        current_user: user currently logged in
+    Returns: if user is authorized: json with list of all donation requests and corresponding user data, else: returns
+    only donation requests without sensitive user information
+             if admin user: returns json with all donation requests
     """
     if current_user:
         if current_user.role == "admin":
@@ -96,19 +107,19 @@ def get_donation_requests(current_user):
 @donation_request_route.route('/api/user_donation_requests', methods=['GET'])
 @token_required()
 def get_user_donation_requests(current_user):
+    """
+    Get all donation requests of the user currently logged in.
+    Args:
+        current_user: user currently logged in
+    Returns: json with list of all the user's donation requests
+    """
     results = (db.session.query(DonationRequest.id, DonationRequest.user_id, DonationRequest.date,
                                 DonationRequest.category, DonationRequest.amount, DonationRequest.size_1,
                                 DonationRequest.size_2, DonationRequest.color_1, DonationRequest.description)
                .filter_by(user_id=current_user.id)).all()
-               # .join(User, User.id == Donation.user_id)).all()
 
     return jsonify([dict(id=x.id, user_id=x.user_id, date=x.date, category=x.category, amount=x.amount, size_1=x.size_1,
                          size_2=x.size_2, color_1=x.color_1, description=x.description) for x in results])
-
-    # TODO: could be optimized by using the donations already present in current_user but difficult to access
-    # current_user_json = user_schema.jsonify(current_user)
-    # user_donation_requests = jsonify(current_user_json['user_donation_requests'])
-    # return user_donation_requests
 
 
 @donation_request_route.route('/api/donation_request_details', methods=['GET'])
@@ -116,7 +127,11 @@ def get_user_donation_requests(current_user):
 def get_donation_request_details(current_user):
     """
     Gets a specific donation request by id from the donation_requests database table.
-    Returns: json with donation request data
+    Expects donation request id in query params (e.g. (/api/donation_request_details?id=10)
+    Args:
+        current_user: user currently logged in
+    Returns: if user is authorized: json with donation request details and user details, else: only donation details without sensitive user
+    information
     """
     args = request.args.to_dict()
     donation_request_id = args.get("id")
@@ -150,8 +165,10 @@ def get_donation_request_details(current_user):
 def update_donation_request(current_user):
     """
     Updates a given donation request by id in the donation requests database table.
+    Expects full donation request data in json body (see examples in backend/mock_data/donation_request.json).
+    Expects donation request id in query params (e.g. /api/donation_request?id=10).
     Args:
-        donation_request_id: id of donation request to be updated
+        current_user: user currently logged in
     Returns: json of updated donation request
     """
 
@@ -187,11 +204,10 @@ def update_donation_request(current_user):
 
 @donation_request_route.route("/api/donation_request", methods=['DELETE'])
 @token_required()
-def delete_donation(current_user):
+def delete_donation():
     """
     Deletes a donation request by id from the donation_requests database table.
-    Args:
-        donation_request_id: id of donation request to be deleted
+    Expects donation request id in query params (e.g. /api/donation_request?id=10).
     Returns: json of deleted donation request entity from database table donation requests
     """
     args = request.args.to_dict()

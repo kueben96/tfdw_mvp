@@ -1,7 +1,5 @@
 import jwt
 import os
-import secrets
-import string
 
 from flask import Flask, jsonify, request, Blueprint, render_template, make_response
 from datetime import datetime, timedelta
@@ -10,9 +8,7 @@ from flask_mail import Message
 from werkzeug.security import generate_password_hash
 
 from extensions import db, mail
-from models.user import User
-from api.user import token_required, verify_reset_password_token, verify_email
-from services.mail_service import send_email
+from api.user import token_required, verify_email
 
 reset_route = Blueprint('reset_route', __name__)
 
@@ -21,6 +17,7 @@ reset_route = Blueprint('reset_route', __name__)
 async def forgot_password():
     """
     Generates password reset token for user and sends email to user with link to password reset page.
+    Expects user email in json body.
     Returns: reset_token (JWT)
     """
 
@@ -50,10 +47,11 @@ async def forgot_password():
 def reset_password(current_user):
     """
     Reset password of user.
-    reset_token is expected in header as "reset_token"
-    password is expected in body (json)
+    Expects reset_token in header as "reset_token".
+    Expects password in body (json).
     Args:
         current_user: user that has sent the request
+    Returns message stating password reset was successful.
     """
     password = request.json.get('password', '')
     current_user.password = generate_password_hash(password)
@@ -62,17 +60,6 @@ def reset_password(current_user):
     db.session.commit()
 
     return make_response("Password reset successful.", 201)
-
-# @reset_route.route('/api/reset_password/<token>', methods=['POST'])
-# def reset_password(token):
-#     user = verify_reset_password_token(token)
-#     password = request.json.get('password', '')
-#     user.password = generate_password_hash(password)
-#
-#     db.session.add(user)
-#     db.session.commit()
-#
-#     return make_response("Password reset successful.", 201)
 
 
 
