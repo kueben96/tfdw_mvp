@@ -7,7 +7,7 @@ import SignUpForm from './components/auth/SignUpForm';
 import RecipientDashboard from './components/donations_recipient/RecipientsDashboard';
 import DonorsDashboard from './components/donations_donor/DonorsDashboard';
 import DashboardSelection from './components/ui_component/DashboardSelection';
-import AdminRequests from './components/admin/AdminRequests';
+import AdminPage from './components/admin/AdminPage';
 import DonationDetail from './components/donation_components/DonationDetail';
 import AddDonation from './components/donation_components/AddDonation';
 import MyAccount from './components/account/MyAccount';
@@ -34,7 +34,7 @@ function App() {
                 <Route path='/dashboard/donations' element={<RecipientDashboard />} />
                 <Route path='/dashboard/requests' element={<DonorsDashboard />} />
                 <Route path='/dashboard' element={<DashboardSelection />} />
-                <Route path='/adminrequests' element={<AdminRequests />} />
+                <Route path='/adminrequests' element={<AdminPage />} />
                 <Route path='/donation/:id' element={<DonationDetail />} />
                 <Route path='/donation_request/:id' element={<DonationDetail />} />
                 <Route path='/donation_request/new' element={<AddDonation />} />
