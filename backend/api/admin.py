@@ -12,7 +12,7 @@ admin_route = Blueprint('admin_route', __name__)
 @token_required()
 def get_unreviewed_receivers(current_user):
     """
-    Admin user gets list of all unreviewed receivers
+    Admin user gets list of all unreviewed receivers.
     (receivers need to be reviewed before they can post a request for a donation).
     Args:
         current_user: user currently logged in (gets returned by token_required wrapper)
