@@ -1,16 +1,33 @@
 import '../../resources/styles/register.css';
 import { React, useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import AccountCircle from '../../assets/images/AccountCircle.png'
-import MenuIcon from '../../assets/images/MenuIcon.png'
 import { useSignupMutation } from '../../store/reducers/authApiSlice';
+import DashboardHeader from '../ui_component/DashboardHeader';
+import { validateForm, validatePasswordOnRepeat } from './authFunctions';
+import { useNavigate } from 'react-router-dom';
 
 function Registerform() {
 
-	const [user, setUser] = useState({ firstName: "", lastName: "", email: "", phoneNumber: "", clubName: "", address: "", zipCode: "", city: "", federalState: "", password: "", password: "", repeatPassword: "", role: "" });
+	const [addUser, { isLoading: updating, isSuccess }] = useSignupMutation();
+	const navigate = useNavigate();
+	const [user, setUser] = useState(
+		{
+			first_name: "",
+			last_name: "",
+			email: "",
+			phone: "",
+			club_name: "",
+			address: "",
+			zip_code: "",
+			city: "",
+			region: "",
+			password: "",
+			repeatPassword: "",
+			role: "",
+		});
+
 
 	const [error, setError] = useState({})
-
 	const [isDonor, setIsDonor] = useState(true);
 	const [isRecipient, setIsRecipient] = useState(false)
 
@@ -21,17 +38,8 @@ function Registerform() {
 	}
 
 	const getRole = () => {
-		let role = ""
-		if (isDonor === true) {
-			role = "donor"
-		}
-		else role = "recipient"
-		return role
-	}
-
-	// use mutation to post request on API
-	const [addUser, { isLoading: updating, isSuccess: saved }] = useSignupMutation();
-
+		return isDonor ? 'donor' : 'recipient';
+	};
 
 	const inputHandler = (e) => {
 		const { name, value } = e.target;
@@ -40,83 +48,10 @@ function Registerform() {
 		}
 	};
 
-	const isEmail = (email) =>
-		/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
 
-
-	const isValid = () => {
-		const errors = { ...error }
-		if (!isEmail(user.email)) {
-			errors.email = "Invalid email";
-			console.log("why invalid")
-			console.log(user.email)
-		}
-		if (!user.email) {
-			errors.email = "Enter Email";
-			console.log("why invalid")
-			console.log(user.email)
-		}
-		if (!user.firstName) {
-			errors.firstName = "Enter FirstName";
-		}
-		if (!user.lastName) {
-			errors.lastName = "Enter LastName";
-		}
-		if (!user.address) {
-			errors.lastName = "Enter Street";
-		}
-		if (!user.clubName) {
-			errors.clubName = "Enter Club Name";
-		}
-		if (!user.zipCode) {
-			errors.zipCode = "Enter ZipCode";
-		}
-		if (!user.city) {
-			errors.zipCode = "Enter City";
-		}
-		if (!user.federalState) {
-			errors.federalState = "Enter Region";
-		}
-		setError(errors)
-
-		if (!Object.keys(error).length) {
-			console.log("error obj", Object.keys(error))
-			return true
-		} else {
-			return false
-		}
-
-
-	}
-
-	const validatePasswordOnRepeat = e => {
-		let { name, value } = e.target;
-
-		const passwordErrors = { ...error };
-		switch (name) {
-			case "password":
-				if (!value) {
-					passwordErrors.password = "Please enter Password.";
-				} else if (user.repeatPassword && value !== user.repeatPassword) {
-					passwordErrors.repeatPassword = "Password and Confirm Password does not match.";
-				} else {
-					passwordErrors.repeatPassword = user.repeatPassword ? "" : error.repeatPassword;
-				}
-				break;
-
-			case "repeatPassword":
-				if (!value) {
-					passwordErrors.repeatPassword = "Please enter Confirm Password.";
-				} else if (user.repeatPassword && value !== user.password) {
-					passwordErrors.repeatPassword = "Password and Confirm Password does not match.";
-				}
-				break;
-
-			default:
-				break;
-		}
+	const _validatePasswordOnRepeat = e => {
+		let passwordErrors = validatePasswordOnRepeat(e, user, error)
 		setError(passwordErrors)
-
 	}
 
 	const isCheckox = (name) => {
@@ -125,23 +60,21 @@ function Registerform() {
 	}
 
 	const saveUser = (e) => {
-
 		e.preventDefault();
-		const isValid = isValid()
-		setUser({ ...user, role: getRole() })
-
-		if (isValid) {
+		setUser({ ...user, role: getRole() });
+		const errors = validateForm(user);
+		if (Object.keys(errors).length === 0) {
 			try {
-				const response = addUser({ first_name: user.firstName, last_name: user.lastName, email: user.email, phone: user.phoneNumber, street: user.address, zip_code: user.zipCode, city: user.city, region: user.federalState, password: user.password, role: getRole(), club_name: user.clubName }).unwrap()
-
-				console.log("response", response)
+				addUser(user)
+				if (isSuccess) navigate('/login')
 			} catch (err) {
-				console.log("failed to post user", err)
+				console.log("failed to post user", err);
 			}
 		} else {
-			console.log("gib notification, is nicht valid")
+			setError(errors);
 		}
-	}
+	};
+	console.log(isSuccess)
 
 	return (
 		<div>
@@ -151,13 +84,7 @@ function Registerform() {
 						<div className="form-card">
 
 							<div className="">
-								<div className="form-header">
-									<img src={MenuIcon} className="icon"></img>
-									<h2 className="text-uppercase ">
-										Dein Konto
-									</h2>
-									<img src={AccountCircle} className="icon"></img>
-								</div>
+								<DashboardHeader text="Registrieren" />
 								<div className="form-body">
 									<div className="mb-10">Um deine Angaben für die nächsten Spenden zu speichern, erstelle gerne ein Benutzerkonto.   </div>
 									<Form onSubmit={saveUser}>
@@ -179,27 +106,27 @@ function Registerform() {
 										/>
 										<Row>
 											<Col sm={6} md={6}>
-												<Form.Group className="mb-1 flex-col" controlId="firstName">
+												<Form.Group className="mb-1 flex-col" controlId="first_name">
 													<label>Vorname *</label>
 													<input className="form-input-grey"
 														type="text"
-														id='firstName'
-														name='firstName'
+														id='first_name'
+														name='first_name'
 														onChange={inputHandler}
 													></input>
-													{error.firstName && <span className='err'>{error.firstName}</span>}
+													{error.first_name && <span className='err'>{error.first_name}</span>}
 												</Form.Group>
 											</Col>
 											<Col sm={6}>
-												<Form.Group className="mb-1 flex-col" controlId="lastName">
+												<Form.Group className="mb-1 flex-col" controlId="last_name">
 													<label>Nachname *</label>
 													<input className="form-input-grey"
 														type="text"
-														id='lastName'
-														name='lastName'
+														id='last_name'
+														name='last_name'
 														onChange={inputHandler}
 													></input>
-													{error.lastName && <span className='err'>{error.lastName}</span>}
+													{error.last_name && <span className='err'>{error.last_name}</span>}
 												</Form.Group>
 											</Col>
 										</Row>
@@ -219,8 +146,8 @@ function Registerform() {
 											<label>Telefonnummer</label>
 											<input className="form-input-grey"
 												type="tel"
-												id='phoneNumber'
-												name='phoneNumber'
+												id='phone'
+												name='phone'
 												onChange={inputHandler}
 											></input>
 										</Form.Group>
@@ -229,11 +156,11 @@ function Registerform() {
 											<label>Vereinsname / Organnisationsname *</label>
 											<input className="form-input-grey"
 												type="text"
-												id='clubName'
-												name='clubName'
+												id='club_name'
+												name='club_name'
 												onChange={inputHandler}
 											></input>
-											{error.clubName && <span className='err'>{error.clubName}</span>}
+											{error.club_name && <span className='err'>{error.club_name}</span>}
 										</Form.Group>
 										<Form.Group className="mb-1 flex-col" controlId="address">
 											<label>Straße und Hausnummer *</label>
@@ -248,15 +175,15 @@ function Registerform() {
 
 										<Row>
 											<Col md={4}>
-												<Form.Group className="mb-1 flex-col" controlId="zipCode">
+												<Form.Group className="mb-1 flex-col" controlId="zip_code">
 													<label>PLZ *</label>
 													<input className="form-input-grey"
 														type="number"
-														id='zipCode'
-														name='zipCode'
+														id='zip_code'
+														name='zip_code'
 														onChange={inputHandler}
 													></input>
-													{error.zipCode && <span className='err'>{error.zipCode}</span>}
+													{error.zip_code && <span className='err'>{error.zip_code}</span>}
 												</Form.Group>
 											</Col>
 											<Col md={6}>
@@ -273,15 +200,15 @@ function Registerform() {
 											</Col>
 										</Row>
 										<Col >
-											<Form.Group className="mb-1 flex-col" controlId="federalState">
+											<Form.Group className="mb-1 flex-col" controlId="region">
 												<label>Bundesland *</label>
 												<input className="form-input-grey"
 													type="text"
-													id='federalState'
-													name='federalState'
+													id='region'
+													name='region'
 													onChange={inputHandler}
 												></input>
-												{error.federalState && <span className='err'>{error.federalState}</span>}
+												{error.region && <span className='err'>{error.region}</span>}
 											</Form.Group>
 										</Col>
 										<Form.Group className="mb-1 flex-col" controlId="password">
@@ -291,7 +218,7 @@ function Registerform() {
 												id='password'
 												name='password'
 												onChange={inputHandler}
-												onBlur={validatePasswordOnRepeat}
+												onBlur={_validatePasswordOnRepeat}
 											></input>
 											{error.password && <span className='err'>{error.password}</span>}
 										</Form.Group>
@@ -302,7 +229,7 @@ function Registerform() {
 												id='repeatPassword'
 												name='repeatPassword'
 												onChange={inputHandler}
-												onBlur={validatePasswordOnRepeat}
+												onBlur={_validatePasswordOnRepeat}
 											></input>
 											{error.repeatPassword && <span className='err'>{error.repeatPassword}</span>}
 										</Form.Group>
