@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Row } from 'react-bootstrap';
+import React, {useState } from 'react';
+import { Row } from 'react-bootstrap';
 import '../../resources/styles/donationcards.css';
 
 import FilterBarDonations from '../FilterBarDonations';

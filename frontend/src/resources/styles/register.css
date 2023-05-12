@@ -42,7 +42,6 @@
 /* Style the checkmark/indicator */
 .register-check .checkmark:after {
   left: 6px;
-  
   width: 5px;
   height: 12px;
   border: solid white;
