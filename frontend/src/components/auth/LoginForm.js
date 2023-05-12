@@ -9,7 +9,7 @@ import { useLoginMutation } from '../../store/reducers/authApiSlice';
 
 function LoginForm() {
     // TODO: handle reset password (backend alreaady done)
-    // TODO: handle refresh token 
+    // TODO: handle refresh token -> implemented in DB
     const errRef = useRef()
     const dispatch = useDispatch();
     const navigate = useNavigate()
@@ -22,7 +22,7 @@ function LoginForm() {
         // redirect to home if already logged in
         if (authUser) navigate('/');
 
-    }, []);
+    }, [authUser, navigate]);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errMsg, setErrMsg] = useState('')
