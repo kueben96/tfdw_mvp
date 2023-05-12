@@ -1,23 +1,19 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
-import { selectCurrentUser } from '../../store/reducers/authSlice';
+import { userIdFromLocalStorage } from '../../store/reducers/authSlice';
 import { useGetUserByIdQuery } from '../../store/reducers/userSlice'
 
 const AccountDetail = () => {
-    const currentUser = useSelector(selectCurrentUser);
-    console.log(currentUser)
 
-    const userId = localStorage.getItem('userId')
+    const userId = userIdFromLocalStorage
 
-    const { data: user, isLoading, isSuccess, isError } = useGetUserByIdQuery(userId)
+    const { data: user, isLoading, isSuccess, isError, error } = useGetUserByIdQuery(userId)
 
-    console.log(user)
     if (isLoading) {
         return <div>Loading...</div>;
     }
 
     if (isError) {
-        return <div>Error: error</div>;
+        return <div>Error: {error}</div>;
     }
 
     return (

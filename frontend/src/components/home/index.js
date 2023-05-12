@@ -2,14 +2,14 @@ import React from 'react'
 import { Button, Container } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { selectCurrentToken, selectCurrentUser } from '../../store/reducers/authSlice'
+import { selectCurrentToken, selectCurrentUser, userFromLocalStorage } from '../../store/reducers/authSlice'
 
 const Home = () => {
 
     const navigate = useNavigate()
     const token = useSelector(selectCurrentToken)
-    // const user = useSelector(selectCurrentUser)
-    const user = localStorage.getItem('user')
+
+    const user = userFromLocalStorage
 
     const routeDashboard = () => {
         navigate('/dashboard')
