@@ -1,13 +1,11 @@
-import json
-
 import jwt
 import os
 
-from flask import Flask, jsonify, request, Blueprint, make_response, Response
+from flask import Flask, jsonify, request, Blueprint, make_response
 from werkzeug.security import check_password_hash
 from datetime import datetime, timedelta
 
-from models.user import User, user_schema
+from models.user import User
 from api.user import token_required
 
 login_route = Blueprint('login_route', __name__)
