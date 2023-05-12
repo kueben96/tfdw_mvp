@@ -1,14 +1,17 @@
 import '../../resources/styles/register.css';
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useSignupMutation } from '../../store/reducers/authApiSlice';
 import DashboardHeader from '../ui_component/DashboardHeader';
 import { validateForm, validatePasswordOnRepeat } from './authFunctions';
 import { useNavigate } from 'react-router-dom';
 
+// TODO: user feedback after successfull registration missing
+// TODO: isSuccess property is not set after successfull registration
+
 function Registerform() {
 
-	const [addUser, { isLoading: updating, isSuccess }] = useSignupMutation();
+	const [addUser, { isLoading, isSuccess }] = useSignupMutation();
 	const navigate = useNavigate();
 	const [user, setUser] = useState(
 		{
@@ -59,22 +62,21 @@ function Registerform() {
 		return false
 	}
 
-	const saveUser = (e) => {
+	const saveUser = async (e) => {
 		e.preventDefault();
 		setUser({ ...user, role: getRole() });
 		const errors = validateForm(user);
 		if (Object.keys(errors).length === 0) {
-			try {
-				addUser(user)
-				if (isSuccess) navigate('/login')
-			} catch (err) {
-				console.log("failed to post user", err);
-			}
+			addUser(user);
 		} else {
 			setError(errors);
 		}
 	};
-	console.log(isSuccess)
+	useEffect(() => {
+		if (isSuccess) {
+			navigate('/login');
+		}
+	}, [isSuccess, navigate]);
 
 	return (
 		<div>
@@ -233,8 +235,9 @@ function Registerform() {
 											></input>
 											{error.repeatPassword && <span className='err'>{error.repeatPassword}</span>}
 										</Form.Group>
-										<Button type="submit" bsPrefix='button-pink align-self-right' className='button-pink'> {updating ? "Konto wird erstellt ..." : "Konto erstellen"}</Button>
+										<Button type="submit" bsPrefix='button-pink align-self-right' className='button-pink'> {isLoading ? "Konto wird erstellt ..." : "Konto erstellen"}</Button>
 									</Form>
+									{isSuccess && <div>Konto wurde erfolgreich erstellt.</div>}
 								</div>
 							</div>
 
