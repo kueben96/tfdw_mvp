@@ -1,6 +1,7 @@
 import jwt
 import os
 
+from dto.user import UserDTO
 from extensions import db
 from functools import wraps
 from flask import Flask, jsonify, request, Blueprint
@@ -127,6 +128,7 @@ def get_user(current_user, user_id: int):
     Returns: json with user data
     """
     user = User.query.get(user_id)
+
     return user_schema.jsonify(user)
 
 
