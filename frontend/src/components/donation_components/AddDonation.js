@@ -1,8 +1,8 @@
 import { Col, Container, Row } from 'react-bootstrap';
-import '../resources/styles/setpost.css';
-import DashboardHeader from './ui/DashboardHeader';
-import { useAddDonationMutation } from '../store/reducers/donationsSlice';
-import { useAddDonationRequestMutation } from '../store/reducers/donationsRequestSlice';
+import '../../resources/styles/setpost.css';
+import DashboardHeader from '../ui_component/DashboardHeader';
+import { useAddDonationMutation } from '../../store/reducers/donationsSlice';
+import { useAddDonationRequestMutation } from '../../store/reducers/donationsRequestSlice';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -24,7 +24,7 @@ const getAddDonationQuery = (path) => {
         return null;
     }
 };
-const SetUpPost = () => {
+const AddDonation = () => {
     const navigate = useNavigate();
     const location = useLocation()
     const pageType = isDonationRequestPath(location.pathname) ? "Gesuch" : "Spende";
@@ -135,7 +135,7 @@ const SetUpPost = () => {
     );
 };
 
-export default SetUpPost;
+export default AddDonation;
 
 
 

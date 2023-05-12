@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Container, Nav, NavItem, Row } from 'react-bootstrap';
-import DashboardHeader from '../ui/DashboardHeader';
+import DashboardHeader from '../ui_component/DashboardHeader';
 import { Outlet, useParams, useNavigate } from 'react-router-dom';
 
 

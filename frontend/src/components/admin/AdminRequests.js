@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
 import '../../resources/styles/dashboard.css';
-import DashboardHeader from '../ui/DashboardHeader';
+import DashboardHeader from '../ui_component/DashboardHeader';
 
 const AdminRequests = () => {
 

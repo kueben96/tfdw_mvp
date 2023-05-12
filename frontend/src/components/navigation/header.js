@@ -1,6 +1,6 @@
 import React from 'react';
 import { Nav, Navbar, Container } from 'react-bootstrap'
-import { Logo } from '../ui/Logo';
+import { Logo } from '../ui_component/Logo';
 import Blog from '../../images/Blog.png'
 import Globe from '../../images/Globe.png'
 import { Heart } from '../../images'

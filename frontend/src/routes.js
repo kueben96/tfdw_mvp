@@ -1,15 +1,15 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Layout from './components/Layout';
+import Layout from './components/ui_component/Layout';
 import Home from './components/home';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import RecipientDashboard from './components/donations_recipient/RecipientsDashboard';
 import DonorsDashboard from './components/donations_donor/DonorsDashboard';
-import DashboardSelection from './components/DashboardSelection';
+import DashboardSelection from './components/ui_component/DashboardSelection';
 import AdminRequests from './components/admin/AdminRequests';
-import DonationDetail from './components/donations_detail/DonationDetail';
-import SetUpPost from './components/SetUpPost';
+import DonationDetail from './components/donation_components/DonationDetail';
+import AddDonation from './components/donation_components/AddDonation';
 import MyAccount from './components/account/MyAccount';
 import EditEntry from './components/account/EditEntry';
 import AccountEntries from './components/account/AccountEntries';
@@ -37,8 +37,8 @@ function App() {
                 <Route path='/adminrequests' element={<AdminRequests />} />
                 <Route path='/donation/:id' element={<DonationDetail />} />
                 <Route path='/donation_request/:id' element={<DonationDetail />} />
-                <Route path='/donation_request/new' element={<SetUpPost />} />
-                <Route path='/donation/new' element={<SetUpPost />} />
+                <Route path='/donation_request/new' element={<AddDonation />} />
+                <Route path='/donation/new' element={<AddDonation />} />
             </Route>
         </Routes>
 
