@@ -1,5 +1,4 @@
 import { apiSlice } from "./apiSlice"
-// https://codesandbox.io/s/eed6q?file=/src/apps/posts/_api.js
 
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
@@ -10,7 +9,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 body: { ...credentials }
             })
         }),
-        // add signup here
+
         signup: builder.mutation({
             query: userData => ({
                 url: '/signup',
