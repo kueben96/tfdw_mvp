@@ -47,7 +47,7 @@ def token_required(optional=False, refresh=False, reset=False):
                 if token:
                     try:
                         # decoding the payload to fetch the stored details
-                        data = jwt.decode(token, os.environ.get('SECRET_KEY'))
+                        data = jwt.decode(token, os.environ.get('SECRET_KEY'), algorithms=["HS256"])
                         current_user = User.query.filter_by(id=data['id']).first()
                     except:
                         return jsonify({'message': 'Token is invalid!!'}), 401
@@ -60,7 +60,7 @@ def token_required(optional=False, refresh=False, reset=False):
                     return jsonify({'message': 'Token is missing!!'}), 401
                 try:
                     # decoding the payload to fetch the stored details
-                    data = jwt.decode(token, os.environ.get('SECRET_KEY'))
+                    data = jwt.decode(token, os.environ.get('SECRET_KEY'), algorithms=["HS256"])
                     current_user = User.query.filter_by(id=data['id']).first()
                 except:
                     return jsonify({'message': 'Token is invalid!!'}), 401

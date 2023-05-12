@@ -132,5 +132,14 @@
   "color_1": "blue",
   "color_2": "yellow",
   "description": "football socks children blue yellow"
+ },
+ {
+  "category": "football_sock",
+  "amount": 1,
+  "size_1": "children",
+  "size_2": "",
+  "color_1": "red",
+  "color_2": "yellow",
+  "description": "football socks children blue yellow"
  }
 ]
