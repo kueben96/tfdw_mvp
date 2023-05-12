@@ -204,10 +204,12 @@ def update_donation_request(current_user):
 
 @donation_request_route.route("/api/donation_request", methods=['DELETE'])
 @token_required()
-def delete_donation():
+def delete_donation(current_user):
     """
     Deletes a donation request by id from the donation_requests database table.
     Expects donation request id in query params (e.g. /api/donation_request?id=10).
+    Args:
+        current_user: user currently logged in (gets returned by token_required wrapper)
     Returns: json of deleted donation request entity from database table donation requests
     """
     args = request.args.to_dict()

@@ -104,9 +104,11 @@ def verify_reset_password_token(token):
 
 @user_route.route('/api/user', methods=['GET'])
 @token_required()
-def get_users():
+def get_users(current_user):
     """
     Get all users from the database table users.
+    Args:
+        current_user: user currently logged in (gets returned by token_required wrapper)
     Returns: json with list of all users
     """
     all_users = User.query.all()
@@ -115,10 +117,11 @@ def get_users():
 
 @user_route.route('/api/user/<int:user_id>', methods=['GET'])
 @token_required()
-def get_user(user_id: int):
+def get_user(current_user, user_id: int):
     """
     Gets a specific user by id from the users database table.
     Args:
+        current_user: user currently logged in (gets returned by token_required wrapper)
         user_id: id of user
     Returns: json with user data
     """
@@ -169,10 +172,11 @@ def update_user(current_user, user_id: int):
 
 @user_route.route("/api/user/<int:user_id>", methods=['DELETE'])
 @token_required()
-def delete_user(user_id: int):
+def delete_user(current_user, user_id: int):
     """
     Deletes a user by id from the users database table.
     Args:
+        current_user: user currently logged in (gets returned by token_required wrapper)
         user_id: id of user to be deleted
     Returns: json of deleted user entity from database table users
     """

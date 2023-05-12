@@ -174,10 +174,11 @@ def get_donation_details(current_user):
 
 @donation_route.route('/api/donation/<int:donation_id>', methods=['GET'])
 @token_required()
-def get_donation_by_id(donation_id: int):
+def get_donation_by_id(current_user, donation_id: int):
     """
     Gets a specific donation by id from the donations database table.
     Args:
+        current_user: user currently logged in (gets returned by token_required wrapper)
         donation_id: id of donation
     Returns: json with donation data
     """
@@ -230,10 +231,12 @@ def update_donation(current_user):
 
 @donation_route.route("/api/donation", methods=['DELETE'])
 @token_required()
-def delete_donation():
+def delete_donation(current_user):
     """
     Deletes a donation by id from the donations database table.
     Expects donation id in query parameters as "id" (e.g. /api/donation/?id=10)
+    Args:
+        current_user: user currently logged in (gets returned by token_required wrapper)
     Returns: json of deleted donation entity from database table donations
     """
     args = request.args.to_dict()
