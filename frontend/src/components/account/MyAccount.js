@@ -3,7 +3,7 @@ import { Col, Container, Nav, NavItem, Row } from 'react-bootstrap';
 import DashboardHeader from '../ui_component/DashboardHeader';
 import { Outlet, useParams, useNavigate } from 'react-router-dom';
 
-
+// TODO: Implement page according to figma file
 const MyAccount = () => {
     const { activeTab } = useParams();
     const navigate = useNavigate();
