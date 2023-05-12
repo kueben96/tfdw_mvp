@@ -2,6 +2,7 @@ import os
 from datetime import datetime, timedelta
 import jwt
 
+# these tests fail because authorization dies not work with generated token
 
 def test_token_required(test_client):
 

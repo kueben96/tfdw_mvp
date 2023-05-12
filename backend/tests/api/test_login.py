@@ -39,7 +39,7 @@ def test_login(test_client):
 
     assert response.status_code == 201
 
-    assert response.json[0].get('id') == 8
+    assert response.json[0].get('id') == 4
     assert response.json[0].get('email') == 'ron.weasley@hogwarts.magic'
     assert response.json[0].get('first_name') == 'Ron'
     assert response.json[0].get('last_name') == 'Weasley'
