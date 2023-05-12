@@ -1,8 +1,8 @@
 import '../../resources/styles/register.css';
 import { React, useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import AccountCircle from '../../images/AccountCircle.png'
-import MenuIcon from '../../images/MenuIcon.png'
+import AccountCircle from '../../assets/images/AccountCircle.png'
+import MenuIcon from '../../assets/images/MenuIcon.png'
 import { useSignupMutation } from '../../store/reducers/authApiSlice';
 
 function Registerform() {

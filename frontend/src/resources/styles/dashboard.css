@@ -31,7 +31,7 @@
 
 }
 .home-image{
-  background-image: url(../../images/Group.png);
+  background-image: url(../../assets/images/Group.png);
   background-repeat: no-repeat;
   background-size: cover;
   margin-top: 15px;
@@ -44,7 +44,7 @@
     
 }
 .konto-image{
-  background-image: url(../../images/Konto.png);
+  background-image: url(../../assets/images/Konto.png);
   background-repeat: no-repeat;
   background-size: cover;
   float: right;
