@@ -9,10 +9,10 @@
   position: relative;
    }
 input#email {
-    background-image: url(../../images/SecuredLetter.png);
-    background-repeat: no-repeat;
-    text-indent: 30px;
-    background-position: 10px 5px; 
+  background-image: url(../../images/SecuredLetter.png);
+  background-repeat: no-repeat;
+  text-indent: 30px;
+  background-position: 10px 5px; 
 }
 input#email:focus{
   background-image:none;
@@ -23,15 +23,15 @@ input#email:focus{
   text-indent: 30px;
   background-position: 10px 5px; 
 }
-input#password:focus{
-background-image:none;
+  input#password:focus{
+  background-image:none;
 }
 
 .loginwrap{
   width:350px;
   margin: auto;
   text-align: left;
- margin-top: 150px;
+  margin-top: 150px;
  
 }
 .logincontainer{
@@ -62,14 +62,14 @@ background-image:none;
   .login-paragraph{
     width: 350px;
     height: 48px;
-  text-align: left;
-  font-family: 'Bebas Neue', sans-serif;
-  font-style:normal;
-  font-size: 18px;
-  line-height: 20px;
-  align-items: center;
-  color: #000000;
-  }
+    text-align: left;
+    font-family: 'Bebas Neue', sans-serif;
+    font-style:normal;
+    font-size: 18px;
+    line-height: 20px;
+    align-items: center;
+    color: #000000;
+    }
   .login-text1:hover{
     color: #F7E167;
     text-decoration-line: none;
@@ -78,7 +78,7 @@ background-image:none;
     width:350px;
     margin: auto;
     text-align: left;
-   margin-top: 60px;
+    margin-top: 60px;
    
   }
   .login-text2{

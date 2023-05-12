@@ -1,4 +1,3 @@
-
 .dashboard{
     margin: auto;
     position: relative;
@@ -19,40 +18,40 @@
   
 }
 .text-center h4{
-  display: flex;
-  align-content: center;
-  font-style: normal;
-  font-weight: bold;
-  margin: auto;
-  line-height: 45px;
-  font-size: 20px;
-  color: black;
-  justify-content: center;
+    display: flex;
+    align-content: center;
+    font-style: normal;
+    font-weight: bold;
+    margin: auto;
+    line-height: 45px;
+    font-size: 20px;
+    color: black;
+    justify-content: center;
 
 }
 .home-image{
-  background-image: url(../../images/Group.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  margin-top: 15px;
-  float: left;
-  margin-left: 15px;
-  width: 18px;
-  height: 18px;
-  background-color: transparent;
-  border: none;
+    background-image: url(../../images/Group.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 15px;
+    float: left;
+    margin-left: 15px;
+    width: 18px;
+    height: 18px;
+    background-color: transparent;
+    border: none;
     
 }
 .konto-image{
-  background-image: url(../../images/Konto.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  float: right;
-  width: 48px;
-  height: 48px;
-  background-color: transparent;
-  border: none;
-  align-items: center;
+    background-image: url(../../images/Konto.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    float: right;
+    width: 48px;
+    height: 48px;
+    background-color: transparent;
+    border: none;
+    align-items: center;
   
 }
 
@@ -65,25 +64,25 @@
     
 }
 .registerpara p{
-  margin: auto;
-  text-align: center;
-  height: 48px;
-  font-style: normal;
-  font-weight: 0;
-  font-size: 16px;
-  line-height: 20px;
-  align-items: center;
-  color: #000000;
+    margin: auto;
+    text-align: center;
+    height: 48px;
+    font-style: normal;
+    font-weight: 0;
+    font-size: 16px;
+    line-height: 20px;
+    align-items: center;
+    color: #000000;
   }
  .registerpara button{
-  display: flex;
-  margin:  auto;
-  width: 200px;
-  height: 40px;
-  justify-content: center;
-  padding: 10px;
-  font-size: 16px;
-  line-height: 1rem;
+    display: flex;
+    margin:  auto;
+    width: 200px;
+    height: 40px;
+    justify-content: center;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 1rem;
   
   
   }
