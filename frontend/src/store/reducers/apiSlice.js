@@ -5,7 +5,9 @@ const baseQuery = fetchBaseQuery({
     baseUrl: '/api',
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
-        const token = getState().auth.token
+        const token = localStorage.getItem("token")
+        // TODO: implement with state
+        // const token = getState().auth.token
         if (token) {
             headers.set("x-access-token", token)
         }

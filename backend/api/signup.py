@@ -15,8 +15,8 @@ signup_route = Blueprint('signup_route', __name__)
 def signup():
     """
     Creates a new user in the database.
-
-    Returns: response if signup was successful
+    Expects json body with complete user data (examples in backend/mock_data/user.json)
+    Returns: response whether signup was successful or not
     """
     first_name = request.json.get('first_name', '')
     last_name = request.json.get('last_name', '')

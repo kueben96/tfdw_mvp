@@ -17,6 +17,7 @@ reset_route = Blueprint('reset_route', __name__)
 async def forgot_password():
     """
     Generates password reset token for user and sends email to user with link to password reset page.
+    Expects user email in json body.
     Returns: reset_token (JWT)
     """
 
@@ -46,10 +47,11 @@ async def forgot_password():
 def reset_password(current_user):
     """
     Reset password of user.
-    reset_token is expected in header as "reset_token"
-    password is expected in body (json)
+    Expects reset_token in header as "reset_token".
+    Expects password in body (json).
     Args:
         current_user: user that has sent the request
+    Returns message stating password reset was successful.
     """
     password = request.json.get('password', '')
     current_user.password = generate_password_hash(password)
@@ -58,3 +60,10 @@ def reset_password(current_user):
     db.session.commit()
 
     return make_response("Password reset successful.", 201)
+
+
+
+
+
+
+
