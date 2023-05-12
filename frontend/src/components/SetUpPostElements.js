@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import '../resources/styles/setpost.css';
 import { useAddDonationMutation } from '../store/reducers/donationsSlice';
 
+// TODO: pop up size_2 after size_1 selection
 const SetUpPostElements = () => {
 
   const navigate = useNavigate();

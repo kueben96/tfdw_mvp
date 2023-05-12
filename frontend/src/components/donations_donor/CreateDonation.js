@@ -4,6 +4,8 @@ import FilterBarDonations from '../FilterBarDonations'
 import DashboardHeader from '../ui/DashboardHeader';
 
 const CreateDonation = () => {
+
+    // TODO: if not authenticated, show login page button
     const [filters, setFilters] = useState({});
     const handleFilterChange = (newFilters) => {
         setFilters(newFilters)

@@ -3,6 +3,7 @@ import { Col, Container, Row } from 'react-bootstrap'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDeleteDonationMutation } from '../../store/reducers/donationsSlice'
 
+// TODO: Show like donation details
 const EntryDetail = () => {
     const location = useLocation()
     const { donation } = location.state
