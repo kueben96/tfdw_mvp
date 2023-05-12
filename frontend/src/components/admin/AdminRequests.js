@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import '../../resources/styles/dashboard.css';
 import DashboardHeader from '../ui/DashboardHeader';
 
