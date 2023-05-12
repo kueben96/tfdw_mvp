@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request, Blueprint, make_response
 from datetime import datetime
 import pytz
 
-from models.donation_request import DonationRequest, donation_request_schema, donation_requests_schema
+from models.donation_request import DonationRequest, donation_request_schema
 from models.user import User
 from extensions import db
 
@@ -16,10 +16,14 @@ donation_request_route = Blueprint('donation_request_route', __name__)
 def create_donation_request(current_user):
     """
     Creates a new donation request entity in the donation_requests database table.
+    Args:
+        current_user: user currently logged in
     Returns: json with donation request data
     """
     if current_user.reviewed:
         user_id = current_user.id
+
+        # set current date and time as date for the donation request
         tz = pytz.timezone('Europe/Berlin')
         date = datetime.now(tz)
 
@@ -29,7 +33,7 @@ def create_donation_request(current_user):
         size_2 = request.json.get('size_2', '')
         color_1 = request.json.get('color_1', '')
         description = request.json.get('description', '')
-        status = "offen"
+        status = "offen"  # status for new request is always "offen" (active)
 
         donation_request = DonationRequest(user_id=user_id,
                                            date=date,
@@ -47,7 +51,7 @@ def create_donation_request(current_user):
         return donation_request_schema.jsonify(donation_request)
 
     else:
-        return make_response("Cannot create a donation request. Current user is not reviewed by TFWD Admins.")
+        return make_response("Cannot create a donation request. Current user is not reviewed by TFDW Admins.")
 
 
 @donation_request_route.route('/api/donation_request', methods=['GET'])
@@ -56,7 +60,11 @@ def get_donation_requests(current_user):
     """
     Get all donation requests from the database table donation_requests joined with table user.
     If arguments are given in query string, results are being filtered by given arguments.
-    Returns: json with list of all donation requests and corresponding user data
+    Args:
+        current_user: user currently logged in
+    Returns: if user is authorized: json with list of all donation requests and corresponding user data, else: returns
+    only donation requests without sensitive user information
+             if admin user: returns json with all donation requests
     """
     if current_user:
         if current_user.role == "admin":
@@ -96,6 +104,14 @@ def get_donation_requests(current_user):
 @donation_request_route.route('/api/user_donation_requests', methods=['GET'])
 @token_required()
 def get_user_donation_requests(current_user):
+    """
+    Get all donation requests of the user currently logged in.
+    Args:
+        current_user: use
+
+    Returns:
+
+    """
     results = (db.session.query(DonationRequest.id, DonationRequest.user_id, DonationRequest.date,
                                 DonationRequest.category, DonationRequest.amount, DonationRequest.size_1,
                                 DonationRequest.size_2, DonationRequest.color_1, DonationRequest.description)
