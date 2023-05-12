@@ -178,22 +178,16 @@ def get_donation_details(current_user):
 
 @donation_route.route('/api/donation/<int:donation_id>', methods=['GET'])
 @token_required()
-def get_donation_by_id(donation_id: int):
+def get_donation_by_id(current_user, donation_id: int):
     """
     Gets a specific donation by id from the donations database table.
     Args:
+        current_user: user currently logged in (gets returned from token_required wrapper)
         donation_id: id of donation
     Returns: json with donation data
     """
-    donation_db = Donation.query.get(donation_id)
-
-    donation_dto = DonationDTO(id=donation_id, user_id=donation_db.user_id, date=donation_db.date,
-                               category=donation_db.category, amount=donation_db.amount, size_1=donation_db.size_1,
-                               size_2=donation_db.size_2, color_1=donation_db.color_1, color_2=donation_db.color_2,
-                               description=donation_db.description, status=donation_db.status)
-
-    donation_json = DonationEncoder().encode(donation_dto)
-    return make_response(donation_json)
+    donation = Donation.query.get(donation_id)
+    return donation_schema.jsonify(donation)
 
 
 @donation_route.route('/api/donation/', methods=['PATCH'])
@@ -245,7 +239,7 @@ def update_donation(current_user):
 
 @donation_route.route("/api/donation", methods=['DELETE'])
 @token_required()
-def delete_donation():
+def delete_donation(current_user):
     """
     Deletes a donation by id from the donations database table.
     Expects donation id in query parameters as "id" (e.g. /api/donation/?id=10)

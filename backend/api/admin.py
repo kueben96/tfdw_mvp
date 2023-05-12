@@ -13,29 +13,27 @@ admin_route = Blueprint('admin_route', __name__)
 
 @admin_route.route('/api/unreviewed_receivers', methods=['GET'])
 @token_required()
-def get_unreviewed_receivers():
+def get_unreviewed_receivers(current_user):
     """
     Admin user gets list of all unreviewed receivers
     (receivers need to be reviewed before they can post a request for a donation).
+    Args:
+        current_user: user currently logged in (gets returned from token_required wrapper)
     Returns: list of all unreviewed receivers
     """
-    results = User.query.filter_by(reviewed=False).all()
+    results = (db.session.query(User.id, User.club_name, User.date, User.reviewed)
+               .filter_by(reviewed=False)).all()
 
-    unreviewed_users = [UserDTO(id=x.id, first_name=x.first_name, last_name=x.last_name, email=x.email,
-                                phone=x.phone, password=x.password, street=x.street, zip_code=x.zip_code,
-                                city=x.city, region=x.region, role=x.role, club_name=x.club_name,
-                                reviewed=x.reviewed, date=x.date) for x in results]
-
-    unreviewed_users_json = json.dumps([UserEncoder().encode(ob) for ob in unreviewed_users])
-    return make_response(unreviewed_users_json)
+    return jsonify([dict(id=x.id, club_name=x.club_name, date=x.date, reviewed=x.reviewed) for x in results])
 
 
 @admin_route.route('/api/update_receiver_reviewed/<int:user_id>', methods=['PATCH'])
 @token_required()
-def update_user_reviewed(user_id):
+def update_user_reviewed(current_user, user_id):
     """
     Admin updates the "reviewed" status of a receiver to True so that a receiver is able to post donation requests.
     Args:
+        current_user: user currently logged in (gets returned from token_required wrapper)
         user_id: id of user to be updated
     Returns: updated receiver user object
 
