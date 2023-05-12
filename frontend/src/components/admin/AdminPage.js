@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import '../../resources/styles/dashboard.css';
 import DashboardHeader from '../ui_component/DashboardHeader';
 
-const AdminRequests = () => {
+const AdminPage = () => {
 
     return (
         <div>
@@ -21,4 +21,4 @@ const AdminRequests = () => {
     )
 }
 
-export default AdminRequests
+export default AdminPage
