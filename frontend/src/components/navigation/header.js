@@ -1,12 +1,12 @@
 import React from 'react';
 import { Nav, Navbar, Container } from 'react-bootstrap'
 import { Logo } from '../ui_component/Logo';
-import Blog from '../../images/Blog.png'
-import Globe from '../../images/Globe.png'
-import { Heart } from '../../images'
-import Pray from '../../images/Pray.svg'
-import Santa from '../../images/Santa.png'
-import TShirt from '../../images/T-Shirt.png'
+import Blog from '../../assets/images/Blog.png'
+import Globe from '../../assets/images/Globe.png'
+import { Heart } from '../../assets/images'
+import Pray from '../../assets/images/Pray.svg'
+import Santa from '../../assets/images/Santa.png'
+import TShirt from '../../assets/images/T-Shirt.png'
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut, selectCurrentToken } from '../../store/reducers/authSlice';
 import { useNavigate } from 'react-router-dom'
