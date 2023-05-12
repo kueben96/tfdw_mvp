@@ -1,11 +1,8 @@
-import { Col, Container, Row } from 'react-bootstrap';
+import { Container} from 'react-bootstrap';
 import { useLocation, useParams } from 'react-router-dom';
-<<<<<<< HEAD:frontend/src/components/donations_detail/DonationRequestDetail.js
-import { useFetchDonationRequestByIdQuery } from '../store/reducers/donationsRequestSlice';
 import DashboardHeader from '../components/ui/DashboardHeader';
-=======
 import { useFetchDonationRequestByIdQuery } from '../../store/reducers/donationsRequestSlice';
->>>>>>> develop:frontend/src/donations_detail/DonationRequestDetail.js
+
 
 const DonationRequestDetail = () => {
     const location = useLocation();
@@ -41,7 +38,6 @@ const DonationRequestDetail = () => {
         
             <p>Category: {donation.category}</p>
             <p>Amount: {donation.amount}</p>
-            {/* add more donation data fields here */}
           </div>
           </div>
       </div>
