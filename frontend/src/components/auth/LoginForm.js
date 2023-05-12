@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../../store/reducers/authApiSlice';
 
 function LoginForm() {
+    // TODO: handle reset password (backend alreaady done)
+    // TODO: handle refresh token -> implemented in DB
     const errRef = useRef()
     const dispatch = useDispatch();
     const navigate = useNavigate()
@@ -20,7 +22,7 @@ function LoginForm() {
         // redirect to home if already logged in
         if (authUser) navigate('/');
 
-    }, []);
+    }, [authUser, navigate]);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errMsg, setErrMsg] = useState('')
@@ -30,14 +32,18 @@ function LoginForm() {
         return email.length > 0 && password.length > 0;
     }
 
+    const resetForm = () => {
+        setEmail('')
+        setPassword('')
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
             const userData = await login({ email, password }).unwrap()
-            dispatch(setCredentials({ ...userData, email }))
+            dispatch(setCredentials({ ...userData }))
 
-            setEmail('')
-            setPassword('')
+            resetForm()
             navigate('/')
         } catch (err) {
             // TODO: handle errors from reducer 

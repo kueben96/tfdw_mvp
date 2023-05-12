@@ -1,8 +1,6 @@
-from flask import Flask, jsonify, request
-import json
+from flask import Flask
 import config
 
-import os
 from api.signup import signup_route
 from api.login import login_route
 from api.reset_password import reset_route
@@ -12,8 +10,6 @@ from api.donation import donation_route
 from api.donation_request import donation_request_route
 
 from extensions import db, migrate, ma, cors, mail
-
-from models import user, donation, donation_request
 
 
 def create_app(app_config):
@@ -42,10 +38,3 @@ def create_app(app_config):
 
 # Create an application instance
 app = create_app(config.DevelopmentConfig)
-
-# Create various application instances
-# Order matters: Initialize SQLAlchemy before Marshmallow
-
-# if __name__ == "__main__":
-#     port = int(os.environ.get('PORT', 5000))
-#     app.run(debug=True, host='0.0.0.0', port=port)

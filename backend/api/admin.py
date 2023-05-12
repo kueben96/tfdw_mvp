@@ -1,8 +1,8 @@
 from api.user import token_required
 from extensions import db
-from flask import Flask, jsonify, request, Blueprint
+from flask import Flask, jsonify, Blueprint
 
-from models.user import User, user_schema, users_schema
+from models.user import User, user_schema
 
 
 admin_route = Blueprint('admin_route', __name__)
@@ -12,9 +12,10 @@ admin_route = Blueprint('admin_route', __name__)
 @token_required()
 def get_unreviewed_receivers(current_user):
     """
-    Admin user gets list of all unreviewed receivers.
+    Admin user gets list of all unreviewed receivers
+    (receivers need to be reviewed before they can post a request for a donation).
     Args:
-        current_user: admin user
+        current_user: user currently logged in (gets returned by token_required wrapper)
     Returns: list of all unreviewed receivers
     """
     results = (db.session.query(User.id, User.club_name, User.date, User.reviewed)
@@ -26,9 +27,10 @@ def get_unreviewed_receivers(current_user):
 @token_required()
 def update_user_reviewed(current_user, user_id):
     """
-    Admin updates the reviewed status of a receiver to True.
+    Admin updates the "reviewed" status of a receiver to True so that a receiver is able to post donation requests.
     Args:
-        current_user: admin user
+        current_user: user currently logged in (gets returned by token_required wrapper)
+        user_id: id of user to be updated
     Returns: updated receiver user object
 
     """

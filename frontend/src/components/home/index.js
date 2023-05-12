@@ -8,12 +8,13 @@ const Home = () => {
 
     const navigate = useNavigate()
     const token = useSelector(selectCurrentToken)
-    const user = useSelector(selectCurrentUser)
+    // const user = useSelector(selectCurrentUser)
+    const user = localStorage.getItem('user')
 
     const routeDashboard = () => {
         navigate('/dashboard')
     }
-    const welcomeMsg = token ? <h1>Welcome, you're logged in {user}</h1> : <div>Log in to proceed: press the button below </div>
+    const welcomeMsg = token ? <h1>Welcome, you're logged {user}</h1> : null
 
     return (
         <section>

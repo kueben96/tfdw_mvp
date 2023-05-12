@@ -4,6 +4,10 @@ from flask_marshmallow import Marshmallow
 from flask_cors import CORS
 from flask_mail import Mail
 
+"""
+This file contains all extensions for the app.
+"""
+
 # Create various application instances
 # Order matters: Initialize SQLAlchemy before Marshmallow
 db = SQLAlchemy()

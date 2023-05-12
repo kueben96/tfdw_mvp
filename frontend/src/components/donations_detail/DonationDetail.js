@@ -1,35 +1,57 @@
 import { Col, Container, Row } from 'react-bootstrap';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useGetDonationDetailsByIdWithUserInfoQuery } from '../../store/reducers/donationsSlice'
+import { useGetDonationRequestDetailsByIdWithUserInfoQuery } from '../../store/reducers/donationsRequestSlice'
 import '../../resources/styles/donationdetail.css';
+import DashboardHeader from '../ui/DashboardHeader';
+
+const getUseGetDonationQuery = (path) => {
+    if (path.includes("/donation_request/")) {
+        return useGetDonationRequestDetailsByIdWithUserInfoQuery;
+    } else if (path.includes("/donation/")) {
+        return useGetDonationDetailsByIdWithUserInfoQuery;
+    } else {
+        console.error("Invalid route path");
+        return null;
+    }
+};
 
 const DonationDetail = () => {
+
+    const token = localStorage.getItem('token')
+
     const location = useLocation();
+    const { id } = useParams()
     const navigate = useNavigate();
-    const { donation } = location.state;
+    const donationId = location?.state?.id || id;
+
+
+    const useGetDonationQuery = getUseGetDonationQuery(location.pathname);
+    const { data, isLoading, isError } = useGetDonationQuery(donationId);
+    const donation = data?.[0] ?? null;
+
+    if (isLoading) return <div>Loading...</div>
+    if (isError) return <div>Error fetching donation details</div>
+    console.log(donation)
 
     const handleGoBack = () => {
-        navigate('/dashboard');
+        navigate(-1);
     };
 
-    if (!donation) {
-        return <p>No donation data available</p>;
-    }
+    const handleContactClick = () => {
+        if (token) {
+            const mailtoLink = `mailto:${donation.email}`;
+            window.location.href = mailtoLink;
+        } else {
+            // TODO: handle navigate back to detail page after authentication
+            navigate("/login");
+        }
+    };
 
     return (
         <Container>
             <div className='dashboard'>
-                <div className="text-center">
-                    <Row>
-                        <Col sm={2} >
-                            <button className='home-image'></button></Col>
-                        <Col sm={8}>
-                            <h4>Spendenplatform</h4></Col>
-                        <Col sm={2} >
-                            <button className='konto-image'></button></Col>
-                    </Row>
-                </div>
-
-
+                <DashboardHeader />
                 <div className='donation-articles' >
 
                     <div className='articles-cards' id='elements'>
@@ -55,17 +77,17 @@ const DonationDetail = () => {
                             <p>PLZ: {donation.zip_code}</p>
                             <p>Beschreibung: {donation.description}</p>
                         </div>
-                        <div className='kontaktdetails'>
-                            <h6>kontaktdetails</h6>
-                            <p>Name: {donation.first_name} {donation.last_name}</p>
-                            <p>Verein: {donation.club_name}</p>
-                            <p>E-mail: {donation.email}</p>
-                            <p>Telefon: {donation.phone}</p>
 
-
-
-                        </div>
-                        <button className='button-pink'>Kontaktieren</button>
+                        {token && (
+                            <div className='kontaktdetails'>
+                                <h6>kontaktdetails</h6>
+                                <p>Name: {donation.first_name} {donation.last_name}</p>
+                                <p>Verein: {donation.club_name}</p>
+                                <p>E-mail:   <a href={`mailto:${donation.email}`}>{donation.email}</a></p>
+                                <p>Telefon: {donation.phone}</p>
+                            </div>
+                        )}
+                        {!token && <button className='button-pink' onClick={handleContactClick}>Kontaktieren</button>}
                         <button className='button-pink' onClick={handleGoBack}>Zurück</button>
                     </div>
                 </div>

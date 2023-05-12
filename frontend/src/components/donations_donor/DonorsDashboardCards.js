@@ -31,7 +31,7 @@ const DonorsDashboardCards = () => {
     if (isLoading) {
         content = <p>"Loading..."</p>;
     } else if (isSuccess) {
-        content = donations.map(donation => <DonationCard key={donation.id} donation={donation} />)
+        content = donations.map(donation => <DonationCard type="requests" key={donation.id} donation={donation} />)
     } else if (isError) {
         content = <p>Error fetching a donations</p>;
     }

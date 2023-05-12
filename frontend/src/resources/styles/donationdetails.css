@@ -97,16 +97,7 @@ fieldset{
 .donationbutton:hover{
 background-color: #F7E167;
 }
-p{
-margin-bottom:1px;
-margin-top: 15px;
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 15px;
-align-items: center;
-color: #000000;
-}
+
 select{
   width: 180px;
   height: 24px;

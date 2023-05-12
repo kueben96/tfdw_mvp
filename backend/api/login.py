@@ -15,6 +15,16 @@ login_route = Blueprint('login_route', __name__)
 
 @login_route.route('/api/login', methods=['POST'])
 def login():
+    """
+    Login for registered users.
+    Expects user email and password as json body (see examples in backend/mock_data/login.json).
+    Returns: if user logged in correctly: json list with user object,
+                                          token (x-access-token, used for authorization in api calls) and
+                                          refresh token (refresh-token, used for api/refresh route,
+                                                         creates new x-access-token),
+             else: email/password wrong/missing or user does not exist or token is invalid
+
+    """
     auth = request.json
     print(auth)
     print(os.environ.get('SECRET_KEY'))
@@ -91,10 +101,8 @@ def refresh(current_user):
     """
     Token refresh route, generates new access token.
     Args:
-        current_user: User object
-
+        current_user: User object of user currently logged in
     Returns: new x-access-token
-
     """
     # generates new JWT Token
     token = jwt.encode({
