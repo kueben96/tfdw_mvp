@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container } from 'react-bootstrap';
-import '../resources/styles/selection.css';
+import '../../resources/styles/selection.css';
 import { useNavigate } from 'react-router-dom';
 
 

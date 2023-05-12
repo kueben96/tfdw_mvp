@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import '../../resources/styles/donationcards.css';
 
-import FilterBarDonations from '../FilterBarDonations';
+import FilterBarDonations from '../donation_components/FilterBarDonations';
 import { useFetchDonationsQuery } from '../../store/reducers/donationsSlice';
 import DonationCard from '../donations_donor/DonationCard';
 

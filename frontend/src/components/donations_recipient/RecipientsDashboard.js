@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
 import '../../resources/styles/dashboard.css';
 import RecipientDashboardCards from './RecipientDashboardCards';
-import DashboardHeader from '../ui/DashboardHeader';
+import DashboardHeader from '../ui_component/DashboardHeader';
 import { useNavigate } from 'react-router-dom';
 
 

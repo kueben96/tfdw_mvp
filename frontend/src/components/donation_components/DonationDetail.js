@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useGetDonationDetailsByIdWithUserInfoQuery } from '../../store/reducers/donationsSlice'
 import { useGetDonationRequestDetailsByIdWithUserInfoQuery } from '../../store/reducers/donationsRequestSlice'
 import '../../resources/styles/donationdetail.css';
-import DashboardHeader from '../ui/DashboardHeader';
+import DashboardHeader from '../ui_component/DashboardHeader';
 
 const getUseGetDonationQuery = (path) => {
     if (path.includes("/donation_request/")) {

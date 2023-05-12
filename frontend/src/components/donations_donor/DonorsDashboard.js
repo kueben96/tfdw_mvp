@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import '../../resources/styles/dashboard.css';
 import DonorsDashboardCards from './DonorsDashboardCards';
 import { useNavigate } from 'react-router-dom';
-import DashboardHeader from '../ui/DashboardHeader';
+import DashboardHeader from '../ui_component/DashboardHeader';
 
 const DonorsDashboard = () => {
     const navigate = useNavigate()
