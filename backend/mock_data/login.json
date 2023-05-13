@@ -29,5 +29,9 @@
   {
 "email": "alice.b@football_for_girls.com",
 "password": "alice"
-}
+},
+  {
+  "email": "alice.lili@football_for_girls.com",
+  "password": "alice_lili"
+  }
 ]
