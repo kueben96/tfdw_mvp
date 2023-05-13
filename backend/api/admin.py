@@ -19,7 +19,7 @@ def get_unreviewed_receivers(current_user):
     Returns: list of all unreviewed receivers
     """
     results = (db.session.query(User.id, User.club_name, User.date, User.reviewed)
-               .filter_by(reviewed=False)).all()
+               .filter_by(reviewed=False, role="receiver")).all()
     return jsonify([dict(id=x.id, club_name=x.club_name, date=x.date, reviewed=x.reviewed) for x in results])
 
 
