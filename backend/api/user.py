@@ -1,7 +1,6 @@
 import jwt
 import os
 
-from dto.user import UserDTO
 from extensions import db
 from functools import wraps
 from flask import Flask, jsonify, request, Blueprint

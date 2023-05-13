@@ -47,10 +47,10 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
 
         fields = (
             'id', 'first_name', 'last_name', 'email', 'phone', 'password', 'street', 'zip_code', 'city', 'region',
-            'role', 'club_name', 'reviewed', 'date', 'user_donations', 'user_donation_requests')
+            'role', 'club_name', 'reviewed', 'date', 'user_donations', 'user_requests')
 
     user_donations = fields.Nested(DonationSchema, many=True)
-    user_donation_requests = fields.Nested(DonationRequestSchema, many=True)
+    user_requests = fields.Nested(DonationRequestSchema, many=True)
 
 
 user_schema = UserSchema()
