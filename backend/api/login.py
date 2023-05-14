@@ -1,13 +1,11 @@
-import json
-
 import jwt
 import os
 
-from flask import Flask, jsonify, request, Blueprint, make_response, Response
+from flask import Flask, jsonify, request, Blueprint, make_response
 from werkzeug.security import check_password_hash
 from datetime import datetime, timedelta
 
-from models.user import User, user_schema
+from models.user import User
 from api.user import token_required
 
 login_route = Blueprint('login_route', __name__)
@@ -15,6 +13,16 @@ login_route = Blueprint('login_route', __name__)
 
 @login_route.route('/api/login', methods=['POST'])
 def login():
+    """
+    Login for registered users.
+    Expects user email and password as json body (see examples in backend/mock_data/login.json).
+    Returns: if user logged in correctly: json list with user object,
+                                          token (x-access-token, used for authorization in api calls) and
+                                          refresh token (refresh-token, used for api/refresh route,
+                                                         creates new x-access-token),
+             else: email/password wrong/missing or user does not exist or token is invalid
+
+    """
     auth = request.json
     print(auth)
     print(os.environ.get('SECRET_KEY'))
@@ -28,14 +36,14 @@ def login():
         )
 
     user = User.query.filter_by(email=auth.get('email')).first()
-    print(user)
+    print("User: ", user)
 
     if not user:
         # returns 401 if user does not exist
         return make_response(
             'Could not verify!',
             401,
-            {'WWW-Authenticate:' 'Basic realm = "User does not exist!!"'}
+            {'WWW-Authenticate': 'Basic realm = "User does not exist!!"'}
         )
 
     if check_password_hash(user.password, auth.get('password')):
@@ -49,6 +57,16 @@ def login():
             'exp': datetime.utcnow() + timedelta(days=1)
         }, os.environ.get('SECRET_KEY'))
 
+        try:
+            token = token.decode('UTF-8')
+        except AttributeError:
+            pass
+
+        try:
+            refresh_token = refresh_token.decode('UTF-8')
+        except AttributeError:
+            pass
+
         response_object = [
             {'id': user.id,
              'first_name': user.first_name,
@@ -61,8 +79,8 @@ def login():
              'region': user.region,
              'role': user.role,
              'club_name': user.club_name},
-            {'token': token.decode('UTF-8')},
-            {'refresh_token': refresh_token.decode('UTF-8')}
+            {'token': token},
+            {'refresh_token': refresh_token}
         ]
 
         return make_response(jsonify(response_object), 201)
@@ -81,10 +99,8 @@ def refresh(current_user):
     """
     Token refresh route, generates new access token.
     Args:
-        current_user: User object
-
+        current_user: User object of user currently logged in
     Returns: new x-access-token
-
     """
     # generates new JWT Token
     token = jwt.encode({

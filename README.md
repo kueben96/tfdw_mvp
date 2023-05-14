@@ -95,3 +95,6 @@
 ## Local SMTP Server
 - python -m smtpd -n -c DebuggingServer localhost:1025
 
+## Data Transfer Objects
+- DTOs for User, Donation and Donation Request are created in the dto package but currently only the User DTO is used for registration, the others are not bein used
+

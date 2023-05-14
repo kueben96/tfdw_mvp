@@ -101,5 +101,18 @@
   "password": "alice",
   "role": "receiver",
   "club_name": "Football for Girls"
+  },
+  {
+  "first_name":"Alice Lili",
+  "last_name":"B",
+  "email": "alice.lili@football_for_girls.com",
+  "phone": "5678",
+  "street": "Street 12",
+  "zip_code": 12345,
+  "city": "Hamburg",
+  "region": "Hamburg",
+  "password": "alice_lili",
+  "role": "receiver",
+  "club_name": "Lili's Girls"
   }
 ]
