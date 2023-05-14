@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Container } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { selectCurrentToken, selectCurrentUser, userFromLocalStorage } from '../../store/reducers/authSlice'
+import { selectCurrentToken, userFromLocalStorage } from '../../store/reducers/authSlice'
 
 const Home = () => {
 

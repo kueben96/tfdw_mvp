@@ -15,7 +15,7 @@ function LoginForm() {
     const navigate = useNavigate()
     const authUser = useSelector(selectCurrentUser)
 
-    const [login, { isLoading }] = useLoginMutation()
+    const [login] = useLoginMutation()
 
 
     useEffect(() => {

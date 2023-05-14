@@ -6,7 +6,7 @@ const AccountDetail = () => {
 
     const userId = userIdFromLocalStorage
 
-    const { data: user, isLoading, isSuccess, isError, error } = useGetUserByIdQuery(userId)
+    const { data: user, isLoading, isError, error } = useGetUserByIdQuery(userId)
 
     if (isLoading) {
         return <div>Loading...</div>;
