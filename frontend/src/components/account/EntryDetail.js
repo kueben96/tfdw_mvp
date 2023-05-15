@@ -21,7 +21,7 @@ const EntryDetail = () => {
     if (isSuccess) {
         navigate(-1, { state: { isItemDeleted: true } })
     }
-    console.log(donation)
+
     return (
         <Container>
             <div>

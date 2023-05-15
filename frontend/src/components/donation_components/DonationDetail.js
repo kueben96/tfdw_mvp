@@ -33,7 +33,6 @@ const DonationDetail = () => {
 
     if (isLoading) return <div>Loading...</div>
     if (isError) return <div>Error fetching donation details</div>
-    console.log(donation)
 
     const handleGoBack = () => {
         navigate(-1);

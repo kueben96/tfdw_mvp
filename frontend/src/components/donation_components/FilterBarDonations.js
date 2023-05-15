@@ -24,8 +24,6 @@ const sizes = {
 
 const getSizeOptions = (category, size1) => {
     if (category && size1 in sizes) {
-        console.log("getting size ops")
-
         return sizes[size1][category];
     }
     return [];
