@@ -41,9 +41,9 @@ List the remaining tasks that need to be completed in order to finish the projec
 ### Smaller Tasks
 
 - Fix formatting issues in the code
-- Refactor the database queries for better performance
-- Improve the UI for mobile devices
-
+- Add Data Transfer Layer
+- Improve responsiveness of UI
+  
 ## Contributing
 
 Explain how others can contribute to the project, whether it's through bug reports, feature requests, or code contributions. Include a link to the project's issue tracker or pull request guidelines if applicable.
