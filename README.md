@@ -9,7 +9,6 @@ Results from education program FINTA Tech Academy by Netlight Consulting:
 - [Usage](#usage)
 - [TODOs](#todos)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Description
 
