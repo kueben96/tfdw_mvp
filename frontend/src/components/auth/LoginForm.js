@@ -20,7 +20,7 @@ function LoginForm() {
 
     useEffect(() => {
         // redirect to home if already logged in
-        if (authUser) navigate('/');
+        if (authUser) navigate(-1);
 
     }, [authUser, navigate]);
     const [email, setEmail] = useState("");
