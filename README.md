@@ -13,55 +13,51 @@ Results from education program FINTA Tech Academy by Netlight Consulting:
 
 ## Description
 
-Provide a more detailed description of the project and what it aims to achieve. Include any relevant information, such as the project's goals, intended audience, or any challenges faced during development.
+This project is a minimal viable product (MVP) of a platform for the NGO Trikot für die Welt. It is a React Application with a Python Flask API, which is connected to a PostgreSQL database.  With this platform, users should be able to create jersey donations or donation requests. The requests and offers can be viewed and filtered on the application's dashboard. The goal of the project was primarily to work with a group of women with different levels of experience to independently learn to design and implement a digital product. 
 
 ## Installation
+### Prerequisites
 
-List the steps required to install and run the project locally. Include any dependencies or prerequisites needed to run the app. For example:
-
-1. Clone the repository: `git clone https://github.com/your-username/project-name.git`
-2. Install dependencies: `npm install`
-3. Start the app: `npm start`
-
-## Usage
-
-Provide instructions on how to use the app, including any notable features or functionality. Include screenshots or GIFs if possible to make the instructions more clear.
-
-## TODOs
-
-List the remaining tasks that need to be completed in order to finish the project, as well as any known bugs or issues. This section can be divided into two parts: the most essential things that need to be done, and smaller tasks that are marked as TODOs within the code. For example:
-
-### Essential Tasks
-
-- Finish implementing the Figma frames
-- Add appropriate error handling
-- Test the app thoroughly
-- Deployment
-
-### Smaller Tasks
-
-- Fix formatting issues in the code
-- Add Data Transfer Layer
-- Improve responsiveness of UI
-  
-## Contributing
-
-Explain how others can contribute to the project, whether it's through bug reports, feature requests, or code contributions. Include a link to the project's issue tracker or pull request guidelines if applicable.
-
-## License
-
-Specify the license under which the project is distributed. This can be as simple as:
-
-
-
-# Prerequisites
-
+- Docker installed
 - create a .env file in the root folder of this directory
 - tfdw_platform/.env
 - SQLALCHEMY_DATABASE_URI=${POSTGRES_CONNECTION_STRING}
 - add SECRET_KEY key for JWT authentication
 - SECRET_KEY=${secretkey}
 
+### Commands
+
+1. Clone the repository: `git clone https://github.com/kueben96/tfdw_mvp.git`
+2. Run docker-compose: `docker-compose up --build`
+
+## Usage
+
+The application should provide an intuitive flow of use. From the start page, the user can go directly to the donation platform. There, a distinction is made between offers and requests. The dashboard can then be used to search and filter for donation objects. If there is no suitable offer or request, the user can directly write his own entry, if he is logged in. 
+Of course, the donation-related functions also include login, registration and user management. 
+The functions can be taken in detail from the Miro board. 
+
+## TODOs
+
+Since it is an MVP, only the main functions of the platform have been implemented. To complete the project, the following main essential tasks can be listed. Further, code-related tasks are stored in the code as "TODO:" in the comments. 
+### Essential Tasks
+
+- Finish implementing the Figma frames
+- Add appropriate error handling
+- Test the app thoroughly
+- User Testing
+- Deployment
+
+### Smaller Tasks
+
+- Fix quality issues in the code like consistency and remove duplicated code 
+- Add/Complete Data Transfer Layer
+- Improve responsiveness of UI
+- adapt a design pattern 
+## Contributing
+
+This code can be contributed in the next round of Finta Tech Academy. 
+
+# Code and environment related information
 ## Start dockerized React and Flask development servers
 - docker-compose up --build
 - localhost:3000 -> react app
