@@ -3,7 +3,8 @@ import { Col, Container, Row } from 'react-bootstrap'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDeleteDonationMutation } from '../../store/reducers/donationsSlice'
 
-// TODO: Show like donation details
+// TODO: Implement page according to figma file
+// TODO: implement edit functionality
 const EntryDetail = () => {
     const location = useLocation()
     const { donation } = location.state
@@ -20,25 +21,17 @@ const EntryDetail = () => {
     if (isSuccess) {
         navigate(-1, { state: { isItemDeleted: true } })
     }
-
+    console.log(donation)
     return (
         <Container>
-            <Row>
-                <Col className='yellow-tick' />
-                <Col>
-                    <Row>{donation.category}</Row>
-                    <Row>
-                        {donation.amount} {donation.date}
-                    </Row>
-                </Col>
-                <Col>
-                    <select placeholder='Eintrag aktiv' className='filters'>
-                        <option value='offen' disabled>
-                            Eintrag aktiv
-                        </option>
-                    </select>
-                </Col>
-            </Row>
+            <div>
+                <h1>Account Detail</h1>
+                <p>Kategorie: {donation.category}</p>
+                <p>Anzahl: {donation.amount}</p>
+                <p>Größe: {donation.size_1}</p>
+                <p>Farbe: {donation.color_1}</p>
+                <p>Beschreibung: {donation.description}</p>
+            </div>
             <Row>
                 <Col>
                     {isDeleting ? (

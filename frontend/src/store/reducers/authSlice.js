@@ -1,17 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const token = localStorage.getItem('token')
-    ? localStorage.getItem('token')
-    : null
-
-const user = localStorage.getItem('user')
-    ? localStorage.getItem('user')
-    : null
+export const tokenFromLocalStorage = localStorage.getItem('token') ?? null
+export const userFromLocalStorage = localStorage.getItem('user') ?? null
+export const userIdFromLocalStorage = localStorage.getItem('userId') ?? null
 
 const authSlice = createSlice({
     // TODO: persist redux state objects in local storage
     name: 'auth',
-    initialState: { user: null, token: token },
+    initialState: { user: null, token: tokenFromLocalStorage },
     reducers: {
         setCredentials: (state, action) => {
             const { id, email } = action.payload[0]

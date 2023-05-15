@@ -4,6 +4,7 @@ import { useGetDonationDetailsByIdWithUserInfoQuery } from '../../store/reducers
 import { useGetDonationRequestDetailsByIdWithUserInfoQuery } from '../../store/reducers/donationsRequestSlice'
 import '../../resources/styles/donationdetail.css';
 import DashboardHeader from '../ui_component/DashboardHeader';
+import { tokenFromLocalStorage } from '../../store/reducers/authSlice';
 
 const getUseGetDonationQuery = (path) => {
     if (path.includes("/donation_request/")) {
@@ -18,7 +19,7 @@ const getUseGetDonationQuery = (path) => {
 
 const DonationDetail = () => {
 
-    const token = localStorage.getItem('token')
+    const token = tokenFromLocalStorage;
 
     const location = useLocation();
     const { id } = useParams()

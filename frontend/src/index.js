@@ -9,7 +9,12 @@ import App from './routes';
 
 const root = ReactDOMClient.createRoot(document.getElementById('root'));
 
-console.log(localStorage)
+
+// TODO: implement persistent state handling
+// State is currently not persisted on page reloads.
+// The redux selectors are losing the information on each reload.
+// In order to make data persistens throught the session,
+// data is stored in the local storage of the browser. (see authSlice.js)
 root.render(
   <Provider store={store}>
     <Router>

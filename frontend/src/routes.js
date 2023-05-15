@@ -15,6 +15,7 @@ import EditEntry from './components/account/EditEntry';
 import AccountEntries from './components/account/AccountEntries';
 import AccountDetail from './components/account/AccountDetail';
 import EntryDetail from './components/account/EntryDetail';
+import PasswordReset from './components/auth/PasswordReset';
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                 <Route index element={<Home />} />
                 <Route path='/login' element={<LoginForm />} />
                 <Route path='/signup' element={<SignUpForm />} />
+                <Route path='/password_reset' element={<PasswordReset />} />
                 <Route path='account' element={<MyAccount />}>
                     <Route index element={<Navigate to='entries' replace />} />
                     <Route path='entries' element={<AccountEntries />} />

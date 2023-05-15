@@ -15,7 +15,7 @@ function LoginForm() {
     const navigate = useNavigate()
     const authUser = useSelector(selectCurrentUser)
 
-    const [login, { isLoading }] = useLoginMutation()
+    const [login] = useLoginMutation()
 
 
     useEffect(() => {
@@ -70,6 +70,10 @@ function LoginForm() {
         navigate('/signup')
     }
 
+    const handlePasswordReset = () => {
+        navigate('/password_reset')
+    }
+
     return (
 
         <Container>
@@ -101,7 +105,7 @@ function LoginForm() {
                                         onChange={handlePasswordInput}
                                         placeholder='Passwort'
                                     ></input>
-                                    <a className="login-text1" href="/">Ich habe mein Passwort vergessen.  </a>
+                                    <a className="login-text1" onClick={handlePasswordReset}>Ich habe mein Passwort vergessen.  </a>
                                 </Form.Group>
 
                                 <Button bsPrefix='button-pink' type="submit" onSubmit={validateForm} >

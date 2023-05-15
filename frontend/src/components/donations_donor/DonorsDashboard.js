@@ -1,5 +1,4 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap';
 import '../../resources/styles/dashboard.css';
 import DonorsDashboardCards from './DonorsDashboardCards';
 import { useNavigate } from 'react-router-dom';
