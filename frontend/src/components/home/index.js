@@ -1,45 +1,35 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchDonations, getDonationsError, getDonationsStatus, selectAllDonations } from '../../store/reducers/donationsSlice';
-import AddDonationForm from '../donations/AddDonationForm';
-import DonationCard from '../donations/DonationCard';
-import { Row, Col, Container } from 'react-bootstrap'
+import React from 'react'
+import { Button, Container } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { selectCurrentToken, userFromLocalStorage } from '../../store/reducers/authSlice'
 
 const Home = () => {
-    const dispatch = useDispatch();
-    const donations = useSelector(selectAllDonations)
-    const donationsStatus = useSelector(getDonationsStatus)
-    const error = useSelector(getDonationsError)
 
-    useEffect(() => {
-        if (donationsStatus === 'idle') {
-            dispatch(fetchDonations())
-        }
-    }, [donationsStatus, dispatch])
+    const navigate = useNavigate()
+    const token = useSelector(selectCurrentToken)
 
-    let content;
-    if (donationsStatus === 'loading') {
-        content = <p>"Loading..."</p>;
-    } else if (donationsStatus === 'succeeded') {
-        content = donations.map(donation => <DonationCard key={donation.id} donation={donation} />)
-    } else if (donationsStatus === 'failed') {
-        content = <p>{error}</p>;
+    const user = userFromLocalStorage
+
+    const routeDashboard = () => {
+        navigate('/dashboard')
     }
+    const welcomeMsg = token ? <h1>Welcome, you're logged {user}</h1> : null
+
     return (
-        <div className='App'>
+        <section>
             <Container>
 
-                <h1> Donations</h1>
-                {content}
-                <Row>
-                    <AddDonationForm></AddDonationForm>
-                </Row>
-
+                <div className='homePage'>
+                    {welcomeMsg}
+                    <h3>TRIKOTS FÜR DIE WELT</h3>
+                    <h1 className='font-64'>SPENDEN</h1>
+                    <Button onClick={routeDashboard} bsPrefix='button-pink' className='font-24'>Spendenplattform</Button>
+                </div>
             </Container>
-        </div>
+        </section>
 
     )
-
 }
 
-export default Home;
+export default Home

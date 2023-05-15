@@ -1,17 +1,6 @@
-.logincontainer{
-  display: block;
-  position: relative;
-  margin: auto;
-  align-items: center;
+.form-input-white{
   width: 350px;
-  height: 500px;
-  font-family: 'Raleway', sans-serif;
-  top:10px;
-   }
- 
-input[type=email],input[type=password]{
-  width: 350px;
-  height: 20px;
+  height: 35px;
   padding: 5px;
   margin-top: 15px;
   color: #4f4f4f;
@@ -19,65 +8,43 @@ input[type=email],input[type=password]{
   border-radius: 10px;
   position: relative;
    }
-.loginbutton{
-  width: 350px;
-  height: 40px;
-  font-size: 16px;
-  position: inherit;
-  margin-top: 40px;
-  color: #4E4D4B;
-  font-weight: bold;
-  cursor: pointer;
-  color: black;
-  background-color: #F7E167;
-  border-radius: 15px;
-  border: 0;
-  padding: 10px 0;
-  outline:none;
-  margin-bottom: 80px;}
-   
-  .loginwrap{
-    width:350px;
-    margin: auto;
-    text-align: left;
-   margin-top: 150px;
-   
-  }
-  .login-titel{
-    text-align: left;
-    width: 350px;
-   font-family: 'Bebas Neue', sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    color: black;
-    height: 48px;
-    line-height: 38px;
-  }
-  .login-paragraph{
-    width: 350px;
-    height: 48px;
+input#email {
+    background-image: url(../../assets/images/SecuredLetter.png);
+    background-repeat: no-repeat;
+    text-indent: 30px;
+    background-position: 10px 5px; 
+}
+input#email:focus{
+  background-image:none;
+ }
+ input#password {
+  background-image: url(../../assets/images/Lock.png);
+  background-repeat: no-repeat;
+  text-indent: 30px;
+  background-position: 10px 5px; 
+}
+input#password:focus{
+background-image:none;
+}
+
+.loginwrap{
+  width:350px;
+  margin: auto;
   text-align: left;
-  font-family: 'Bebas Neue', sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+ margin-top: 150px;
+ 
+}
+.logincontainer{
+  display: block;
+  position: relative;
+  margin: auto;
   align-items: center;
-  color: #000000;
-  }
-  .login-text{
-    width: 350px;
-    height: 24px;
-    font-family: 'Bebas Neue', sans-serif;
-    font-style: normal;
-    font-size: 14px;
-    line-height: 19px;
-    align-items: center;
-    color: #000000;
-    margin-bottom: -25px;
-  }
-  .login-text1{
+  width: 350px;
+  height: 300px;
+  font-family: 'Raleway', sans-serif;
+  top:30px;
+   }
+   .login-text1{
     width: 350px;
     height: 24px;
     font-family: 'Bebas Neue', sans-serif;
@@ -92,13 +59,27 @@ input[type=email],input[type=password]{
     font-weight: normal;
     
   }
- 
-  .login-form{
-    text-align: left;
+  .login-paragraph{
+    width: 350px;
+    height: 48px;
+  text-align: left;
+  font-family: 'Bebas Neue', sans-serif;
+  font-style:normal;
+  font-size: 18px;
+  line-height: 20px;
+  align-items: center;
+  color: #000000;
   }
   .login-text1:hover{
     color: #F7E167;
     text-decoration-line: none;
+  }
+  .login-form{
+    width:350px;
+    margin: auto;
+    text-align: left;
+   margin-top: 60px;
+   
   }
   .login-text2{
     width: 350px;
@@ -111,21 +92,3 @@ input[type=email],input[type=password]{
     color: #000000;
     margin-bottom: -40px;
   }
-  input#email {
-    background-image: url(../../images/SecuredLetter.png);
-    background-repeat: no-repeat;
-    text-indent: 30px;
-    background-position: 10px 5px; 
-}
-input#email:focus{
-  background-image:none;
- }
- input#password {
-  background-image: url(../../images/Lock.png);
-  background-repeat: no-repeat;
-  text-indent: 30px;
-  background-position: 10px 5px; 
-}
-input#password:focus{
-background-image:none;
-}

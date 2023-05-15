@@ -1,6 +1,136 @@
-{"user_id":2, 
- "donation_type":"sock",
- "number": 1,
- "color": "white",
- "cut": "unisex",
- "description": "one sock to free an elf"}
+[{
+ "category": "sock",
+ "amount": 1,
+ "size_1": "children",
+ "size_2": "35-38",
+ "color_1": "white",
+ "color_2": "white",
+ "description": "one sock to free an elf"
+},
+ {
+  "category": "jersey_kit",
+  "amount": 1,
+  "size_1": "adult",
+  "size_2": "M",
+  "color_1": "red",
+  "color_2": "yellow",
+  "description": "jersey kit"
+ },
+ {
+  "category": "jersey_kit",
+  "amount": 1,
+  "size_1": "adult",
+  "size_2": "M",
+  "color_1": "red",
+  "color_2": "yellow",
+  "description": "jersey kit"
+ },
+ {
+  "category": "jersey",
+  "amount": 1,
+  "size_1": "adult",
+  "size_2": "M",
+  "color_1": "green",
+  "color_2": "white",
+  "description": "green and white striped jersey size M"
+ },
+{
+  "category": "shoes",
+  "amount": 1,
+  "size_1": "children",
+  "size_2": "36",
+  "color_1": "white",
+  "color_2": "gold",
+  "description": "children football shoes size 36"
+ },
+ {
+  "category": "jersey_pants",
+  "amount": 5,
+  "size_1": "adult",
+  "size_2": "L",
+  "color_1": "green",
+  "color_2": "white",
+  "description": "set of five jersey pants"
+ },
+ {
+  "category": "jersey_pants",
+  "amount": 5,
+  "size_1": "children",
+  "size_2": "M",
+  "color_1": "blue",
+  "color_2": "white",
+  "description": "set of five jersey pants"
+ },
+ {
+  "category": "bib",
+  "amount": 1,
+  "size_1": "adult",
+  "size_2": "",
+  "color_1": "yellow",
+  "color_2": "",
+  "description": "adult bibs white"
+ },
+ {
+  "category": "shoes",
+  "amount": 1,
+  "size_1": "adult",
+  "size_2": "46",
+  "color_1": "gold",
+  "color_2": "white",
+  "description": "gold and white football shoes"
+ },
+ {
+  "category": "shoes",
+  "amount": 1,
+  "size_1": "adult",
+  "size_2": "42",
+  "color_1": "white",
+  "color_2": "blue",
+  "description": "white and blue football shoes"
+ },
+ {
+  "category": "shoes",
+  "amount": 1,
+  "size_1": "children",
+  "size_2": "38",
+  "color_1": "blue",
+  "color_2": "gold",
+  "description": "blue and gold football shoes"
+ },
+ {
+  "category": "jersey_top",
+  "amount": 10,
+  "size_1": "children",
+  "size_2": "S",
+  "color_1": "blue",
+  "color_2": "yellow",
+  "description": "set of 10 football jersey tops children size"
+ },
+ {
+  "category": "jersey_top",
+  "amount": 3,
+  "size_1": "children",
+  "size_2": "M",
+  "color_1": "red",
+  "color_2": "yellow",
+  "description": "set of 3 football jersey tops children size"
+ },
+ {
+  "category": "tracksuit_top",
+  "amount": 1,
+  "size_1": "adult",
+  "size_2": "M",
+  "color_1": "blue",
+  "color_2": "white",
+  "description": "adult tracksuit top size M"
+ },
+ {
+  "category": "football_sock",
+  "amount": 1,
+  "size_1": "children",
+  "size_2": "",
+  "color_1": "blue",
+  "color_2": "yellow",
+  "description": "football socks children blue yellow"
+ }
+]

@@ -1,0 +1,64 @@
+[{
+ "category": "sock",
+ "amount": 1,
+ "size_1": "children",
+ "color_1": "white",
+ "description": "one sock to free an elf"
+},
+ {
+ "category": "jersey",
+ "amount": 1,
+ "size_1": "adult",
+ "color_1": "green",
+ "description": "green jersey size M"
+ },
+ {
+  "category": "jersey_top",
+  "amount": 1,
+  "size_1": "children",
+  "color_1": "red",
+  "description": "football jersey top children size"
+ },
+ {
+  "category": "tracksuit_top",
+  "amount": 1,
+  "size_1": "adult",
+  "color_1": "blue",
+  "description": "adult tracksuit top size M"
+ },
+ {
+  "category": "jersey_top",
+  "amount": 10,
+  "size_1": "children",
+  "color_1": "blue",
+  "description": "children blue jersey top set"
+ },
+ {
+  "category": "jersey_pants",
+  "amount": 10,
+  "size_1": "children",
+  "color_1": "blue",
+  "description": "children blue jersey pants set"
+ },
+ {
+  "category": "jersey_top",
+  "amount": 10,
+  "size_1": "children",
+  "color_1": "green",
+  "description": "children green jersey top set"
+ },
+ {
+  "category": "jersey_pants",
+  "amount": 10,
+  "size_1": "children",
+  "color_1": "green",
+  "description": "children green jersey pants set"
+ },
+ {
+ "category": "other",
+ "amount": 1,
+ "size_1": "adult",
+ "color_1": "white",
+ "description": "ball adult size"
+ }
+]

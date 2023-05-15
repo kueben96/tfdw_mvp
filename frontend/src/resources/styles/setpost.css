@@ -1,0 +1,41 @@
+#post-width{
+    width: 500px;
+    margin: auto;
+    margin-top: 20px;
+}
+.set-filters{
+    display: flex;
+}
+.commentbox{
+    width: 500px;
+    height: 100px;
+    resize: none;
+    font-style: normal;
+    font-size: 14px;
+    border: none;
+    background: #F0F1EC;
+    border-radius: 10px;
+  }
+.text-areas{
+    margin-top: 30px; 
+  }
+.setpost-buttons{
+    margin-top: 30px;
+ 
+  }
+.setpost-buttons button{
+    background-color: white;
+    border: 1px solid black;
+ 
+  }
+.setpost-buttons button:hover{
+    background-color: #FBA276;
+    border: none;
+  }
+  .straight-line{
+   background-color: black;
+   height: 1px ;
+   margin-top: 20px;
+   margin-bottom: 20px;
+
+  }

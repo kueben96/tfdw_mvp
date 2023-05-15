@@ -1,0 +1,37 @@
+[{
+  "email": "harry.potter@hogwarts.magic",
+  "password": "alohomora"
+  },
+  {
+  "email": "dobby@hogwarts.magic",
+  "password": "dobby"
+  },
+  {
+  "email": "hermione.granger@hogwarts.magic",
+  "password": "caputdraconis"
+  },
+  {
+  "email": "ron.weasley@hogwarts.magic",
+  "password": "password"
+  },
+  {
+  "email": "alice@outlook.com",
+  "password": "Alice123"
+},
+  {
+  "email": "bob@outlook.com",
+  "password": "Bob"
+},
+  {
+    "email":"tfdw.admin@tfdw.com",
+    "password": "AwnhzJ78b4LfuqHujjJ2"
+  },
+  {
+"email": "alice.b@football_for_girls.com",
+"password": "alice"
+},
+  {
+  "email": "alice.lili@football_for_girls.com",
+  "password": "alice_lili"
+  }
+]
